@@ -1,0 +1,127 @@
+@import ../../../styles/helpers
+
+.table
+    margin-top: 50px 
+    display: table
+    width: 100%
+    +t
+        display: block
+
+.row
+    display: table-row
+    +koc1
+        display: none
+    &.active
+        .col
+            &:not(:first-child):not(:nth-child(2))
+                display: none
+            &:nth-child(2)
+                &:after
+                    right: 12px
+
+.col
+    position: relative
+    display: table-cell
+    padding: 0 12px 16px
+    vertical-align: middle
+    +caption1
+    color: $n4
+    &:after
+        content: ""
+        position: absolute
+        left: 0
+        bottom: 0
+        right: 0
+        height: 1px
+        background: $n3
+        +dark
+            background: $n6
+
+    &:first-child
+        padding-left: 30px
+    &:last-child
+        &:after
+            right: 12px
+    &:nth-child(1)
+        width: calc(4/12 * 100%);
+    &:nth-child(2),
+        width: calc(0.75/12 * 100%);
+    &:nth-child(3),
+        width: calc(1.125/12 * 100%);
+    &:nth-child(4),
+        width: calc(1.125/12 * 100%);
+    &:nth-child(5)
+        width: calc(10/100 * 100%);
+    &:nth-child(6)
+        width: calc(12/100 * 100%);
+    &:nth-child(7)
+        width: calc(13/100 * 100%);
+    
+.pagination
+    display: flex
+    justify-content: center
+    margin-top: 20px
+    text-align: center
+    .button
+        .loader
+            transform: scale(.8)
+            margin: 0 18px 0 8px
+
+.paginationActive
+    font-weight: bold
+
+.item 
+	align-items: center 
+	color: #808e9b 
+	cursor: pointer 
+	display: flex 
+	font-size: 14px 
+	height: 40px 
+	justify-content: center 
+	width: 40px
+	a 
+        color: unset
+        padding: 0 20px 
+
+.disabled-page 
+	color: #808e9b 
+.active 
+	border: solid 1px #808e9b 
+	border-radius: 40px 
+	color: #808e9b 
+.break-me 
+.next 
+	font-size: 20px 
+	height: 20px 
+	right: 0 
+.pagination 
+	align-items: center 
+	display: flex 
+	flex-direction: row 
+    height: 30px
+	justify-content: center 
+	list-style-type: none 
+	position: relative 
+.pagination-page 
+	font-weight: 700 
+.previous 
+	font-size: 20px 
+	height: 20px 
+	left: 0 
+	 
+.center 
+    text-align: center
+
+.left 
+    text-align: left
+
+.swapPanigate
+    display: flex
+    flex-direction: column
+    justify-content: center
+    box-sizing: borderbox
+    width: 100%
+    height: 100%
+
+.name
+    min-width: 250px

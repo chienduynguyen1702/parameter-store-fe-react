@@ -1,0 +1,84 @@
+name: koc-react-deploy-prod
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ vars.NODE_VER }}
+      - name: Caching node modules # get cache hash file in runner
+        id:  node-modules-cache 
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: koc-hub-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            koc-hub-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
+
+      - name: check env file
+        env:
+          PROJECT_NAME: ${{vars.PROJECT_NAME}}
+          PROJECT_URL: ${{vars.PROJECT_URL}}
+          PROJECT_BASE_URL: ${{vars.PROJECT_BASE_URL}}
+        run: |
+          echo "REACT_APP_PROJECT_NAME=$PROJECT_NAME" >> .env
+          echo "REACT_APP_PROJECT_URL=$PROJECT_URL" >> .env
+          echo "REACT_APP_PROJECT_BASE_URL=$PROJECT_BASE_URL" >> .env
+          cat .env
+          ls -la
+
+
+      - name: Install dependencies
+        #if cache is true then skip npm i, else run npm i
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: yarn 
+          
+      # - name: Change API URL
+      #   run: sed -i 's/https:\/\/api.dev.maybelline.website/https:\/\/api.maybelline.website/g' src/services/config/baseUrl.js
+
+          
+      # - name: cat baseURL file to check
+      #   run: cat src/services/config/baseUrl.js
+
+      - name: Build
+        run: CI=false yarn build
+
+      - name: Test unit
+        run: yarn test
+
+  # deploy:
+  #   needs: build-test
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     NODE_ENV: production
+  #   steps:
+  #     - uses: actions/checkout@v2
+      - name: Setup AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Deploy to S3
+        run: aws s3 sync build/ s3://${{ vars.AWS_S3_REACT }} --follow-symlinks --delete
+
+      - name: Invalidate CloudFront
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+
+      # - name: Deploy to old S3
+      #   run: aws s3 sync build/ s3://${{ vars.AWS_OLD_S3_REACT }} --follow-symlinks --delete
+        
+      # - name: Invalidate old CloudFront
+      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.OLD_DISTRIBUTION_ID }} --paths "/*"
+

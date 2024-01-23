@@ -1,0 +1,43 @@
+@import ../../../../styles/helpers
+
+.card
+    row-gap: 0
+    +xxl
+        row-gap: 32px
+    +w
+        row-gap: 32px
+    +t
+        row-gap: 32px
+    +m
+        row-gap: 0
+
+.item
+    display: block
+    color: $n7
+    border-style: solid
+    border-color: $n3
+    &:not(:last-child)
+            +w
+                &:nth-child(1),
+                &:nth-child(2),
+                &:nth-child(3),
+                    border-width: 0 1px 0px 0px
+                &:nth-child(4),
+                    border-width: 0 0px 1px 0px
+                padding: 0
+            +m
+                &:nth-child(1),
+                    border-width: 0 1px 1px 0px
+                &:nth-child(2),
+                    border-width: 0 0px 1px 0px
+                &:nth-child(3),
+                    border-width: 0 1px 0px 0px
+                &:nth-child(4),
+                    border-width: 0 0px 0px 0px
+            +a
+                border-width: 0px 0px 1px 0px !important
+
+@media only screen and (min-width: 1419px)
+    .item
+        border-width: 0 1px 0 0;
+        padding: 0;

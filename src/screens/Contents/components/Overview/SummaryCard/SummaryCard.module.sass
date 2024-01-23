@@ -1,0 +1,50 @@
+@import ../../../../../styles/helpers
+
+.iconBox
+    width: 48px
+    height: 48px
+
+.label
+    margin: 8px 0
+    +s
+        margin: 6px 0
+    +caption1
+    color: $n4
+
+.oneLine
+    text-overflow: ellipsis
+    white-space: nowrap
+    +s
+        font-size: 14px !important
+
+.tooltip
+    svg
+        fill: $n4
+        +s
+            width: 14px
+            height: 14px
+
+.counter
+    min-width: 238px
+    margin-bottom: 8px
+    font-size: 36px
+    +s
+        font-size: 24px !important
+    font-weight: 600
+    line-height: 1
+    letter-spacing: -.03em
+    +x
+        min-width: 200px
+    +t
+        min-width: auto
+        font-size: 40px
+
+.skeleton
+    width: 60%
+    height: 36px
+    +s
+        height: 24px
+
+.item
+    +s
+        margin-left: 32px

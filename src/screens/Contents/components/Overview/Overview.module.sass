@@ -1,0 +1,38 @@
+@import ../../../../styles/helpers
+
+.overview
+    +s
+        border-bottom: 1px solid $n3
+
+.item
+    display: block
+    color: $n7
+    border-style: solid
+    border-color: $n3
+    &:not(:last-child)
+        +xxl
+            border-width: 0 1px 0px 0px
+            padding: 0
+        +w
+            border-width: 0 1px 0px 0px
+        +t
+            border-width: 0
+            &:nth-child(1),
+            &:nth-child(2),
+                border-width: 0 1px 1px 0px
+            &:nth-child(4),
+                border-width: 0 1px 0px 0px
+            &:nth-child(3),
+                border-width: 0 0px 1px 0px
+        +a
+            border-width: 0 0px 0px 0px
+            &:nth-child(1),
+            &:nth-child(2),
+                border-width: 0 0px 0px 0px
+            &:nth-child(4),
+                border-width: 0 0px 0px 0px
+            &:nth-child(3),
+                border-width: 0 0px 0px 0px
+    &:last-child
+        +s
+            width: 100%

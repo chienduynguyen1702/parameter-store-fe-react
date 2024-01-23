@@ -1,0 +1,51 @@
+@import ../../../../styles/helpers
+
+.icon
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 48px
+    height: 48px
+    margin-bottom: 24px
+    border-radius: 50%
+    +m
+        margin: 0 20px 0 0
+    svg
+        fill: $n7
+
+.iconBox
+    width: 48px
+    height: 48px
+
+.label
+    height: 32px
+    display: flex
+    align-items: center
+    margin-bottom: 8px
+    +caption1
+    color: $n4
+
+.tooltip
+    svg
+        fill: $n4
+
+.counter
+    min-width: 238px
+    margin-bottom: 8px
+    font-size: 36px
+    font-weight: 600
+    line-height: 1
+    letter-spacing: -.03em
+    +x
+        min-width: 200px
+    +t
+        min-width: auto
+
+.skeleton
+    width: 60%
+    +w
+        width: 100%
+    +t
+        width: 70%
+    +s
+        width: 100%

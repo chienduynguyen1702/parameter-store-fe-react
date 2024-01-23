@@ -1,0 +1,51 @@
+.react-datepicker {
+  width: 100%;
+  background-color: transparent !important;
+  &__month-container,
+  &__year-container {
+    width: 100%;
+  }
+  &__month-wrapper,
+  &__year-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    max-width: 100% !important;
+  }
+  &__month-text,
+  &__year-text {
+    height: 42px;
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+    margin: 0 !important;
+    &--today,
+    &--selected {
+      background-color: inherit !important;
+      color: initial !important;
+    }
+    &:hover {
+      background-color: #efefef !important;
+      color: #000 !important;
+      border-radius: 10px !important;
+    }
+  }
+
+  &__month-text {
+    width: 100% !important;
+    &--keyboard-selected {
+      background-color: #3e444c !important;
+      color: #fff !important;
+      border-radius: 10px !important;
+    }
+  }
+  &__year-text {
+    width: calc(100% / 3) !important;
+    &[tabindex='0'] {
+      background-color: #3e444c !important;
+      color: #fff !important;
+      border-radius: 10px !important;
+    }
+  }
+}

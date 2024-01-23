@@ -1,0 +1,208 @@
+@import ../../../styles/helpers
+    
+.rounded
+    border-radius: 16px
+
+.container 
+    display: flex
+    flex-direction: row
+    align-items: center
+    height: 182px
+    +koc1
+        height: auto
+
+.bgProDetail 
+    background-color: #fcfcfc
+    border-radius: 16px
+    padding-bottom: 24px
+    min-height: 100vh
+
+
+.productInfo 
+    display: flex
+    flex-direction: column
+    +koc1
+        width: 80%
+
+.col
+    display: flex
+    white-space: nowrap
+    width: 
+    color: $n7
+    margin-bottom: 3px
+    +koc1
+        display: block
+        // width: 100%
+        flex: 1
+        // padding: 10px 12px
+
+    +dark
+        color: $n1
+    
+    &:last-child
+        border-radius: 0 8px 8px 0
+        &:after
+            right: 12px
+    &:nth-child(1)
+    &:nth-child(2)
+    &:nth-child(3)
+        .left
+            margin-right: 10px
+    &:nth-child(4)
+    &:nth-child(5)
+    &:nth-child(6)
+    &:nth-child(7)
+            
+
+.item
+    display: flex
+    align-items: center
+    transition: color .2s
+    &:hover
+        color: $p1
+    +koc1
+        margin-bottom: 10px
+        &:last-child
+            margin-bottom: 0px
+
+.linkInUsername
+    color: $n7
+
+.imagePro
+    flex-shrink: 0
+    width: 105px;
+    height: 157px;
+    margin-right: 12px
+    overflow: hidden
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+    +koc1
+        width: 80px
+        height: 80px
+        margin-right: 40px
+
+.user
+    max-width: 140px
+    margin-bottom: 4px
+    font-weight: 700
+    +textOverflow
+
+.phoneNumber
+    +caption1
+    color: $n4
+    +dark
+        color: $shades1
+
+.email
+    color: $n8
+
+.price 
+    color: $n8
+
+.btnPlat
+    width: fit-content
+    margin: 0 10px 10px 0
+
+.title
+    display: block
+    color: $n4
+    width: 120px
+    padding-right: 20px
+    font-size: 13px
+    span
+        color: $n8
+
+.left
+    text-align: left
+    &:first-child
+        margin-bottom: 8px
+
+.threeDots
+    padding: 0 38px
+
+.text_white
+    color: $n
+
+.bg_tier1
+    background-color: $p4
+
+.bg_tier2
+    background-color: $p1
+
+.bg_tier3
+    background-color: $p2
+
+.bg_tier4
+    background-color: $p3
+
+.bg_tiktok
+    background-color: $n6
+
+.bg_fb
+    background-color: $p1
+
+.bg_ytube
+    background-color: $p3
+
+.bg_insta
+    background-color: $s2
+
+.bg_sale
+    background-color: $p3
+
+.bg_create
+    background-color: $s4
+
+.colKoc
+    padding: 0px 8px
+    border-radius: 6px
+    +koc1
+        width: fit-content
+
+.new
+    display: flex
+    align-items: center
+    line-height: 24px
+    height: 24px
+    +s
+        display: none
+
+.font15
+    +base1-s
+
+.nav
+    display: flex
+    // overflow: auto
+    justify-content: space-between
+    +koc2
+        margin-top: 20px
+        width: 100%
+
+.link
+    padding: 8px 16px
+    border-radius: 8px
+    white-space: nowrap
+    +base1-s
+    color: $n4
+    transition: all .2s
+    &:hover,
+    &.active
+        color: $n7
+        +dark
+            color: $n1
+    &.active
+        background: $n3
+        +dark
+            background: $n6
+    &:not(:last-child)
+        margin-right: 8px
+    +koc2
+        width: 40%
+
+.skeleton
+    width: 35%
+
+.overflowAuto
+    overflow: auto

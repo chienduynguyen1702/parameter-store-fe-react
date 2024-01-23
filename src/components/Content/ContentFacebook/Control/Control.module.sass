@@ -1,0 +1,36 @@
+@import ../../../../styles/helpers
+
+.controlBox
+    color: white
+    margin: 15px 8px
+
+.control
+    align-items: center
+    position: absolute
+    bottom: 0%
+    right: 0%
+    z-index: 3
+    word-break: break-all
+    svg
+        font-size: 26px
+.button
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-shrink: 0
+    width: 36px
+    height: 36px
+    border-radius: 50%
+    background: $n1
+    svg
+        fill: $n4
+        transition: fill .2s
+    &:hover
+        svg
+            fill: $p1
+    &:not(:last-child)
+        margin-right: 16px
+
+.cursorPointer
+    &:hover
+        cursor: pointer

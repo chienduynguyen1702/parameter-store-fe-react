@@ -1,0 +1,29 @@
+[
+  {
+    "Date": "07/07/2022",
+    "Name": "Phí ship shopee sản phẩm cho KOLs",
+    "Category": "Shipping fee",
+    "Cost": "400",
+    "PIC": "Ngoc",
+    "Status": "Upcoming",
+    "Evidence URL": "https://s3.amazonaws.com/images.dev.maybelline.website/images/571aba66-c0a8-4e7a-90f1-f2a0e1c233ea.JPG"
+  },
+  {
+    "Date": "04/07/2022",
+    "Name": "Mua quà sinh nhật cho KOL",
+    "Category": "Gift",
+    "Cost": "347",
+    "PIC": "Trang",
+    "Status": "Completed",
+    "Evidence URL": "https://s3.amazonaws.com/images.dev.maybelline.website/images/571aba66-c0a8-4e7a-90f1-f2a0e1c233ea.JPG"
+  },
+  {
+    "Date": "05/07/2022",
+    "Name": "Mua quà sinh nhật cho 4 KOLs (cốc khắc tên)L",
+    "Category": "Birthday",
+    "Cost": "500",
+    "PIC": "Trang",
+    "Status": "Completed",
+    "Evidence URL": "https://s3.amazonaws.com/images.dev.maybelline.website/images/571aba66-c0a8-4e7a-90f1-f2a0e1c233ea.JPG"
+  }
+]

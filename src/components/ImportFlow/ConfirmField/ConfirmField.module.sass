@@ -1,0 +1,59 @@
+@import ../../../styles/helpers
+
+.label
+    margin-bottom: 14px
+    +base2
+    color: $n5
+    +dark
+        color: $n3
+
+.tooltip
+    position: relative
+    top: -1px
+    svg
+        fill: $shades1
+
+.tableTitle
+    display: inline-flex
+    justify-content: space-between
+    align-items: baseline
+    width: 100%
+
+.col
+    position: relative
+    padding: 0 12px 16px
+    +caption1
+    color: $n4
+    &:nth-child(1)
+        position: relative
+        border-radius: 12px
+        flex: 0.7
+        text-align: center
+    &:nth-child(2)
+        padding-right: 20px
+        text-align: center
+
+.tableSelect
+    display: inline-flex
+    justify-content: space-between
+    align-items: baseline
+    width: 100%
+
+.head
+    position: relative
+    width: 50%
+    height: 48px
+    padding: 0 12px 0 12px
+    border-radius: 12px
+    font-size: 14px
+    font-weight: 600
+    line-height: 48px
+    color: $n7
+    background-color: $n3
+    flex: 0.7
+    text-align: center
+    white-space: nowrap
+
+.dropdownField
+    width: 40%
+

@@ -1,0 +1,27 @@
+@import ../../../../styles/helpers
+
+.profile
+    display: flex
+    align-items: center
+    margin-bottom: 32px
+    +t
+        margin-bottom: 24px
+    & > .button
+        +m
+            display: none
+
+.avatar
+    position: relative
+    flex-shrink: 0
+    width: 96px
+    height: 96px
+    margin-right: 32px
+    +m
+        width: 80px
+        height: 80px
+        margin-right: 16px
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+        border-radius: 50%

@@ -1,0 +1,24 @@
+@import ../../../../../styles/helpers
+ 
+.item
+    position: relative
+    +t
+        &.active
+            display: block
+    &:not(:last-child)
+        margin-bottom: 12px
+        padding-bottom: 12px
+        +t
+            margin-bottom: 0
+            padding-bottom: 0
+            border: none
+        +dark
+            border-color: $n6
+
+.btn
+    width: 30%
+
+.checkboxBorder
+    border-top: 1px solid $n3
+    border-bottom: 1px solid $n3
+    padding: 16px 0 12px 0

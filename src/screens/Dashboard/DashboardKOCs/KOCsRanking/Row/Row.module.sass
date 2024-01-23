@@ -1,0 +1,49 @@
+@import ../../../../../styles/helpers
+
+.ranking
+    width: 40px
+    height: 40px
+    display: flex
+    visibility: visible
+    background-color: #EFEFEF
+    text-align: center
+    border-radius: 50%
+    align-items: center
+    justify-content: center
+
+.ava
+    width: 43px
+    height: 43px
+    border-radius: 50%
+
+.contentCount
+    padding: 0 7px
+    text-align: center
+    background-color: #83BF6E
+    width: fit-content
+    border-radius: 6px
+    color: white
+
+.rowTable
+    height: 90px
+    vertical-align: middle
+    padding: 0 10px
+    &:not(&:nth-of-type(1))
+        min-width: 100px
+
+.setting 
+    width: fit-content
+
+.link
+    cursor: pointer
+    
+.d-table-row
+    &:nth-child(6) 
+        .ranking
+            background-color: #FF6A55
+    &:nth-child(4) 
+        .ranking
+            background-color: #659EEA
+    &:nth-child(2) 
+        .ranking
+            background-color: #83BF6E

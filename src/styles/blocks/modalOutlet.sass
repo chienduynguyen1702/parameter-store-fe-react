@@ -1,0 +1,63 @@
+// Modal outlet
+.outerModal
+  min-width: 900px
+  +t
+    min-width: 100%
+    padding: 0
+  +w
+    min-width: 800px
+  +koc2
+    min-width: 500px
+  +s
+    min-width: 100%
+
+.outerSettingModal
+  min-width: 400px
+  +s
+    min-width: 100%
+
+.outerDetail
+  max-width: 80%
+
+.responsiveTwoButtons
+  +m
+    width: 100%
+    margin-top: 20px
+
+.navigateButton
+  padding: 8px 16px !important
+  border-radius: 8px
+  font-size: 15px
+  font-weight: 600
+  color: $n4
+  transition: all .2s
+  background: $n2
+  +m
+    flex: 1
+  &:hover
+    background: $n2
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 0px 2px 0px
+  &:hover,
+  &.active
+    color: $n7
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 0px 2px 0px
+  &.active
+    background: $n
+  &:not(:last-child)
+    margin-right: 8px
+    +m
+      margin-right: 0
+
+.allOrMeButton
+  padding: 8px 16px
+  border-radius: 8px
+  font-size: 15px
+  font-weight: 600
+  line-height: (24/15)
+  color: $n4
+  transition: all .2s
+  &:hover,
+  &.active
+    color: $n7
+    &.active
+      background: $n3

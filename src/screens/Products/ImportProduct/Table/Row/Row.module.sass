@@ -1,0 +1,253 @@
+@import ../../../../../styles/helpers
+
+.row
+    display: table-row
+    transition: all .2s
+    +koc1
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        border-top: 1px solid $n3
+
+    +dark
+        border-color: $n6
+    &:hover
+        +rmin(1086)
+            background: $n2
+            +dark
+                background: $n6
+            .price
+                background: $n1
+                +dark
+                    background: $n8
+    &:last-child
+        .col:after
+            display: none
+    &.active
+        &:hover
+            background: none
+        .col
+            &:not(:first-child):not(:nth-child(2))
+                display: none
+            &:nth-child(2)
+                &:after
+                    right: 12px
+    &.active.selected
+        background: $n3
+        +dark
+            background: $n6
+            box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.05), inset 0px 1px 1px rgba(255, 255, 255, 0.08)
+
+.col
+    position: relative
+    display: table-cell
+    vertical-align: middle
+    padding: 16px 12px
+    white-space: nowrap
+    color: $n7
+    +koc1
+        display: block
+        width: 100%
+        padding: 10px 12px
+    +dark
+        color: $n1
+    &:after
+        content: ""
+        position: absolute
+        left: 0
+        bottom: 0
+        right: 0
+        height: 1px
+        background: $n3
+        +koc1
+            display: none
+        +dark
+            background: $n6
+    &:first-child
+        padding-left: 30px
+    &:last-child
+        border-radius: 0 8px 8px 0
+        +koc1
+            padding-bottom: 50px
+        &:after
+            right: 12px
+    &:nth-child(1)
+        cursor: pointer
+        width: calc(4/12 * 100%);
+    &:nth-child(2),
+        width: calc(0.75/12 * 100%);
+    &:nth-child(3),
+        width: calc(1.125/12 * 100%);
+    &:nth-child(4),
+        width: calc(1.125/12 * 100%);
+    &:nth-child(5)
+        width: calc(10/108 * 100%);
+        +koc1
+            display: flex
+            flex-direction: row
+            padding-left: 0px
+    &:nth-child(6)
+        width: calc(12/108 * 100%);
+    &:nth-child(7)
+        width: calc(13/108 * 100%);
+    &:nth-child(n)
+        +koc1
+            width: 100%
+            padding-left: 0px
+            display: inline-flex
+
+.item
+    display: flex
+    align-items: center
+    transition: color .2s
+    &:hover
+        color: $p1
+    +koc1
+        margin-bottom: 10px
+        &:last-child
+            margin-bottom: 0px
+
+.linkInUsername
+    color: $n7
+
+.avatar
+    flex-shrink: 0
+    width: 48px
+    height: 48px
+    margin-right: 12px
+    border-radius: 50%
+    overflow: hidden
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+    +koc1
+        width: 80px
+        height: 80px
+        margin-right: 40px
+
+.user
+    // max-width: 140px
+    margin-bottom: 4px
+    font-weight: 700
+    white-space: normal
+    // +textOverflow
+
+.phoneNumber
+    +caption1
+    color: $n4
+    +dark
+        color: $shades1
+
+.email
+    // width: 250px
+    +textOverflow
+    +koc2
+        width: 170px
+        +textOverflow
+    +base2
+    color: $n8
+
+.platform
+    display: flex
+    flex-direction: column
+
+.btnPlat
+    width: fit-content
+    margin: 10px 0
+    +koc1
+        margin: 0
+
+.title
+    display: none
+    +koc1
+        display: block
+        color: $n4
+        width: 120px
+        padding-right: 20px
+        +body-table-m
+
+.tier
+    > div
+        width: fit-content
+
+.left
+    text-align: left
+
+.threeDots
+    padding: 0 38px
+
+.text_white
+    color: $n
+
+.bg_tier1
+    background-color: $p4
+
+.bg_tier2
+    background-color: $p1
+
+.bg_tier3
+    background-color: $p2
+
+.bg_tier4
+    background-color: $p3
+
+.bg_tiktok
+    background-color: $n6
+
+.bg_fb
+    background-color: $p1
+
+.bg_ytube
+    background-color: $p3
+
+.bg_insta
+    background-color: $s2
+
+.bg_sale
+    background-color: $p3
+
+.bg_create
+    background-color: $s4
+
+.colKoc
+    padding: 0px 8px
+    border-radius: 6px
+
+.new
+    display: flex
+    align-items: center
+    line-height: 24px
+    height: 24px
+    +s
+        display: none
+
+.font15
+    +base1-s
+
+
+.imagePro
+    flex-shrink: 0
+    width: 105px;
+    height: 157px;
+    margin-right: 12px
+    overflow: hidden
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+    +koc1
+        width: 80px
+        height: 80px
+        margin-right: 40px
+
+.dataError
+    color: $p3
+    font-weight: bold
+
+.imageError
+    border: 4px solid $p3;
+    box-shadow: 0 0 10px $p3;
+
+.rowError
+    background-color: rgba(255, 106, 85, 0.3)

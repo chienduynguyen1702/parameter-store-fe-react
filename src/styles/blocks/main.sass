@@ -1,0 +1,45 @@
+@import ../helpers
+
+.cursor-pointer
+    cursor: pointer
+
+.col-2dot4
+    -webkit-box-flex: 0
+    -ms-flex: 0 0 20%
+    flex: 0 0 20%
+    max-width: 20%
+
+@media (min-width: 475px)
+    .col-sm-2dot4
+        flex: 0 0 auto
+        width: 20%
+
+@media (min-width: 768px)
+    .col-md-2dot4
+        flex: 0 0 auto
+        width: 20%
+
+@media (min-width: 1024px)
+    .col-lg-2dot4
+        flex: 0 0 auto
+        width: 20%
+
+@media (min-width: 1260px)
+    .col-xl-2dot4
+        flex: 0 0 auto
+        width: 20%
+
+.textOverFlow
+    overflow: hidden
+    text-overflow: ellipsis
+
+.overFlowHidden
+    overflow: hidden
+
+.imgCover
+    width: 100% !important
+    height: 100% !important
+    object-fit: cover
+
+.color4
+    color: $n4

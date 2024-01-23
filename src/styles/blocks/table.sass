@@ -1,0 +1,139 @@
+// Table d-table
+.tableOuter
+  overflow-x: auto
+  text-overflow: ellipsis
+  white-space: nowrap
+  margin-top: 24px
+  +s
+    overflow-x: hidden
+
+.tableContainer
+  display: table
+  width: 100%
+
+.tableHead
+  position: relative
+  display: table-row
+  +s
+    display: none
+  color: $n4
+  +body-table-m
+  line-height: 3
+  &:after
+    content: ""
+    position: absolute
+    left: 0
+    bottom: 0
+    right: 0
+    height: 1px
+    margin: 0 16px
+    background: $n3
+
+.tableRow
+  display: table-row
+  position: relative
+  &:hover
+    background: $n2
+  +s
+    display: none
+  &:not(:last-child)
+  &:after
+    content: ""
+    position: absolute
+    left: 0
+    bottom: 0
+    right: 0
+    height: 1px
+    margin: 0 16px
+    background: $n3
+
+.threeDots
+  padding: 0 38px
+
+// Cell item in table
+.role
+  padding: 0 8px
+  margin-left: 8px
+  font-weight: 600
+  width: fit-content
+  border-radius: 6px
+  background: $n3
+  transition: backround .2s
+  cursor: pointer
+  &:first-child
+    margin-left: 0
+
+.avatar
+  flex-shrink: 0
+  width: 48px
+  height: 48px
+  margin-right: 12px
+  border-radius: 50%
+  overflow: hidden
+  img
+    width: 100%
+    height: 100%
+    object-fit: cover
+    +t
+      width: 80px
+      height: 80px
+      margin-right: 40px
+
+.tableCell
+  display: table-cell
+  max-width: 300px
+  // font-size: 15px
+  padding: 0 15px
+  overflow: hidden
+  +m
+    max-width: 600px
+    padding: 0 16px
+  +s
+    max-width: 600px
+    padding: 0 16px
+
+.desktop
+  display: table-row
+  &:not(:last-child)
+    &:after
+      content: ""
+      position: absolute
+      left: 0
+      bottom: 0
+      right: 0
+      height: 1px
+      margin: 0 16px
+      background: $n3
+  +s
+    display: none
+
+.mobile
+  display: none
+  +s
+    display: block
+    padding: 16px 0 20px 0
+    &:not(:last-child)
+      border-bottom: 1px solid $n3
+    .item
+      display: flex
+      justify-content: space-between
+      margin: 12px 0px
+
+.name
+  max-width: 70vw
+  overflow: hidden
+  text-overflow: ellipsis
+  padding: 0
+
+.roundedFull
+  border-radius: 16px
+
+.roundedLeft
+  border-radius: 16px 0 0 16px
+
+.roundedRight
+  border-radius: 0 16px 16px 0
+
+.borderBottomCard
+  &:not(:last-child)
+    border-bottom: 1px solid $n3

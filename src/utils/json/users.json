@@ -1,0 +1,56 @@
+[
+  {
+    "Username": "bemahbabiboo",
+    "Email": "htrang15911@gmail.com",
+    "Platforms": {
+      "TikTok": true,
+      "Instagram": true,
+      "Youtube": false,
+      "Facebook": null
+    },
+    "TikTok ID": "bemahbabiboo",
+    "Instagram ID": "bemahbabi",
+    "Hashtag": "#bemahbabiboo",
+    "Address": "27 lê văn lương, thanh xuân, hà nội",
+    "Phone": "0364259203",
+    "Category": "Creative-Driven",
+    "Tier": "Tier 10",
+    "Date of Birth": "0903"
+  },
+  {
+    "Username": "yenjiivu",
+    "Email": "bookingyenjiivu@gmail.com",
+    "Platforms": {
+      "TikTok": true,
+      "Instagram": false,
+      "Youtube": false,
+      "Facebook": false
+    },
+    "TikTok ID": "@yenjiivu",
+    "Instagram ID": "@yenjiivu",
+    "Hashtag": "#yenjiivu",
+    "Address": "48 An Dương, Yên Phụ, Tây Hồ, Hà Nội",
+    "Phone": "0352799701",
+    "Category": "Creative-Driven",
+    "Tier": "Tier 1",
+    "Date of Birth": null
+  },
+  {
+    "Username": "yuldailykol",
+    "Email": "yuldaily@gmail.com",
+    "Platforms": {
+      "TikTok": true,
+      "Instagram": false,
+      "Youtube": false,
+      "Facebook": false
+    },
+    "TikTok ID": "@yuldaily",
+    "Instagram ID": "@yuldaily",
+    "Hashtag": "#yuldaily",
+    "Address": "HR3 eco green, 107 Nguyễn Văn Linh, phường Tân Thuận Tây, quận 7, HCM",
+    "Phone": "0398550061",
+    "Category": "Creative-Driven",
+    "Tier": "Tier 1",
+    "Date of Birth": "11/08/1998"
+  }
+]
