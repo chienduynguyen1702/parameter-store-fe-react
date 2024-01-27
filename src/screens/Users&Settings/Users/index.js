@@ -33,19 +33,6 @@ export default function Users() {
   const editUserMatch = useMatch('/user-setting/users/edit-user/:id');
   const isEditMode = useMemo(() => editUserMatch !== null, [editUserMatch]);
 
-  // ------------------Handle modal import user------------------------
-  const importStep1Match = useMatch('/user-setting/users/import/1');
-  const isImportStep1Mode = useMemo(
-    () => importStep1Match !== null,
-    [importStep1Match],
-  );
-
-  const importStep2Match = useMatch('/user-setting/users/import/2');
-  const isImportStep2Mode = useMemo(
-    () => importStep2Match !== null,
-    [importStep2Match],
-  );
-
   const handleCloseModal = useCallback(() => {
     navigate({
       pathname: '/user-setting/users',
@@ -73,14 +60,8 @@ export default function Users() {
         exact
       >
         <ModalWithoutPortal
-          outerClassName={cn(
-            'outerModal',
-            isImportStep1Mode && 'outerSettingModal',
-            isImportStep2Mode && 'outerDetail',
-          )}
-          visible={
-            isAddMode || isEditMode || isImportStep1Mode || isImportStep2Mode
-          }
+          outerClassName={cn('outerModal')}
+          visible={isAddMode || isEditMode}
           onClose={handleCloseModal}
         >
           <Outlet

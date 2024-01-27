@@ -1,7 +1,6 @@
-import React, { createContext, useCallback, useEffect } from 'react';
+import React, { createContext } from 'react';
 import { Modal, Image } from '../components';
-import styles from '../screens/SignIn/SignIn.module.sass';
-import { useLocation, useNavigate } from 'react-router';
+import styles from '../screens/Authentication/SignIn/SignIn.module.sass';
 
 const UnderDevelopmentContext = createContext();
 

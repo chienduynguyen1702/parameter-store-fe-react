@@ -44,6 +44,7 @@ const AuthProvider = ({ children }) => {
           description: permission.description,
         };
       }),
+      organizationId: data?.organization_id,
     };
     setMe(me);
   }, []);
@@ -55,7 +56,9 @@ const AuthProvider = ({ children }) => {
 
         const accessToken = response.data.data.accessToken;
         const refreshToken = response.data.data.refreshToken;
+        console.log('x');
         saveMe(response.data.data.user);
+        console.log('y');
 
         token.setAccessToken(accessToken);
         token.setRefreshToken(refreshToken);

@@ -1,4 +1,4 @@
-name: koc-react-integrate-prod
+name: Clouding Frontend CI
 
 on:
   pull_request:
@@ -8,6 +8,7 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    environment: Clouding-aws
     env:
       NODE_ENV: production
     steps:
@@ -22,9 +23,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: koc-hub-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
+          key: clouding-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
           restore-keys: |
-            koc-hub-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
+            clouding-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
 
       - name: check env file
         env:

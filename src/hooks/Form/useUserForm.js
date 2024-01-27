@@ -6,12 +6,9 @@ import { toast } from 'react-toastify';
 
 import {
   addUser,
-  editMyInfo,
   editUser,
-  getListAgency,
   getListRole,
   getListSettings,
-  getMyInfo,
   getUser,
   uploadImage,
 } from '../../services/api';
@@ -50,16 +47,6 @@ export default function useUserForm() {
         id: item.id,
         text: item.name,
       }));
-    },
-  });
-
-  const listAgency = useQuery({
-    queryKey: ['agencies'],
-    queryFn: () => {
-      return getListAgency();
-    },
-    select: (data) => {
-      return data.data.data;
     },
   });
 
@@ -224,9 +211,9 @@ export default function useUserForm() {
   const userQuery = useQuery({
     queryKey: ['user', id],
     queryFn: () => {
-      if (id === 'me') {
-        return getMyInfo();
-      }
+      // if (id === 'me') {
+      //   return getMyInfo();
+      // }
       return getUser(id);
     },
     enabled: !isAddMode,
@@ -268,9 +255,9 @@ export default function useUserForm() {
 
   const editUsersMutation = useMutation(
     ({ id, data }) => {
-      if (id === 'me') {
-        return editMyInfo(data);
-      }
+      // if (id === 'me') {
+      //   return editMyInfo(data);
+      // }
       return editUser(id, data);
     },
     {
@@ -390,7 +377,6 @@ export default function useUserForm() {
   return {
     id,
     rolesQuery,
-    listAgency,
     tiersQuery,
     categoriesQuery,
     platformsQuery,

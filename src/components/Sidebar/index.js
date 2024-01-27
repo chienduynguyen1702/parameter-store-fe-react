@@ -16,133 +16,18 @@ const navigation = [
     url: '/',
     permissions: [''],
   },
-  // {
-  //   title: 'Dashboard',
-  //   icon: 'pie-chart',
-  //   slug: 'dashboard',
-  //   dropdown: [
-  //     {
-  //       title: 'Highlights',
-  //       url: '/dashboard/highlight',
-  //       permissions: [''],
-  //     },
-  //     {
-  //       title: 'KOCs',
-  //       url: '/dashboard/kocs',
-  //       permissions: [''],
-  //     },
-  //     {
-  //       title: 'Contents',
-  //       url: '/dashboard/contents',
-  //       permissions: [''],
-  //     },
-  //     {
-  //       title: 'Orders',
-  //       url: '/dashboard/orders',
-  //       permissions: [''],
-  //     },
-  //     {
-  //       title: 'Products',
-  //       url: '/dashboard/products',
-  //       permissions: [''],
-  //     },
-  //   ],
-  // },
   {
-    title: 'Contents',
-    icon: 'video-stroke',
-    slug: 'content',
-    dropdown: [
-      {
-        title: 'TikTok',
-        url: '/content/tiktok',
-        permissions: ['content-tiktok'],
-      },
-      {
-        title: 'Facebook',
-        url: '/content/facebook',
-        permissions: ['content-facebook'],
-      },
-      {
-        title: 'Youtube',
-        url: '/content/youtube',
-        permissions: ['content-youtube'],
-      },
-      {
-        title: 'Instagram',
-        url: '/content/instagram',
-        permissions: ['content-instagram'],
-      },
-      {
-        title: 'Other Contents',
-        url: '/content/other-contents',
-        permissions: ['content-other'],
-      },
-    ],
+    title: 'Projects',
+    icon: 'diamond',
+    url: '/projects',
+    permissions: [''],
   },
-  // {
-  //   title: 'KOCs',
-  //   icon: 'profile-circle',
-  //   url: '/kocs',
-  //   subUrl: '/koc-profile',
-  //   permissions: ['user'],
-  // },
   {
-    title: 'Products',
-    icon: 'box',
-    url: '/products',
-    subUrl: '/product-detail',
-    permissions: ['product'],
+    title: 'Secrets',
+    icon: 'ticket',
+    url: '/secrets',
+    permissions: [''],
   },
-
-  // {
-  //   title: 'Orders',
-  //   icon: 'cart',
-  //   url: '/orders',
-  //   permissions: ['orders'],
-  // },
-
-  {
-    title: 'Tasks',
-    icon: 'calendar',
-    slug: 'tasks',
-    dropdown: [
-      {
-        title: 'Calendar View',
-        url: '/tasks/calendar-view',
-        permissions: ['task'],
-      },
-      {
-        title: 'Table View',
-        url: '/tasks/table-view',
-        permissions: ['task'],
-      },
-    ],
-  },
-  // {
-  //   title: 'Pampering',
-  //   icon: 'cake',
-  //   slug: 'pamperings',
-  //   dropdown: [
-  //     {
-  //       title: 'Calendar View',
-  //       url: '/pamperings/calendar-view',
-  //       permissions: ['pampering'],
-  //     },
-  //     {
-  //       title: 'Table View',
-  //       url: '/pamperings/table-view',
-  //       permissions: ['pampering'],
-  //     },
-  //   ],
-  // },
-  // {
-  //   title: 'Liquidation',
-  //   icon: 'check-not-filled',
-  //   url: '/liquidation',
-  //   subUrl: '/liquidation-file',
-  //   permissions: ['liquidation'],
-  // },
 ];
 
 const Sidebar = ({ className, onClose }) => {
@@ -161,6 +46,7 @@ const Sidebar = ({ className, onClose }) => {
             onClose();
           }}
         >
+          
           <Icon name="close" size="24" />
         </button>
         <LogoContainer className={styles.logo} />

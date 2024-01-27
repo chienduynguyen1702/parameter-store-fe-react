@@ -20,18 +20,12 @@ const User = ({ className }) => {
     return [
       {
         menu: [
-          {
-            title: 'Account settings',
-            onClick: () => {
-              navigate('/user-setting/users/edit-user/me');
-            },
-          },
-          {
-            title: 'My Contents',
-            onClick: () => {
-              navigate(`/koc-profile/me/tiktok`);
-            },
-          },
+          // {
+          //   title: 'Account settings',
+          //   onClick: () => {
+          //     navigate('/user-setting/users/edit-user/me');
+          //   },
+          // },
           {
             title: 'Log out',
             onClick: () => {

@@ -3,16 +3,8 @@ import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import {
-  getArchivedKOCs,
-  getArchivedLiquidation,
-  getArchivedLiquidationItem,
-  getArchivedPamperings,
   getArchivedRoles,
   getArchivedUsers,
-  unarchiveKOC,
-  unarchiveLiquidation,
-  unarchiveLiquidationItem,
-  unarchivePampering,
   unarchiveRole,
   unarchiveUser,
 } from '../../services/api';
@@ -31,33 +23,6 @@ const ARCHIVED_OBJECT_LIST = {
     keyList: 'roles',
     keyArchivistList: 'role-archivist-list',
     title: 'Role',
-  },
-  kocs: {
-    archiveAPI: getArchivedKOCs,
-    unarchiveAPI: unarchiveKOC,
-    keyList: 'kocs',
-    keyArchivistList: 'koc-archivist-list',
-    title: 'KOC',
-  },
-  liquidations: {
-    archiveAPI: getArchivedLiquidation,
-    unarchiveAPI: unarchiveLiquidation,
-    keyList: 'liquidations',
-    keyArchivistList: 'liquidation-archivist-list',
-    title: 'Liquidation',
-  },
-  'liquidations-items': {
-    archiveAPI: getArchivedLiquidationItem,
-    unarchiveAPI: unarchiveLiquidationItem,
-    keyList: 'liquidations-items',
-    keyArchivistList: 'liquidation-item-archivist-list',
-  },
-  pampering: {
-    archiveAPI: getArchivedPamperings,
-    unarchiveAPI: unarchivePampering,
-    keyList: 'pamperings',
-    keyArchivistList: 'pampering-archivist-list',
-    title: 'Pampering',
   },
 };
 
