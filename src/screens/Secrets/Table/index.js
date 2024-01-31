@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Row from './Row';
 import { NoData, Pagination } from '../../../components';
 
-import { useListSecrets } from '../../../hooks/Data';
+import { useListSecrets } from '../../../hooks';
 const Table = ({ setTotal }) => {
   const { listSecrets, isSuccess, isLoading, totalPage, pagination } =
     useListSecrets();
@@ -27,9 +27,7 @@ const Table = ({ setTotal }) => {
             <div className="tableCell"></div>
           </div>
           {isSuccess &&
-            listSecrets.map((secrets) => (
-              <Row key={secrets.id} item={secrets} />
-            ))}
+            listSecrets.map((secret) => <Row key={secret.id} item={secret} />)}
         </div>
         {isSuccess && listSecrets.length === 0 && <NoData />}
       </div>

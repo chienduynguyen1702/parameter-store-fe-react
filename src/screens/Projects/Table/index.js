@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Row from './Row';
 import { NoData, Pagination } from '../../../components';
 
-import { useListProjects } from '../../../hooks/Data';
+import { useListProjects } from '../../../hooks';
 const Table = ({ setTotal }) => {
   const { listProjects, isSuccess, isLoading, totalPage, pagination } =
     useListProjects();

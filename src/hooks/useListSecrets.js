@@ -2,11 +2,11 @@ import { useCallback, useMemo, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 
-import useQueryString from '../useQueryString';
-import { fromNow } from '../../utils/helpers';
-import { getListProjects } from '../../services/api';
+import useQueryString from './useQueryString';
+import { fromNow } from '../utils/helpers';
+import { getListSecrets } from '../services/api';
 
-export default function useListProjects() {
+export default function useListSecrets() {
   const [totalPage, setTotalPage] = useState(1);
 
   const defaultQueryString = useMemo(() => {
@@ -21,13 +21,18 @@ export default function useListProjects() {
   const { page, limit } = queryString;
 
   const parseData = useCallback((data) => {
-    const projects = data?.result?.map((item) => {
+    const secrets = data?.result?.map((item) => {
       return {
         id: item.id,
         name: item.name,
         description: item.description,
+        value: item.value,
+        projectId: item.project_id,
+        projectName: item.project_name,
+        createdBy: item.created_by,
         createdAt: moment(item.created_at).format('DD/MM/YYYY'),
         updatedAt: fromNow(item.updated_at),
+        deletedAt: item.deleted_at,
       };
     });
     const pagination = {
@@ -36,12 +41,12 @@ export default function useListProjects() {
       totalPage: data.pagination.totalPage,
       limit: data.pagination.limit,
     };
-    return { pagination, projects };
+    return { pagination, secrets };
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['projects', queryString],
-    queryFn: () => getListProjects(queryString),
+    queryKey: ['secrets', queryString],
+    queryFn: () => getListSecrets(queryString),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data.data),
     enabled: !!page && !!limit,
@@ -60,7 +65,7 @@ export default function useListProjects() {
   }, [defaultQueryString, limit, page, queryString, setQueryString]);
 
   return {
-    listProjects: data?.projects,
+    listSecrets: data?.secrets,
     pagination: data?.pagination,
     isSuccess,
     isLoading,

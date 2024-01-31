@@ -3,7 +3,7 @@ import { Stack } from 'react-bootstrap';
 
 import styles from './Checkbox.module.sass';
 import cn from 'classnames';
-import ImageCustom from '../ImageCustom';
+import Image from '../Image';
 
 const Checkbox = ({
   className,
@@ -21,7 +21,7 @@ const Checkbox = ({
       direction="horizontal"
     >
       {image !== '' && (
-        <ImageCustom
+        <Image
           src={image}
           className="mx-2"
           width={40}

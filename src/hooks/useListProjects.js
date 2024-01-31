@@ -1,14 +1,12 @@
 import { useCallback, useMemo, useEffect, useState } from 'react';
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
+import { useQuery } from '@tanstack/react-query';
+import moment from 'moment';
 
-import useQueryString from '../../hooks/useQueryString';
+import useQueryString from './useQueryString';
+import { fromNow } from '../utils/helpers';
+import { getListProjects } from '../services/api';
 
-import { getListRole, archiveRole } from '../../services/api';
-
-export default function useListRoles() {
-  const queryClient = useQueryClient();
-
+export default function useListProjects() {
   const [totalPage, setTotalPage] = useState(1);
 
   const defaultQueryString = useMemo(() => {
@@ -23,24 +21,13 @@ export default function useListRoles() {
   const { page, limit } = queryString;
 
   const parseData = useCallback((data) => {
-    const roles = data.roles.map((item) => {
+    const projects = data?.result?.map((item) => {
       return {
         id: item.id,
         name: item.name,
         description: item.description,
-        createdAt: item.created_at,
-        archiverId: item.archiver_id,
-        archivedAt: item.archived_at,
-        archived: item.archived,
-        permissionsCount: item.permissions_count,
-        countUser: item.user_count,
-        permissions: item.permissions.map((permission) => {
-          return {
-            id: permission.id,
-            name: permission.name,
-            description: permission.description,
-          };
-        }),
+        createdAt: moment(item.created_at).format('DD/MM/YYYY'),
+        updatedAt: fromNow(item.updated_at),
       };
     });
     const pagination = {
@@ -49,30 +36,16 @@ export default function useListRoles() {
       totalPage: data.pagination.totalPage,
       limit: data.pagination.limit,
     };
-    return { pagination, roles };
+    return { pagination, projects };
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['roles', queryString],
-    queryFn: () => getListRole(queryString),
+    queryKey: ['projects', queryString],
+    queryFn: () => getListProjects(queryString),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data.data),
     enabled: !!page && !!limit,
   });
-
-  const archiveRoleMutation = useMutation(
-    async (id) => {
-      return archiveRole(id);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['roles'],
-        });
-        toast.success('Role archived successfully');
-      },
-    },
-  );
 
   useEffect(() => {
     if (data?.pagination?.totalPage) {
@@ -87,12 +60,12 @@ export default function useListRoles() {
   }, [defaultQueryString, limit, page, queryString, setQueryString]);
 
   return {
-    listRoles: data?.roles,
+    listProjects: data?.projects,
     pagination: data?.pagination,
     isSuccess,
     isLoading,
+    page,
     limit,
     totalPage: totalPage,
-    archiveRoleMutation,
   };
 }

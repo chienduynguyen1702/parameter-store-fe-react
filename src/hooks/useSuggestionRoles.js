@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getListRole } from '../../services/api';
+import { getListRole } from '../services/api';
 
-export default function useListRoles() {
+export default function useSuggestionRoles() {
   const listRoles = useQuery({
     queryKey: ['suggestion-roles'],
     queryFn: () => {

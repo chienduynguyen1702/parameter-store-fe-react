@@ -1,13 +1,11 @@
 import { useCallback, useMemo, useEffect, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-import useQueryString from '../useQueryString';
-import { fromNow } from '../../utils/helpers';
-import { archiveUser, editUser, getListUser } from '../../services/api';
-import { toast } from 'react-toastify';
+import useQueryString from './useQueryString';
+import { fromNow } from '../utils/helpers';
+import { getListUser } from '../services/api';
 
 export default function useListUsers() {
-  const queryClient = useQueryClient();
   const [totalPage, setTotalPage] = useState(1);
 
   const defaultQueryString = useMemo(() => {
@@ -66,52 +64,6 @@ export default function useListUsers() {
     }
   }, [defaultQueryString, limit, page, queryString, setQueryString]);
 
-  const editUsersMutation = useMutation(({ id, data }) => {
-    return editUser(id, data);
-  });
-
-  const handleUpdateUserRole = ({ newSetting, itemId, itemRoles }) => {
-    const body = {};
-    const roles = itemRoles;
-    const index = roles.indexOf(newSetting);
-
-    if (index === -1) {
-      body['roles'] = [...roles, newSetting];
-    } else {
-      body['roles'] = roles.filter((role) => role !== newSetting);
-    }
-    return editUsersMutation.mutate(
-      { id: itemId, data: body },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: ['users'],
-          });
-          toast.success('Edit User successfully');
-        },
-        onError: (error) => {
-          toast.error(error.response.data.message, {
-            autoClose: 5000,
-          });
-        },
-      },
-    );
-  };
-
-  const archiveUserMutation = useMutation(
-    (id) => {
-      return archiveUser(id);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['users'],
-        });
-        toast.success('User archived successfully');
-      },
-    },
-  );
-
   return {
     listUsers: data?.users,
     pagination: data?.pagination,
@@ -120,7 +72,5 @@ export default function useListUsers() {
     page,
     limit,
     totalPage: totalPage,
-    handleUpdateUserRole,
-    archiveUserMutation,
   };
 }

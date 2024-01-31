@@ -4,7 +4,7 @@ import PopoverEditSecret from './PopoverEditSecret';
 const Row = ({ item }) => {
   return (
     <>
-      <div className="d-sm-table-row d-none tableRow">
+      <div className="tableRow">
         <div className="d-table-cell tableCell py-3 roundedLeft">
           <div className="colorN4">{item.id}</div>
         </div>

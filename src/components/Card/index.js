@@ -16,7 +16,7 @@ const Card = ({
         <div
           className={cn(
             styles.head,
-            'd-flex flex-wrap flex-row flex-lg-col gap-3 gap-sm-2',
+            'd-flex flex-wrap flex-row flex-lg-col gap-3',
             classCardHead,
           )}
         >

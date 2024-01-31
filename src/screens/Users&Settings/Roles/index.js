@@ -1,93 +1,56 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import { useMatch, useNavigate, Outlet } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
-import {
-  Card,
-  Modal,
-  Decentralization,
-  Archived,
-  FormSearch,
-  ButtonAdd,
-} from '../../../components';
+import { Card, Modal, FormSearch, ButtonAdd } from '../../../components';
 
 import Table from './Table';
-import ArchivedRoles from './ArchivedRoles';
-
-import useQueryString from '../../../hooks/useQueryString';
 
 function Roles() {
-  const navigate = useNavigate();
+  const [total, setTotal] = useState(0);
 
-  const { queryString, parseQueryString } = useQueryString();
+  const [isAddMode, setIsAddMode] = useState(false);
 
-  const [totalRoles, setTotalRoles] = useState(0);
+  const onCloseModel = () => {
+    setIsAddMode(false);
+  };
 
-  //------------------Handle modal add or edit role------------------------
-  const addRoleMatch = useMatch('/user-setting/roles/add-role');
-  const isAddMode = useMemo(() => addRoleMatch !== null, [addRoleMatch]);
-
-  const editRoleMatch = useMatch('/user-setting/roles/edit-role/:id');
-  const isEditMode = useMemo(() => editRoleMatch !== null, [editRoleMatch]);
-
-  const handleCloseModal = useCallback(() => {
-    navigate({
-      pathname: '/user-setting/roles',
-      search: `?${parseQueryString(queryString)}`,
-    });
-  }, [navigate, parseQueryString, queryString]);
-
-  const openAddUserForm = useCallback(() => {
-    navigate({
-      pathname: '/user-setting/roles/add-role',
-      search: `?${parseQueryString(queryString)}`,
-    });
-  }, [navigate, parseQueryString, queryString]);
+  const onOpenModel = () => {
+    setIsAddMode(true);
+  };
 
   return (
     <>
-      <Decentralization
-        permissions={['role-one', 'role-create', 'role-update']}
+      <Modal
+        outerClassName="outerModal"
+        visible={isAddMode}
+        onClose={onCloseModel}
       >
-        <Modal
-          outerClassName="outerModal"
-          visible={isAddMode || isEditMode}
-          onClose={handleCloseModal}
-        >
-          <Outlet
-            context={{
-              onClose: handleCloseModal,
-            }}
-          />
-        </Modal>
-      </Decentralization>
-      <Decentralization permissions={['role-create']} exact>
-        <div className="mb-4">
-          <ButtonAdd titleButton="Add Role" handleClickAdd={openAddUserForm} />
-        </div>
-      </Decentralization>
+        <Outlet
+          context={{
+            onClose: onCloseModel,
+          }}
+        />
+      </Modal>
+      <div className="mb-4">
+        <ButtonAdd titleButton="Add Role" handleClickAdd={onOpenModel} />
+      </div>
 
-      <Decentralization permissions={['role-list', 'role-archivist-list']}>
-        <Card
-          title={`${totalRoles} Roles`}
-          classTitle="title-purple"
-          head={
-            <>
-              <FormSearch placeholder="Search by role" />
-              <div>
-                <Decentralization permissions={['role-archivist-list']}>
+      <Card
+        title={`${total} Roles`}
+        classTitle="title-purple"
+        head={
+          <>
+            <FormSearch placeholder="Search by role" />
+            {/* <div>
                   <Archived title={'Archived roles'}>
                     <ArchivedRoles />
                   </Archived>
-                </Decentralization>
-              </div>
-            </>
-          }
-        >
-          <Decentralization permissions={['role-list']} exact>
-            <Table setTotalRoles={setTotalRoles} />
-          </Decentralization>
-        </Card>
-      </Decentralization>
+              </div> */}
+          </>
+        }
+      >
+        <Table setTotal={setTotal} />
+      </Card>
     </>
   );
 }

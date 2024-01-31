@@ -1,5 +1,3 @@
-import { useCallback, useState } from 'react';
-import { useNavigate } from 'react-router';
 import { AiFillEdit } from 'react-icons/ai';
 import { BiArchiveIn } from 'react-icons/bi';
 import { HiDotsHorizontal } from 'react-icons/hi';
@@ -11,34 +9,20 @@ import {
   Popover,
 } from '../../../../../../components';
 
-import useQueryString from '../../../../../../hooks/useQueryString';
-
-export default function PopoverEditUser({ itemId, archiveUserMutation }) {
-  const navigate = useNavigate();
-  const [isConfirmMode, setIsConfirmMode] = useState(false);
-
-  const { queryString, parseQueryString } = useQueryString();
-
-  const goToEditUser = useCallback(
-    (id) => {
-      navigate({
-        pathname: `/user-setting/users/edit-user/${id}`,
-        search: `?${parseQueryString(queryString)}`,
-      });
-    },
-    [navigate, parseQueryString, queryString],
-  );
-
+export default function PopoverEditUser({
+  itemId,
+  archiveUserMutation = () => {},
+}) {
   return (
     <>
-      <Modal visible={isConfirmMode} onClose={() => setIsConfirmMode(false)}>
+      <Modal visible={false} onClose={() => {}}>
         <ConfirmContent
           title="Confirm"
           content="Are you sure you want to archive this user?"
           contentBtnSubmit="Archive"
           contentBtnCancel="Cancel"
           isLoading={archiveUserMutation.isLoading}
-          onClose={() => setIsConfirmMode(false)}
+          onClose={() => {}}
           handleSubmit={() => archiveUserMutation.mutate(itemId)}
         />
       </Modal>
@@ -53,7 +37,7 @@ export default function PopoverEditUser({ itemId, archiveUserMutation }) {
                 </span>
               </Decentralization>
             ),
-            onClick: () => goToEditUser(itemId),
+            onClick: () => {},
           },
           {
             component: (
@@ -64,9 +48,7 @@ export default function PopoverEditUser({ itemId, archiveUserMutation }) {
                 </span>
               </Decentralization>
             ),
-            onClick: () => {
-              setIsConfirmMode(true);
-            },
+            onClick: () => {},
           },
         ]}
       >

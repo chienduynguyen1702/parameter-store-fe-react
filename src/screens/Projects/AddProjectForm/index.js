@@ -6,11 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import Item from '../../../components/Item';
 
-import {
-  RHFTextInput,
-  AsyncButton,
-  Decentralization,
-} from '../../../components';
+import { RHFTextInput, AsyncButton } from '../../../components';
 
 import { AddProjectSchema } from '../../../utils/ValidateSchema';
 import { addProject } from '../../../services/api';
@@ -78,24 +74,18 @@ const AddProjectForm = ({ onClose }) => {
         </Item>
 
         <div className="pt-5 d-flex justify-content-end align-items-center">
-          <div>
-            <p onClick={onClose} className={'button-white me-2'}>
-              Cancel
-            </p>
-          </div>
-          <Decentralization permissions={['user-update', 'user-create']}>
-            <div>
-              <AsyncButton
-                threeDotsWidth="20"
-                threeDotsHeight="20"
-                type="submit"
-                className="button px-4"
-                value="Save"
-                notMaxWidth
-                loading={addProjectMutation.isLoading}
-              />
-            </div>
-          </Decentralization>
+          <p onClick={onClose} className={'button-white me-2'}>
+            Cancel
+          </p>
+          <AsyncButton
+            threeDotsWidth="20"
+            threeDotsHeight="20"
+            type="submit"
+            className="button px-4"
+            value="Save"
+            notMaxWidth
+            loading={addProjectMutation.isLoading}
+          />
         </div>
       </form>
     </FormProvider>

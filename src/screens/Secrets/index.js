@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import cn from 'classnames';
-
 import {
   Card,
   FormSearch,
@@ -21,7 +19,7 @@ export default function SecretsPage() {
   return (
     <>
       <ModalWithoutPortal
-        outerClassName={cn('outerModal')}
+        outerClassName={'outerModal'}
         visible={isAddMode}
         onClose={() => setIsAddMode(false)}
       >
@@ -37,7 +35,6 @@ export default function SecretsPage() {
       <Card
         title={`Found ${total} secrets`}
         classTitle="title-purple"
-        classCardHead="d-flex flex-wrap flex-row flex-lg-col gap-3"
         head={
           <>
             <FormSearch placeholder="Search by name or value" />

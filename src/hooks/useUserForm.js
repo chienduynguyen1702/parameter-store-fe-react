@@ -1,5 +1,4 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-
 import { useMatch, useOutletContext, useParams } from 'react-router';
 import { useCallback, useMemo } from 'react';
 import { toast } from 'react-toastify';
@@ -11,9 +10,9 @@ import {
   getListSettings,
   getUser,
   uploadImage,
-} from '../../services/api';
+} from '../services/api';
 
-import { AddUserSchema, EditUserSchema } from '../../utils/ValidateSchema';
+import { AddUserSchema, EditUserSchema } from '../utils/ValidateSchema';
 
 export default function useUserForm() {
   const { onClose } = useOutletContext();

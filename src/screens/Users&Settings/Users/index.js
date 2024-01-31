@@ -1,116 +1,55 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import { useMatch, useNavigate, Outlet } from 'react-router-dom';
+import React, { useState } from 'react';
 
-import cn from 'classnames';
-
-import {
-  Card,
-  Archived,
-  Decentralization,
-  FormSearch,
-  ModalWithoutPortal,
-  ButtonExport,
-  ButtonAdd,
-} from '../../../components';
+import { Card, FormSearch, ButtonAdd, Modal } from '../../../components';
 
 import Table from './Table';
-import ArchivedUsers from './ArchivedUsers';
-
-import useQueryString from '../../../hooks/useQueryString';
-import useExport from '../../../hooks/Export/useExport';
 
 export default function Users() {
-  const navigate = useNavigate();
+  const [total, setTotal] = useState(0);
 
-  const { queryString, parseQueryString } = useQueryString();
+  const [isAddMode, setIsAddMode] = useState(false);
 
-  const [totalUsers, setTotalUsers] = useState(0);
+  const onCloseModel = () => {
+    setIsAddMode(false);
+  };
 
-  //------------------Handle modal add or edit user------------------------
-  const addUserMatch = useMatch('/user-setting/users/add-user');
-  const isAddMode = useMemo(() => addUserMatch !== null, [addUserMatch]);
-
-  const editUserMatch = useMatch('/user-setting/users/edit-user/:id');
-  const isEditMode = useMemo(() => editUserMatch !== null, [editUserMatch]);
-
-  const handleCloseModal = useCallback(() => {
-    navigate({
-      pathname: '/user-setting/users',
-      search: `?${parseQueryString(queryString)}`,
-    });
-  }, [navigate, parseQueryString, queryString]);
-
-  const navigateToAddUser = useCallback(
-    () =>
-      navigate({
-        pathname: '/user-setting/users/add-user',
-        search: `?${parseQueryString(queryString)}`,
-      }),
-    [navigate, parseQueryString, queryString],
-  );
-
-  const { handleClickExport, isLoadingExport } = useExport({
-    exportedObject: 'users',
-  });
+  const onOpenModel = () => {
+    setIsAddMode(true);
+  };
 
   return (
     <>
-      <Decentralization
-        permissions={['user-create', 'user-one', 'user-update', 'user-import']}
-        exact
+      <Modal
+        outerClassName={'outerModal'}
+        visible={isAddMode}
+        onClose={onCloseModel}
       >
-        <ModalWithoutPortal
-          outerClassName={cn('outerModal')}
-          visible={isAddMode || isEditMode}
-          onClose={handleCloseModal}
-        >
-          <Outlet
-            context={{
-              onClose: handleCloseModal,
-            }}
-          />
-        </ModalWithoutPortal>
-      </Decentralization>
+        {/* User form  */}
+      </Modal>
       <div className="d-flex mb-4 gap-2">
-        <Decentralization permissions={['user-create']} exact>
-          <ButtonAdd
-            handleClickAdd={navigateToAddUser}
-            titleButton="Add User"
-          />
-        </Decentralization>
+        <ButtonAdd handleClickAdd={onOpenModel} titleButton="Add User" />
       </div>
-      <Decentralization
-        permissions={['user-list', 'user-archivist-list', 'user-export']}
-        exact
-      >
-        <Card
-          title={`${totalUsers} Users`}
-          classTitle="title-purple"
-          classCardHead="d-flex flex-wrap flex-row flex-lg-col gap-3"
-          head={
-            <>
-              <FormSearch placeholder="Search by name or email" />
-              <div className="d-flex">
-                <Decentralization permissions={['user-archivist-list']} exact>
-                  <Archived title={'Archived users'}>
+
+      <Card
+        title={`${total} Users`}
+        classTitle="title-purple"
+        head={
+          <>
+            <FormSearch placeholder="Search by name or email" />
+            {/* <div className="d-flex">
+              <Archived title={'Archived users'}>
                     <ArchivedUsers />
                   </Archived>
-                </Decentralization>
-                <Decentralization permissions={['user-export']} exact>
-                  <ButtonExport
+              <ButtonExport
                     isLoading={isLoadingExport}
                     handleClickExport={handleClickExport}
                   />
-                </Decentralization>
-              </div>
-            </>
-          }
-        >
-          <Decentralization permissions={['user-list']} exact>
-            <Table setTotalUsers={setTotalUsers} />
-          </Decentralization>
-        </Card>
-      </Decentralization>
+            </div> */}
+          </>
+        }
+      >
+        <Table setTotal={setTotal} />
+      </Card>
     </>
   );
 }

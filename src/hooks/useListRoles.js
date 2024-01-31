@@ -1,12 +1,14 @@
 import { useCallback, useMemo, useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
-import useQueryString from '../useQueryString';
-import { fromNow } from '../../utils/helpers';
-import { getListSecrets } from '../../services/api';
-import moment from 'moment';
+import useQueryString from './useQueryString';
 
-export default function useListSecrets() {
+import { getListRole, archiveRole } from '../services/api';
+
+export default function useListRoles() {
+  const queryClient = useQueryClient();
+
   const [totalPage, setTotalPage] = useState(1);
 
   const defaultQueryString = useMemo(() => {
@@ -21,18 +23,24 @@ export default function useListSecrets() {
   const { page, limit } = queryString;
 
   const parseData = useCallback((data) => {
-    const secrets = data?.result?.map((item) => {
+    const roles = data.roles.map((item) => {
       return {
         id: item.id,
         name: item.name,
         description: item.description,
-        value: item.value,
-        projectId: item.project_id,
-        projectName: item.project_name,
-        createdBy: item.created_by,
-        createdAt: moment(item.created_at).format('DD/MM/YYYY'),
-        updatedAt: fromNow(item.updated_at),
-        deletedAt: item.deleted_at,
+        createdAt: item.created_at,
+        archiverId: item.archiver_id,
+        archivedAt: item.archived_at,
+        archived: item.archived,
+        permissionsCount: item.permissions_count,
+        countUser: item.user_count,
+        permissions: item.permissions.map((permission) => {
+          return {
+            id: permission.id,
+            name: permission.name,
+            description: permission.description,
+          };
+        }),
       };
     });
     const pagination = {
@@ -41,16 +49,30 @@ export default function useListSecrets() {
       totalPage: data.pagination.totalPage,
       limit: data.pagination.limit,
     };
-    return { pagination, secrets };
+    return { pagination, roles };
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['secrets', queryString],
-    queryFn: () => getListSecrets(queryString),
+    queryKey: ['roles', queryString],
+    queryFn: () => getListRole(queryString),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data.data),
     enabled: !!page && !!limit,
   });
+
+  const archiveRoleMutation = useMutation(
+    async (id) => {
+      return archiveRole(id);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['roles'],
+        });
+        toast.success('Role archived successfully');
+      },
+    },
+  );
 
   useEffect(() => {
     if (data?.pagination?.totalPage) {
@@ -65,12 +87,12 @@ export default function useListSecrets() {
   }, [defaultQueryString, limit, page, queryString, setQueryString]);
 
   return {
-    listSecrets: data?.secrets,
+    listRoles: data?.roles,
     pagination: data?.pagination,
     isSuccess,
     isLoading,
-    page,
     limit,
     totalPage: totalPage,
+    archiveRoleMutation,
   };
 }
