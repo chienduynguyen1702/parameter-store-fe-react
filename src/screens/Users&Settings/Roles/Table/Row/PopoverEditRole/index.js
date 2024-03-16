@@ -30,24 +30,24 @@ export default function PopoverEditRole({
             component: (
               <div>
                 <AiFillEdit size={18} />
-                <span className="font15 ms-3">Edit</span>
+                <span className="font15 ms-3">View</span>
               </div>
             ),
             onClick: () => {},
           },
-          {
-            component: (
-              <div onClick={() => setIsConfirmMode(true)}>
-                <>
-                  <BiArchiveIn size={18} />
-                  <span className="font15 ms-3">Archive</span>
-                </>
-              </div>
-            ),
-            onClick: () => {
-              setIsConfirmMode(true);
-            },
-          },
+          // {
+          //   component: (
+          //     <div onClick={() => setIsConfirmMode(true)}>
+          //       <>
+          //         <BiArchiveIn size={18} />
+          //         <span className="font15 ms-3">Archive</span>
+          //       </>
+          //     </div>
+          //   ),
+          //   onClick: () => {
+          //     setIsConfirmMode(true);
+          //   },
+          // },
         ]}
       >
         <HiDotsHorizontal />

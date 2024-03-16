@@ -1,5 +1,6 @@
 import React from 'react';
 
+import cn from 'classnames';
 import AvatarAndInfo from './AvatarAndInfo';
 import { PopoverEditAndArchive } from '../../../../../components';
 
@@ -16,17 +17,21 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
       </div>
       <div className="tableCell">
         {item.projects.map((item) => (
-          <div className="status-red d-flex mb-1 justify-content-center">
+          <div className="d-flex mb-1 justify-content">
             {item.name}
           </div>
         ))}
       </div>
       <div className="tableCell">
-        <div className="status-green-dark ">{item.permissionsCount}</div>
+        <div className="  ">{item.permissionsCount}</div>
       </div>
       <div className="tableCell">
         {item.roles.map((item) => (
-          <div className="status-yellow d-flex mb-1 justify-content-center">
+          <div className={cn(
+            "status-"+item.color,
+            "mb-1 justify-content",
+            )}
+            >
             {item.name}
           </div>
         ))}

@@ -4,39 +4,51 @@ import { ROLES } from './roles';
 export const USERS = [
   {
     id: 1,
-    username: 'User 1',
+    username: 'chien.nd',
     phone: '0965656565',
     email: 'colorme1@gmail.com',
     avatar_url: 'https://i.pravatar.cc/300',
 
-    projects: [PROJECTS[0], PROJECTS[1]],
+    projects: [PROJECTS[0],],
     permissions_count: '12',
-    roles: ROLES,
-    last_sign_in: '2021-09-01T00:00:00.000Z',
+    roles: [ROLES[0]],
+    last_sign_in: '2024-03-16T00:00:00.000Z',
   },
   {
-    id: 1,
-    username: 'User 1',
+    id: 2,
+    username: 'dung.bm',
     phone: '0965656565',
     email: 'colorme1@gmail.com',
     avatar_url: 'https://i.pravatar.cc/300',
 
     projects: [PROJECTS[1]],
-    permissions_count: '12',
+    permissions_count: '18',
     roles: [ROLES[0]],
-    last_sign_in: '2021-09-01T00:00:00.000Z',
+    last_sign_in: '2024-03-08T00:00:00.000Z',
   },
-  {
-    id: 1,
-    username: 'User 1',
+  { 
+    id: 3,
+    username: 'tung.ba',
     phone: '0965656565',
     email: 'colorme1@gmail.com',
     avatar_url: 'https://i.pravatar.cc/300',
 
-    projects: [PROJECTS[1], PROJECTS[2]],
-    permissions_count: '12',
-    roles: [ROLES[1], ROLES[2]],
-    last_sign_in: '2021-09-01T00:00:00.000Z',
+    projects: [ PROJECTS[2]],
+    permissions_count: '9',
+    roles: [ROLES[2]],
+    last_sign_in: '2024-03-15T00:00:00.000Z',
+  },
+  {
+    id: 4,
+    username: 'thanh.ng',
+    phone: '0965656565',
+    email: 'colorme1@gmail.com',
+    avatar_url: 'https://i.pravatar.cc/300',
+
+    projects: [PROJECTS[1]],
+    permissions_count: '18',
+    roles: [ROLES[1]],
+    last_sign_in: '2024-03-08T00:00:00.000Z',
   },
 ];
 
