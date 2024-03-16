@@ -98,48 +98,6 @@ export const unarchiveUser = (id) => {
   });
 };
 
-export const exportUsers = (params) => {
-  return authApi({
-    method: 'GET',
-    url: '/users/export',
-    params,
-  });
-};
-
-export const testImportUsers = (data) => {
-  return authApi({
-    method: 'POST',
-    url: `/users/testImportUser`,
-    data,
-  });
-};
-
-export const importUsers = (data) => {
-  return authApi({
-    method: 'POST',
-    url: `/users/import`,
-    data,
-  });
-};
-
-export const uploadImage = (data) => {
-  return authApi({
-    method: 'POST',
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-    url: '/upload-image',
-    data,
-  });
-};
-
-export const getListAgency = () => {
-  return authApi({
-    method: 'Get',
-    url: `/users/agency`,
-  });
-};
-
 // ------------------------------ Role ------------------------------
 
 export const getListRole = (params) =>

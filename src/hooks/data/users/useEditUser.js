@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
-import { addUser } from '../../../services/api';
+import { editUser } from '../../../services/api';
 
 const useAddUser = ({ onClose }) => {
   const queryClient = useQueryClient();
 
-  const addUserMutation = useMutation(
-    (data) => {
-      return addUser(data);
+  const editUserMutation = useMutation(
+    (id, data) => {
+      return editUser(id, data);
     },
     {
       onSuccess: () => {
@@ -30,7 +30,7 @@ const useAddUser = ({ onClose }) => {
   );
 
   return {
-    addUserMutation,
+    editUserMutation,
   };
 };
 

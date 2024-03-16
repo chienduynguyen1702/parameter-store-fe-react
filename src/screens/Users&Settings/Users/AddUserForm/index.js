@@ -3,14 +3,14 @@ import { useAddUser } from '../../../../hooks/data';
 import UserForm from '../UserForm';
 
 const AddUserForm = ({ onClose }) => {
-  const { addUsersMutation } = useAddUser({ onClose });
+  const { addUserMutation } = useAddUser({ onClose });
   const method = useForm({
     // resolver: yupResolver(schema),
     // defaultValues: {},
   });
 
   const handleSubmit = (data) => {
-    addUsersMutation.mutate(data);
+    addUserMutation.mutate(data);
   };
 
   return (
