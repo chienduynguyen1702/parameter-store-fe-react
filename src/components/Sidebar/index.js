@@ -22,12 +22,6 @@ const navigation = [
     url: '/projects',
     permissions: [''],
   },
-  {
-    title: 'Secrets',
-    icon: 'ticket',
-    url: '/secrets',
-    permissions: [''],
-  },
 ];
 
 const Sidebar = ({ className, onClose }) => {
@@ -46,7 +40,6 @@ const Sidebar = ({ className, onClose }) => {
             onClose();
           }}
         >
-          
           <Icon name="close" size="24" />
         </button>
         <LogoContainer className={styles.logo} />

@@ -22,8 +22,19 @@ const UsersAndSettingsPage = lazy(() => import('./screens/Users&Settings'));
 const UsersPage = lazy(() => import('./screens/Users&Settings/Users'));
 const RolesPage = lazy(() => import('./screens/Users&Settings/Roles'));
 
-const SecretsPage = lazy(() => import('./screens/Secrets'));
-const ProjectsPage = lazy(() => import('./screens/Projects'));
+const ProjectsPage = lazy(() => import('./screens/Projects/ProjectsPage'));
+const ProjectDetailPage = lazy(() =>
+  import('./screens/Projects/ProjectDetailPage/ProjectDetailPage'),
+);
+const ProjectOverviewPage = lazy(() =>
+  import('./screens/Projects/OverviewPage/OverviewPage'),
+);
+const ProjectParametersPage = lazy(() =>
+  import('./screens/Projects/ParametersPage/ParametersPage'),
+);
+const ProjectTrackingPage = lazy(() =>
+  import('./screens/Projects/TrackingPage/TrackingPage'),
+);
 
 const SignIn = lazy(() => import('./screens/Authentication/SignIn'));
 const ResetPassword = lazy(() =>
@@ -71,17 +82,6 @@ function App() {
                   />
                   <Route
                     exact
-                    path="secrets/*"
-                    element={
-                      <SuspenseContainer>
-                        <PageContent title="Secrets" wide>
-                          <SecretsPage />
-                        </PageContent>
-                      </SuspenseContainer>
-                    }
-                  />
-                  <Route
-                    exact
                     path="projects/*"
                     element={
                       <SuspenseContainer>
@@ -91,6 +91,31 @@ function App() {
                       </SuspenseContainer>
                     }
                   />
+                  <Route
+                    exact
+                    path="project-detail/*"
+                    element={
+                      <SuspenseContainer>
+                        <PageContent title="Project Detail" wide>
+                          <ProjectDetailPage />
+                        </PageContent>
+                      </SuspenseContainer>
+                    }
+                  >
+                    <Route index element={<Navigate to="overview" />} />
+                    <Route
+                      path="overview/*"
+                      element={<ProjectOverviewPage />}
+                    />
+                    <Route
+                      path="parameters/*"
+                      element={<ProjectParametersPage />}
+                    />
+                    <Route
+                      path="tracking/*"
+                      element={<ProjectTrackingPage />}
+                    />
+                  </Route>
                   <Route
                     exact
                     path="user-setting/*"

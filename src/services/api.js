@@ -157,51 +157,7 @@ export const getListPermission = (params = null) =>
     params,
   });
 
-// ------------------------------ User Settings ------------------------------
-
-export const getListSettings = (params) =>
-  authApi({
-    method: 'GET',
-    url: '/settings',
-    params,
-  });
-
-export const addSetting = (data) =>
-  authApi({
-    method: 'POST',
-    url: '/settings',
-    data,
-  });
-
-export const addListSettings = (data) =>
-  authApi({
-    method: 'POST',
-    url: '/list-settings',
-    data,
-  });
-
-export const editSetting = (id, data) =>
-  authApi({
-    method: 'PUT',
-    url: `/settings/${id}`,
-    data,
-  });
-
 // ------------------------------ Organization ------------------------------
-
-export const getListOrganizations = (params) =>
-  authApi({
-    method: 'GET',
-    url: '/organizations',
-    params,
-  });
-
-export const addOrganization = (data) =>
-  authApi({
-    method: 'POST',
-    url: '/organizations',
-    data,
-  });
 
 export const editOrganizationById = (id, data) =>
   authApi({
@@ -250,6 +206,27 @@ export const deleteProjectById = (id) =>
     method: 'DELETE',
     url: `/projects/${id}`,
   });
+
+export const getArchivedProjects = () => {
+  return authApi({
+    method: 'GET',
+    url: '/archived-users',
+  });
+};
+
+export const archiveProject = (id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/users/${id}/archive`,
+  });
+};
+
+export const unarchiveProject = (id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/users/${id}/unarchive`,
+  });
+};
 
 // ------------------------------ Secret ------------------------------
 
