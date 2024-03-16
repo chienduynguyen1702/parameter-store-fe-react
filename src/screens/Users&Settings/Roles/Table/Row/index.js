@@ -10,9 +10,7 @@ const Row = ({ item }) => {
           <div className="status-default">{item.name}</div>
         </div>
         <div className="tableCell">
-          <div className="font14 colorN4">
-            {item.role} {item.countUser} users
-          </div>
+          <div className="font14 colorN4">{item.usersCount} users</div>
         </div>
 
         <div className="tableCell">

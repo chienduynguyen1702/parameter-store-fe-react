@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 
 import Row from './Row';
 import { NoData, Pagination } from '../../../../components';
-
-import useListRoles from '../../../../hooks/useListRoles';
+import { useListRoles } from '../../../../hooks/data';
 
 const Table = ({ setTotal }) => {
   const { listRoles, isSuccess, isLoading, totalPage, pagination } =
@@ -18,7 +17,7 @@ const Table = ({ setTotal }) => {
       <div className="tableOuter">
         <div className="tableContainer d-block d-sm-table">
           <div className="tableHead">
-            <div className="tableCell pb-4">Role</div>
+            <div className="tableCell pb-4">Name</div>
             <div className="tableCell">Assigned to</div>
             <div className="tableCell">Permissions</div>
             <div className="tableCell"></div>

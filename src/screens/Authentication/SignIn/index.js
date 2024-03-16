@@ -79,12 +79,12 @@ const SignIn = () => {
                 <AiOutlineEye />
               </div>
             </div>
-            <RHFTextInput
+            {/* <RHFTextInput
               name="organization_id"
               type="number"
               placeholder="Organization ID"
               icon="mail"
-            />
+            /> */}
             <AsyncButton loading={loading} value="Sign in" type="submit" />
 
             {isError ? (

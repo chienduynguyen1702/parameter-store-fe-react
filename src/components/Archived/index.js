@@ -1,13 +1,31 @@
 import React, { useState } from 'react';
+import Icon from '../Icon';
+import { BiArchiveIn } from 'react-icons/bi';
+import Skeleton from 'react-loading-skeleton';
 
 import cn from 'classnames';
 import styles from './Archived.module.sass';
 
-import Icon from '../Icon';
-import { BiArchiveIn } from 'react-icons/bi';
+import Form from '../Form';
+import ArchivedItem from './ArchivedItem';
+import NoDataArchived from './NoDataArchived';
 
-const Archived = ({ className, classNameBtn, children, title }) => {
+const Archived = ({
+  className,
+  classNameBtn,
+  title,
+  archivedList,
+  isSuccess,
+  isLoading,
+  search,
+  handleSearch,
+  unarchiveMutation,
+}) => {
   const [visible, setVisible] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div
@@ -27,7 +45,34 @@ const Archived = ({ className, classNameBtn, children, title }) => {
             <Icon name="close" size="20" />
           </button>
         </div>
-        {visible && children}
+        {visible && (
+          <>
+            <Form
+              value={search}
+              setValue={handleSearch}
+              onSubmit={handleSubmit}
+              className="archiverSearch"
+              placeholder="Search archived users"
+            />
+            <div className="archiverScroll">
+              {isLoading && <Skeleton height={60} count={6} className="mb-2" />}
+              {isSuccess &&
+                (archivedList?.length > 0 ? (
+                  archivedList?.map((item, index) => (
+                    <ArchivedItem
+                      key={index}
+                      item={item}
+                      havingImage
+                      handleUnarchive={(id) => unarchiveMutation.mutate(id)}
+                      isLoading={unarchiveMutation.isLoading}
+                    />
+                  ))
+                ) : (
+                  <NoDataArchived />
+                ))}
+            </div>
+          </>
+        )}
       </div>
       <div className={styles.overlay} onClick={() => setVisible(false)}></div>
     </div>

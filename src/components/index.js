@@ -1,5 +1,4 @@
 export { default as Archived } from './Archived';
-export { default as ArchivedItem } from './ArchivedItem';
 export { default as Balance } from './Balance';
 export { default as ButtonImport } from './ButtonImport';
 export { default as ButtonExport } from './ButtonExport';
@@ -36,7 +35,6 @@ export { default as ModalWithoutPortal } from './ModalWithoutPortal';
 export { default as ModalPreview } from './ModalPreview';
 export { default as ModalProduct } from './ModalProduct';
 export { default as NoData } from './NoData';
-export { default as NoDataArchived } from './NoDataArchived';
 export { default as Page } from './Page';
 export { default as Pagination } from './Pagination';
 export { default as Popover } from './Popover';
@@ -85,3 +83,5 @@ export { default as Decentralization } from './Decentralization';
 export { default as Avatar } from './Avatar';
 
 export { default as MonthYearDatePicker } from './DatePicker/MonthYearDatePicker';
+
+export { default as PopoverEditAndArchive } from './PopoverEditAndArchive';

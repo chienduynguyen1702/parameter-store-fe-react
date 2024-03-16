@@ -1,54 +1,97 @@
 import React, { useState } from 'react';
 
-import { Card, FormSearch, ButtonAdd, Modal } from '../../../components';
+import {
+  Card,
+  FormSearch,
+  ButtonAdd,
+  Modal,
+  Archived,
+} from '../../../components';
 
 import Table from './Table';
+import {
+  archiveUser,
+  getArchivedUsers,
+  unarchiveUser,
+} from '../../../services/api';
+import AddUserForm from './AddUserForm';
+import EditUserForm from './EditUserForm';
+import { useListArchived, useListUsers } from '../../../hooks/data';
 
 export default function Users() {
-  const [total, setTotal] = useState(0);
-
   const [isAddMode, setIsAddMode] = useState(false);
+  const [editedItemId, setEditedItemId] = useState(undefined);
 
-  const onCloseModel = () => {
-    setIsAddMode(false);
-  };
+  const { pagination, isSuccess: isListUsersSuccess } = useListUsers();
 
-  const onOpenModel = () => {
-    setIsAddMode(true);
-  };
+  const {
+    archivedList,
+    isSuccess: isListArchivedSuccess,
+    isLoading,
+    search,
+    handleSearch,
+    archiveMutation,
+    unarchiveMutation,
+  } = useListArchived({
+    archivedObject: {
+      listArchivedAPI: getArchivedUsers,
+      archiveAPI: archiveUser,
+      unarchiveAPI: unarchiveUser,
+      keyArchivistList: 'user-archivist-list',
+      keyList: 'users',
+      title: 'User',
+    },
+  });
 
   return (
     <>
       <Modal
         outerClassName={'outerModal'}
-        visible={isAddMode}
-        onClose={onCloseModel}
+        visible={isAddMode || typeof editedItemId !== 'undefined'}
+        onClose={() => {
+          setIsAddMode(false);
+          setEditedItemId(undefined);
+        }}
       >
-        {/* User form  */}
+        {isAddMode && <AddUserForm onClose={() => setIsAddMode(false)} />}
+        {typeof editedItemId !== 'undefined' && (
+          <EditUserForm
+            id={editedItemId}
+            onClose={() => setEditedItemId(undefined)}
+          />
+        )}
       </Modal>
       <div className="d-flex mb-4 gap-2">
-        <ButtonAdd handleClickAdd={onOpenModel} titleButton="Add User" />
+        <ButtonAdd
+          handleClickAdd={() => setIsAddMode(true)}
+          titleButton="Add User"
+        />
       </div>
 
       <Card
-        title={`${total} Users`}
+        title={`${isListUsersSuccess ? pagination?.total : '-'} Users`}
         classTitle="title-purple"
         head={
           <>
-            <FormSearch placeholder="Search by name or email" />
-            {/* <div className="d-flex">
-              <Archived title={'Archived users'}>
-                    <ArchivedUsers />
-                  </Archived>
-              <ButtonExport
-                    isLoading={isLoadingExport}
-                    handleClickExport={handleClickExport}
-                  />
-            </div> */}
+            <FormSearch placeholder="Search by name" />
+            <div className="d-flex">
+              <Archived
+                title="Archived users"
+                archivedList={archivedList}
+                isSuccess={isListArchivedSuccess}
+                isLoading={isLoading}
+                search={search}
+                handleSearch={handleSearch}
+                unarchiveMutation={unarchiveMutation}
+              />
+            </div>
           </>
         }
       >
-        <Table setTotal={setTotal} />
+        <Table
+          setEditedItemId={setEditedItemId}
+          archiveMutation={archiveMutation}
+        />
       </Card>
     </>
   );

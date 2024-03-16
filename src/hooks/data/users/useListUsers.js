@@ -1,40 +1,36 @@
-import { useCallback, useMemo, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import useQueryString from './useQueryString';
-import { fromNow } from '../utils/helpers';
-import { getListUser } from '../services/api';
+import useQueryString from '../../useQueryString';
+import { getListUser } from '../../../services/api';
+import { USERS } from '../../mocks/users';
+import moment from 'moment';
 
-export default function useListUsers() {
-  const [totalPage, setTotalPage] = useState(1);
+const DEFAULT_QUERY_STRING = {
+  page: 1,
+  limit: 10,
+};
 
-  const defaultQueryString = useMemo(() => {
-    return {
-      page: 1,
-      limit: 10,
-    };
-  }, []);
-
+const useListUsers = (defaultParams) => {
   const { queryString, setQueryString } = useQueryString();
 
   const { page, limit } = queryString;
 
   const parseData = useCallback((data) => {
-    const users = data?.users?.map((item) => {
+    const users = USERS?.map((item) => {
       return {
         id: item.id,
-        email: item.email,
         username: item.username,
         phone: item.phone,
-        address: item.address,
-        bio: item.bio,
-        color: item.color,
+        email: item.email,
         avatarUrl: item.avatar_url,
-        lastSignIn: fromNow(item.last_sign_in),
-        roles: item.roles.map((role) => role.name),
+        projects: item.projects,
         permissionsCount: item.permissions_count,
+        roles: item.roles,
+        lastSignIn: moment(item.last_sign_in).fromNow(),
       };
     });
+
     const pagination = {
       total: data.pagination.total,
       currentPage: data.pagination.currentPage,
@@ -53,16 +49,10 @@ export default function useListUsers() {
   });
 
   useEffect(() => {
-    if (data?.pagination?.totalPage) {
-      setTotalPage(data.pagination.totalPage);
-    }
-  }, [data?.pagination?.totalPage]);
-
-  useEffect(() => {
     if (!page || !limit) {
-      setQueryString(defaultQueryString);
+      setQueryString(DEFAULT_QUERY_STRING);
     }
-  }, [defaultQueryString, limit, page, queryString, setQueryString]);
+  }, [limit, page, queryString, setQueryString]);
 
   return {
     listUsers: data?.users,
@@ -71,6 +61,8 @@ export default function useListUsers() {
     isLoading,
     page,
     limit,
-    totalPage: totalPage,
+    totalPage: data?.pagination?.totalPage,
   };
-}
+};
+
+export default useListUsers;
