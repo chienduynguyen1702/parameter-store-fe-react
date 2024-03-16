@@ -22,18 +22,17 @@ const UsersAndSettingsPage = lazy(() => import('./screens/Users&Settings'));
 const UsersPage = lazy(() => import('./screens/Users&Settings/Users'));
 const RolesPage = lazy(() => import('./screens/Users&Settings/Roles'));
 
-const ProjectsPage = lazy(() => import('./screens/Projects/ProjectsPage'));
-const ProjectDetailPage = lazy(() =>
-  import('./screens/Projects/ProjectDetailPage/ProjectDetailPage'),
-);
+const ProjectsPage = lazy(() => import('./screens/Projects'));
+
+const ProjectDetailPage = lazy(() => import('./screens/ProjectDetail'));
 const ProjectOverviewPage = lazy(() =>
-  import('./screens/Projects/OverviewPage/OverviewPage'),
+  import('./screens/ProjectDetail/OverviewPage'),
 );
 const ProjectParametersPage = lazy(() =>
-  import('./screens/Projects/ParametersPage/ParametersPage'),
+  import('./screens/ProjectDetail/ParametersPage'),
 );
 const ProjectTrackingPage = lazy(() =>
-  import('./screens/Projects/TrackingPage/TrackingPage'),
+  import('./screens/ProjectDetail/TrackingPage'),
 );
 
 const SignIn = lazy(() => import('./screens/Authentication/SignIn'));
@@ -93,7 +92,7 @@ function App() {
                   />
                   <Route
                     exact
-                    path="project-detail/*"
+                    path="project-detail/:id/*"
                     element={
                       <SuspenseContainer>
                         <PageContent title="Project Detail" wide>

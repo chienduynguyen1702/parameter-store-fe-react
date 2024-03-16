@@ -1,10 +1,10 @@
 import React from 'react';
 
 import Row from './Row/Row';
-import { NoData, Pagination } from '../../../../components';
+import { NoData, Pagination } from '../../../../../components';
 
 const Table = ({
-  listProjects,
+  listParameters,
   isSuccess,
   isLoading,
   totalPage,
@@ -17,11 +17,15 @@ const Table = ({
         <div className="tableContainer">
           <div className="tableHead">
             <div className="tableCell pb-4">Name</div>
-            <div className="tableCell">Assigned to</div>
+            <div className="tableCell">Value</div>
+            <div className="tableCell">Stage</div>
+            <div className="tableCell">Environment</div>
+            <div className="tableCell">Created at</div>
+            <div className="tableCell">Updated at</div>
             <div className="tableCell"></div>
           </div>
           {isSuccess &&
-            listProjects.map((item) => (
+            listParameters.map((item) => (
               <Row
                 key={item.id}
                 item={item}
@@ -30,9 +34,9 @@ const Table = ({
               />
             ))}
         </div>
-        {isSuccess && listProjects.length === 0 && <NoData />}
+        {isSuccess && listParameters.length === 0 && <NoData />}
       </div>
-      {((isSuccess && listProjects.length !== 0) || isLoading) && (
+      {((isSuccess && listParameters.length !== 0) || isLoading) && (
         <Pagination pageCount={totalPage || 5} />
       )}
     </>

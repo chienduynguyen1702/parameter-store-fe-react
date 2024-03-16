@@ -2,19 +2,19 @@ export const PROJECTS = [
   {
     id: 1,
     name: 'SOICT',
-    description: 'SOICT Project',
     color: 'red',
+    users_count: 10,
   },
   {
     id: 2,
     name: 'EdTech',
-    description: 'EdTech Project',
     color: 'blue',
+    users_count: 10,
   },
   {
     id: 3,
     name: 'DxClan',
-    description: 'DxClan Project',
     color: 'green',
+    users_count: 10,
   },
 ];

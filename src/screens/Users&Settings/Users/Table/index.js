@@ -3,11 +3,14 @@ import React from 'react';
 import Row from './Row';
 import { NoData, Pagination } from '../../../../components';
 
-import { useListUsers } from '../../../../hooks/data';
-
-const Table = ({ setEditedItemId, archiveMutation }) => {
-  const { listUsers, isSuccess, isLoading, totalPage } = useListUsers();
-
+const Table = ({
+  listUsers,
+  isSuccess,
+  isLoading,
+  totalPage,
+  setEditedItemId,
+  archiveMutation,
+}) => {
   return (
     <>
       <div className="tableOuter">

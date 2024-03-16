@@ -1,50 +1,51 @@
 import React, { useState } from 'react';
 
 import {
+  ButtonAdd,
   Card,
   FormSearch,
-  ButtonAdd,
-  Modal,
   Archived,
+  Modal,
 } from '../../../components';
 
-import Table from './Table';
-import {
-  archiveUser,
-  getArchivedUsers,
-  unarchiveUser,
-} from '../../../services/api';
-import AddUserForm from './AddUserForm';
-import EditUserForm from './EditUserForm';
-import { useListArchived, useListUsers } from '../../../hooks/data';
+import Table from './components/Table/Table';
+import AddParameterForm from './components/AddParameterForm';
+import EditParameterForm from './components/EditParameterForm';
 
-const UsersPage = (defaultParams) => {
+import { useListParameters, useListArchived } from '../../../hooks/data';
+import {
+  archiveParameter,
+  getArchivedParameters,
+  unarchiveParameter,
+} from '../../../services/api';
+
+const ParametersPage = () => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
 
   const {
-    listUsers,
-    pagination,
+    listParameters,
+    isLoading: isListParametersLoading,
     isSuccess: isListUsersSuccess,
-    isLoading: isListUsersLoading,
-  } = useListUsers(defaultParams);
+    pagination,
+  } = useListParameters();
 
   const {
     archivedList,
     isSuccess: isListArchivedSuccess,
-    isLoading: isListArchivedLoading,
+    isLoading,
     search,
     handleSearch,
     archiveMutation,
     unarchiveMutation,
   } = useListArchived({
     archivedObject: {
-      listArchivedAPI: getArchivedUsers,
-      archiveAPI: archiveUser,
-      unarchiveAPI: unarchiveUser,
-      keyArchivistList: 'user-archivist-list',
-      keyList: 'users',
-      title: 'User',
+      listArchivedAPI: getArchivedParameters,
+      archiveAPI: archiveParameter,
+      unarchiveAPI: unarchiveParameter,
+      keyArchivistList: 'parameter-archivist-list',
+      keyList: 'parameters',
+      title: 'Parameter',
     },
   });
 
@@ -58,9 +59,9 @@ const UsersPage = (defaultParams) => {
           setEditedItemId(undefined);
         }}
       >
-        {isAddMode && <AddUserForm onClose={() => setIsAddMode(false)} />}
+        {isAddMode && <AddParameterForm onClose={() => setIsAddMode(false)} />}
         {typeof editedItemId !== 'undefined' && (
-          <EditUserForm
+          <EditParameterForm
             id={editedItemId}
             onClose={() => setEditedItemId(undefined)}
           />
@@ -68,7 +69,7 @@ const UsersPage = (defaultParams) => {
       </Modal>
 
       <Card
-        title={`${isListUsersSuccess ? pagination?.total : '-'} Users`}
+        title={`${isListUsersSuccess ? pagination?.total : '-'} Parameters`}
         classTitle="title-purple"
         head={
           <>
@@ -76,14 +77,14 @@ const UsersPage = (defaultParams) => {
             <div className="d-flex">
               <ButtonAdd
                 handleClickAdd={() => setIsAddMode(true)}
-                titleButton="Add User"
+                titleButton="Add Parameter"
                 className="me-2"
               />
               <Archived
-                title="Archived users"
+                title="Archived Parameters"
                 archivedList={archivedList}
                 isSuccess={isListArchivedSuccess}
-                isLoading={isListArchivedLoading}
+                isLoading={isLoading}
                 search={search}
                 handleSearch={handleSearch}
                 unarchiveMutation={unarchiveMutation}
@@ -93,9 +94,9 @@ const UsersPage = (defaultParams) => {
         }
       >
         <Table
-          listUsers={listUsers}
+          listParameters={listParameters}
           isSuccess={isListUsersSuccess}
-          isLoading={isListUsersLoading}
+          isLoading={isListParametersLoading}
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
@@ -105,4 +106,4 @@ const UsersPage = (defaultParams) => {
   );
 };
 
-export default UsersPage;
+export default ParametersPage;

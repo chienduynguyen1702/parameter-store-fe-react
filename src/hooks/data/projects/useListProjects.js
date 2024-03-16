@@ -3,31 +3,25 @@ import { useQuery } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
 import { getListUser } from '../../../services/api';
-import { USERS } from '../../mocks/users';
-import moment from 'moment';
+import { PROJECTS } from '../../mocks/projects';
 
 const DEFAULT_QUERY_STRING = {
   page: 1,
   limit: 10,
 };
 
-const useListUsers = (defaultParams) => {
+const useListProjects = (defaultParams) => {
   const { queryString, setQueryString } = useQueryString();
 
   const { page, limit } = queryString;
 
   const parseData = useCallback((data) => {
-    const users = USERS?.map((item) => {
+    const projects = PROJECTS?.map((item) => {
       return {
         id: item.id,
-        username: item.username,
-        phone: item.phone,
-        email: item.email,
-        avatarUrl: item.avatar_url,
-        projects: item.projects,
-        permissionsCount: item.permissions_count,
-        roles: item.roles,
-        lastSignIn: moment(item.last_sign_in).fromNow(),
+        name: item.name,
+        color: item.color,
+        usersCount: item.users_count,
       };
     });
 
@@ -37,11 +31,11 @@ const useListUsers = (defaultParams) => {
       totalPage: data.pagination.totalPage,
       limit: data.pagination.limit,
     };
-    return { pagination, users };
+    return { pagination, projects };
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['users', queryString],
+    queryKey: ['projects', queryString],
     queryFn: () => getListUser(queryString),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data.data),
@@ -55,14 +49,11 @@ const useListUsers = (defaultParams) => {
   }, [limit, page, queryString, setQueryString]);
 
   return {
-    listUsers: data?.users,
+    listProjects: data?.projects,
     pagination: data?.pagination,
     isSuccess,
     isLoading,
-    page,
-    limit,
-    totalPage: data?.pagination?.totalPage,
   };
 };
 
-export default useListUsers;
+export default useListProjects;

@@ -1,36 +1,24 @@
 import React from 'react';
+import { Icon } from '../../../../../components';
+import { useNavigate } from 'react-router';
 
-import { PopoverEditAndArchive } from '../../../../../components';
-
-const Row = ({ item, setEditedItemId, archiveMutation }) => {
+const Row = ({ item }) => {
+  const navigate = useNavigate();
   return (
     <div className="tableRow">
-      <div className="tableCell py-3 ps-2 roundedLeft">x</div>
-      <div className="tableCell">
-        {item.projects.map((item) => (
-          <div className="status-red d-flex mb-1 justify-content-center">
-            {item.name}
-          </div>
-        ))}
+      <div className="tableCell py-4 ps-2 roundedLeft">
+        <div className="status-default" style={{ backgroundColor: item.color }}>
+          {item.name}
+        </div>
       </div>
       <div className="tableCell">
-        <div className="status-green-dark ">{item.permissionsCount}</div>
+        <div className="status-green-dark">{item.usersCount}</div>
       </div>
-      <div className="tableCell">
-        {item.roles.map((item) => (
-          <div className="status-yellow d-flex mb-1 justify-content-center">
-            {item.name}
-          </div>
-        ))}
-      </div>
-      <div className="tableCell">{item.lastSignIn}</div>
-      <div className="tableCell roundedRight">
-        <PopoverEditAndArchive
-          itemId={item.id}
-          name="user"
-          setEditedItemId={setEditedItemId}
-          archiveMutation={archiveMutation}
-        />
+      <div
+        className="tableCell cursor-pointer roundedRight"
+        onClick={() => navigate(`/project-detail/${item.id}`)}
+      >
+        <Icon name="arrow-right" size={24} />
       </div>
     </div>
   );

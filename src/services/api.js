@@ -228,37 +228,52 @@ export const unarchiveProject = (id) => {
   });
 };
 
-// ------------------------------ Secret ------------------------------
+// ------------------------------ Parameter ------------------------------
 
-export const getListSecrets = (params) =>
+export const getListParameter = (params) =>
   authApi({
     method: 'GET',
-    url: '/secrets',
+    url: '/users',
     params,
   });
 
-export const addSecret = (data) =>
+export const addParameter = (data) =>
   authApi({
     method: 'POST',
-    url: '/secrets',
+    url: '/users',
     data,
   });
 
-export const editSecret = (id, data) =>
+export const editParameter = (id, data) =>
   authApi({
     method: 'PUT',
-    url: `/secrets/${id}`,
+    url: `/users/${id}`,
     data,
   });
 
-export const getSecret = (id) =>
+export const getParameter = (id) =>
   authApi({
     method: 'GET',
-    url: `/secrets/${id}`,
+    url: `/users/${id}`,
   });
 
-export const deleteSecretById = (id) =>
-  authApi({
-    method: 'DELETE',
-    url: `/secrets/${id}`,
+export const getArchivedParameters = () => {
+  return authApi({
+    method: 'GET',
+    url: '/archived-users',
   });
+};
+
+export const archiveParameter = (id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/users/${id}/archive`,
+  });
+};
+
+export const unarchiveParameter = (id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/users/${id}/unarchive`,
+  });
+};

@@ -6,7 +6,7 @@ import Table from './components/Table/Table';
 import AddProjectForm from './components/AddProjectForm/AddProjectForm';
 import EditProjectForm from './components/EditProjectForm/EditProjectForm';
 
-import { useListUsers, useListArchived } from '../../hooks/data';
+import { useListProjects, useListArchived } from '../../hooks/data';
 import {
   archiveProject,
   getArchivedProjects,
@@ -17,7 +17,12 @@ const ProjectsPage = () => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
 
-  const { pagination, isSuccess: isListUsersSuccess } = useListUsers();
+  const {
+    listProjects,
+    isLoading: isListProjectsLoading,
+    isSuccess: isListUsersSuccess,
+    pagination,
+  } = useListProjects();
 
   const {
     archivedList,
@@ -32,9 +37,9 @@ const ProjectsPage = () => {
       listArchivedAPI: getArchivedProjects,
       archiveAPI: archiveProject,
       unarchiveAPI: unarchiveProject,
-      keyArchivistList: 'user-archivist-list',
-      keyList: 'users',
-      title: 'User',
+      keyArchivistList: 'project-archivist-list',
+      keyList: 'projects',
+      title: 'Project',
     },
   });
 
@@ -56,22 +61,21 @@ const ProjectsPage = () => {
           />
         )}
       </Modal>
-      <div className="d-flex mb-4 gap-2">
-        <ButtonAdd
-          handleClickAdd={() => setIsAddMode(true)}
-          titleButton="Add User"
-        />
-      </div>
 
       <Card
-        title={`${isListUsersSuccess ? pagination?.total : '-'} Users`}
+        title={`${isListUsersSuccess ? pagination?.total : '-'} Projects`}
         classTitle="title-purple"
         head={
           <>
             <FormSearch placeholder="Search by name" />
             <div className="d-flex">
+              <ButtonAdd
+                handleClickAdd={() => setIsAddMode(true)}
+                titleButton="Add Project"
+                className="me-2"
+              />
               <Archived
-                title="Archived users"
+                title="Archived projects"
                 archivedList={archivedList}
                 isSuccess={isListArchivedSuccess}
                 isLoading={isLoading}
@@ -84,6 +88,10 @@ const ProjectsPage = () => {
         }
       >
         <Table
+          listProjects={listProjects}
+          isSuccess={isListUsersSuccess}
+          isLoading={isListProjectsLoading}
+          totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
         />
