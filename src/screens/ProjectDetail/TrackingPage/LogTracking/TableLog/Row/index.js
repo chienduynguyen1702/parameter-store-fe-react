@@ -94,7 +94,8 @@ const Row = ({ item }) => {
   return (
     <>
       <div className={styles.row} onMouseLeave={() => setVisibleActions(false)}>
-        <div className={styles.col}>{item?.time}</div>
+        {/* <div className={styles.col}>{item?.time}</div> */}
+        <div className={styles.col}>17:12, 13 Sep 2023</div>
         <div className={styles.col}>
           <div className={styles.user}>
             <div className={styles.avatar}>
@@ -102,31 +103,31 @@ const Row = ({ item }) => {
                 src={
                   item?.users
                     ? item?.users?.avatar_url
-                    : 'images/content/avatar-1.jpg'
+                    : 'https://i.pravatar.cc/300'
                 }
                 alt="Avatar"
               />
             </div>
-            {item?.users ? item?.users?.username : 'Anonymous'}
+            {item?.users ? item?.users?.username : 'Duy Chien'}
           </div>
         </div>
         <div className={styles.col}>
           <div className={styles.label}>Screen</div>
           <div className={styles.number}>
-            {updateScreenName(item?.endpoint)}
+            {updateScreenName(item?.endpoint ?? '/api/v1/get-deployed-params')}
           </div>
         </div>
         <div className={styles.col}>
           <div className={styles.label}>Endpoint</div>
           <div className={styles.endpoint}>
             <u></u>
-            {compactString(item?.endpoint)}
+            {compactString(item?.endpoint ?? '/api/v1/get-deployed-params')}
           </div>
         </div>
         <div className={styles.col}>
           <div className={styles.label}>Method</div>
           <div className={styles.box}>
-            <div className={styles.number}>{item?.method}</div>
+            <div className={styles.number}>{item?.method ?? 'Post'}</div>
           </div>
         </div>
         <div className={styles.col}>
@@ -134,15 +135,16 @@ const Row = ({ item }) => {
           <div className={styles.box_response}>
             <div
               className={styles.response_color}
-              style={{ backgroundColor: colorForStatus(item?.response_status) }}
+              // style={{ backgroundColor: colorForStatus(item?.response_status) }}
+              style={{ backgroundColor: '#83BF6E' }}
             ></div>
-            {item.response_status}
+            {item.response_status ?? '200'}
           </div>
         </div>
 
         <div className={styles.col}>
           <div className={styles.label}>Latency</div>
-          {item.latency}ms
+          {item.latency ?? '100'}ms
         </div>
       </div>
       <ModalProduct
