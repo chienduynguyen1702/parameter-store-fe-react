@@ -57,10 +57,10 @@ const colorForStatus = (status) => {
 
 const compactString = (str) => {
   const MAX_LENGTH = 50;
-  if (str.length <= MAX_LENGTH) {
+  if (str?.length <= MAX_LENGTH) {
     return str;
   }
-  return str.slice(0, MAX_LENGTH) + '...';
+  return str?.slice(0, MAX_LENGTH) + '...';
 };
 
 const updateScreenName = (endpoint) => {

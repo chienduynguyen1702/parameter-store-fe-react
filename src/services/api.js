@@ -277,11 +277,62 @@ export const unarchiveParameter = (id) => {
     url: `/users/${id}/unarchive`,
   });
 };
+
+// ------------------------------ Agent ------------------------------
+
+export const getListAgent = (params) =>
+  authApi({
+    method: 'GET',
+    url: '/users',
+    params,
+  });
+
+export const addAgent = (data) =>
+  authApi({
+    method: 'POST',
+    url: '/users',
+    data,
+  });
+
+export const editAgent = (id, data) =>
+  authApi({
+    method: 'PUT',
+    url: `/users/${id}`,
+    data,
+  });
+
+export const getAgent = (id) =>
+  authApi({
+    method: 'GET',
+    url: `/users/${id}`,
+  });
+
+export const getArchivedAgents = () => {
+  return authApi({
+    method: 'GET',
+    url: '/archived-users',
+  });
+};
+
+export const archiveAgent = (id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/users/${id}/archive`,
+  });
+};
+
+export const unarchiveAgent = (id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/users/${id}/unarchive`,
+  });
+};
+
 // ------------------------------ Logger ------------------------------
 export const getListLogger = (params) =>
   authApi({
     method: 'GET',
-    url: '/loggers',
+    url: '/users',
     params,
   });
 

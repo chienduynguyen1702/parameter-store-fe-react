@@ -5,10 +5,11 @@ import { Icon, Pagination } from '../../../../../components';
 import Filters from '../Filters';
 import Row from './Row';
 import Checkbox from '../Checkbox';
-import useListLogger from '../../../../../hooks/useListLogger';
 import { ThreeDots } from 'react-loader-spinner';
 import useQueryString from '../../../../../hooks/useQueryString';
 import SkeletonTable from './Skeleton';
+
+import { useListAgents } from '../../../../../hooks/data';
 
 const statusAlias = ['2xx', '3xx', '4xx', '5xx'];
 const sortByTime = ['asc', 'desc'];
@@ -20,7 +21,12 @@ const TableLog = ({ items }) => {
   const [visible, setVisible] = useState(false);
   const [indexSort, setIndexSort] = useState(1);
 
-  const { listLoggers, isSuccess, isLoading, totalPage } = useListLogger();
+  const {
+    listAgents: listLoggers,
+    isSuccess,
+    isLoading,
+    totalPage,
+  } = useListAgents();
 
   const checkSelected = (id) => {
     return selectedFilters.includes(id);

@@ -9,6 +9,10 @@ export { default as useListParameters } from './parameters/useListParameters';
 export { default as useAddParameter } from './parameters/useAddParameter';
 export { default as useEditParameter } from './parameters/useEditParameter';
 
+export { default as useListAgents } from './agents/useListAgents';
+export { default as useAddAgent } from './agents/useAddAgent';
+export { default as useEditAgent } from './agents/useEditAgent';
+
 export { default as useListUsers } from './users/useListUsers';
 export { default as useAddUser } from './users/useAddUser';
 export { default as useListRoles } from './roles/useListRoles';

@@ -2,7 +2,7 @@ export const PROJECTS = [
   {
     id: 1,
     name: 'SOICT',
-    color: 'yellow',
+    color: '#B5E4CA',
     description: `This project is make calendar manager for Hust student, is able import from other calender and sned notification. Make more useful for Hust student`,
     address:
       'Nhà B1, Đại học, số 1 Giải Phóng, Bách Khoa, Hai Bà Trưng, Hà Nội',
@@ -14,7 +14,7 @@ export const PROJECTS = [
   {
     id: 2,
     name: 'EdTech',
-    color: 'blue',
+    color: '#F6D55C',
     description: `This project is make calendar manager for Hust student, is able import from other calender and sned notification. Make more useful for Hust student`,
     address:
       'Nhà B1, Đại học, số 1 Giải Phóng, Bách Khoa, Hai Bà Trưng, Hà Nội',
@@ -26,7 +26,7 @@ export const PROJECTS = [
   {
     id: 3,
     name: 'DxClan',
-    color: 'green',
+    color: '#B5E4CA',
     description: `This project is make calendar manager for Hust student, is able import from other calender and sned notification. Make more useful for Hust student`,
     address:
       'Nhà B1, Đại học, số 1 Giải Phóng, Bách Khoa, Hai Bà Trưng, Hà Nội',
