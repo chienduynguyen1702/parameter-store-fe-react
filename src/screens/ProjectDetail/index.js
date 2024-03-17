@@ -4,6 +4,7 @@ import { useNavigate, Outlet, useLocation, useParams } from 'react-router-dom';
 const TABS = [
   { name: 'Overview', subPath: 'overview' },
   { name: 'Parameters', subPath: 'parameters' },
+  { name: 'Agent', subPath: 'agents' },
   { name: 'Tracking', subPath: 'tracking' },
 ];
 

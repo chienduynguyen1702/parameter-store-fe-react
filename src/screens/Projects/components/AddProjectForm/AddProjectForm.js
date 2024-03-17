@@ -17,7 +17,7 @@ const AddForm = ({ onClose }) => {
 
   return (
     <ProjectForm
-      title="Add User"
+      title="Add project"
       method={method}
       handleSubmit={handleSubmit}
       onLoading={false}

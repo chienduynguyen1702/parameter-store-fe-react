@@ -277,3 +277,24 @@ export const unarchiveParameter = (id) => {
     url: `/users/${id}/unarchive`,
   });
 };
+// ------------------------------ Logger ------------------------------
+export const getListLogger = (params) =>
+  authApi({
+    method: 'GET',
+    url: '/loggers',
+    params,
+  });
+
+export const getLoggerSummary = (params) =>
+  authApi({
+    method: 'GET',
+    url: '/loggers/summary',
+    params,
+  });
+
+export const getAmountLoggerByDay = (params) =>
+  authApi({
+    method: 'GET',
+    url: '/loggers/amount-by-day',
+    params,
+  });

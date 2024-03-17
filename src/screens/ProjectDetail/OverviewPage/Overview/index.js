@@ -10,7 +10,7 @@ const Overview = () => {
   const project = PROJECTS[0];
 
   return (
-    <Card title={`${project.name}`} classTitle="title-purple" className="mb-5">
+    <Card title={`Overview`} classTitle="title-blue" className="mb-5">
       <Row>
         {/* <Col xs={12} md={4}> */}
         <Stack direction="horizontal" gap={3} className="py-2">

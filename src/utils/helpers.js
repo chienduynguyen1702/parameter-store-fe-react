@@ -106,3 +106,84 @@ export const onEnterPreventDefault = (e) => {
     e.preventDefault();
   }
 };
+export function dateToUrl(date) {
+  date = new Date(date);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day
+    .toString()
+    .padStart(2, '0')}`;
+  return formattedDate;
+}
+
+const handleMergeByTime = (chunk, granularity) => {
+  const startDate = new Date(chunk[0].date).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+  const endDate = new Date(chunk[chunk.length - 1].date).toLocaleDateString(
+    'en-US',
+    {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    },
+  );
+  const time = `${startDate} - ${endDate}`;
+
+  const sum = chunk.reduce((acc, obj) => {
+    const total = acc.total + obj.total;
+    const success = acc.success + obj.success;
+    const error = acc.error + obj.error;
+
+    return { total, success, error };
+  });
+
+  return { date: time, ...sum };
+};
+
+export const handleDataWithGranularity = (data, granularity) => {
+  let result = [];
+
+  switch (granularity) {
+    case 'day':
+      result = data;
+      break;
+    case 'week':
+      for (let i = 0; i < data.length; i += 7) {
+        const chunk = data.slice(i, i + 7);
+        console.log('chunk', chunk);
+        const sum = handleMergeByTime(chunk, granularity);
+        console.log('sum', sum);
+        result.push(sum);
+      }
+      break;
+    case 'month':
+      for (let i = 0; i < data.length; i += 30) {
+        const chunk = data.slice(i, i + 30);
+        const sum = handleMergeByTime(chunk, granularity);
+        result.push(sum);
+      }
+      break;
+    case 'quarter':
+      for (let i = 0; i < data.length; i += 90) {
+        const chunk = data.slice(i, i + 90);
+        const sum = handleMergeByTime(chunk, granularity);
+        result.push(sum);
+      }
+      break;
+    case 'year':
+      for (let i = 0; i < data.length; i += 365) {
+        const chunk = data.slice(i, i + 365);
+        const sum = handleMergeByTime(chunk, granularity);
+        result.push(sum);
+      }
+      break;
+    default:
+      break;
+  }
+
+  return result;
+};

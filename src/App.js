@@ -34,6 +34,9 @@ const ProjectParametersPage = lazy(() =>
 const ProjectTrackingPage = lazy(() =>
   import('./screens/ProjectDetail/TrackingPage'),
 );
+const ProjectAgentPage = lazy(() =>
+  import('./screens/ProjectDetail/AgentPage'),
+);
 
 const SignIn = lazy(() => import('./screens/Authentication/SignIn'));
 const ResetPassword = lazy(() =>
@@ -73,7 +76,7 @@ function App() {
                     index
                     element={
                       <SuspenseContainer>
-                        <PageContent wide>
+                        <PageContent title="Home Page" wide>
                           <HomePage />
                         </PageContent>
                       </SuspenseContainer>
@@ -110,6 +113,7 @@ function App() {
                       path="parameters/*"
                       element={<ProjectParametersPage />}
                     />
+                    <Route path="agents/*" element={<ProjectAgentPage />} />
                     <Route
                       path="tracking/*"
                       element={<ProjectTrackingPage />}
