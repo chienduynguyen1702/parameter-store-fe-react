@@ -1,4 +1,4 @@
-import Overview from '../../HomePage/components/Overview';
+import Overview from './Overview';
 import UsersPage from '../../Users&Settings/Users';
 
 const OverviewPage = () => {

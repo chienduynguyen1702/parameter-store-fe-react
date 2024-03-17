@@ -22,6 +22,11 @@ const useListProjects = (defaultParams) => {
         name: item.name,
         color: item.color,
         usersCount: item.users_count,
+        description: item.description,
+        address: item.address,
+        currentSprint: item.currentSprint,
+        startDate: item.startDate,
+        status: item.status,
       };
     });
 
