@@ -11,16 +11,7 @@ export const AGENTS = [
       id: 1,
       name: 'Dev/test',
     },
-    project: [
-      {
-        id: 1,
-        name: 'Project A',
-      },
-      {
-        id: 2,
-        name: 'Project B',
-      },
-    ],
+    last_used: '2024-08-01',
   },
   {
     id: 2,
@@ -34,16 +25,7 @@ export const AGENTS = [
       id: 2,
       name: 'Staging',
     },
-    project: [
-      {
-        id: 3,
-        name: 'Project C',
-      },
-      {
-        id: 4,
-        name: 'Project D',
-      },
-    ],
+    last_used: '2024-08-01',
   },
   {
     id: 3,
@@ -57,15 +39,6 @@ export const AGENTS = [
       id: 3,
       name: 'Production',
     },
-    project: [
-      {
-        id: 5,
-        name: 'Project E',
-      },
-      {
-        id: 6,
-        name: 'Project F',
-      },
-    ],
+    last_used: '2024-08-01',
   },
 ];

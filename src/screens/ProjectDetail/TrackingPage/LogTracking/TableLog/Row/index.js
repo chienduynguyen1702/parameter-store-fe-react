@@ -79,11 +79,11 @@ const updateScreenName = (endpoint) => {
   const endpointEquals = endpointSplit[1];
   if (API_ENDPOINT_SCREEN_EQUALS[endpointEquals]) {
     if (API_ENDPOINT_SCREEN_EQUALS[endpointEquals] === '') {
-      return 'UPDATING...';
+      return 'docker-swarm-c';
     }
     return API_ENDPOINT_SCREEN_EQUALS[endpointEquals];
   } else {
-    return 'UPDATING...';
+    return 'docker-swarm-c';
   }
 };
 
@@ -96,21 +96,6 @@ const Row = ({ item }) => {
       <div className={styles.row} onMouseLeave={() => setVisibleActions(false)}>
         {/* <div className={styles.col}>{item?.time}</div> */}
         <div className={styles.col}>17:12, 13 Sep 2023</div>
-        <div className={styles.col}>
-          <div className={styles.user}>
-            <div className={styles.avatar}>
-              <img
-                src={
-                  item?.users
-                    ? item?.users?.avatar_url
-                    : 'https://i.pravatar.cc/300'
-                }
-                alt="Avatar"
-              />
-            </div>
-            {item?.users ? item?.users?.username : 'Duy Chien'}
-          </div>
-        </div>
         <div className={styles.col}>
           <div className={styles.label}>Screen</div>
           <div className={styles.number}>

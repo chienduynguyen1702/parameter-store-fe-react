@@ -29,12 +29,13 @@ const useListAgents = (defaultParams) => {
           id: item.environment.id,
           name: item.environment.name,
         },
-        project: item.project.map((project) => {
-          return {
-            id: project.id,
-            name: project.name,
-          };
-        }),
+        // project: item.project.map((project) => {
+        //   return {
+        //     id: project.id,
+        //     name: project.name,
+        //   };
+        // }),
+        last_used: item.last_used,
       };
     });
 

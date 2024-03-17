@@ -13,8 +13,8 @@ export const PARAMETERS = [
       name: 'Dev/Test',
       color: '#659EEA',
     },
-    created_at: '2021-08-05T10:00:00Z',
-    updated_at: '2021-08-05T10:00:00Z',
+    created_at: '2024-03-02T10:00:00Z',
+    updated_at: '2024-03-02T10:00:00Z',
   },
   {
     id: 2,
@@ -30,8 +30,8 @@ export const PARAMETERS = [
       name: 'Staging',
       color: '#F6D55C',
     },
-    created_at: '2021-08-05T10:00:00Z',
-    updated_at: '2021-08-05T10:00:00Z',
+    created_at: '2024-03-02T10:00:00Z',
+    updated_at: '2024-03-02T10:00:00Z',
   },
   {
     id: 3,
@@ -45,9 +45,9 @@ export const PARAMETERS = [
     environment: {
       id: 3,
       name: 'Production',
-      color: '#F6D55C',
+      color: '#FFAFF2',
     },
-    created_at: '2021-08-05T10:00:00Z',
-    updated_at: '2021-08-05T10:00:00Z',
+    created_at: '2024-03-02T10:00:00Z',
+    updated_at: '2024-03-02T10:00:00Z',
   },
 ];

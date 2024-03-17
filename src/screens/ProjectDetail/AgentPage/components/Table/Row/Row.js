@@ -26,13 +26,7 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
           {item.environment.name}
         </p>
       </div>
-      <div className="tableCell">
-        {item.project.map((project) => (
-          <p className="status-default me-1" key={project.id}>
-            {project.name}
-          </p>
-        ))}
-      </div>
+      <p className="tableCell">{item.last_used}</p>
       <div className="tableCell roundedRight">
         <PopoverEditAndArchive
           itemId={item.id}
