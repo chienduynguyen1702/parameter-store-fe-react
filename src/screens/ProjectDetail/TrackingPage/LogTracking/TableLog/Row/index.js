@@ -127,7 +127,7 @@ const Row = ({ item }) => {
         <div className={styles.col}>
           <div className={styles.label}>Method</div>
           <div className={styles.box}>
-            <div className={styles.number}>{item?.method ?? 'Post'}</div>
+            <div className={styles.number}>{item?.method ?? 'Get'}</div>
           </div>
         </div>
         <div className={styles.col}>
