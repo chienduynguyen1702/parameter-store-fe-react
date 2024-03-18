@@ -99,20 +99,20 @@ const Row = ({ item }) => {
         <div className={styles.col}>
           <div className={styles.label}>Screen</div>
           <div className={styles.number}>
-            {updateScreenName(item?.endpoint ?? '/api/v1/get-deployed-params')}
+            {updateScreenName(item?.endpoint ?? 'get-param-set')}
           </div>
         </div>
         <div className={styles.col}>
-          <div className={styles.label}>Endpoint</div>
-          <div className={styles.endpoint}>
+          <div className={styles.label}>Actions</div>
+          <div className={styles.text}>
             <u></u>
-            {compactString(item?.endpoint ?? '/api/v1/get-deployed-params')}
+            {compactString(item?.endpoint ?? 'Get param set')}
           </div>
         </div>
         <div className={styles.col}>
           <div className={styles.label}>Method</div>
           <div className={styles.box}>
-            <div className={styles.number}>{item?.method ?? 'Get'}</div>
+            <div className={styles.number} style={{backgroundColor: '#83BF6E'}}>{item?.method ?? 'GET'}</div>
           </div>
         </div>
         <div className={styles.col}>

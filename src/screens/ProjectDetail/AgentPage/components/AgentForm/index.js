@@ -19,69 +19,82 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
           classTitle="title-green"
         >
           <RHFTextInput
-            name="username"
-            label="Username"
+            name="agent-name"
+            label="Agent name"
             type="text"
-            placeholder="Enter username"
-            tooltip="Username is required"
+            placeholder="Enter agent name"
+            tooltip="Agent name is required"
           />
           <RHFTextInput
-            name="email"
-            label="Email"
+            name="Describtion"
+            label="describtion"
             type="text"
-            placeholder="Enter email"
-            tooltip="Please enter correct email format"
-          />
-          <RHFTextInput
-            label="Phone"
-            name="phone"
-            type="phone"
-            placeholder="Enter phone number"
-            tooltip="Phone number is required"
+            placeholder="Enter describtion"
+            tooltip="Please enter correct describtion format"
           />
           <Row>
             <Col sm={12} md={6}>
               <RHFDropdown
-                name="role"
-                data={['Organization Admin', 'Project Admin', 'Developer']}
-                defaultValue="Select role"
-                label="Role"
-                tooltip="User type is required"
+                name="stage"
+                data={['Build', 'Test', 'Deploy']}
+                defaultValue="Select stage"
+                label="Stage"
+                tooltip="stage is required"
               />
             </Col>
             <Col sm={12} md={6}>
               <RHFDropdown
-                name="project"
-                data={['Project 1', 'Project 2', 'Project 3']}
-                defaultValue="Select project"
-                label="Project"
-                tooltip="User type is required"
+                name="Environment"
+                data={['Dev/Test', 'Staging', 'Production']}
+                defaultValue="Select environment"
+                label="Environment"
+                tooltip="Environment is required"
               />
             </Col>
           </Row>
         </Item>
         <Item
-          title="Update Password"
+          title="Repository link"
           className="py-4 borderBottom"
           classTitle="title-purple"
         >
           <Row>
             <Col sm={12} md={6}>
               <RHFTextInput
-                tooltip="New password is required"
-                label="New password"
-                name="newPassword"
-                placeholder="Enter new password"
-                type="password"
+                label="Repository name"
+                name="repositoryName"
+                placeholder="Enter repository name"
+                type="text"
+                tooltip="Repository name is required"
               />
             </Col>
             <Col sm={12} md={6}>
               <RHFTextInput
-                tooltip="Confirm new password is required"
-                label="Confirm new password"
-                name="confirmNewPassword"
-                placeholder="Enter confirm new password"
+                label="Repository API Token"
+                name="repositoryAPIToken"
+                placeholder="Enter API Token"
                 type="password"
+                tooltip="API token only have access to workflow of repository. Doc: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12} md={6}>
+              <RHFTextInput
+                label="Workflow name"
+                name="workflowName"
+                placeholder="Enter workflow name"
+                type="text"
+                tooltip="Workflow name is required"
+              />
+            </Col>
+            <Col sm={12} md={6}>
+              <RHFDropdown
+                name="platform"
+                data={['Github Actions', 'Gitlab Runner', 'Jenkins', 'CircleCI']}
+                defaultValue="Select platform"
+                label="Platform"
+                tooltip="Platform is required"
               />
             </Col>
           </Row>
@@ -99,7 +112,7 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
               threeDotsHeight="20"
               type="submit"
               className="button px-4"
-              value="Save"
+              value="Done"
               notMaxWidth
               loading={false}
             />

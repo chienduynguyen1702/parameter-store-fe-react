@@ -1,8 +1,8 @@
 export const AGENTS = [
   {
     id: 1,
-    name: 'docker-swarm-b',
-    description: 'Docker Swarm B',
+    name: 'github-action-a',
+    description: 'Github Action for build source coe',
     stage: {
       id: 1,
       name: 'Build',
@@ -16,7 +16,7 @@ export const AGENTS = [
   {
     id: 2,
     name: 'docker-swarm-c',
-    description: 'Docker Swarm C',
+    description: 'Backend server staging',
     stage: {
       id: 2,
       name: 'Deploy',
@@ -30,7 +30,7 @@ export const AGENTS = [
   {
     id: 3,
     name: 'docker-swarm-d',
-    description: 'Docker Swarm D',
+    description: 'Backend server production',
     stage: {
       id: 3,
       name: 'Test',

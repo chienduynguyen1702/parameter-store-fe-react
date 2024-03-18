@@ -17,7 +17,7 @@ const EditForm = ({ onClose }) => {
 
   return (
     <ParameterForm
-      title="Add User"
+      title="Edit Parameter"
       method={method}
       handleSubmit={handleSubmit}
       onLoading={false}
