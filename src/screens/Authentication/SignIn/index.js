@@ -34,8 +34,9 @@ const SignIn = () => {
   }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (data) => {
+    const { email, password } = data;
     setLoading(true);
-    const isError = !(await loginWithEmail(data));
+    const isError = !(await loginWithEmail({ email, password }));
     setLoading(false);
     setIsError(isError);
   };
@@ -60,6 +61,12 @@ const SignIn = () => {
             className={styles.body}
           >
             <RHFTextInput
+              name="organization"
+              type="text"
+              placeholder="Organization name"
+              icon="edit"
+            />
+            <RHFTextInput
               name="email"
               type="text"
               placeholder="Email"
@@ -79,12 +86,6 @@ const SignIn = () => {
                 <AiOutlineEye />
               </div>
             </div>
-            {/* <RHFTextInput
-              name="organization_id"
-              type="number"
-              placeholder="Organization ID"
-              icon="mail"
-            /> */}
             <AsyncButton loading={loading} value="Sign in" type="submit" />
 
             {isError ? (
