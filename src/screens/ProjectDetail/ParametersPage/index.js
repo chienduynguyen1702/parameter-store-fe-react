@@ -6,11 +6,14 @@ import {
   FormSearch,
   Archived,
   Modal,
+  FiltersCustom,
+  RHFInputSelect,
 } from '../../../components';
 
 import Table from './components/Table/Table';
 import AddParameterForm from './components/AddParameterForm';
 import EditParameterForm from './components/EditParameterForm';
+import FormFilter from './components/FormFilter';
 
 import { useListParameters, useListArchived } from '../../../hooks/data';
 import {
@@ -18,6 +21,7 @@ import {
   getArchivedParameters,
   unarchiveParameter,
 } from '../../../services/api';
+import { VERSIONS } from '../../../hooks/mocks/versions';
 
 const ParametersPage = () => {
   const [isAddMode, setIsAddMode] = useState(false);
@@ -75,6 +79,9 @@ const ParametersPage = () => {
           <>
             <FormSearch placeholder="Search by name" />
             <div className="d-flex">
+              <FiltersCustom className="me-2">
+                <FormFilter />
+              </FiltersCustom>
               <ButtonAdd
                 handleClickAdd={() => setIsAddMode(true)}
                 titleButton="Add Parameter"
