@@ -1,15 +1,14 @@
 import { useForm } from 'react-hook-form';
 
-import ParameterForm from '../ParameterForm';
-
-import { useListParameters } from '../../../../../hooks/data';
+import ProjectForm from '../ProjectForm';
+import { useListProjects } from '../../../../hooks/data';
 
 const AddForm = ({ onClose }) => {
-  const { addParameterMutation } = useListParameters();
+  const { addProjectMutation } = useListProjects();
   const method = useForm({});
 
   const handleSubmit = (data) => {
-    addParameterMutation.mutate(data, {
+    addProjectMutation.mutate(data, {
       onSuccess: () => {
         onClose();
       },
@@ -17,8 +16,8 @@ const AddForm = ({ onClose }) => {
   };
 
   return (
-    <ParameterForm
-      title="Add Parameter"
+    <ProjectForm
+      title="Add Project"
       method={method}
       handleSubmit={handleSubmit}
       onLoading={false}

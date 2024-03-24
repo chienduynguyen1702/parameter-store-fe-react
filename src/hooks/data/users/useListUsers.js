@@ -1,20 +1,28 @@
 import { useCallback, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import moment from 'moment';
+import { toast } from 'react-toastify';
 
 import useQueryString from '../../useQueryString';
-import { getListUser } from '../../../services/api';
+import { addUser, editUser, getListUser } from '../../../services/api';
 import { USERS } from '../../mocks/users';
-import moment from 'moment';
 
 const DEFAULT_QUERY_STRING = {
   page: 1,
   limit: 10,
 };
 
-const useListUsers = (defaultParams = {}) => {
+const useListUsers = () => {
+  const queryClient = useQueryClient();
   const { queryString, setQueryString } = useQueryString();
 
   const { page, limit } = queryString;
+
+  useEffect(() => {
+    if (!page || !limit) {
+      setQueryString(DEFAULT_QUERY_STRING);
+    }
+  }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
     const users = USERS?.map((item) => {
@@ -48,17 +56,51 @@ const useListUsers = (defaultParams = {}) => {
     enabled: !!page && !!limit,
   });
 
-  useEffect(() => {
-    if (!page || !limit) {
-      setQueryString(DEFAULT_QUERY_STRING);
-    }
-  }, [limit, page, queryString, setQueryString]);
+  const addUserMutation = useMutation(
+    (data) => {
+      return addUser(data);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['users', queryString],
+        });
+        toast.success('Add user successfully');
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message, {
+          autoClose: 5000,
+        });
+      },
+    },
+  );
+
+  const editUserMutation = useMutation(
+    (id, data) => {
+      return editUser(id, data);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['users', queryString],
+        });
+        toast.success('Edit user successfully');
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message, {
+          autoClose: 5000,
+        });
+      },
+    },
+  );
 
   return {
     listUsers: data?.users,
     pagination: data?.pagination,
     isSuccess,
     isLoading,
+    addUserMutation,
+    editUserMutation,
   };
 };
 

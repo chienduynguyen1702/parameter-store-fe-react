@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { ButtonAdd, Card, FormSearch, Archived, Modal } from '../../components';
 
 import Table from './components/Table/Table';
-import AddProjectForm from './components/AddProjectForm/AddProjectForm';
-import EditProjectForm from './components/EditProjectForm/EditProjectForm';
+import AddProjectForm from './components/AddProjectForm';
+import EditProjectForm from './components/EditProjectForm';
 
 import { useListProjects, useListArchived } from '../../hooks/data';
 import {
@@ -76,6 +76,7 @@ const ProjectsPage = () => {
               />
               <Archived
                 title="Archived projects"
+                name="projects"
                 archivedList={archivedList}
                 isSuccess={isListArchivedSuccess}
                 isLoading={isLoading}

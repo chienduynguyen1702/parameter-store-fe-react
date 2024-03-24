@@ -2,17 +2,18 @@ import { useForm } from 'react-hook-form';
 
 import ParameterForm from '../ParameterForm';
 
-import { useAddUser } from '../../../../../hooks/data';
+import { useListParameters } from '../../../../../hooks/data';
 
 const EditForm = ({ onClose }) => {
-  const { addUserMutation } = useAddUser({ onClose });
-  const method = useForm({
-    // resolver: yupResolver(schema),
-    // defaultValues: {},
-  });
+  const { editParameterMutation } = useListParameters();
+  const method = useForm({});
 
   const handleSubmit = (data) => {
-    addUserMutation.mutate(data);
+    editParameterMutation.mutate(data, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
 
   return (

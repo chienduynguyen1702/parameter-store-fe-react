@@ -2,17 +2,18 @@ import { useForm } from 'react-hook-form';
 
 import AgentForm from '../AgentForm';
 
-import { useAddUser } from '../../../../../hooks/data';
+import { useListAgents } from '../../../../../hooks/data';
 
-const EditForm = ({ onClose }) => {
-  const { addUserMutation } = useAddUser({ onClose });
-  const method = useForm({
-    // resolver: yupResolver(schema),
-    // defaultValues: {},
-  });
+const AddForm = ({ onClose }) => {
+  const { editAgentMutation } = useListAgents();
+  const method = useForm({});
 
   const handleSubmit = (data) => {
-    addUserMutation.mutate(data);
+    editAgentMutation.mutate(data, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
 
   return (
@@ -26,4 +27,4 @@ const EditForm = ({ onClose }) => {
   );
 };
 
-export default EditForm;
+export default AddForm;

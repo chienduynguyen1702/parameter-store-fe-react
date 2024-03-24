@@ -100,7 +100,7 @@ export const unarchiveUser = (id) => {
 
 // ------------------------------ Role ------------------------------
 
-export const getListRole = (params) =>
+export const getListRoles = (params) =>
   authApi({
     method: 'GET',
     url: '/roles',
@@ -188,20 +188,20 @@ export const addProject = (data) =>
     data,
   });
 
-export const editProjectById = (id, data) =>
+export const editProject = (id, data) =>
   authApi({
     method: 'PUT',
     url: `/projects/${id}`,
     data,
   });
 
-export const getProjectById = (id) =>
+export const getProject = (id) =>
   authApi({
     method: 'GET',
     url: `/projects/${id}`,
   });
 
-export const deleteProjectById = (id) =>
+export const deleteProject = (id) =>
   authApi({
     method: 'DELETE',
     url: `/projects/${id}`,

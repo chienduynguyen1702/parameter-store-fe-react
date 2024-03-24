@@ -30,9 +30,9 @@ const ArchivedItem = ({
               ? item?.name.substring(0, 36) + '...'
               : item?.name}
           </div>
-          <div
+          {/* <div
             className={styles.information}
-          >{`Archived by ${item.archiver} ${item.archivedAt}`}</div>
+          >{`Archived by ${item.archiver} ${item.archivedAt}`}</div> */}
         </div>
       </div>
       <div className={styles.actions}>

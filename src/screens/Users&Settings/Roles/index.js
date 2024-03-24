@@ -1,56 +1,105 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
 
-import { Card, Modal, FormSearch, ButtonAdd } from '../../../components';
+import {
+  Card,
+  Modal,
+  FormSearch,
+  ButtonAdd,
+  Archived,
+} from '../../../components';
 
 import Table from './Table';
+import { useListArchived, useListRoles } from '../../../hooks/data';
+import {
+  archiveRole,
+  getArchivedRoles,
+  unarchiveRole,
+} from '../../../services/api';
 
 function Roles() {
-  const [total, setTotal] = useState(0);
-
   const [isAddMode, setIsAddMode] = useState(false);
+  const [editedItemId, setEditedItemId] = useState(undefined);
 
-  const onCloseModel = () => {
-    setIsAddMode(false);
-  };
+  const {
+    listRoles,
+    pagination,
+    isSuccess: isListRolesSuccess,
+    isLoading: isListRolesLoading,
+  } = useListRoles();
 
-  const onOpenModel = () => {
-    setIsAddMode(true);
-  };
+  const {
+    archivedList,
+    isSuccess: isListArchivedSuccess,
+    isLoading: isListArchivedLoading,
+    search,
+    handleSearch,
+    archiveMutation,
+    unarchiveMutation,
+  } = useListArchived({
+    archivedObject: {
+      listArchivedAPI: getArchivedRoles,
+      archiveAPI: archiveRole,
+      unarchiveAPI: unarchiveRole,
+      keyArchivistList: 'role-archivist-list',
+      keyList: 'roles',
+      title: 'Role',
+    },
+  });
 
+  console.log('archivedList', archivedList);
   return (
     <>
       <Modal
         outerClassName="outerModal"
         visible={isAddMode}
-        onClose={onCloseModel}
+        onClose={() => {
+          setIsAddMode(false);
+          setEditedItemId(undefined);
+        }}
       >
-        <Outlet
-          context={{
-            onClose: onCloseModel,
-          }}
-        />
+        {/* {isAddMode && <AddUserForm onClose={() => setIsAddMode(false)} />}
+        {typeof editedItemId !== 'undefined' && (
+          <EditUserForm
+            id={editedItemId}
+            onClose={() => setEditedItemId(undefined)}
+          />
+        )} */}
       </Modal>
-      <div className="mb-4">
-        <ButtonAdd titleButton="Add Role" handleClickAdd={onOpenModel} />
-      </div>
 
       <Card
-        // title={`${total} Roles`}
-        title={`3 Roles`}
+        title={`${isListRolesSuccess ? pagination?.total : '-'} Roles`}
         classTitle="title-purple"
         head={
           <>
             <FormSearch placeholder="Search by role" />
-            {/* <div>
-                  <Archived title={'Archived roles'}>
-                    <ArchivedRoles />
-                  </Archived>
-              </div> */}
+            <div className="d-flex">
+              <ButtonAdd
+                titleButton="Add Role"
+                className="me-2"
+                handleClickAdd={() => setIsAddMode(true)}
+              />
+              <Archived
+                title="Archived roles"
+                name="roles"
+                archivedList={archivedList}
+                isSuccess={isListArchivedSuccess}
+                isLoading={isListArchivedLoading}
+                search={search}
+                handleSearch={handleSearch}
+                unarchiveMutation={unarchiveMutation}
+              />
+            </div>
           </>
         }
       >
-        <Table setTotal={setTotal} />
+        <Table
+          listRoles={listRoles}
+          isSuccess={isListRolesSuccess}
+          isLoading={isListRolesLoading}
+          totalPage={pagination?.totalPage}
+          setEditedItemId={setEditedItemId}
+          archiveMutation={archiveMutation}
+        />
       </Card>
     </>
   );

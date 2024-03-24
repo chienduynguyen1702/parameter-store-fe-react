@@ -2,17 +2,18 @@ import { useForm } from 'react-hook-form';
 
 import AgentForm from '../AgentForm';
 
-import { useAddUser } from '../../../../../hooks/data';
+import { useListAgents } from '../../../../../hooks/data';
 
 const AddForm = ({ onClose }) => {
-  const { addUserMutation } = useAddUser({ onClose });
-  const method = useForm({
-    // resolver: yupResolver(schema),
-    // defaultValues: {},
-  });
+  const { addAgentMutation } = useListAgents();
+  const method = useForm({});
 
   const handleSubmit = (data) => {
-    addUserMutation.mutate(data);
+    addAgentMutation.mutate(data, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
 
   return (

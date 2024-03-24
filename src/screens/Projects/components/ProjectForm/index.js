@@ -3,7 +3,7 @@ import { FormProvider } from 'react-hook-form';
 
 import Item from '../../../../components/Item';
 
-import { RHFTextInput, AsyncButton, RHFDropdown } from '../../../../components';
+import { RHFTextInput, AsyncButton } from '../../../../components';
 
 const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
   return (

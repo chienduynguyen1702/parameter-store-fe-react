@@ -18,7 +18,7 @@ import AddUserForm from './AddUserForm';
 import EditUserForm from './EditUserForm';
 import { useListArchived, useListUsers } from '../../../hooks/data';
 
-const UsersPage = (defaultParams) => {
+const UsersPage = () => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
 
@@ -27,7 +27,7 @@ const UsersPage = (defaultParams) => {
     pagination,
     isSuccess: isListUsersSuccess,
     isLoading: isListUsersLoading,
-  } = useListUsers(defaultParams);
+  } = useListUsers();
 
   const {
     archivedList,
@@ -81,6 +81,7 @@ const UsersPage = (defaultParams) => {
               />
               <Archived
                 title="Archived users"
+                name="users"
                 archivedList={archivedList}
                 isSuccess={isListArchivedSuccess}
                 isLoading={isListArchivedLoading}

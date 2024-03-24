@@ -14,6 +14,7 @@ const Archived = ({
   className,
   classNameBtn,
   title,
+  name,
   archivedList,
   isSuccess,
   isLoading,
@@ -52,7 +53,7 @@ const Archived = ({
               setValue={handleSearch}
               onSubmit={handleSubmit}
               className="archiverSearch"
-              placeholder="Search archived users"
+              placeholder={`Search archived ${name}`}
             />
             <div className="archiverScroll">
               {isLoading && <Skeleton height={60} count={6} className="mb-2" />}

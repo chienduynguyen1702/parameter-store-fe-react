@@ -1,13 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { useAddUser } from '../../../../hooks/data';
+import { useListUsers } from '../../../../hooks/data';
 import UserForm from '../UserForm';
 
 const AddUserForm = ({ onClose }) => {
-  const { addUserMutation } = useAddUser({ onClose });
-  const method = useForm({
-    // resolver: yupResolver(schema),
-    // defaultValues: {},
-  });
+  const { addUserMutation } = useListUsers({ onClose });
+  const method = useForm({});
 
   const handleSubmit = (data) => {
     addUserMutation.mutate(data);

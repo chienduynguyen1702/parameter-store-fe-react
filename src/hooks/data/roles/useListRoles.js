@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
 import { ROLES } from '../../mocks/roles';
-import { getListRole } from '../../../services/api';
+import { addRole, editRole, getListRoles } from '../../../services/api';
+import { toast } from 'react-toastify';
 
 const DEFAULT_QUERY_STRING = {
   page: 1,
@@ -11,9 +12,16 @@ const DEFAULT_QUERY_STRING = {
 };
 
 export default function useListRoles() {
+  const queryClient = useQueryClient();
   const { queryString, setQueryString } = useQueryString();
 
   const { page, limit } = queryString;
+
+  useEffect(() => {
+    if (!page || !limit) {
+      setQueryString(DEFAULT_QUERY_STRING);
+    }
+  }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
     const roles = ROLES.map((item) => {
@@ -36,24 +44,56 @@ export default function useListRoles() {
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['roles', queryString],
-    queryFn: () => getListRole(queryString),
+    queryFn: () => getListRoles(queryString),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data.data),
     enabled: !!page && !!limit,
   });
 
-  useEffect(() => {
-    if (!page || !limit) {
-      setQueryString(DEFAULT_QUERY_STRING);
-    }
-  }, [limit, page, queryString, setQueryString]);
+  const addRoleMutation = useMutation(
+    (data) => {
+      return addRole(data);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['roles', queryString],
+        });
+        toast.success('Add role successfully');
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message, {
+          autoClose: 5000,
+        });
+      },
+    },
+  );
+
+  const editRoleMutation = useMutation(
+    (id, data) => {
+      return editRole(id, data);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['roles', queryString],
+        });
+        toast.success('Edit role successfully');
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message, {
+          autoClose: 5000,
+        });
+      },
+    },
+  );
 
   return {
     listRoles: data?.roles,
     pagination: data?.pagination,
     isSuccess,
     isLoading,
-    limit,
-    totalPage: data?.pagination?.totalPage,
+    addRoleMutation,
+    editRoleMutation,
   };
 }
