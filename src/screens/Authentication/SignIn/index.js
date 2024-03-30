@@ -17,7 +17,7 @@ import { AiOutlineEye } from 'react-icons/ai';
 
 const SignIn = () => {
   const heightWindow = use100vh();
-  const { isAuthenticated, loginWithEmail } = useContext(AuthContext);
+  const { isAuthenticated, login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,9 +34,9 @@ const SignIn = () => {
   }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (data) => {
-    const { email, password } = data;
+    const { organization_name, email, password } = data;
     setLoading(true);
-    const isError = !(await loginWithEmail({ email, password }));
+    const isError = !(await login({ organization_name, email, password }));
     setLoading(false);
     setIsError(isError);
   };
@@ -61,7 +61,7 @@ const SignIn = () => {
             className={styles.body}
           >
             <RHFTextInput
-              name="organization"
+              name="organization_name"
               type="text"
               placeholder="Organization name"
               icon="edit"

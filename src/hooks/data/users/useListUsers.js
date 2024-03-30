@@ -1,11 +1,9 @@
 import { useCallback, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import moment from 'moment';
 import { toast } from 'react-toastify';
 
 import useQueryString from '../../useQueryString';
 import { addUser, editUser, getListUser } from '../../../services/api';
-import { USERS } from '../../mocks/users';
 
 const DEFAULT_QUERY_STRING = {
   page: 1,
@@ -25,25 +23,32 @@ const useListUsers = () => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const users = USERS?.map((item) => {
+    const users = data?.users?.map((item) => {
       return {
-        id: item.id,
-        username: item.username,
-        phone: item.phone,
-        email: item.email,
-        avatarUrl: item.avatar_url,
-        projects: item.projects,
-        permissionsCount: item.permissions_count,
-        roles: item.roles,
-        lastSignIn: moment(item.last_sign_in).fromNow(),
+        id: item.ID,
+        username: item.Username,
+        phone: item.Phone,
+        email: item.Email,
+        // avatarUrl: item.avatar_url,
+        // projects: item.projects,
+        // permissionsCount: item.permissions_count,
+        // roles: item.roles,
+        // lastSignIn: moment(item.last_sign_in).fromNow(),
       };
     });
 
+    // const pagination = {
+    //   total: data.pagination.total,
+    //   currentPage: data.pagination.currentPage,
+    //   totalPage: data.pagination.totalPage,
+    //   limit: data.pagination.limit,
+    // };
+
     const pagination = {
-      total: data.pagination.total,
-      currentPage: data.pagination.currentPage,
-      totalPage: data.pagination.totalPage,
-      limit: data.pagination.limit,
+      total: 100,
+      currentPage: 1,
+      totalPage: 10,
+      limit: 10,
     };
     return { pagination, users };
   }, []);

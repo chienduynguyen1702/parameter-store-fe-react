@@ -4,10 +4,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import {
   login as loginFn,
-  refreshToken as refreshTokenFn,
   logout as logoutFn,
+  validate as validateFn,
 } from '../services/api';
-import token from '../utils/token';
+import { getCookie, removeCookie } from '../utils/cookie';
 
 const AuthContext = createContext();
 
@@ -22,46 +22,41 @@ const AuthProvider = ({ children }) => {
 
   const saveMe = useCallback((data) => {
     const me = {
-      id: data.id,
-      username: data.username,
+      // id: data.id,
+      // username: data.username,
       email: data.email,
-      address: data.address,
-      avatarUrl: data.avatar_url,
-      bio: data.bio,
-      color: data.color,
-      phone: data.phone,
-      roles: data.roles.map((role) => {
-        return {
-          id: role.id,
-          name: role.name,
-          description: role.description,
-        };
-      }),
-      permissions: data.permissions.map((permission) => {
-        return {
-          id: permission.id,
-          name: permission.name,
-          description: permission.description,
-        };
-      }),
       organizationId: data?.organization_id,
+      // address: data.address,
+      // avatarUrl: data.avatar_url,
+      // bio: data.bio,
+      // color: data.color,
+      // phone: data.phone,
+      // roles: data.roles.map((role) => {
+      //   return {
+      //     id: role.id,
+      //     name: role.name,
+      //     description: role.description,
+      //   };
+      // }),
+      // permissions: data.permissions.map((permission) => {
+      //   return {
+      //     id: permission.id,
+      //     name: permission.name,
+      //     description: permission.description,
+      //   };
+      // }),
     };
     setMe(me);
   }, []);
 
-  const loginWithEmail = useCallback(
+  const login = useCallback(
     async (data) => {
       try {
         const response = await loginFn(data);
 
-        const accessToken = response.data.data.accessToken;
-        const refreshToken = response.data.data.refreshToken;
-        console.log('x');
+        console.log(response);
         saveMe(response.data.data.user);
-        console.log('y');
 
-        token.setAccessToken(accessToken);
-        token.setRefreshToken(refreshToken);
         setIsAuthenticated(true);
 
         toast.success('Login success');
@@ -74,27 +69,39 @@ const AuthProvider = ({ children }) => {
     [navigate, saveMe],
   );
 
-  const loginWithToken = useCallback(async () => {
+  const loginWithCookie = useCallback(async () => {
     try {
-      const oldRefreshToken = token.getRefreshToken();
+      const response = await validateFn();
 
-      const response = await refreshTokenFn({ refreshToken: oldRefreshToken });
+      console.log(response);
 
-      const accessToken = response.data.data.accessToken;
-      const refreshToken = response.data.data.refreshToken;
       saveMe(response.data.data.user);
-
-      token.setAccessToken(accessToken);
-      token.setRefreshToken(refreshToken);
-      setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
-      token.removeAccessToken();
-      token.removeRefreshToken();
-      setIsAuthenticated(false);
-      queryClient.clear();
     }
-  }, [queryClient, saveMe]);
+  }, [saveMe]);
+
+  // const loginWithToken = useCallback(async () => {
+  //   try {
+  //     const oldRefreshToken = token.getRefreshToken();
+
+  //     const response = await refreshTokenFn({ refreshToken: oldRefreshToken });
+
+  //     const accessToken = response.data.data.accessToken;
+  //     const refreshToken = response.data.data.refreshToken;
+  //     saveMe(response.data.data.user);
+
+  //     token.setAccessToken(accessToken);
+  //     token.setRefreshToken(refreshToken);
+  //     setIsAuthenticated(true);
+  //   } catch (error) {
+  //     console.log(error);
+  //     token.removeAccessToken();
+  //     token.removeRefreshToken();
+  //     setIsAuthenticated(false);
+  //     queryClient.clear();
+  //   }
+  // }, [queryClient, saveMe]);
 
   const logout = async () => {
     try {
@@ -102,26 +109,23 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     } finally {
-      token.removeAccessToken();
-      token.removeRefreshToken();
+      removeCookie();
       setIsAuthenticated(false);
       queryClient.clear();
     }
   };
 
   useEffect(() => {
-    const refreshToken = token.getRefreshToken();
-    if (refreshToken) {
-      loginWithToken();
+    const cookie = getCookie();
+    if (cookie) {
+      loginWithCookie();
     } else {
       setIsAuthenticated(false);
     }
-  }, [loginWithToken]);
+  }, [loginWithCookie]);
 
   return (
-    <AuthContext.Provider
-      value={{ isAuthenticated, loginWithEmail, logout, me }}
-    >
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, me }}>
       {children}
     </AuthContext.Provider>
   );

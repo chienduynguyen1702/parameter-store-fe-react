@@ -5,27 +5,26 @@ import publicApi from './config/publicApi.config';
 export const login = (data) =>
   publicApi({
     method: 'POST',
-    url: '/login',
+    url: '/auth/login',
     data,
   });
 
-export const refreshToken = (data) =>
+export const validate = () =>
   publicApi({
-    method: 'POST',
-    url: '/refreshToken',
-    data,
+    method: 'GET',
+    url: '/auth/validate',
   });
 
 export const logout = () =>
   authApi({
     method: 'POST',
-    url: '/logout',
+    url: '/auth/logout',
   });
 
 export const forgotPassword = (email) => {
   publicApi({
     method: 'POST',
-    url: '/forgotPassword',
+    url: '/auth/forgotPassword',
     data: {
       email,
     },
@@ -53,48 +52,48 @@ export const getMe = () =>
 export const getListUser = (params) =>
   authApi({
     method: 'GET',
-    url: '/users',
+    url: '/setting/user',
     params,
   });
 
 export const addUser = (data) =>
   authApi({
     method: 'POST',
-    url: '/users',
+    url: '/setting/user',
     data,
   });
 
 export const editUser = (id, data) =>
   authApi({
     method: 'PUT',
-    url: `/users/${id}`,
+    url: `/setting/user/${id}`,
     data,
   });
 
 export const getUser = (id) =>
   authApi({
     method: 'GET',
-    url: `/users/${id}`,
+    url: `/setting/user/${id}`,
   });
 
 export const getArchivedUsers = () => {
   return authApi({
     method: 'GET',
-    url: '/archived-users',
+    url: '/setting/archived-users',
   });
 };
 
 export const archiveUser = (id) => {
   return authApi({
     method: 'PATCH',
-    url: `/users/${id}/archive`,
+    url: `/setting/users/${id}/archive`,
   });
 };
 
 export const unarchiveUser = (id) => {
   return authApi({
     method: 'PATCH',
-    url: `/users/${id}/unarchive`,
+    url: `/setting/users/${id}/unarchive`,
   });
 };
 
@@ -103,28 +102,28 @@ export const unarchiveUser = (id) => {
 export const getListRoles = (params) =>
   authApi({
     method: 'GET',
-    url: '/roles',
+    url: 'setting/role',
     params,
   });
 
 export const addRole = (data) =>
   authApi({
     method: 'POST',
-    url: '/roles',
+    url: 'setting/role',
     data,
   });
 
 export const editRole = (id, data) =>
   authApi({
     method: 'PUT',
-    url: `/roles/${id}`,
+    url: `setting/role/${id}`,
     data,
   });
 
 export const getRole = (id) =>
   authApi({
     method: 'GET',
-    url: `/roles/${id}`,
+    url: `setting/role/${id}`,
   });
 
 export const getArchivedRoles = () => {
