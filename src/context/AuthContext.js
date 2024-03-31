@@ -7,7 +7,7 @@ import {
   logout as logoutFn,
   validate as validateFn,
 } from '../services/api';
-import { removeCookie } from '../utils/cookie';
+import { getCookie, removeCookie } from '../utils/cookie';
 
 const AuthContext = createContext();
 
@@ -24,8 +24,8 @@ const AuthProvider = ({ children }) => {
     const me = {
       // id: data.id,
       // username: data.username,
-      email: data?.['user:'].email,
-      organizationId: data?.['user:'].organization_id,
+      email: data?.email,
+      organizationId: data?.organization_id,
       // address: data.address,
       // avatarUrl: data.avatar_url,
       // bio: data.bio,
@@ -54,7 +54,9 @@ const AuthProvider = ({ children }) => {
       try {
         const response = await loginFn(data);
 
-        saveMe(response.data);
+        saveMe(response?.data?.['user:']);
+
+        console.log(getCookie());
 
         setIsAuthenticated(true);
 
@@ -73,7 +75,7 @@ const AuthProvider = ({ children }) => {
     try {
       const response = await validateFn();
 
-      saveMe(response.data.user);
+      saveMe(response.data?.['Validated user']);
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
@@ -117,6 +119,7 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    console.log(document.cookie);
     loginWithCookie();
   }, [loginWithCookie]);
 
