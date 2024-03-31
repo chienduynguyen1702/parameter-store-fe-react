@@ -7,7 +7,6 @@ import cn from 'classnames';
 import Icon from '../Icon';
 import Dropdown from './Dropdown';
 import LogoContainer from '../LogoContainer';
-import Decentralization from '../Decentralization';
 
 const navigation = [
   {
@@ -46,24 +45,22 @@ const Sidebar = ({ className, onClose }) => {
         <div className={styles.menu}>
           {navigation.map((x, index) =>
             x.url ? (
-              <Decentralization key={index} permissions={x.permissions}>
-                <NavLink
-                  className={({ isActive }) =>
-                    cn(styles.item, {
-                      [styles.active]: isActive || firstLevelPath === x.subUrl,
-                    })
-                  }
-                  to={x.url}
-                  end
-                  onClick={() => {
-                    onClose();
-                    setVisible(false);
-                  }}
-                >
-                  <Icon name={x.icon} size="24" />
-                  {x.title}
-                </NavLink>
-              </Decentralization>
+              <NavLink
+                className={({ isActive }) =>
+                  cn(styles.item, {
+                    [styles.active]: isActive || firstLevelPath === x.subUrl,
+                  })
+                }
+                to={x.url}
+                end
+                onClick={() => {
+                  onClose();
+                  setVisible(false);
+                }}
+              >
+                <Icon name={x.icon} size="24" />
+                {x.title}
+              </NavLink>
             ) : (
               <Dropdown
                 className={styles.dropdown}
@@ -79,33 +76,28 @@ const Sidebar = ({ className, onClose }) => {
             ),
           )}
         </div>
-        <Decentralization permissions={['user']}>
-          <button
-            className={styles.toggle}
-            onClick={() => setVisible(!visible)}
-          >
-            <Icon name="arrow-right" size="24" />
-            <Icon name="close" size="24" />
+        <button className={styles.toggle} onClick={() => setVisible(!visible)}>
+          <Icon name="arrow-right" size="24" />
+          <Icon name="close" size="24" />
+        </button>
+        <div className={styles.foot}>
+          <button className={styles.link}>
+            <NavLink
+              className={({ isActive }) =>
+                cn(styles.item, { [styles.active]: isActive })
+              }
+              to={'/user-setting/users'}
+              end
+              onClick={() => {
+                onClose();
+                setVisible(false);
+              }}
+            >
+              <Icon name="setting" size="24" />
+              Users & Settings
+            </NavLink>
           </button>
-          <div className={styles.foot}>
-            <button className={styles.link}>
-              <NavLink
-                className={({ isActive }) =>
-                  cn(styles.item, { [styles.active]: isActive })
-                }
-                to={'/user-setting/users'}
-                end
-                onClick={() => {
-                  onClose();
-                  setVisible(false);
-                }}
-              >
-                <Icon name="setting" size="24" />
-                Users & Settings
-              </NavLink>
-            </button>
-          </div>
-        </Decentralization>
+        </div>
       </div>
     </>
   );

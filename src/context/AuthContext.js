@@ -7,7 +7,7 @@ import {
   logout as logoutFn,
   validate as validateFn,
 } from '../services/api';
-import { getCookie, removeCookie } from '../utils/cookie';
+import { removeCookie } from '../utils/cookie';
 
 const AuthContext = createContext();
 
@@ -24,8 +24,8 @@ const AuthProvider = ({ children }) => {
     const me = {
       // id: data.id,
       // username: data.username,
-      email: data.email,
-      organizationId: data?.organization_id,
+      email: data?.['user:'].email,
+      organizationId: data?.['user:'].organization_id,
       // address: data.address,
       // avatarUrl: data.avatar_url,
       // bio: data.bio,
@@ -54,13 +54,13 @@ const AuthProvider = ({ children }) => {
       try {
         const response = await loginFn(data);
 
-        console.log(response);
-        saveMe(response.data.data.user);
+        saveMe(response.data);
 
         setIsAuthenticated(true);
 
         toast.success('Login success');
         navigate.push('/', { replace: true });
+        console.log('X');
         return true;
       } catch {
         return false;
@@ -73,13 +73,14 @@ const AuthProvider = ({ children }) => {
     try {
       const response = await validateFn();
 
-      console.log(response);
-
-      saveMe(response.data.data.user);
+      saveMe(response.data.user);
+      setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
+      setIsAuthenticated(false);
+      queryClient.clear();
     }
-  }, [saveMe]);
+  }, [saveMe, queryClient]);
 
   // const loginWithToken = useCallback(async () => {
   //   try {
@@ -116,12 +117,7 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const cookie = getCookie();
-    if (cookie) {
-      loginWithCookie();
-    } else {
-      setIsAuthenticated(false);
-    }
+    loginWithCookie();
   }, [loginWithCookie]);
 
   return (

@@ -8,7 +8,6 @@ import {
   Item,
   RHFTextInput,
   RHFCheckbox,
-  Decentralization,
   AsyncButton,
 } from '../../../../components';
 
@@ -123,15 +122,13 @@ const RoleForm = () => {
           <p onClick={onClose} className="button-white ms-auto me-2">
             Cancel
           </p>
-          <Decentralization permissions={['role-update', 'role-create']}>
-            <AsyncButton
-              notMaxWidth
-              type="submit"
-              className="button px-4"
-              value={'Save'}
-              loading={addRoleMutation.isLoading || editRoleMutation.isLoading}
-            />
-          </Decentralization>
+          <AsyncButton
+            notMaxWidth
+            type="submit"
+            className="button px-4"
+            value={'Save'}
+            loading={addRoleMutation.isLoading || editRoleMutation.isLoading}
+          />
         </Stack>
       </form>
     </FormProvider>

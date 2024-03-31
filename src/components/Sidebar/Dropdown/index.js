@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
-import Decentralization from '../../Decentralization';
-
 import cn from 'classnames';
 import styles from './Dropdown.module.sass';
 
@@ -77,28 +75,26 @@ const Dropdown = ({ className, item, visibleSidebar, setValue, onClick }) => {
       )}
       <div className={styles.body}>
         {item.dropdown.map((x, index) => (
-          <Decentralization key={index} permissions={x.permissions}>
-            <NavLink
-              className={({ isActive }) =>
-                cn(styles.link, { [styles.active]: isActive })
-              }
-              to={x.url}
-              onClick={() => handleClose()}
-              exact
-            >
-              {x.title}
-              {x.counter ? (
-                <div
-                  className={styles.counter}
-                  style={{ backgroundColor: x.colorCounter }}
-                >
-                  {x.counter}
-                </div>
-              ) : (
-                <Icon name="arrow-next" size="24" />
-              )}
-            </NavLink>
-          </Decentralization>
+          <NavLink
+            className={({ isActive }) =>
+              cn(styles.link, { [styles.active]: isActive })
+            }
+            to={x.url}
+            onClick={() => handleClose()}
+            exact
+          >
+            {x.title}
+            {x.counter ? (
+              <div
+                className={styles.counter}
+                style={{ backgroundColor: x.colorCounter }}
+              >
+                {x.counter}
+              </div>
+            ) : (
+              <Icon name="arrow-next" size="24" />
+            )}
+          </NavLink>
         ))}
       </div>
     </div>

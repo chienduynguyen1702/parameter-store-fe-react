@@ -6,7 +6,6 @@ import cn from 'classnames';
 import styles from './SettingItem.module.sass';
 
 import Icon from './../Icon';
-import Decentralization from '../Decentralization';
 
 function SettingItem({
   title = 'Setting options',
@@ -35,32 +34,28 @@ function SettingItem({
                   {item.name}
                 </p>
               </Col>
-              <Decentralization permissions={['setting-update']} exact>
-                <Col
-                  sm={2}
-                  xs={2}
-                  onClick={() => {
-                    onEdit(item);
-                  }}
-                >
-                  <Icon
-                    className={cn('ms-auto', styles.iconEdit)}
-                    name="edit"
-                    size="24"
-                    fill="#6F767E"
-                  />
-                </Col>
-              </Decentralization>
+              <Col
+                sm={2}
+                xs={2}
+                onClick={() => {
+                  onEdit(item);
+                }}
+              >
+                <Icon
+                  className={cn('ms-auto', styles.iconEdit)}
+                  name="edit"
+                  size="24"
+                  fill="#6F767E"
+                />
+              </Col>
             </Row>
           );
         })
       )}
-      <Decentralization permissions={['setting-create']} exact>
-        <p className="button-xsmall button-grey mt-2" onClick={() => onAdd()}>
-          <Icon name="plus" size="12" />
-          {titleButton}
-        </p>
-      </Decentralization>
+      <p className="button-xsmall button-grey mt-2" onClick={() => onAdd()}>
+        <Icon name="plus" size="12" />
+        {titleButton}
+      </p>
     </div>
   );
 }

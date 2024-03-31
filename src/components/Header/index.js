@@ -17,7 +17,7 @@ const Header = ({ onOpen }) => {
   return (
     <header className={styles.header}>
       <button className={styles.burger} onClick={() => handleClick()}></button>
-      <p className={cn(styles.title)}>Hello, {me.username}!</p>
+      <p className={cn(styles.title)}>Hello, {me?.username ?? me.email}!</p>
       <div className={styles.control} onClick={() => setVisible(false)}>
         <User className={styles.user} />
       </div>
