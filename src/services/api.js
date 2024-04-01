@@ -14,6 +14,7 @@ export const validate = () =>
   publicApi({
     method: 'GET',
     url: '/auth/validate',
+    withCredentials: true,
   });
 
 export const logout = () =>
