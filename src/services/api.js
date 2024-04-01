@@ -7,6 +7,7 @@ export const login = (data) =>
     method: 'POST',
     url: '/auth/login',
     data,
+    withCredentials: true,
   });
 
 export const validate = () =>
