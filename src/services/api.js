@@ -21,6 +21,7 @@ export const logout = () =>
   authApi({
     method: 'POST',
     url: '/auth/logout',
+    withCredentials: true,
   });
 
 export const forgotPassword = (email) => {
@@ -54,8 +55,9 @@ export const getMe = () =>
 export const getListUser = (params) =>
   authApi({
     method: 'GET',
-    url: '/setting/users',
+    url: '/setting/users/',
     params,
+    withCredentials: true,
   });
 
 export const addUser = (data) =>
@@ -198,10 +200,11 @@ export const editProject = (id, data) =>
     data,
   });
 
-export const getProject = (id) =>
+export const getProjectOverview = (id) =>
   authApi({
     method: 'GET',
-    url: `/projects/${id}`,
+    url: `/projects/${id}/overview/`,
+    withCredentials: true,
   });
 
 export const deleteProject = (id) =>

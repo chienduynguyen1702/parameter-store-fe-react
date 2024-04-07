@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import useQueryString from '../../useQueryString';
+import { getProjectOverview } from '../../../services/api';
 import { addUser, editUser, getListUser } from '../../../services/api';
 
 const DEFAULT_QUERY_STRING = {
@@ -10,7 +11,7 @@ const DEFAULT_QUERY_STRING = {
   limit: 10,
 };
 
-const useListUsers = () => {
+const useProjectUserList = (id) => {
   const queryClient = useQueryClient();
   const { queryString, setQueryString } = useQueryString();
 
@@ -23,22 +24,21 @@ const useListUsers = () => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const users = data?.users?.map((item) => {
+    // console.log("parseData: ",data);
+    const users = data?.users.map((user) => {
       return {
-        id: item?.id,
-        username: item?.username,
-        phone: item?.phone,
-        email: item?.email,
-        // avatarUrl: item.avatar_url,
-        // projects: item.projects,
-        // permissionsCount: item.permissions_count,
-        // roles: item.roles,
-        // lastSignIn: moment(item.last_sign_in).fromNow(),
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        phone: user?.phone,
+        // status: user.status,
+        // last_login: user.last_login,
       };
     });
-
+    
     // const pagination = {
-    //   total: data.pagination.total,
+      //   total: data.pagination.total,
     //   currentPage: data.pagination.currentPage,
     //   totalPage: data.pagination.totalPage,
     //   limit: data.pagination.limit,
@@ -56,12 +56,13 @@ const useListUsers = () => {
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['users', queryString],
-    queryFn: () => getListUser(queryString),
+    queryKey: ['projects', 'overview', id],
+    queryFn: () => getProjectOverview(id),
     staleTime: 10 * 1000,
-    select: (data) => parseData(data.data.data),
+    select: (data) => parseData(data.data),
     enabled: !!page && !!limit,
   });
+  // console.log("useProjectUserList: ",data);
 
   const addUserMutation = useMutation(
     (data) => {
@@ -100,11 +101,6 @@ const useListUsers = () => {
       },
     },
   );
-  console.log("data ",data);
-  // console.log("users? ",data?.users);
-  // console.log("pagination? ",data?.pagination);
-  
-
   return {
     listUsers: data?.users,
     pagination: data?.pagination,
@@ -115,4 +111,4 @@ const useListUsers = () => {
   };
 };
 
-export default useListUsers;
+export default useProjectUserList;

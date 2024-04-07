@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Row from './Row';
-import { NoData, Pagination } from '../../../../components';
+import { NoData, Pagination } from '../../../../../components';
 
 const Table = ({
   listUsers,
@@ -16,13 +16,9 @@ const Table = ({
       <div className="tableOuter">
         <div className="tableContainer">
           <div className="tableHead">
-            {/* <div className="tableCell pb-4">Name</div>
-            <div className="tableCell">Project</div>
-            <div className="tableCell">Permissions</div>
-            <div className="tableCell">Role</div>
-            <div className="tableCell">Last sign in</div> */}
             <div className="tableCell pb-4">Name</div>
             <div className="tableCell">Mail</div>
+            <div className="tableCell">Role</div>
             <div className="tableCell">Phone</div>
             <div className="tableCell"></div>
           </div>

@@ -1,18 +1,30 @@
 import { Col, Row, Stack } from 'react-bootstrap';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { ButtonSetting, Card, Icon, Modal } from '../../../../components';
 import { PROJECTS } from '../../../../hooks/mocks/projects';
-
+import useProjectOverviewAndUserList  from '../../../../hooks/data/projects/useProjectOverviewAndUserListById';
 import EditProjectForm from '../../../Projects/components/EditProjectForm';
 import SettingsForm from './SettingsForm';
+import moment from 'moment';
 
-const Overview = () => {
-  const project = PROJECTS[0];
-
+const Overview = ({ overview , usersList}) => {
+  // const project = PROJECTS[0];
+  // const { id } = useParams();
+  // console.log("project id: ",id);
+  // const {overview, usersList, isSuccess} = useProjectOverviewAndUserList(id);
+  // console.log("overview: ",overview);
   const [isEditMode, setIdEditMode] = useState(false);
   const [isSetting, setIsSetting] = useState(false);
-
+  // if (!isSuccess) {
+  //   // Handle loading state if needed
+  //   return <p>Loading...</p>;
+  // }
+  // if (!overview) {
+  //   // Handle case when organization data is not available
+  //   return <p>No organization data available</p>;
+  // }
   return (
     <>
       <Modal
@@ -35,7 +47,7 @@ const Overview = () => {
         <SettingsForm />
       </Modal>
       <Card
-        title={`Overview`}
+        title=  {overview.name}
         classTitle="title-blue"
         className="mb-5"
         head={
@@ -62,7 +74,8 @@ const Overview = () => {
             <div className="detail-item">
               <p className="me-auto">Description:</p>
               <p className="detail-content status-text">
-                {project.description}
+                {/* {project.description} */}
+                {overview.description}
               </p>
             </div>
           </Stack>
@@ -73,27 +86,31 @@ const Overview = () => {
           <Col xs={12} md={5}>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Current sprint no:</p>
-              <p className="status-text ">{project.currentSprint}</p>
+              <p className="status-text ">{overview.current_sprint}</p>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Status:</p>
-              <p className="detail-content status-text">{project.status}</p>
+              <p className="detail-content status-text">{overview.status}</p>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Start date:</p>
-              <p className="detail-content status-text">{project.startDate}</p>
+              <p className="detail-content status-text">{moment(overview.start_at).format("DD/MM/YYYY")}</p>
             </Stack>
           </Col>
-          <Col xs={12} md={{ span: 5, offset: 1 }}>
+          <Col xs={12} md={{ span: 6, offset: 1 }}>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Members: </p>
               <p className="detail-content status-text">
-                {project.users_count}
+                {usersList.length}
               </p>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Address:</p>
-              <p className="detail-content status-text">{project.address}</p>
+              <p className="detail-content status-text">{overview.address}</p>
+            </Stack>
+            <Stack direction="horizontal" gap={3} className="py-2">
+              <p className="me-auto">Repository URL:</p>
+              <p className="detail-content status-text">{overview.repo_url}</p>
             </Stack>
           </Col>
         </Row>

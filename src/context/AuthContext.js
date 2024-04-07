@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
   const saveMe = useCallback((data) => {
     const me = {
       // id: data.id,
-      // username: data.username,
+      username: data?.username,
       email: data?.email,
       organizationId: data?.organization_id,
       // address: data.address,
@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
       try {
         const response = await loginFn(data);
 
-        saveMe(response?.data?.['user:']);
+        saveMe(response?.data?.['user']);
 
         console.log(getCookie());
 
@@ -75,7 +75,8 @@ const AuthProvider = ({ children }) => {
     try {
       const response = await validateFn();
 
-      saveMe(response.data?.['Validated user']);
+      console.log('validateFn.response?.data:', response?.data);
+      saveMe(response.data?.['user']);
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
