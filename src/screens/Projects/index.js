@@ -23,7 +23,6 @@ const ProjectsPage = () => {
     isSuccess: isListUsersSuccess,
     pagination,
   } = useListProjects();
-
   const {
     archivedList,
     isSuccess: isListArchivedSuccess,
@@ -34,9 +33,9 @@ const ProjectsPage = () => {
     unarchiveMutation,
   } = useListArchived({
     archivedObject: {
-      listArchivedAPI: getArchivedProjects,
-      archiveAPI: archiveProject,
-      unarchiveAPI: unarchiveProject,
+      // listArchivedAPI: getArchivedProjects,
+      // archiveAPI: archiveProject,
+      // unarchiveAPI: unarchiveProject,
       keyArchivistList: 'project-archivist-list',
       keyList: 'projects',
       title: 'Project',

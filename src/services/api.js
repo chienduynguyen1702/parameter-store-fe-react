@@ -167,10 +167,11 @@ export const editOrganizationById = (id, data) =>
     data,
   });
 
-export const getOrganizationById = (id) =>
+export const getOrganizationById = () =>
   authApi({
     method: 'GET',
-    url: `/organizations/${id}`,
+    url: `/organizations/`,
+    withCredentials: true,
   });
 
 // ------------------------------ Project ------------------------------
@@ -178,8 +179,9 @@ export const getOrganizationById = (id) =>
 export const getListProjects = (params) =>
   authApi({
     method: 'GET',
-    url: '/projects',
+    url: '/organizations/projects',
     params,
+    withCredentials: true,
   });
 
 export const addProject = (data) =>

@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
-import { addProject, editProject, getListUser } from '../../../services/api';
+import { addProject, editProject, getListProjects } from '../../../services/api';
 import { PROJECTS } from '../../mocks/projects';
 import { toast } from 'react-toastify';
 
@@ -24,36 +24,42 @@ const useListProjects = () => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const projects = PROJECTS?.map((item) => {
+    const projects = data?.projects.map((project) => {
       return {
-        id: item.id,
-        name: item.name,
-        color: item.color,
-        usersCount: item.users_count,
-        description: item.description,
-        address: item.address,
-        currentSprint: item.currentSprint,
-        startDate: item.startDate,
-        status: item.status,
+        id: project.id,
+        createdAt: project.CreatedAt,
+        name: project.name,
+        color: project.color,
+        usersCount: project.users_count,
+        repoUrl: project.RepoURL,
+        description: project.description,
+        address: project.address,
+        currentSprint: project.CurrentSprint,
+        startDate: project.startDate,
+        status: project.status,
       };
     });
-
     const pagination = {
-      total: data.pagination.total,
-      currentPage: data.pagination.currentPage,
-      totalPage: data.pagination.totalPage,
-      limit: data.pagination.limit,
+      total: projects.length,
+      currentPage: data.pagination?.currentPage,
+      totalPage: data.pagination?.totalPage,
+      limit: data.pagination?.limit,
     };
     return { pagination, projects };
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['projects', queryString],
-    queryFn: () => getListUser(queryString),
+    queryFn: () => getListProjects(queryString),
     staleTime: 10 * 1000,
-    select: (data) => parseData(data.data.data),
+    select: (data) => parseData(data.data),
     enabled: !!page && !!limit,
   });
+  if (data) {
+    console.log(data.projects);
+  } else {
+    console.log("Data is not yet available");
+  }
 
   const addProjectMutation = useMutation(
     (data) => {
@@ -92,7 +98,6 @@ const useListProjects = () => {
       },
     },
   );
-
   return {
     listProjects: data?.projects,
     pagination: data?.pagination,
