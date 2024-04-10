@@ -7,21 +7,18 @@ export const login = (data) =>
     method: 'POST',
     url: '/auth/login',
     data,
-    withCredentials: true,
   });
 
 export const validate = () =>
   publicApi({
     method: 'GET',
     url: '/auth/validate',
-    withCredentials: true,
   });
 
 export const logout = () =>
   authApi({
     method: 'POST',
     url: '/auth/logout',
-    withCredentials: true,
   });
 
 export const forgotPassword = (email) => {
@@ -57,7 +54,6 @@ export const getListUser = (params) =>
     method: 'GET',
     url: '/settings/users/',
     params,
-    withCredentials: true,
   });
 
 export const addUser = (data) =>
@@ -83,21 +79,21 @@ export const getUser = (id) =>
 export const getArchivedUsers = () => {
   return authApi({
     method: 'GET',
-    url: '/settings/archived-users',
+    url: '/settings/users/archived',
   });
 };
 
 export const archiveUser = (id) => {
   return authApi({
-    method: 'PATCH',
+    method: 'PUT',
     url: `/settings/users/${id}/archive`,
   });
 };
 
 export const unarchiveUser = (id) => {
   return authApi({
-    method: 'PATCH',
-    url: `/settings/users/${id}/unarchive`,
+    method: 'PUT',
+    url: `/settings/users/${id}/restore`,
   });
 };
 
@@ -173,7 +169,6 @@ export const getOrganizationById = () =>
   authApi({
     method: 'GET',
     url: `/organizations/`,
-    withCredentials: true,
   });
 
 // ------------------------------ Project ------------------------------
@@ -183,7 +178,6 @@ export const getListProjects = (params) =>
     method: 'GET',
     url: '/organizations/projects',
     params,
-    withCredentials: true,
   });
 
 export const addProject = (data) =>
@@ -204,7 +198,6 @@ export const getProjectOverview = (id) =>
   authApi({
     method: 'GET',
     url: `/projects/${id}/overview/`,
-    withCredentials: true,
   });
 
 export const deleteProject = (id) =>
