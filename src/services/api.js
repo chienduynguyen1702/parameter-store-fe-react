@@ -55,7 +55,7 @@ export const getMe = () =>
 export const getListUser = (params) =>
   authApi({
     method: 'GET',
-    url: '/setting/users/',
+    url: '/settings/users/',
     params,
     withCredentials: true,
   });
@@ -63,41 +63,41 @@ export const getListUser = (params) =>
 export const addUser = (data) =>
   authApi({
     method: 'POST',
-    url: '/setting/users',
+    url: '/settings/users',
     data,
   });
 
 export const editUser = (id, data) =>
   authApi({
     method: 'PUT',
-    url: `/setting/users/${id}`,
+    url: `/settings/users/${id}`,
     data,
   });
 
 export const getUser = (id) =>
   authApi({
     method: 'GET',
-    url: `/setting/users/${id}`,
+    url: `/settings/users/${id}`,
   });
 
 export const getArchivedUsers = () => {
   return authApi({
     method: 'GET',
-    url: '/setting/archived-users',
+    url: '/settings/archived-users',
   });
 };
 
 export const archiveUser = (id) => {
   return authApi({
     method: 'PATCH',
-    url: `/setting/users/${id}/archive`,
+    url: `/settings/users/${id}/archive`,
   });
 };
 
 export const unarchiveUser = (id) => {
   return authApi({
     method: 'PATCH',
-    url: `/setting/users/${id}/unarchive`,
+    url: `/settings/users/${id}/unarchive`,
   });
 };
 
@@ -106,28 +106,28 @@ export const unarchiveUser = (id) => {
 export const getListRoles = (params) =>
   authApi({
     method: 'GET',
-    url: 'setting/roles',
+    url: 'settings/roles',
     params,
   });
 
 export const addRole = (data) =>
   authApi({
     method: 'POST',
-    url: 'setting/roles',
+    url: 'settings/roles',
     data,
   });
 
 export const editRole = (id, data) =>
   authApi({
     method: 'PUT',
-    url: `setting/roles/${id}`,
+    url: `settings/roles/${id}`,
     data,
   });
 
 export const getRole = (id) =>
   authApi({
     method: 'GET',
-    url: `setting/roles/${id}`,
+    url: `settings/roles/${id}`,
   });
 
 export const getArchivedRoles = () => {
