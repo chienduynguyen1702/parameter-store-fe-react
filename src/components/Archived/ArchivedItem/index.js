@@ -7,6 +7,7 @@ import cn from 'classnames';
 import styles from './ArchivedItem.module.sass';
 import Avatar from '../../Avatar';
 import Popover from '../../Popover';
+import moment from 'moment';
 
 const ArchivedItem = ({
   item,
@@ -30,6 +31,9 @@ const ArchivedItem = ({
               ? item?.name.substring(0, 36) + '...'
               : item?.name}
           </div>
+          <div className={styles.information}>{`Archived at ${moment(
+            item.archivedAt,
+          ).fromNow()}`}</div>
           {/* <div
             className={styles.information}
           >{`Archived by ${item.archiver} ${item.archivedAt}`}</div> */}
