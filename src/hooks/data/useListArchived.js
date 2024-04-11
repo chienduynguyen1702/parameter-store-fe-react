@@ -27,10 +27,11 @@ const useListArchived = ({
   const [search, setSearch] = useState('');
 
   const parseData = useCallback((data) => {
-    return ARCHIVED_USERS.map((item) => {
+    return data.map((item) => {
       return {
         id: item.id,
-        name: item.name,
+        name: item.username,
+        // name: item.name,
         image: item.avatar_url,
         archiver: item.archiver_username,
         archivedAt: item.archived_at,
@@ -43,7 +44,7 @@ const useListArchived = ({
     queryFn: () => {
       return listArchivedAPI();
     },
-    select: (data) => parseData(data),
+    select: (data) => parseData(data.data.data.users),
   });
 
   const dataFiltered = useMemo(() => {
