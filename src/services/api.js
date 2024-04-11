@@ -80,6 +80,7 @@ export const getArchivedUsers = () => {
   return authApi({
     method: 'GET',
     url: '/settings/users/archived',
+    withCredentials: true,
   });
 };
 
@@ -102,28 +103,29 @@ export const unarchiveUser = (id) => {
 export const getListRoles = (params) =>
   authApi({
     method: 'GET',
-    url: 'settings/roles',
+    url: '/settings/roles/',
     params,
+    withCredentials : true,
   });
 
 export const addRole = (data) =>
   authApi({
     method: 'POST',
-    url: 'settings/roles',
+    url: '/settings/roles',
     data,
   });
 
 export const editRole = (id, data) =>
   authApi({
     method: 'PUT',
-    url: `settings/roles/${id}`,
+    url: `/settings/roles/${id}`,
     data,
   });
 
 export const getRole = (id) =>
   authApi({
     method: 'GET',
-    url: `settings/roles/${id}`,
+    url: `/settings/roles/${id}`,
   });
 
 export const getArchivedRoles = () => {

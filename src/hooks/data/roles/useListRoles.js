@@ -24,15 +24,18 @@ export default function useListRoles() {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const roles = ROLES.map((item) => {
+    console.log('data.roles: ', data);
+    const roles = data.roles.map((item) => {
       return {
-        id: item.ID,
-        name: item.Name,
-        description: item.Description,
-        usersCount: item.users_count ?? 0,
-        permissions: item.permissions ?? 0,
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        usersCount: item.user_count ,
+        permissions: item.permissions_count,
       };
     });
+    console.log('roles: ', roles);
+
     // const pagination = {
     //   total: data.pagination.total,
     //   currentPage: data.pagination.currentPage,
@@ -93,7 +96,6 @@ export default function useListRoles() {
       },
     },
   );
-
   return {
     listRoles: data?.roles,
     pagination: data?.pagination,
