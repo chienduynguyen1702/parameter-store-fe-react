@@ -196,6 +196,14 @@ export const editProject = (id, data) =>
     data,
   });
 
+export const addUserToProject = (id, data) =>
+console.log("addUserToProject data",data) ||
+  authApi({
+    method: 'POST',
+    url: `/projects/${id}/overview/add-user`,
+    data,
+  });
+
 export const getProjectOverview = (id) =>
   authApi({
     method: 'GET',

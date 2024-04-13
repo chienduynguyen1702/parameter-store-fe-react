@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import useQueryString from '../../useQueryString';
 import { getProjectOverview } from '../../../services/api';
-import { addUser, editUser, getListUser } from '../../../services/api';
+import { addUserToProject, editUser, getListUser } from '../../../services/api';
 
 const DEFAULT_QUERY_STRING = {
   page: 1,
@@ -29,6 +29,7 @@ const useProjectUserList = (id) => {
       return {
         id: user.id,
         name: user.name,
+        username: user.username,
         email: user.email,
         role: user.role,
         phone: user?.phone,
@@ -65,8 +66,9 @@ const useProjectUserList = (id) => {
   // console.log("useProjectUserList: ",data);
 
   const addUserMutation = useMutation(
-    (data) => {
-      return addUser(data);
+    (body) => {
+      console.log("addUserMutation data: ",body);
+      return addUserToProject(body.project_id,body.data);
     },
     {
       onSuccess: () => {

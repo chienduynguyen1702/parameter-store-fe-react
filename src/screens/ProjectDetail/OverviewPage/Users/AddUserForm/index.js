@@ -1,13 +1,21 @@
 import { useForm } from 'react-hook-form';
-import { useListUsers } from '../../../../../hooks/data';
+import { useParams } from 'react-router-dom';
+import { useProjectUserList } from '../../../../../hooks/data';
 import UserForm from '../UserForm';
 
 const AddUserForm = ({ listUsers, onClose }) => {
-  const { addUserMutation } = useListUsers({ onClose });
+
+  const { id } = useParams();
+  const { addUserMutation } = useProjectUserList({ onClose });
   const method = useForm({});
 
   const handleSubmit = (data) => {
-    addUserMutation.mutate(data);
+    console.log(data);
+    const body = {
+      data: data,
+      project_id: id,
+    }
+    addUserMutation.mutate(body);
   };
 
   return (

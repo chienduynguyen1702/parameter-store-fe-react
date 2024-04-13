@@ -45,7 +45,7 @@ const Overview = ({ overview , usersList}) => {
         <SettingsForm />
       </Modal> */}
       <Card
-        title=  {overview.name}
+        title=  {overview?.name}
         classTitle="title-blue"
         className="mb-5"
         head={
@@ -73,7 +73,7 @@ const Overview = ({ overview , usersList}) => {
               <p className="me-auto">Description:</p>
               <p className="detail-content status-text">
                 {/* {project.description} */}
-                {overview.description}
+                {overview?.description}
               </p>
             </div>
           </Stack>
@@ -84,31 +84,31 @@ const Overview = ({ overview , usersList}) => {
           <Col xs={12} md={5}>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Current sprint no:</p>
-              <p className="status-text ">{overview.current_sprint}</p>
+              <p className="status-text ">{overview?.current_sprint}</p>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Status:</p>
-              <p className="detail-content status-text">{overview.status}</p>
+              <p className="detail-content status-text">{overview?.status}</p>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Start date:</p>
-              <p className="detail-content status-text">{moment(overview.start_at).format("DD/MM/YYYY")}</p>
+              <p className="detail-content status-text">{moment(overview?.start_at).format("DD/MM/YYYY")}</p>
             </Stack>
           </Col>
           <Col xs={12} md={{ span: 6, offset: 1 }}>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Repository URL:</p>
-              <p className="detail-content status-text">{overview.repo_url}</p>
+              <p className="detail-content status-text">{overview?.repo_url}</p>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Members: </p>
               <p className="detail-content status-text">
-                {usersList.length}
+                {usersList? usersList.length: "0"}
               </p>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Address:</p>
-              <p className="detail-content status-text">{overview.address}</p>
+              <p className="detail-content status-text">{overview?.address}</p>
             </Stack>
           </Col>
         </Row>

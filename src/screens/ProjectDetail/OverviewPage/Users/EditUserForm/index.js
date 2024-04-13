@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { useListUsers } from '../../../../../hooks/data';
+import { useProjectUserList } from '../../../../../hooks/data';
 import UserForm from '../UserForm';
 
 const EditUserForm = () => {
-  const { editUserMutation } = useListUsers();
+  const { editUserMutation } = useProjectUserList();
   const method = useForm({});
 
   const handleSubmit = (data) => {
