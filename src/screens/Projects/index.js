@@ -4,7 +4,7 @@ import { ButtonAdd, Card, FormSearch, Archived, Modal } from '../../components';
 
 import Table from './components/Table/Table';
 import AddProjectForm from './components/AddProjectForm';
-import EditProjectForm from './components/EditProjectForm';
+// import EditProjectForm from './components/EditProjectForm';
 
 import { useListProjects, useListArchived } from '../../hooks/data';
 import {
@@ -15,7 +15,7 @@ import {
 
 const ProjectsPage = () => {
   const [isAddMode, setIsAddMode] = useState(false);
-  const [editedItemId, setEditedItemId] = useState(undefined);
+  // const [editedItemId, setEditedItemId] = useState(undefined);
 
   const {
     listProjects,
@@ -46,19 +46,20 @@ const ProjectsPage = () => {
     <>
       <Modal
         outerClassName={'outerModal'}
-        visible={isAddMode || typeof editedItemId !== 'undefined'}
+        visible={isAddMode}
+        // visible={isAddMode || typeof editedItemId !== 'undefined'}
         onClose={() => {
           setIsAddMode(false);
-          setEditedItemId(undefined);
+          // setEditedItemId(undefined);
         }}
       >
         {isAddMode && <AddProjectForm onClose={() => setIsAddMode(false)} />}
-        {typeof editedItemId !== 'undefined' && (
+        {/* {typeof editedItemId !== 'undefined' && (
           <EditProjectForm
             id={editedItemId}
             onClose={() => setEditedItemId(undefined)}
           />
-        )}
+        )} */}
       </Modal>
 
       <Card
@@ -92,7 +93,7 @@ const ProjectsPage = () => {
           isSuccess={isListUsersSuccess}
           isLoading={isListProjectsLoading}
           totalPage={pagination?.totalPage}
-          setEditedItemId={setEditedItemId}
+          // setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
         />
       </Card>
