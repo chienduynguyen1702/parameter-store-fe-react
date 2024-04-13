@@ -37,17 +37,10 @@ const useListUsers = () => {
       };
     });
 
-    // const pagination = {
-    //   total: data.pagination.total,
-    //   currentPage: data.pagination.currentPage,
-    //   totalPage: data.pagination.totalPage,
-    //   limit: data.pagination.limit,
-    // };
-
     const pagination = {
       total: users.length,
       currentPage: 1,
-      totalPage: 10,
+      totalPage: Math.ceil(users.length / 10),
       limit: 10,
     };
     // console.log ("pagination ",pagination);

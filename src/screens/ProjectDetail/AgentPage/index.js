@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import {
   ButtonAdd,
@@ -13,11 +14,11 @@ import AddAgentForm from './components/AddAgentForm';
 import EditAgentForm from './components/EditAgentForm';
 
 import { useListArchived, useListAgents } from '../../../hooks/data';
-import {
-  archiveAgent,
-  getArchivedAgents,
-  unarchiveAgent,
-} from '../../../services/api';
+// import {
+//   archiveAgent,
+//   getArchivedAgents,
+//   unarchiveAgent,
+// } from '../../../services/api';
 
 const AgentPage = () => {
   const [isAddMode, setIsAddMode] = useState(false);
@@ -25,29 +26,29 @@ const AgentPage = () => {
 
   const {
     listAgents,
-    isLoading: isListAgentsLoading,
-    isSuccess: isListUsersSuccess,
     pagination,
+    isLoading: isListAgentsLoading,
+    isSuccess: isListAgentsSuccess,
   } = useListAgents();
 
-  const {
-    archivedList,
-    isSuccess: isListArchivedSuccess,
-    isLoading,
-    search,
-    handleSearch,
-    archiveMutation,
-    unarchiveMutation,
-  } = useListArchived({
-    archivedObject: {
-      listArchivedAPI: getArchivedAgents,
-      archiveAPI: archiveAgent,
-      unarchiveAPI: unarchiveAgent,
-      keyArchivistList: 'agent-archivist-list',
-      keyList: 'agents',
-      title: 'agent',
-    },
-  });
+  // const {
+  //   archivedList,
+  //   isSuccess: isListArchivedSuccess,
+  //   isLoading,
+  //   search,
+  //   handleSearch,
+  //   archiveMutation,
+  //   unarchiveMutation,
+  // } = useListArchived({
+  //   archivedObject: {
+  //     listArchivedAPI: getArchivedAgents,
+  //     archiveAPI: archiveAgent,
+  //     unarchiveAPI: unarchiveAgent,
+  //     keyArchivistList: 'agent-archivist-list',
+  //     keyList: 'agents',
+  //     title: 'agent',
+  //   },
+  // });
 
   return (
     <>
@@ -62,14 +63,14 @@ const AgentPage = () => {
         {isAddMode && <AddAgentForm onClose={() => setIsAddMode(false)} />}
         {typeof editedItemId !== 'undefined' && (
           <EditAgentForm
-            id={editedItemId}
+            editedItemId={editedItemId}
             onClose={() => setEditedItemId(undefined)}
           />
         )}
       </Modal>
 
       <Card
-        title={`${isListUsersSuccess ? pagination?.total : '-'} Agents`}
+        title={`${isListAgentsSuccess ? pagination?.total : '0'} Agents`}
         classTitle="title-purple"
         head={
           <>
@@ -80,7 +81,7 @@ const AgentPage = () => {
                 titleButton="Add Agent"
                 className="me-2"
               />
-              <Archived
+              {/* <Archived
                 title="Archived Agents"
                 archivedList={archivedList}
                 isSuccess={isListArchivedSuccess}
@@ -88,18 +89,18 @@ const AgentPage = () => {
                 search={search}
                 handleSearch={handleSearch}
                 unarchiveMutation={unarchiveMutation}
-              />
+              /> */}
             </div>
           </>
         }
       >
         <Table
           listAgents={listAgents}
-          isSuccess={isListUsersSuccess}
+          isSuccess={isListAgentsSuccess}
           isLoading={isListAgentsLoading}
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
-          archiveMutation={archiveMutation}
+          // archiveMutation={archiveMutation}
         />
       </Card>
     </>

@@ -239,11 +239,10 @@ export const unarchiveProject = (id) => {
 
 // ------------------------------ Parameter ------------------------------
 
-export const getListParameter = (params) =>
+export const getListParameter = (project_id) =>
   authApi({
     method: 'GET',
-    url: '/users',
-    params,
+    url: `/projects/${project_id}/parameters/`,
   });
 
 export const addParameter = (data) =>
@@ -289,32 +288,39 @@ export const unarchiveParameter = (id) => {
 
 // ------------------------------ Agent ------------------------------
 
-export const getListAgent = (params) =>
+export const getListAgent = (project_id) =>
   authApi({
     method: 'GET',
-    url: '/users',
-    params,
+    url: `/projects/${project_id}/agents/`,
+    // params,
   });
 
-export const addAgent = (data) =>
+export const addAgent = (project_id,data) =>
   authApi({
     method: 'POST',
-    url: '/users',
+    url: `/projects/${project_id}/agents/`,
     data,
   });
 
-export const editAgent = (id, data) =>
+export const editAgent = (project_id,agent_id, data) =>
   authApi({
     method: 'PUT',
-    url: `/users/${id}`,
+    url: `/projects/${project_id}/agents/${agent_id}/`,
     data,
   });
 
-export const getAgent = (id) =>
+export const getAgentById = (project_id,agent_id) =>
   authApi({
     method: 'GET',
-    url: `/users/${id}`,
+    url: `/projects/${project_id}/agents/${agent_id}/`,
   });
+
+export const deleteAgent = (project_id,agent_id) => {
+  return authApi({
+    method: 'DELETE',
+    url: `/projects/${project_id}/agents/${agent_id}/`,
+  });
+}  
 
 export const getArchivedAgents = () => {
   return authApi({
@@ -326,14 +332,14 @@ export const getArchivedAgents = () => {
 export const archiveAgent = (id) => {
   return authApi({
     method: 'PATCH',
-    url: `/users/${id}/archive`,
+    url: `/projects/${id}/archive`,
   });
 };
 
 export const unarchiveAgent = (id) => {
   return authApi({
     method: 'PATCH',
-    url: `/users/${id}/unarchive`,
+    url: `/projects/${id}/unarchive`,
   });
 };
 

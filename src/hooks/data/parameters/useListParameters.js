@@ -1,11 +1,12 @@
 import { useCallback, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
 import {
   addParameter,
   editParameter,
-  getListUser,
+  getListParameter,
 } from '../../../services/api';
 import { PARAMETERS } from '../../mocks/parameters';
 import moment from 'moment';
@@ -17,6 +18,7 @@ const DEFAULT_QUERY_STRING = {
 };
 
 const useListParameters = () => {
+  const {id}  = useParams();
   const queryClient = useQueryClient();
   const { queryString, setQueryString } = useQueryString();
 
@@ -29,9 +31,9 @@ const useListParameters = () => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const parameters = PARAMETERS?.map((item) => {
+    const parameters = data?.map((item) => {
       return {
-        id: item.id,
+        id: item.ID,
         name: item.name,
         value: item.value,
         stage: {
@@ -42,25 +44,24 @@ const useListParameters = () => {
           name: item.environment.name,
           color: item.environment.color,
         },
-        createdAt: moment(item.created_at).format('DD/MM/YYYY'),
-        updatedAt: moment(item.updated_at).format('DD/MM/YYYY'),
+        createdAt: moment(item.CreatedAt).format('DD/MM/YYYY'),
+        updatedAt: moment(item.UpdatedAt).format('DD/MM/YYYY'),
       };
     });
-
     const pagination = {
-      total: data.pagination.total,
-      currentPage: data.pagination.currentPage,
-      totalPage: data.pagination.totalPage,
-      limit: data.pagination.limit,
+      total: parameters.length,
+      currentPage: 1,
+      totalPage: Math.ceil(parameters.length / 10),
+      limit: 10,
     };
     return { pagination, parameters };
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['projects', queryString],
-    queryFn: () => getListUser(queryString),
+    queryFn: () => getListParameter(id),
     staleTime: 10 * 1000,
-    select: (data) => parseData(data.data.data),
+    select: (data) => parseData(data.data.parameters),
     enabled: !!page && !!limit,
   });
 

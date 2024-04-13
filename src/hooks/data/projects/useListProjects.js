@@ -64,7 +64,7 @@ const useListProjects = () => {
         queryClient.invalidateQueries({
           queryKey: ['projects'],
         });
-        console.log('add project success:',data);
+        // console.log('add project success:',data);
         toast.success('Add project successfully');
       },
       onError: (error) => {

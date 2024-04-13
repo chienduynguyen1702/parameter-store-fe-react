@@ -22,7 +22,7 @@ const Table = ({
             <div className="tableCell">Environment</div>
             {/* <div className="tableCell">Created at</div> */}
             <div className="tableCell">Updated at</div>
-            <div className="tableCell">Expired at</div>
+            {/* <div className="tableCell">Expired at</div> */}
             <div className="tableCell"></div>
           </div>
           {isSuccess &&

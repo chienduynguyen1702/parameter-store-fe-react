@@ -34,24 +34,24 @@ const ParametersPage = () => {
     pagination,
   } = useListParameters();
 
-  const {
-    archivedList,
-    isSuccess: isListArchivedSuccess,
-    isLoading,
-    search,
-    handleSearch,
-    archiveMutation,
-    unarchiveMutation,
-  } = useListArchived({
-    archivedObject: {
-      listArchivedAPI: getArchivedParameters,
-      archiveAPI: archiveParameter,
-      unarchiveAPI: unarchiveParameter,
-      keyArchivistList: 'parameter-archivist-list',
-      keyList: 'parameters',
-      title: 'Parameter',
-    },
-  });
+  // const {
+  //   archivedList,
+  //   isSuccess: isListArchivedSuccess,
+  //   isLoading,
+  //   search,
+  //   handleSearch,
+  //   archiveMutation,
+  //   unarchiveMutation,
+  // } = useListArchived({
+  //   archivedObject: {
+  //     listArchivedAPI: getArchivedParameters,
+  //     archiveAPI: archiveParameter,
+  //     unarchiveAPI: unarchiveParameter,
+  //     keyArchivistList: 'parameter-archivist-list',
+  //     keyList: 'parameters',
+  //     title: 'Parameter',
+  //   },
+  // });
 
   return (
     <>
@@ -73,7 +73,7 @@ const ParametersPage = () => {
       </Modal>
 
       <Card
-        title={`${isListUsersSuccess ? pagination?.total : '-'} Parameters`}
+        title={`${isListUsersSuccess ? pagination?.total : '0'} Parameters`}
         classTitle="title-purple"
         head={
           <>
@@ -87,7 +87,7 @@ const ParametersPage = () => {
                 titleButton="Add Parameter"
                 className="me-2"
               />
-              <Archived
+              {/* <Archived
                 title="Archived Parameters"
                 archivedList={archivedList}
                 isSuccess={isListArchivedSuccess}
@@ -95,7 +95,7 @@ const ParametersPage = () => {
                 search={search}
                 handleSearch={handleSearch}
                 unarchiveMutation={unarchiveMutation}
-              />
+              /> */}
             </div>
           </>
         }
@@ -106,7 +106,7 @@ const ParametersPage = () => {
           isLoading={isListParametersLoading}
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
-          archiveMutation={archiveMutation}
+          // archiveMutation={archiveMutation}
         />
       </Card>
     </>

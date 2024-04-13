@@ -24,7 +24,6 @@ const useProjectUserList = (id) => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    // console.log("parseData: ",data);
     const users = data?.users.map((user) => {
       return {
         id: user.id,
@@ -38,21 +37,13 @@ const useProjectUserList = (id) => {
       };
     });
     
-    // const pagination = {
-      //   total: data.pagination.total,
-    //   currentPage: data.pagination.currentPage,
-    //   totalPage: data.pagination.totalPage,
-    //   limit: data.pagination.limit,
-    // };
 
     const pagination = {
       total: users.length,
       currentPage: 1,
-      totalPage: 10,
+      totalPage: Math.ceil(users.length/10),
       limit: 10,
     };
-    // console.log ("pagination ",pagination);
-    // console.log ("users ",users);
     return { pagination, users };
   }, []);
 

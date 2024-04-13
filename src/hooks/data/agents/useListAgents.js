@@ -1,8 +1,9 @@
 import { useCallback, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
-import { addAgent, editAgent, getListUser } from '../../../services/api';
+import { addAgent, editAgent, getListAgent, deleteAgent } from '../../../services/api';
 import { AGENTS } from '../../mocks/agents';
 import { toast } from 'react-toastify';
 
@@ -12,6 +13,7 @@ const DEFAULT_QUERY_STRING = {
 };
 
 const useListAgents = () => {
+  const {id}  = useParams();
   const queryClient = useQueryClient();
   const { queryString, setQueryString } = useQueryString();
 
@@ -24,43 +26,40 @@ const useListAgents = () => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const agents = AGENTS?.map((item) => {
+    // console.log("parseData: ", data);
+    const agents = data?.map((item) => {
+      // console.log("item: ", item);
       return {
-        id: item.id,
-        name: item.name,
-        description: item.description,
+        name: item?.name,
+        id: item?.ID,
+        description: item?.description,
         stage: {
-          id: item.stage.id,
-          name: item.stage.name,
+          id: item.Stage.ID,
+          name: item.Stage.name,
         },
         environment: {
-          id: item.environment.id,
-          name: item.environment.name,
+          id: item.Environment.ID,
+          name: item.Environment.name,
         },
-        // project: item.project.map((project) => {
-        //   return {
-        //     id: project.id,
-        //     name: project.name,
-        //   };
-        // }),
-        last_used: item.last_used,
+        workflow_name: item.workflow_name,
+        // last_used: item.last_used,
       };
     });
 
     const pagination = {
-      total: data.pagination.total,
-      currentPage: data.pagination.currentPage,
-      totalPage: data.pagination.totalPage,
-      limit: data.pagination.limit,
+      total: agents.length,
+      currentPage: 1,
+      totalPage: Math.ceil(agents.length/10),
+      limit: 10,
     };
     return { pagination, agents };
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['agents', queryString],
-    queryFn: () => getListUser(queryString),
+    queryFn: () => getListAgent(id),
     staleTime: 10 * 1000,
-    select: (data) => parseData(data.data.data),
+    select: (data) => parseData(data.data.agents),
     enabled: !!page && !!limit,
   });
 
@@ -84,8 +83,8 @@ const useListAgents = () => {
   );
 
   const editAgentMutation = useMutation(
-    (id, data) => {
-      return editAgent(id, data);
+    (body) => {
+      return editAgent(body.agent_id, body.data);
     },
     {
       onSuccess: () => {
@@ -93,6 +92,25 @@ const useListAgents = () => {
           queryKey: ['agents'],
         });
         toast.success('Edit agent successfully');
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message, {
+          autoClose: 5000,
+        });
+      },
+    },
+  );
+
+  const deleteAgentMutation = useMutation(
+    (id) => {
+      return deleteAgent(id);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['agents'],
+        });
+        toast.success('Delete agent successfully');
       },
       onError: (error) => {
         toast.error(error.response.data.message, {

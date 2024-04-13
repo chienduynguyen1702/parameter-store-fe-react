@@ -17,17 +17,17 @@ const Table = ({
         <div className="tableContainer">
           <div className="tableHead">
             <div className="tableCell pb-4">Name</div>
-            <div className="tableCell">Description</div>
+            <div className="tableCell">Workflow Name</div>
             <div className="tableCell">Stage</div>
             <div className="tableCell">Environment</div>
             <div className="tableCell">Last used</div>
             <div className="tableCell"></div>
           </div>
           {isSuccess &&
-            listAgents.map((item) => (
+            listAgents.map((agent) => (
               <Row
-                key={item.id}
-                item={item}
+                key={agent.id}
+                item={agent}
                 setEditedItemId={setEditedItemId}
                 archiveMutation={archiveMutation}
               />

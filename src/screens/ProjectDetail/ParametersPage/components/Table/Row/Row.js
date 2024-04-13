@@ -25,7 +25,7 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
         </p>
       </div>
       <p className="tableCell">{item.createdAt}</p>
-      <p className="tableCell">{item.updatedAt}</p>
+      {/* <p className="tableCell">{item.updatedAt}</p> */}
       <div className="tableCell roundedRight">
         <PopoverEditAndArchive
           itemId={item.id}
