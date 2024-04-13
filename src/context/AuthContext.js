@@ -74,8 +74,6 @@ const AuthProvider = ({ children }) => {
   const loginWithCookie = useCallback(async () => {
     try {
       const response = await validateFn();
-
-      console.log('validateFn.response?.data:', response?.data);
       saveMe(response.data?.['user']);
       setIsAuthenticated(true);
     } catch (error) {
