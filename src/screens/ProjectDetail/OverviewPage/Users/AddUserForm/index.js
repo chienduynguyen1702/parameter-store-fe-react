@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useListUsers } from '../../../../../hooks/data';
 import UserForm from '../UserForm';
 
-const AddUserForm = ({ onClose }) => {
+const AddUserForm = ({ listUsers, onClose }) => {
   const { addUserMutation } = useListUsers({ onClose });
   const method = useForm({});
 
@@ -13,6 +13,7 @@ const AddUserForm = ({ onClose }) => {
   return (
     <UserForm
       title="Add User"
+      listUsers={listUsers}
       method={method}
       handleSubmit={handleSubmit}
       onLoading={false}

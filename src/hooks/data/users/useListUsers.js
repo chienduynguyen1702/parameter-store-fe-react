@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import useQueryString from '../../useQueryString';
-import { addUser, editUser, getListUser } from '../../../services/api';
+import { addUser, editUser, getListUser, getUser } from '../../../services/api';
 
 const DEFAULT_QUERY_STRING = {
   page: 1,
@@ -83,8 +83,9 @@ const useListUsers = () => {
   );
 
   const editUserMutation = useMutation(
-    (id, data) => {
-      return editUser(id, data);
+    (data) => {
+      // console.log("editUserMutation",data)
+      return editUser(data.id, data);
     },
     {
       onSuccess: () => {
@@ -94,16 +95,13 @@ const useListUsers = () => {
         toast.success('Edit user successfully');
       },
       onError: (error) => {
+
         toast.error(error.response.data.message, {
           autoClose: 5000,
         });
       },
     },
   );
-  console.log("data ",data);
-  // console.log("users? ",data?.users);
-  // console.log("pagination? ",data?.pagination);
-  
 
   return {
     listUsers: data?.users,

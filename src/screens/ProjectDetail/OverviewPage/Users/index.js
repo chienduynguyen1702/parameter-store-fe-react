@@ -17,7 +17,7 @@ import {
 } from '../../../../services/api';
 import AddUserForm from './AddUserForm';
 import EditUserForm from './EditUserForm';
-import { useListArchived, useProjectUserList } from '../../../../hooks/data';
+import { useListArchived,useListUsers, useProjectUserList } from '../../../../hooks/data';
 
 const UsersPage = () => {
 
@@ -33,23 +33,27 @@ const UsersPage = () => {
   } = useProjectUserList(id);
   console.log(listUsers);
   const {
-    archivedList,
-    isSuccess: isListArchivedSuccess,
-    isLoading: isListArchivedLoading,
-    search,
-    handleSearch,
-    archiveMutation,
-    unarchiveMutation,
-  } = useListArchived({
-    archivedObject: {
-      listArchivedAPI: getArchivedUsers,
-      archiveAPI: archiveUser,
-      unarchiveAPI: unarchiveUser,
-      keyArchivistList: 'user-archivist-list',
-      keyList: 'users',
-      title: 'User',
-    },
-  });
+    listUsers :orgListUsers,
+  } =useListUsers();
+  console.log("orgListUsers :",orgListUsers)
+  // const {
+  //   archivedList,
+  //   isSuccess: isListArchivedSuccess,
+  //   isLoading: isListArchivedLoading,
+  //   search,
+  //   handleSearch,
+  //   archiveMutation,
+  //   unarchiveMutation,
+  // } = useListArchived({
+  //   archivedObject: {
+  //     listArchivedAPI: getArchivedUsers,
+  //     archiveAPI: archiveUser,
+  //     unarchiveAPI: unarchiveUser,
+  //     keyArchivistList: 'user-archivist-list',
+  //     keyList: 'users',
+  //     title: 'User',
+  //   },
+  // });
 
   return (
     <>
@@ -61,7 +65,10 @@ const UsersPage = () => {
           setEditedItemId(undefined);
         }}
       >
-        {isAddMode && <AddUserForm onClose={() => setIsAddMode(false)} />}
+        {isAddMode && <AddUserForm 
+                      onClose={() => setIsAddMode(false)} 
+                      listUsers={orgListUsers}
+                      />}
         {typeof editedItemId !== 'undefined' && (
           <EditUserForm
             id={editedItemId}
@@ -82,7 +89,7 @@ const UsersPage = () => {
                 titleButton="Add User"
                 className="me-2"
               />
-              <Archived
+              {/* <Archived
                 title="Archived users"
                 name="users"
                 archivedList={archivedList}
@@ -91,7 +98,7 @@ const UsersPage = () => {
                 search={search}
                 handleSearch={handleSearch}
                 unarchiveMutation={unarchiveMutation}
-              />
+              /> */}
             </div>
           </>
         }
@@ -102,7 +109,7 @@ const UsersPage = () => {
           isLoading={isListUsersLoading}
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
-          archiveMutation={archiveMutation}
+          // archiveMutation={archiveMutation}
         />
       </Card>
     </>

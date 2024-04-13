@@ -62,7 +62,7 @@ const ProjectsPage = () => {
       </Modal>
 
       <Card
-        title={`${isListUsersSuccess ? pagination?.total : '-'} Projects`}
+        title={`${isListUsersSuccess ? pagination.total : "0"} Projects`}
         classTitle="title-purple"
         head={
           <>

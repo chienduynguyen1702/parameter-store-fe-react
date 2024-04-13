@@ -6,7 +6,7 @@ import Item from '../../../../components/Item';
 
 import { RHFTextInput, AsyncButton, RHFDropdown } from '../../../../components';
 
-const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
+const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose, userInfo }) => {
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>
@@ -21,6 +21,7 @@ const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             type="text"
             placeholder="Enter username"
             tooltip="Username is required"
+            defaultValue={userInfo ? userInfo.username : ''}
           />
           <RHFTextInput
             name="email"
@@ -28,33 +29,17 @@ const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             type="text"
             placeholder="Enter email"
             tooltip="Please enter correct email format"
+            defaultValue={userInfo ? userInfo.email : ''}
           />
           <RHFTextInput
-            label="Phone"
             name="phone"
+            label="Phone"
             type="phone"
             placeholder="Enter phone number"
             tooltip="Phone number is required"
+            defaultValue={userInfo ? userInfo.phone : ''}
           />
           <Row>
-            <Col sm={12} md={6}>
-              <RHFDropdown
-                name="role"
-                data={['Organization Admin', 'Project Admin', 'Developer']}
-                defaultValue="Select role"
-                label="Role"
-                tooltip="User type is required"
-              />
-            </Col>
-            <Col sm={12} md={6}>
-              <RHFDropdown
-                name="project"
-                data={['Project 1', 'Project 2', 'Project 3']}
-                defaultValue="Select project"
-                label="Project"
-                tooltip="User type is required"
-              />
-            </Col>
           </Row>
         </Item>
         <Item
@@ -67,7 +52,7 @@ const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
               <RHFTextInput
                 tooltip="New password is required"
                 label="New password"
-                name="newPassword"
+                name="new_password"
                 placeholder="Enter new password"
                 type="password"
               />
@@ -76,7 +61,7 @@ const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
               <RHFTextInput
                 tooltip="Confirm new password is required"
                 label="Confirm new password"
-                name="confirmNewPassword"
+                name="confirm_password"
                 placeholder="Enter confirm new password"
                 type="password"
               />

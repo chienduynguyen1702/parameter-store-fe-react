@@ -1,9 +1,11 @@
 import React from 'react';
+import { Col, Row, Stack } from 'react-bootstrap';
 import { FormProvider } from 'react-hook-form';
+import moment from 'moment';
 
-import Item from '../../../../components/Item';
+import Item from '../../../../../components/Item';
 
-import { RHFTextInput, AsyncButton } from '../../../../components';
+import { RHFTextInput, AsyncButton } from '../../../../../components';
 
 const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
   return (
@@ -27,7 +29,44 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             type="text"
             placeholder="Enter description"
           />
+          <RHFTextInput
+            name="repo_url"
+            label="Repository URL"
+            type="text"
+            placeholder="Enter Repository URL"
+          />
         </Item>
+
+        <Row className="borderBottom py-2 mb-2">
+          <Col xs={12} md={{ span: 6, offset: 0 }}>
+            <RHFTextInput
+              name="current_sprint"
+              label="Current sprint no"
+              type="text"
+              placeholder="Enter current sprint no"
+            />
+            <RHFTextInput
+              name="status"
+              label="Status"
+              type="text"
+              placeholder="Enter status"
+            />
+          </Col>
+          <Col xs={12} md={{ span: 6, offset: 0 }}>
+            <RHFTextInput
+              name="start_at"
+              label="Start date"
+              type="text"
+              placeholder="Enter start date"
+            />
+            <RHFTextInput
+              name="address"
+              label="Address"
+              type="text"
+              placeholder="Enter address"
+            />
+          </Col>
+        </Row>
 
         <div className="pt-5 d-flex justify-content-end align-items-center">
           <div>

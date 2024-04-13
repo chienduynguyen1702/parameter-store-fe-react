@@ -10,7 +10,7 @@ export const login = (data) =>
   });
 
 export const validate = () =>
-  publicApi({
+  authApi({
     method: 'GET',
     url: '/auth/validate',
   });
@@ -52,7 +52,7 @@ export const getMe = () =>
 export const getListUser = (params) =>
   authApi({
     method: 'GET',
-    url: '/settings/users/',
+    url: '/settings/users',
     params,
   });
 
@@ -80,7 +80,6 @@ export const getArchivedUsers = () => {
   return authApi({
     method: 'GET',
     url: '/settings/users/archived',
-    withCredentials: true,
   });
 };
 
@@ -183,9 +182,10 @@ export const getListProjects = (params) =>
   });
 
 export const addProject = (data) =>
+console.log("addProject data",data) ||
   authApi({
     method: 'POST',
-    url: '/projects',
+    url: '/organizations/projects',
     data,
   });
 

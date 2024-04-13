@@ -11,7 +11,7 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
         <AvatarAndInfo
           itemId={item?.id}
           avatarUrl={item?.avatarUrl}
-          username={item.name}
+          username={item.username}
           // phone={item?.phone}
         />
       </div>

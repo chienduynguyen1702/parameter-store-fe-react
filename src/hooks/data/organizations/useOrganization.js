@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { getOrganizationById } from '../../../services/api';
-import { ORGANIZATION } from '../../mocks/organization';
 
 const useOrganization = (id) => {
 
@@ -12,7 +11,7 @@ const useOrganization = (id) => {
     },
     select: (data) => data.data.organization,
   });
-  console.log(data);
+  
   return {
     data,
     isSuccess,

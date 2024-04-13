@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ButtonSetting, Card, Icon, Modal } from '../../../../components';
-import { PROJECTS } from '../../../../hooks/mocks/projects';
-import useProjectOverviewAndUserList  from '../../../../hooks/data/projects/useProjectOverviewAndUserListById';
-import EditProjectForm from '../../../Projects/components/EditProjectForm';
+import EditProjectForm from './EditProjectForm';
 import SettingsForm from './SettingsForm';
 import moment from 'moment';
 
@@ -16,7 +14,7 @@ const Overview = ({ overview , usersList}) => {
   // const {overview, usersList, isSuccess} = useProjectOverviewAndUserList(id);
   // console.log("overview: ",overview);
   const [isEditMode, setIdEditMode] = useState(false);
-  const [isSetting, setIsSetting] = useState(false);
+  // const [isSetting, setIsSetting] = useState(false);
   // if (!isSuccess) {
   //   // Handle loading state if needed
   //   return <p>Loading...</p>;
@@ -32,12 +30,12 @@ const Overview = ({ overview , usersList}) => {
         visible={isEditMode}
         onClose={() => {
           setIdEditMode(false);
-          setIsSetting(false);
+          // setIsSetting(false);
         }}
       >
         <EditProjectForm />
       </Modal>
-      <Modal
+      {/* <Modal
         visible={isSetting}
         onClose={() => {
           setIdEditMode(false);
@@ -45,7 +43,7 @@ const Overview = ({ overview , usersList}) => {
         }}
       >
         <SettingsForm />
-      </Modal>
+      </Modal> */}
       <Card
         title=  {overview.name}
         classTitle="title-blue"
@@ -61,10 +59,10 @@ const Overview = ({ overview , usersList}) => {
             >
               <Icon name="edit" size={24} />
             </div>
-            <ButtonSetting
+            {/* <ButtonSetting
               titleButton="Config Stages and Environments"
               handleClickSetting={() => setIsSetting(true)}
-            />
+            /> */}
           </>
         }
       >
@@ -99,6 +97,10 @@ const Overview = ({ overview , usersList}) => {
           </Col>
           <Col xs={12} md={{ span: 6, offset: 1 }}>
             <Stack direction="horizontal" gap={3} className="py-2">
+              <p className="me-auto">Repository URL:</p>
+              <p className="detail-content status-text">{overview.repo_url}</p>
+            </Stack>
+            <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Members: </p>
               <p className="detail-content status-text">
                 {usersList.length}
@@ -107,10 +109,6 @@ const Overview = ({ overview , usersList}) => {
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Address:</p>
               <p className="detail-content status-text">{overview.address}</p>
-            </Stack>
-            <Stack direction="horizontal" gap={3} className="py-2">
-              <p className="me-auto">Repository URL:</p>
-              <p className="detail-content status-text">{overview.repo_url}</p>
             </Stack>
           </Col>
         </Row>

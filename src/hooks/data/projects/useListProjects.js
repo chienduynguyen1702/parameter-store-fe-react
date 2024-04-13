@@ -3,7 +3,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
 import { addProject, editProject, getListProjects } from '../../../services/api';
-import { PROJECTS } from '../../mocks/projects';
 import { toast } from 'react-toastify';
 
 const DEFAULT_QUERY_STRING = {
@@ -26,17 +25,17 @@ const useListProjects = () => {
   const parseData = useCallback((data) => {
     const projects = data?.projects.map((project) => {
       return {
-        id: project.id,
-        createdAt: project.CreatedAt,
-        name: project.name,
-        color: project.color,
-        usersCount: project.users_count,
-        repoUrl: project.RepoURL,
-        description: project.description,
-        address: project.address,
-        currentSprint: project.CurrentSprint,
-        startDate: project.startDate,
-        status: project.status,
+        id: project?.id,
+        createdAt: project?.CreatedAt,
+        name: project?.name,
+        color: project?.color,
+        usersCount: project?.users_count,
+        repoUrl: project?.RepoURL,
+        description: project?.description,
+        address: project?.address,
+        currentSprint: project?.CurrentSprint,
+        startDate: project?.startDate,
+        status: project?.status,
       };
     });
     const pagination = {
@@ -55,11 +54,6 @@ const useListProjects = () => {
     select: (data) => parseData(data.data),
     enabled: !!page && !!limit,
   });
-  if (data) {
-    console.log(data.projects);
-  } else {
-    console.log("Data is not yet available");
-  }
 
   const addProjectMutation = useMutation(
     (data) => {
@@ -70,6 +64,7 @@ const useListProjects = () => {
         queryClient.invalidateQueries({
           queryKey: ['projects'],
         });
+        console.log('add project success:',data);
         toast.success('Add project successfully');
       },
       onError: (error) => {

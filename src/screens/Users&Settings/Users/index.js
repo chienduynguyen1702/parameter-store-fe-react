@@ -61,7 +61,7 @@ const UsersPage = () => {
         {isAddMode && <AddUserForm onClose={() => setIsAddMode(false)} />}
         {typeof editedItemId !== 'undefined' && (
           <EditUserForm
-            id={editedItemId}
+            editedItemId={editedItemId}
             onClose={() => setEditedItemId(undefined)}
           />
         )}
