@@ -40,9 +40,9 @@ const useListProjects = () => {
     });
     const pagination = {
       total: projects.length,
-      currentPage: data.pagination?.currentPage,
-      totalPage: data.pagination?.totalPage,
-      limit: data.pagination?.limit,
+      currentPage: page,
+      totalPage: Math.ceil(projects.length / limit),
+      limit: limit,
     };
     return { pagination, projects };
   }, []);

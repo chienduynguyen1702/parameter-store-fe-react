@@ -1,16 +1,17 @@
 import { useMemo, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ARCHIVED_USERS } from '../mocks/users';
 
-const useListArchived = ({
-  archivedObject = {
+import { getArchivedAgents } from '../../../services/api';
+const useListAgentsArchived = ({
+  archivedAgent = {
     // listArchivedAPI: '',
     // archiveAPI: '',
     // unarchiveAPI: '',
     // keyArchivistList: '',
     // keyList: '',
     // title: '',
+    // project_id: '',
   },
 }) => {
   const queryClient = useQueryClient();
@@ -22,17 +23,18 @@ const useListArchived = ({
     keyList,
     keyArchivistList,
     title,
-  } = archivedObject;
+    project_id,
+  } = archivedAgent;
 
   const [search, setSearch] = useState('');
 
   const parseData = useCallback((data) => {
     return data.map((item) => {
       return {
-        id: item.id,
-        name: item.username,
+        id: item?.id,
+        name: item?.name,
         // name: item.name,
-        image: item.avatar_url,
+        image: item?.avatar_url,
         archiver: item.archiver_username,
         archivedAt: item.archived_at,
       };
@@ -42,15 +44,15 @@ const useListArchived = ({
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: [keyArchivistList],
     queryFn: () => {
-      return listArchivedAPI();
+      return listArchivedAPI(project_id);
     },
-    select: (data) => parseData(data.data.data.users),
+    select: (data) => parseData(data.data.agents),
   });
 
   const dataFiltered = useMemo(() => {
     if (!data) return [];
     const dataFiltered = data.filter((item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()),
+      item?.name.toLowerCase().includes(search.toLowerCase()),
     );
     return dataFiltered;
   }, [data, search]);
@@ -61,7 +63,7 @@ const useListArchived = ({
 
   const unarchiveMutation = useMutation(
     async (id) => {
-      return unarchiveAPI(id);
+      return unarchiveAPI(project_id,id);
     },
     {
       onSuccess: () => {
@@ -78,7 +80,7 @@ const useListArchived = ({
 
   const archiveMutation = useMutation(
     (id) => {
-      return archiveAPI(id);
+      return archiveAPI(project_id,id);
     },
     {
       onSuccess: () => {
@@ -104,4 +106,4 @@ const useListArchived = ({
   };
 };
 
-export default useListArchived;
+export default useListAgentsArchived;

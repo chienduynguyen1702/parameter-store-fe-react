@@ -1,5 +1,6 @@
 import { Col, Row, Stack } from 'react-bootstrap';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 import { ButtonSetting, Card, Icon, Modal } from '../../../../components';
@@ -98,7 +99,14 @@ const Overview = ({ overview , usersList}) => {
           <Col xs={12} md={{ span: 6, offset: 1 }}>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Repository URL:</p>
-              <p className="detail-content status-text">{overview?.repo_url}</p>
+              <a
+                href={`https://${overview?.repo_url}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                // className="mb-1 text-dark d-block"
+              >
+                <p className="detail-content status-text">{overview?.repo_url}</p>
+              </a>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Members: </p>

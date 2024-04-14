@@ -1,16 +1,17 @@
 import { useMemo, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ARCHIVED_USERS } from '../mocks/users';
 
-const useListArchived = ({
-  archivedObject = {
+import { getArchivedAgents } from '../../../services/api';
+const useListProjectsArchived = ({
+  archivedProjects = {
     // listArchivedAPI: '',
     // archiveAPI: '',
     // unarchiveAPI: '',
     // keyArchivistList: '',
     // keyList: '',
     // title: '',
+    // project_id: '',
   },
 }) => {
   const queryClient = useQueryClient();
@@ -22,19 +23,18 @@ const useListArchived = ({
     keyList,
     keyArchivistList,
     title,
-  } = archivedObject;
+    project_id,
+  } = archivedProjects;
 
   const [search, setSearch] = useState('');
 
   const parseData = useCallback((data) => {
     return data.map((item) => {
       return {
-        id: item.id,
-        name: item.username,
-        // name: item.name,
-        image: item.avatar_url,
-        archiver: item.archiver_username,
-        archivedAt: item.archived_at,
+        id: item?.id,
+        name: item?.name,
+        archiver: item?.archived_by,
+        archivedAt: item?.archived_at,
       };
     });
   }, []);
@@ -44,7 +44,7 @@ const useListArchived = ({
     queryFn: () => {
       return listArchivedAPI();
     },
-    select: (data) => parseData(data.data.data.users),
+    select: (data) => parseData(data.data.projects),
   });
 
   const dataFiltered = useMemo(() => {
@@ -71,7 +71,7 @@ const useListArchived = ({
         queryClient.invalidateQueries({
           queryKey: [keyArchivistList],
         });
-        toast.success(`${title} unarchived successfully`);
+        toast.success(`${title} archived successfully`);
       },
     },
   );
@@ -104,4 +104,4 @@ const useListArchived = ({
   };
 };
 
-export default useListArchived;
+export default useListProjectsArchived;

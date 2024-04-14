@@ -85,15 +85,15 @@ export const getArchivedUsers = () => {
 
 export const archiveUser = (id) => {
   return authApi({
-    method: 'PUT',
+    method: 'PATCH',
     url: `/settings/users/${id}/archive`,
   });
 };
 
 export const unarchiveUser = (id) => {
   return authApi({
-    method: 'PUT',
-    url: `/settings/users/${id}/restore`,
+    method: 'PATCH',
+    url: `/settings/users/${id}/unarchive`,
   });
 };
 
@@ -172,12 +172,12 @@ export const getOrganizationById = () =>
     url: `/organizations/`,
   });
 
-// ------------------------------ Project ------------------------------
+// ------------------------------ Project List ------------------------------
 
 export const getListProjects = (params) =>
   authApi({
     method: 'GET',
-    url: '/organizations/projects',
+    url: '/project-list/',
     params,
   });
 
@@ -185,16 +185,38 @@ export const addProject = (data) =>
 console.log("addProject data",data) ||
   authApi({
     method: 'POST',
-    url: '/organizations/projects',
+    url: '/project-list/',
     data,
   });
 
+export const getArchivedProjects = () => {
+  return authApi({
+    method: 'GET',
+    url: `/project-list/archived`,
+  });
+};
+
+export const archiveProject = (id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/project-list/${id}/archive`,
+  });
+};
+
+export const unarchiveProject = (id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/project-list/${id}/unarchive`,
+  });
+};
+  
 export const editProject = (id, data) =>
   authApi({
     method: 'PUT',
     url: `/projects/${id}`,
     data,
   });
+// ------------------------------ Project Detail ------------------------------
 
 export const addUserToProject = (id, data) =>
 console.log("addUserToProject data",data) ||
@@ -215,27 +237,6 @@ export const deleteProject = (id) =>
     method: 'DELETE',
     url: `/projects/${id}`,
   });
-
-export const getArchivedProjects = () => {
-  return authApi({
-    method: 'GET',
-    url: '/archived-users',
-  });
-};
-
-export const archiveProject = (id) => {
-  return authApi({
-    method: 'PATCH',
-    url: `/users/${id}/archive`,
-  });
-};
-
-export const unarchiveProject = (id) => {
-  return authApi({
-    method: 'PATCH',
-    url: `/users/${id}/unarchive`,
-  });
-};
 
 // ------------------------------ Parameter ------------------------------
 
@@ -337,24 +338,24 @@ export const deleteAgent = (project_id,agent_id) => {
   });
 }  
 
-export const getArchivedAgents = () => {
+export const getArchivedAgents = (project_id) => {
   return authApi({
     method: 'GET',
-    url: '/archived-users',
+    url: `/projects/${project_id}/agents/archived`,
   });
 };
 
-export const archiveAgent = (id) => {
+export const archiveAgent = (project_id, agent_id) => {
   return authApi({
     method: 'PATCH',
-    url: `/projects/${id}/archive`,
+    url: `/projects/${project_id}/agents/${agent_id}/archive`,
   });
 };
 
-export const unarchiveAgent = (id) => {
+export const unarchiveAgent = (project_id, agent_id) => {
   return authApi({
     method: 'PATCH',
-    url: `/projects/${id}/unarchive`,
+    url: `/projects/${project_id}/agents/${agent_id}/unarchive`,
   });
 };
 

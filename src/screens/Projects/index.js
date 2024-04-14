@@ -6,7 +6,7 @@ import Table from './components/Table/Table';
 import AddProjectForm from './components/AddProjectForm';
 // import EditProjectForm from './components/EditProjectForm';
 
-import { useListProjects, useListArchived } from '../../hooks/data';
+import { useListProjects, useListProjectsArchived } from '../../hooks/data';
 import {
   archiveProject,
   getArchivedProjects,
@@ -31,11 +31,11 @@ const ProjectsPage = () => {
     handleSearch,
     archiveMutation,
     unarchiveMutation,
-  } = useListArchived({
-    archivedObject: {
-      // listArchivedAPI: getArchivedProjects,
-      // archiveAPI: archiveProject,
-      // unarchiveAPI: unarchiveProject,
+  } = useListProjectsArchived({
+    archivedProjects: {
+      listArchivedAPI: getArchivedProjects,
+      archiveAPI: archiveProject,
+      unarchiveAPI: unarchiveProject,
       keyArchivistList: 'project-archivist-list',
       keyList: 'projects',
       title: 'Project',
@@ -46,8 +46,8 @@ const ProjectsPage = () => {
     <>
       <Modal
         outerClassName={'outerModal'}
-        visible={isAddMode}
-        // visible={isAddMode || typeof editedItemId !== 'undefined'}
+        // visible={isAddMode}
+        visible={isAddMode || typeof editedItemId !== 'undefined'}
         onClose={() => {
           setIsAddMode(false);
           // setEditedItemId(undefined);

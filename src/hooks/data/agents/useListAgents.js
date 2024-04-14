@@ -11,8 +11,8 @@ const DEFAULT_QUERY_STRING = {
   limit: 10,
 };
 
-const useListAgents = () => {
-  const {id}  = useParams();
+const useListAgents = (project_id) => {
+  // const {id}  = useParams();
   const queryClient = useQueryClient();
   const { queryString, setQueryString } = useQueryString();
 
@@ -25,12 +25,10 @@ const useListAgents = () => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    // console.log("parseData: ", data);
     const agents = data?.map((item) => {
-      // console.log("item: ", item);
       return {
         name: item?.name,
-        id: item?.ID,
+        id: item?.id,
         description: item?.description,
         stage: {
           id: item.Stage.ID,
@@ -56,7 +54,7 @@ const useListAgents = () => {
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['agents', queryString],
-    queryFn: () => getListAgent(id),
+    queryFn: () => getListAgent(project_id),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data.agents),
     enabled: !!page && !!limit,
@@ -64,7 +62,7 @@ const useListAgents = () => {
 
   const addAgentMutation = useMutation(
     (data) => {
-      return addAgent(data);
+      return addAgent(project_id, data);
     },
     {
       onSuccess: () => {

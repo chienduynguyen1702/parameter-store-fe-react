@@ -13,14 +13,15 @@ import Table from './components/Table/Table';
 import AddAgentForm from './components/AddAgentForm';
 import EditAgentForm from './components/EditAgentForm';
 
-import { useListArchived, useListAgents } from '../../../hooks/data';
-// import {
-//   archiveAgent,
-//   getArchivedAgents,
-//   unarchiveAgent,
-// } from '../../../services/api';
+import { useListAgentsArchived, useListAgents } from '../../../hooks/data';
+import {
+  archiveAgent,
+  getArchivedAgents,
+  unarchiveAgent,
+} from '../../../services/api';
 
 const AgentPage = () => {
+  const { id } = useParams();
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
 
@@ -29,26 +30,28 @@ const AgentPage = () => {
     pagination,
     isLoading: isListAgentsLoading,
     isSuccess: isListAgentsSuccess,
-  } = useListAgents();
-
-  // const {
-  //   archivedList,
-  //   isSuccess: isListArchivedSuccess,
-  //   isLoading,
-  //   search,
-  //   handleSearch,
-  //   archiveMutation,
-  //   unarchiveMutation,
-  // } = useListArchived({
-  //   archivedObject: {
-  //     listArchivedAPI: getArchivedAgents,
-  //     archiveAPI: archiveAgent,
-  //     unarchiveAPI: unarchiveAgent,
-  //     keyArchivistList: 'agent-archivist-list',
-  //     keyList: 'agents',
-  //     title: 'agent',
-  //   },
-  // });
+    addAgentMutation,
+    editAgentMutation,
+  } = useListAgents(id);
+  const {
+    archivedList,
+    isSuccess: isListArchivedSuccess,
+    isLoading,
+    search,
+    handleSearch,
+    archiveMutation,
+    unarchiveMutation,
+  } = useListAgentsArchived({
+    archivedAgent: {
+      listArchivedAPI: getArchivedAgents,
+      archiveAPI: archiveAgent,
+      unarchiveAPI: unarchiveAgent,
+      keyArchivistList: 'agent-archivist-list',
+      keyList: 'agents',
+      title: 'Agent',
+      project_id: id,
+    },
+  });
 
   return (
     <>
@@ -81,7 +84,7 @@ const AgentPage = () => {
                 titleButton="Add Agent"
                 className="me-2"
               />
-              {/* <Archived
+              <Archived
                 title="Archived Agents"
                 archivedList={archivedList}
                 isSuccess={isListArchivedSuccess}
@@ -89,7 +92,7 @@ const AgentPage = () => {
                 search={search}
                 handleSearch={handleSearch}
                 unarchiveMutation={unarchiveMutation}
-              /> */}
+              />
             </div>
           </>
         }
@@ -100,7 +103,7 @@ const AgentPage = () => {
           isLoading={isListAgentsLoading}
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
-          // archiveMutation={archiveMutation}
+          archiveMutation={archiveMutation}
         />
       </Card>
     </>
