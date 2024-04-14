@@ -4,18 +4,24 @@ import { useListUsers } from '../../../../hooks/data';
 import UserForm from '../UserForm';
 import { getUser } from '../../../../services/api';
 
-const EditUserForm = ({ editedItemId }) => {
+const EditUserForm = ({ editedItemId ,onClose}) => {
   const { editUserMutation } = useListUsers();
   const method = useForm({});
   const handleSubmit = (data) => {
     // console.log('handleSubmit data', data);
-    editUserMutation.mutate(data);
+    editUserMutation.mutate(data, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getUser(editedItemId);
+        console.log('users', response.data.data.users);
+
         const userData =  response.data.data.users;// Assuming response.data contains user information
         method.reset(userData); // Populate form fields with user data
       } catch (error) {
@@ -34,7 +40,7 @@ const EditUserForm = ({ editedItemId }) => {
       method={method}
       handleSubmit={handleSubmit}
       onLoading={false}
-      onClose={() => {}}
+      onClose={onClose}
     />
   );
 };

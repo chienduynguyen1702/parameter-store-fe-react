@@ -245,7 +245,11 @@ export const getListParameter = (project_id) =>
     method: 'GET',
     url: `/projects/${project_id}/parameters/`,
   });
-
+export const getParameterByID = (project_id, parameter_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/parameters/${parameter_id}`,
+  });
 export const addParameter = (project_id,data) =>
   authApi({
     method: 'POST',
@@ -253,39 +257,34 @@ export const addParameter = (project_id,data) =>
     data,
   });
 
-export const editParameter = (id, data) =>
+export const editParameter = (project_id, parameter_id, data) =>
   authApi({
     method: 'PUT',
-    url: `/users/${id}`,
+    url: `/projects/${project_id}/parameters/${parameter_id}`,
     data,
   });
 
-export const getParameter = (id) =>
-  authApi({
-    method: 'GET',
-    url: `/users/${id}`,
-  });
-
-export const getArchivedParameters = () => {
+export const getArchivedParameters = (project_id) => {
   return authApi({
     method: 'GET',
-    url: '/archived-users',
+    url: `/projects/${project_id}/parameters/archived`,
   });
 };
 
-export const archiveParameter = (id) => {
+export const archiveParameter = (project_id, parameter_id) => {
   return authApi({
     method: 'PATCH',
-    url: `/users/${id}/archive`,
+    url: `/projects/${project_id}/parameters/${parameter_id}/archive`,
   });
 };
 
-export const unarchiveParameter = (id) => {
+export const unarchiveParameter = (project_id, parameter_id) => {
   return authApi({
     method: 'PATCH',
-    url: `/users/${id}/unarchive`,
+    url: `/projects/${project_id}/parameters/${parameter_id}/unarchive`,
   });
 };
+
 export const getStages = () =>
   authApi({
     method: 'GET',

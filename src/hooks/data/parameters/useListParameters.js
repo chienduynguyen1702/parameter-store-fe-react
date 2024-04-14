@@ -69,7 +69,7 @@ const useListParameters = (project_id) => {
 
   const addParameterMutation = useMutation(
     (data) => {
-      return addParameter(project_id,data);
+      return addParameter(data.project_id,data.data);
     },
     {
       onSuccess: () => {
@@ -88,7 +88,7 @@ const useListParameters = (project_id) => {
 
   const editParameterMutation = useMutation(
     (data) => {
-      return editParameter(project_id,data.parameter_id, data.body);
+      return editParameter(data.project_id,data.parameter_id, data.data);
     },
     {
       onSuccess: () => {

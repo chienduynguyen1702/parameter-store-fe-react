@@ -4,12 +4,16 @@ import ParameterForm from '../ParameterForm';
 
 import { useListParameters } from '../../../../../hooks/data';
 
-const AddForm = ({ onClose }) => {
+const AddForm = ({project_id, onClose, stages, environments }) => {
   const { addParameterMutation } = useListParameters();
   const method = useForm({});
 
   const handleSubmit = (data) => {
-    addParameterMutation.mutate(data, {
+    const req = {
+      data: data,
+      project_id: project_id,
+    };
+    addParameterMutation.mutate(req, {
       onSuccess: () => {
         onClose();
       },
@@ -23,6 +27,8 @@ const AddForm = ({ onClose }) => {
       handleSubmit={handleSubmit}
       onLoading={false}
       onClose={onClose}
+      stages={stages}
+      environments={environments}
     />
   );
 };

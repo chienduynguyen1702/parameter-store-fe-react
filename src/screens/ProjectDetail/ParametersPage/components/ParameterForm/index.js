@@ -9,7 +9,30 @@ import {
   Item,
 } from '../../../../../components';
 
-const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
+const Form = ({ title = '', method, handleSubmit, onLoading, onClose, parameterInfo, stages, environments}) => {
+  console.log('stages in param Form', stages);
+  {/*
+Array(4)
+0
+: 
+{id: 1, name: 'Build', description: 'Build stage', color: ''}
+1
+: 
+{id: 2, name: 'Test', description: 'Test stage', color: ''}
+2
+: 
+{id: 3, name: 'Release', description: 'Release stage', color: ''}
+3
+: 
+{id: 4, name: 'Deploy', description: 'Deploy stage', color: ''}
+ */}
+
+ //parse stages to get only name
+  const stagesName = stages.map((item) => item.name);
+  console.log('stagesName', stagesName);
+  //parse environments to get only name
+  const environmentsName = environments.map((item) => item.name);
+  console.log('environmentsName', environmentsName);
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>
@@ -19,7 +42,7 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
           classTitle="title-green"
         >
           <RHFTextInput
-            name="parameter-name"
+            name="name"
             label="Parameter name"
             type="text"
             placeholder="Enter Parameter name"
@@ -43,23 +66,21 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             <Col sm={12} md={6}>
               <RHFDropdown
                 name="stage"
-                data={['Build', 'Test', 'Deploy']}
-                defaultValue="Select stage"
+                data={stagesName}
                 label="Stage"
                 tooltip="Stage is required"
               />
             </Col>
             <Col sm={12} md={6}>
               <RHFDropdown
-                name="Environment"
-                data={['Dev/Test', 'Staging', 'Production']}
-                defaultValue="Select environment"
+                name="environment"
+                data={environmentsName}
                 label="Environment"
                 tooltip="Environment is required"
               />
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col sm={12} md={6}>
               <RHFDropdown
                 name="expiration"
@@ -69,7 +90,7 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
                 tooltip="After this time, the parameter will be expired"
               />
             </Col>
-          </Row>
+          </Row> */}
         </Item>
 
         <div className="pt-5 d-flex justify-content-end align-items-center">

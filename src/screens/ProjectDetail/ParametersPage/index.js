@@ -16,13 +16,12 @@ import AddParameterForm from './components/AddParameterForm';
 import EditParameterForm from './components/EditParameterForm';
 import FormFilter from './components/FormFilter';
 
-import { useListParameters, useListArchived } from '../../../hooks/data';
+import { useListParameters, useListParametersArchived } from '../../../hooks/data';
 import {
   archiveParameter,
   getArchivedParameters,
   unarchiveParameter,
 } from '../../../services/api';
-import { VERSIONS } from '../../../hooks/mocks/versions';
 
 const ParametersPage = () => {
   const { id } = useParams();
@@ -36,7 +35,9 @@ const ParametersPage = () => {
     pagination,
     stages,
     environments,
-    versions
+    versions,
+    editParameterMutation,
+    addParameterMutation,
   } = useListParameters(id);
 
   const {
@@ -47,14 +48,15 @@ const ParametersPage = () => {
     handleSearch,
     archiveMutation,
     unarchiveMutation,
-  } = useListArchived({
-    archivedObject: {
+  } = useListParametersArchived({
+    archivedParameters: {
       listArchivedAPI: getArchivedParameters,
       archiveAPI: archiveParameter,
       unarchiveAPI: unarchiveParameter,
       keyArchivistList: 'parameter-archivist-list',
       keyList: 'parameters',
       title: 'Parameter',
+      project_id: id,
     },
   });
 
@@ -68,11 +70,21 @@ const ParametersPage = () => {
           setEditedItemId(undefined);
         }}
       >
-        {isAddMode && <AddParameterForm onClose={() => setIsAddMode(false)} />}
+        {isAddMode && 
+          <AddParameterForm 
+          project_id={id}
+          onClose={() => setIsAddMode(false)} 
+          stages={stages}
+          environments={environments}
+          />
+        }
         {typeof editedItemId !== 'undefined' && (
           <EditParameterForm
-            id={editedItemId}
+            project_id={id}
+            editedItemId={editedItemId}
             onClose={() => setEditedItemId(undefined)}
+            stages={stages}
+            environments={environments}
           />
         )}
       </Modal>
