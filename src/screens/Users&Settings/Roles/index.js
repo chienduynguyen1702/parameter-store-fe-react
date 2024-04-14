@@ -5,20 +5,20 @@ import {
   Modal,
   FormSearch,
   ButtonAdd,
-  Archived,
+  // Archived,
 } from '../../../components';
 
 import Table from './Table';
-import { useListArchived, useListRoles } from '../../../hooks/data';
-import {
-  archiveRole,
-  getArchivedRoles,
-  unarchiveRole,
-} from '../../../services/api';
+import { useListRoles } from '../../../hooks/data';
+// import {
+//   archiveRole,
+//   getArchivedRoles,
+//   unarchiveRole,
+// } from '../../../services/api';
 
 function Roles() {
   const [isAddMode, setIsAddMode] = useState(false);
-  const [editedItemId, setEditedItemId] = useState(undefined);
+  // const [editedItemId, setEditedItemId] = useState(undefined);
 
   const {
     listRoles,
@@ -27,26 +27,26 @@ function Roles() {
     isLoading: isListRolesLoading,
   } = useListRoles();
 
-  const {
-    archivedList,
-    isSuccess: isListArchivedSuccess,
-    isLoading: isListArchivedLoading,
-    search,
-    handleSearch,
-    archiveMutation,
-    unarchiveMutation,
-  } = useListArchived({
-    archivedObject: {
-      listArchivedAPI: getArchivedRoles,
-      archiveAPI: archiveRole,
-      unarchiveAPI: unarchiveRole,
-      keyArchivistList: 'role-archivist-list',
-      keyList: 'roles',
-      title: 'Role',
-    },
-  });
+  // const {
+  //   archivedList,
+  //   isSuccess: isListArchivedSuccess,
+  //   isLoading: isListArchivedLoading,
+  //   search,
+  //   handleSearch,
+  //   archiveMutation,
+  //   unarchiveMutation,
+  // } = useListArchived({
+  //   archivedObject: {
+  //     listArchivedAPI: getArchivedRoles,
+  //     archiveAPI: archiveRole,
+  //     unarchiveAPI: unarchiveRole,
+  //     keyArchivistList: 'role-archivist-list',
+  //     keyList: 'roles',
+  //     title: 'Role',
+  //   },
+  // });
 
-  console.log('archivedList', archivedList);
+  // console.log('archivedList', archivedList);
   return (
     <>
       <Modal
@@ -54,7 +54,7 @@ function Roles() {
         visible={isAddMode}
         onClose={() => {
           setIsAddMode(false);
-          setEditedItemId(undefined);
+          // setEditedItemId(undefined);
         }}
       >
         {/* {isAddMode && <AddUserForm onClose={() => setIsAddMode(false)} />}
@@ -78,7 +78,7 @@ function Roles() {
                 className="me-2"
                 handleClickAdd={() => setIsAddMode(true)}
               />
-              <Archived
+              {/* <Archived
                 title="Archived roles"
                 name="roles"
                 archivedList={archivedList}
@@ -87,7 +87,7 @@ function Roles() {
                 search={search}
                 handleSearch={handleSearch}
                 unarchiveMutation={unarchiveMutation}
-              />
+              /> */}
             </div>
           </>
         }
@@ -97,8 +97,8 @@ function Roles() {
           isSuccess={isListRolesSuccess}
           isLoading={isListRolesLoading}
           totalPage={pagination?.totalPage}
-          setEditedItemId={setEditedItemId}
-          archiveMutation={archiveMutation}
+          // setEditedItemId={setEditedItemId}
+          // archiveMutation={archiveMutation}
         />
       </Card>
     </>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import cn from 'classnames';
+// import cn from 'classnames';
 import AvatarAndInfo from './AvatarAndInfo';
 import { PopoverEditAndArchive } from '../../../../../components';
 

@@ -4,7 +4,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
 import { addAgent, editAgent, getListAgent, deleteAgent } from '../../../services/api';
-import { AGENTS } from '../../mocks/agents';
 import { toast } from 'react-toastify';
 
 const DEFAULT_QUERY_STRING = {

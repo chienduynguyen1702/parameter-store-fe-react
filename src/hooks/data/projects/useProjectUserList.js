@@ -58,7 +58,7 @@ const useProjectUserList = (id) => {
 
   const addUserMutation = useMutation(
     (body) => {
-      console.log("addUserMutation data: ",body);
+      // console.log("addUserMutation data: ",body);
       return addUserToProject(body.project_id,body.data);
     },
     {

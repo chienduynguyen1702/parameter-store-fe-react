@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import {
   ButtonAdd,
@@ -24,6 +25,7 @@ import {
 import { VERSIONS } from '../../../hooks/mocks/versions';
 
 const ParametersPage = () => {
+  const { id } = useParams();
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
 
@@ -32,26 +34,29 @@ const ParametersPage = () => {
     isLoading: isListParametersLoading,
     isSuccess: isListUsersSuccess,
     pagination,
-  } = useListParameters();
+    stages,
+    environments,
+    versions
+  } = useListParameters(id);
 
-  // const {
-  //   archivedList,
-  //   isSuccess: isListArchivedSuccess,
-  //   isLoading,
-  //   search,
-  //   handleSearch,
-  //   archiveMutation,
-  //   unarchiveMutation,
-  // } = useListArchived({
-  //   archivedObject: {
-  //     listArchivedAPI: getArchivedParameters,
-  //     archiveAPI: archiveParameter,
-  //     unarchiveAPI: unarchiveParameter,
-  //     keyArchivistList: 'parameter-archivist-list',
-  //     keyList: 'parameters',
-  //     title: 'Parameter',
-  //   },
-  // });
+  const {
+    archivedList,
+    isSuccess: isListArchivedSuccess,
+    isLoading,
+    search,
+    handleSearch,
+    archiveMutation,
+    unarchiveMutation,
+  } = useListArchived({
+    archivedObject: {
+      listArchivedAPI: getArchivedParameters,
+      archiveAPI: archiveParameter,
+      unarchiveAPI: unarchiveParameter,
+      keyArchivistList: 'parameter-archivist-list',
+      keyList: 'parameters',
+      title: 'Parameter',
+    },
+  });
 
   return (
     <>
@@ -80,14 +85,18 @@ const ParametersPage = () => {
             <FormSearch placeholder="Search by name" />
             <div className="d-flex">
               <FiltersCustom className="me-2">
-                <FormFilter />
+                <FormFilter 
+                  stages={stages}
+                  environments={environments}
+                  versions={versions}
+                />
               </FiltersCustom>
               <ButtonAdd
                 handleClickAdd={() => setIsAddMode(true)}
                 titleButton="Add Parameter"
                 className="me-2"
               />
-              {/* <Archived
+              <Archived
                 title="Archived Parameters"
                 archivedList={archivedList}
                 isSuccess={isListArchivedSuccess}
@@ -95,7 +104,7 @@ const ParametersPage = () => {
                 search={search}
                 handleSearch={handleSearch}
                 unarchiveMutation={unarchiveMutation}
-              /> */}
+              />
             </div>
           </>
         }
@@ -106,7 +115,7 @@ const ParametersPage = () => {
           isLoading={isListParametersLoading}
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
-          // archiveMutation={archiveMutation}
+          archiveMutation={archiveMutation}
         />
       </Card>
     </>

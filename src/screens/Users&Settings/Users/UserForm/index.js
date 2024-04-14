@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import Item from '../../../../components/Item';
 
-import { RHFTextInput, AsyncButton, RHFDropdown } from '../../../../components';
+import { RHFTextInput, AsyncButton } from '../../../../components';
 
 const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose, userInfo }) => {
   return (

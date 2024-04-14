@@ -14,7 +14,7 @@ import { STAGES } from '../../../../../hooks/mocks/stages';
 import { ENVIRONMENTS } from '../../../../../hooks/mocks/environments';
 import { VERSIONS } from '../../../../../hooks/mocks/versions';
 
-export default function FormFilter({ parentFc }) {
+export default function FormFilter({ stages, environments, versions ,parentFc }) {
   const { queryString, setQueryString } = useQueryString();
 
   const settings = useMemo(() => {
@@ -73,11 +73,11 @@ export default function FormFilter({ parentFc }) {
             label="Stages"
             tooltip="Search and filter by Stages"
           />
-          {STAGES.map((platform) => (
+          {stages.map((stage) => (
             <RHFCheckbox
-              key={platform.id}
-              name={platform.name}
-              content={platform.name}
+              key={stage.id}
+              name={stage.name}
+              content={stage.name}
             />
           ))}
         </div>
@@ -88,8 +88,8 @@ export default function FormFilter({ parentFc }) {
             label="Environments"
             tooltip="Search and filter by Environments"
           />
-          {ENVIRONMENTS.map((tier) => (
-            <RHFCheckbox key={tier.id} name={tier.name} content={tier.name} />
+          {environments.map((environment) => (
+            <RHFCheckbox key={environment.id} name={environment.name} content={environment.name} />
           ))}
         </div>
 
@@ -98,7 +98,7 @@ export default function FormFilter({ parentFc }) {
             label="Version"
             tooltip="Filter by Version"
             name="version"
-            suggestions={VERSIONS.map((version) => ({
+            suggestions={versions.map((version) => ({
               label: version.name,
               value: version.name,
             }))}

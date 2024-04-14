@@ -245,10 +245,10 @@ export const getListParameter = (project_id) =>
     url: `/projects/${project_id}/parameters/`,
   });
 
-export const addParameter = (data) =>
+export const addParameter = (project_id,data) =>
   authApi({
     method: 'POST',
-    url: '/users',
+    url: `/projects/${project_id}/parameters/`,
     data,
   });
 
@@ -285,7 +285,22 @@ export const unarchiveParameter = (id) => {
     url: `/users/${id}/unarchive`,
   });
 };
+export const getStages = () =>
+  authApi({
+    method: 'GET',
+    url: '/stages/',
+  });
 
+export const getEnvironments = () =>
+  authApi({
+    method: 'GET',
+    url: '/envs/',
+  });
+export const getVersions = (project_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/versions/`,
+  });
 // ------------------------------ Agent ------------------------------
 
 export const getListAgent = (project_id) =>

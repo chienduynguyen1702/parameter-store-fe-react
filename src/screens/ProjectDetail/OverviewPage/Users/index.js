@@ -31,11 +31,11 @@ const UsersPage = () => {
     isSuccess: isListUsersSuccess,
     isLoading: isListUsersLoading,
   } = useProjectUserList(id);
-  console.log(listUsers);
+  // console.log(listUsers);
   const {
     listUsers :orgListUsers,
   } =useListUsers();
-  console.log("orgListUsers :",orgListUsers)
+  // console.log("orgListUsers :",orgListUsers)
   // const {
   //   archivedList,
   //   isSuccess: isListArchivedSuccess,

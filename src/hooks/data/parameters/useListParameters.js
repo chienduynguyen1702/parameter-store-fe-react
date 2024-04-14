@@ -7,6 +7,9 @@ import {
   addParameter,
   editParameter,
   getListParameter,
+  getStages,
+  getEnvironments,
+  getVersions,
 } from '../../../services/api';
 import { PARAMETERS } from '../../mocks/parameters';
 import moment from 'moment';
@@ -17,8 +20,7 @@ const DEFAULT_QUERY_STRING = {
   limit: 10,
 };
 
-const useListParameters = () => {
-  const {id}  = useParams();
+const useListParameters = (project_id) => {
   const queryClient = useQueryClient();
   const { queryString, setQueryString } = useQueryString();
 
@@ -59,7 +61,7 @@ const useListParameters = () => {
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['projects', queryString],
-    queryFn: () => getListParameter(id),
+    queryFn: () => getListParameter(project_id),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data.parameters),
     enabled: !!page && !!limit,
@@ -67,7 +69,7 @@ const useListParameters = () => {
 
   const addParameterMutation = useMutation(
     (data) => {
-      return addParameter(data);
+      return addParameter(project_id,data);
     },
     {
       onSuccess: () => {
@@ -85,8 +87,8 @@ const useListParameters = () => {
   );
 
   const editParameterMutation = useMutation(
-    (id, data) => {
-      return editParameter(id, data);
+    (data) => {
+      return editParameter(project_id,data.parameter_id, data.body);
     },
     {
       onSuccess: () => {
@@ -102,10 +104,77 @@ const useListParameters = () => {
       },
     },
   );
+  ////////////////////////// Get stages //////////////////////////
+  const parseStages = useCallback((data) => {
+    const stages = data?.map((stage) => {
+      // console.log("stage:", stage)
+      return {
+        id: stage.ID,
+        name: stage.name,
+        description: stage.description,
+        color: stage.color,
+      };
+    });
+    return stages;
+  }, []);
+  
+  const { data: stages } = useQuery({
+    queryKey: ['stages'],
+    queryFn: () => getStages(),
+    select: (data) => parseStages(data.data.stages),
+    staleTime: 10 * 1000,
+    enabled: true,
+  });
+
+  ////////////////////////// Get environments //////////////////////////
+  const parseEnvironments = useCallback((data) => {
+    const environments = data?.map((env) => {
+      // console.log("env:", env)
+      return {
+        id: env.ID,
+        name: env.name,
+        description: env.description,
+        color: env.color,
+      };
+    });
+    return environments;
+  }, []);
+
+  const { data: environments } = useQuery({
+    queryKey: ['environments'],
+    queryFn: () => getEnvironments(),
+    select: (data) => parseEnvironments(data.data.environments),
+    staleTime: 10 * 1000,
+    enabled: true,
+  });
+  ////////////////////////// Get versions //////////////////////////
+  const parseVersions = useCallback((data) => {
+    const versions = data?.map((version) => {
+      // console.log("version:", version)
+      return {
+        id: version.ID,
+        name: version.name,
+        description: version.description,
+        color: version.color,
+      };
+    });
+    return versions;
+  }, []);
+
+  const { data: versions } = useQuery({
+    queryKey: ['versions'],
+    queryFn: () => getVersions( project_id),
+    select: (data) => parseVersions(data.data.versions),
+    staleTime: 10 * 1000,
+    enabled: true,
+  });
 
   return {
     listParameters: data?.parameters,
     pagination: data?.pagination,
+    stages,
+    environments,
+    versions,
     isSuccess,
     isLoading,
     addParameterMutation,
