@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 import { ButtonSetting, Card, Icon, Modal } from '../../../../components';
-import EditProjectForm from './EditProjectForm';
+import EditOrganizationForm from './EditOrganizationForm';
 import SettingsForm from './SettingsForm';
 import moment from 'moment';
 
@@ -14,7 +14,11 @@ const Overview = ({ overview , usersList}) => {
   // console.log("project id: ",id);
   // const {overview, usersList, isSuccess} = useProjectOverviewAndUserList(id);
   // console.log("overview: ",overview);
-  const [isEditMode, setIdEditMode] = useState(false);
+  const [editedItemId, setEditedItemId] = useState(undefined);
+  const [isEditMode, setIdEditMode] = useState(false);  
+  const handleEditClick = (id) => {
+    setEditedItemId(id);
+  };
   // const [isSetting, setIsSetting] = useState(false);
   // if (!isSuccess) {
   //   // Handle loading state if needed
@@ -34,7 +38,12 @@ const Overview = ({ overview , usersList}) => {
           // setIsSetting(false);
         }}
       >
-        <EditProjectForm />
+        {typeof editedItemId !== 'undefined' && (
+          <EditOrganizationForm 
+            editedItemId={editedItemId}
+            onClose={() => setEditedItemId(undefined)}
+          />
+        )}
       </Modal>
       {/* <Modal
         visible={isSetting}
@@ -55,10 +64,14 @@ const Overview = ({ overview , usersList}) => {
               className="cursor-pointer ms-auto"
               onClick={() => {
                 setIdEditMode(true);
-                console.log('x');
+                // console.log('x');
+                handleEditClick(overview.id)
               }}
             >
-              <Icon name="edit" size={24} />
+              <Icon 
+                name="edit" 
+                size={24} 
+              />
             </div>
             {/* <ButtonSetting
               titleButton="Config Stages and Environments"

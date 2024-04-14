@@ -11,7 +11,19 @@ const useProjectOverviewAndUserList = (id) => {
         },
         select: (data) => data.data,
     });
-    const overview = data?.overview;
+    console.log("data",data)
+    const overview = {
+        id: data?.overview.ID,
+        name: data?.overview.name,
+        description: data?.overview.description,
+        status: data?.overview.status,
+        start_at: data?.overview.start_at,
+        address: data?.overview.address,
+        current_sprint: data?.overview.current_sprint,
+        repo_url: data?.overview.repo_url,
+        member_count: data?.users.length,
+    };
+    console.log("usersList",data?.users)
     const usersList = data?.users;
     return {
     // // overview tab

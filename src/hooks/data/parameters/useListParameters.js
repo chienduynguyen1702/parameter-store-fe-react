@@ -76,7 +76,7 @@ const useListParameters = (project_id) => {
         queryClient.invalidateQueries({
           queryKey: ['parameters'],
         });
-        toast.success('Add parameter successfully');
+        toast.success('Add parameter successfully! Start rerun cicd to apply changes.');
       },
       onError: (error) => {
         toast.error(error.response.data.message, {

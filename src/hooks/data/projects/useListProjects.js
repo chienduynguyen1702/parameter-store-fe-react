@@ -76,8 +76,8 @@ const useListProjects = () => {
   );
 
   const editProjectMutation = useMutation(
-    (id, data) => {
-      return editProject(id, data);
+    (data) => {
+      return editProject(data.id,data);
     },
     {
       onSuccess: () => {

@@ -35,6 +35,12 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             type="text"
             placeholder="Enter Repository URL"
           />
+          <RHFTextInput
+            name="repo_api_token"
+            label="Repository URL"
+            type="text"
+            placeholder="Enter Repository URL"
+          />
         </Item>
 
         <Row className="borderBottom py-2 mb-2">

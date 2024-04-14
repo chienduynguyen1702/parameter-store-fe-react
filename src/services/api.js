@@ -171,6 +171,11 @@ export const getOrganizationById = () =>
     method: 'GET',
     url: `/organizations/`,
   });
+export const getOrganizationByID = (org_id) =>
+  authApi({
+    method: 'GET',
+    url: `/organizations/${org_id}`,
+  });
 
 // ------------------------------ Project List ------------------------------
 
@@ -213,7 +218,7 @@ export const unarchiveProject = (id) => {
 export const editProject = (id, data) =>
   authApi({
     method: 'PUT',
-    url: `/projects/${id}`,
+    url: `/projects/${id}/overview/`,
     data,
   });
 // ------------------------------ Project Detail ------------------------------
