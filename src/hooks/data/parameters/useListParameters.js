@@ -91,15 +91,20 @@ const useListParameters = (project_id) => {
       return editParameter(data.project_id,data.parameter_id, data.data);
     },
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
         queryClient.invalidateQueries({
           queryKey: ['parameters'],
+        });  
+        console.log("editParameterMutation response:", response)
+        const successMessage = response.data.message;
+        toast.success(successMessage,{
+          autoClose: 10000,
+        
         });
-        toast.success('Edit parameter successfully');
       },
       onError: (error) => {
         toast.error(error.response.data.message, {
-          autoClose: 5000,
+          autoClose: 10000,
         });
       },
     },
