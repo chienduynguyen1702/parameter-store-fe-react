@@ -29,14 +29,14 @@ const useListAgentsArchived = ({
   const [search, setSearch] = useState('');
 
   const parseData = useCallback((data) => {
-    return data.map((item) => {
+    return data?.map((item) => {
       return {
         id: item?.id,
         name: item?.name,
         // name: item.name,
         image: item?.avatar_url,
-        archiver: item.archiver_username,
-        archivedAt: item.archived_at,
+        archiver: item?.archiver_username,
+        archivedAt: item?.archived_at,
       };
     });
   }, []);

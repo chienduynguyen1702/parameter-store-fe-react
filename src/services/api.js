@@ -325,14 +325,14 @@ export const addAgent = (project_id,data) =>
 export const editAgent = (project_id,agent_id, data) =>
   authApi({
     method: 'PUT',
-    url: `/projects/${project_id}/agents/${agent_id}/`,
+    url: `/projects/${project_id}/agents/${agent_id}`,
     data,
   });
 
 export const getAgentById = (project_id,agent_id) =>
   authApi({
     method: 'GET',
-    url: `/projects/${project_id}/agents/${agent_id}/`,
+    url: `/projects/${project_id}/agents/${agent_id}`,
   });
 
 export const deleteAgent = (project_id,agent_id) => {

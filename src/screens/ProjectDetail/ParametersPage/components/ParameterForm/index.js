@@ -10,22 +10,7 @@ import {
 } from '../../../../../components';
 
 const Form = ({ title = '', method, handleSubmit, onLoading, onClose, parameterInfo, stages, environments}) => {
-  console.log('stages in param Form', stages);
-  {/*
-Array(4)
-0
-: 
-{id: 1, name: 'Build', description: 'Build stage', color: ''}
-1
-: 
-{id: 2, name: 'Test', description: 'Test stage', color: ''}
-2
-: 
-{id: 3, name: 'Release', description: 'Release stage', color: ''}
-3
-: 
-{id: 4, name: 'Deploy', description: 'Deploy stage', color: ''}
- */}
+
 
  //parse stages to get only name
   const stagesName = stages.map((item) => item.name);
@@ -69,6 +54,7 @@ Array(4)
                 data={stagesName}
                 label="Stage"
                 tooltip="Stage is required"
+                // defaultValue={parameterInfo.stage}
               />
             </Col>
             <Col sm={12} md={6}>

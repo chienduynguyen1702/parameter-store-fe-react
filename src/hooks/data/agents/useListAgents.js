@@ -62,7 +62,7 @@ const useListAgents = (project_id) => {
 
   const addAgentMutation = useMutation(
     (data) => {
-      return addAgent(project_id, data);
+      return addAgent(data.project_id, data.data);
     },
     {
       onSuccess: () => {
@@ -81,7 +81,7 @@ const useListAgents = (project_id) => {
 
   const editAgentMutation = useMutation(
     (body) => {
-      return editAgent(body.agent_id, body.data);
+      return editAgent(body.project_id, body.agent_id, body.data);
     },
     {
       onSuccess: () => {

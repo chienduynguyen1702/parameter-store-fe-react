@@ -9,7 +9,13 @@ import {
   Item,
 } from '../../../../../components';
 
-const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
+const Form = ({ title = '', method, handleSubmit, onLoading, onClose, stages, environments }) => {
+  // //parse stages to get only name
+  const stagesName = stages.map((item) => item.name);
+  // console.log('stagesName', stagesName);
+  // //parse environments to get only name
+  const environmentsName = environments.map((item) => item.name);
+  // console.log('environmentsName', environmentsName);
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>
@@ -19,15 +25,15 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
           classTitle="title-green"
         >
           <RHFTextInput
-            name="agent-name"
+            name="name"
             label="Agent name"
             type="text"
             placeholder="Enter agent name"
             tooltip="Agent name is required"
           />
           <RHFTextInput
-            name="Describtion"
-            label="describtion"
+            name="description"
+            label="Description"
             type="text"
             placeholder="Enter describtion"
             tooltip="Please enter correct describtion format"
@@ -36,7 +42,7 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             <Col sm={12} md={6}>
               <RHFDropdown
                 name="stage"
-                data={['Build', 'Test', 'Deploy']}
+                data={stagesName}
                 defaultValue="Select stage"
                 label="Stage"
                 tooltip="stage is required"
@@ -44,8 +50,8 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             </Col>
             <Col sm={12} md={6}>
               <RHFDropdown
-                name="Environment"
-                data={['Dev/Test', 'Staging', 'Production']}
+                name="environment"
+                data={environmentsName}
                 defaultValue="Select environment"
                 label="Environment"
                 tooltip="Environment is required"
@@ -58,7 +64,7 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
           className="py-4 borderBottom"
           classTitle="title-purple"
         >
-          <Row>
+          {/* <Row>
             <Col sm={12} md={6}>
               <RHFTextInput
                 label="Repository name"
@@ -77,12 +83,12 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
                 tooltip="API token only have access to workflow of repository. Doc: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"
               />
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col sm={12} md={6}>
               <RHFTextInput
                 label="Workflow name"
-                name="workflowName"
+                name="workflow_name"
                 placeholder="Enter workflow name"
                 type="text"
                 tooltip="Workflow name is required"
@@ -91,7 +97,7 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             <Col sm={12} md={6}>
               <RHFDropdown
                 name="platform"
-                data={['Github Actions', 'Gitlab Runner', 'Jenkins', 'CircleCI']}
+                data={['Github Actions']}
                 defaultValue="Select platform"
                 label="Platform"
                 tooltip="Platform is required"

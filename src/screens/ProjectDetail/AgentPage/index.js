@@ -13,7 +13,7 @@ import Table from './components/Table/Table';
 import AddAgentForm from './components/AddAgentForm';
 import EditAgentForm from './components/EditAgentForm';
 
-import { useListAgentsArchived, useListAgents } from '../../../hooks/data';
+import { useListAgentsArchived, useListAgents, useListParameters } from '../../../hooks/data';
 import {
   archiveAgent,
   getArchivedAgents,
@@ -24,7 +24,10 @@ const AgentPage = () => {
   const { id } = useParams();
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
-
+  const {
+    stages,
+    environments,
+  } = useListParameters(id);
   const {
     listAgents,
     pagination,
@@ -63,11 +66,20 @@ const AgentPage = () => {
           setEditedItemId(undefined);
         }}
       >
-        {isAddMode && <AddAgentForm onClose={() => setIsAddMode(false)} />}
+        {isAddMode && 
+          <AddAgentForm 
+            project_id={id}
+            onClose={() => setIsAddMode(false)} 
+            stages={stages}
+            environments={environments}
+          />}
         {typeof editedItemId !== 'undefined' && (
           <EditAgentForm
+            project_id={id}
             editedItemId={editedItemId}
             onClose={() => setEditedItemId(undefined)}
+            stages={stages}
+            environments={environments}
           />
         )}
       </Modal>
