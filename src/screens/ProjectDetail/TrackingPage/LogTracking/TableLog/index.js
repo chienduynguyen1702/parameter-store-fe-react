@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './TableLog.module.sass';
+import { useParams } from 'react-router-dom';
 // import cn from "classnames";
 import { Icon, Pagination } from '../../../../../components';
 import Filters from '../Filters';
@@ -9,12 +10,13 @@ import { ThreeDots } from 'react-loader-spinner';
 import useQueryString from '../../../../../hooks/useQueryString';
 import SkeletonTable from './Skeleton';
 
-import { useListAgents } from '../../../../../hooks/data';
+import { useTracking } from '../../../../../hooks/data';
 
 const statusAlias = ['2xx', '3xx', '4xx', '5xx'];
 const sortByTime = ['asc', 'desc'];
 
 const TableLog = ({ items }) => {
+  const {id} = useParams();
   const { queryString, setQueryString } = useQueryString();
 
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -22,12 +24,10 @@ const TableLog = ({ items }) => {
   const [indexSort, setIndexSort] = useState(1);
 
   const {
-    listAgents: listLoggers,
+    data: listLoggers,
     isSuccess,
-    isLoading,
-    totalPage,
-  } = useListAgents();
-
+  } = useTracking(id);
+  console.log ('listLoggers', listLoggers);
   const checkSelected = (id) => {
     return selectedFilters.includes(id);
   };
@@ -94,7 +94,7 @@ const TableLog = ({ items }) => {
           </div>
           <div className={styles.col}>Agent Name</div>
           <div className={styles.col}>Endpoint</div>
-          <div className={styles.col}>Method</div>
+          <div className={styles.col}>Message</div>
           <div className={styles.col}>
             Response Status
             <div className={styles.icon_container}>
@@ -119,32 +119,32 @@ const TableLog = ({ items }) => {
                   style={{ width: '100%', height: '30px' }}
                   onClick={() => handleTableFilter()}
                 >
-                  {isLoading ? (
+                  {/* {isLoading ? (
                     <ThreeDots width={50} height={32} />
                   ) : (
                     <span>OK</span>
-                  )}
+                  )} */}
                 </button>
               </Filters>
             </div>
           </div>
           <div className={styles.col}>Latency</div>
         </div>
-        {isLoading && <SkeletonTable />}
+        {/* {isLoading && <SkeletonTable />} */}
 
-        {listLoggers?.map((x, index) => (
+        {listLoggers?.map((log) => (
           <Row
-            item={x}
-            key={index}
-            up={items.length - index <= 2}
-            value={selectedFilters.includes(x.id)}
-            onChange={() => handleChange(x.id)}
+            item={log}
+            // key={index}
+            // up={items.length - index <= 2}
+            // value={selectedFilters.includes(x.id)}
+            // onChange={() => handleChange(x.id)}
           />
         ))}
       </div>
       {/* {isSuccess && listLoggers.length === 0 && <NoData />} */}
-      {((isSuccess && listLoggers.length !== 0) || isLoading) && (
-        <Pagination pageCount={totalPage || 5} />
+      {((isSuccess && listLoggers.length !== 0)) && (
+        <Pagination pageCount={1} />
       )}
     </div>
   );

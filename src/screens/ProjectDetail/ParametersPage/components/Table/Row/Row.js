@@ -2,6 +2,7 @@ import React from 'react';
 import { PopoverEditAndArchive } from '../../../../../../components';
 
 const Row = ({ item, setEditedItemId, archiveMutation }) => {
+  console.log('item', item);
   return (
     <div className="tableRow">
       <div className="tableCell py-3 ps-2 roundedLeft">

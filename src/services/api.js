@@ -363,6 +363,13 @@ export const unarchiveAgent = (project_id, agent_id) => {
   });
 };
 
+
+// ------------------------------ Tracking ------------------------------
+export const getTracking = (project_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/tracking/`,
+  });
 // ------------------------------ Logger ------------------------------
 export const getListLogger = (params) =>
   authApi({

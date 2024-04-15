@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './Row.module.sass';
 import ModalProduct from '../../../../../../components/ModalProduct';
 
+import moment from 'moment';
 const API_ENDPOINT_SCREEN_INCLUDE = {
   login: 'Login',
   logout: 'Logout',
@@ -94,25 +95,27 @@ const Row = ({ item }) => {
   return (
     <>
       <div className={styles.row} onMouseLeave={() => setVisibleActions(false)}>
-        {/* <div className={styles.col}>{item?.time}</div> */}
-        <div className={styles.col}>17:12, 13 Sep 2023</div>
+        <div className={styles.col}>{moment(item?.CreatedAt).format('YYYY-MM-DD hh:mm:ss: a')}</div>
+        {/* <div className={styles.col}>17:12, 13 Sep 2023</div> */}
         <div className={styles.col}>
           <div className={styles.label}>Screen</div>
           <div className={styles.number}>
-            {updateScreenName(item?.endpoint ?? 'get-param-set')}
+            {/* {updateScreenName(item?.agent.name ?? 'get-param-set')} */}
+            {item?.agent.name }
           </div>
         </div>
         <div className={styles.col}>
           <div className={styles.label}>Actions</div>
           <div className={styles.text}>
             <u></u>
-            {compactString(item?.endpoint ?? 'Get param set')}
+            {/* {compactString(item?.endpoint ?? 'Get param set')} */}
+            {item?.path} 
           </div>
         </div>
         <div className={styles.col}>
-          <div className={styles.label}>Method</div>
+          <div className={styles.label}>Message</div>
           <div className={styles.box}>
-            <div className={styles.number} style={{backgroundColor: '#83BF6E'}}>{item?.method ?? 'GET'}</div>
+            <div className={styles.number} style={{backgroundColor: '#83BF6E'}}>{item?.message ?? 'GET'}</div>
           </div>
         </div>
         <div className={styles.col}>
@@ -123,7 +126,7 @@ const Row = ({ item }) => {
               // style={{ backgroundColor: colorForStatus(item?.response_status) }}
               style={{ backgroundColor: '#83BF6E' }}
             ></div>
-            {item.response_status ?? '200'}
+            {item?.response_status}
           </div>
         </div>
 
