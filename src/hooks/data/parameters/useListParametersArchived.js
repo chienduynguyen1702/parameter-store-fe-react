@@ -29,7 +29,6 @@ const useListParametersArchived = ({
   const [search, setSearch] = useState('');
 
   const parseData = useCallback((data) => {
-    console.log("useListParametersArchived: ",data);
     return data.map((item) => {
       return {
         id: item?.ID,

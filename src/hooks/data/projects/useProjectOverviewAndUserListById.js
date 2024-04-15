@@ -11,7 +11,6 @@ const useProjectOverviewAndUserList = (id) => {
         },
         select: (data) => data.data,
     });
-    console.log("data",data)
     const overview = {
         id: data?.overview.ID,
         name: data?.overview.name,
@@ -23,7 +22,6 @@ const useProjectOverviewAndUserList = (id) => {
         repo_url: data?.overview.repo_url,
         member_count: data?.users.length,
     };
-    console.log("usersList",data?.users)
     const usersList = data?.users;
     return {
     // // overview tab
