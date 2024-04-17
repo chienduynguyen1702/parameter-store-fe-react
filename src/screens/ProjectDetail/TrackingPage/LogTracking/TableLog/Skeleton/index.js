@@ -3,7 +3,7 @@ import cn from 'classnames';
 import styles from '../Row/Row.module.sass';
 import Skeleton from 'react-loading-skeleton';
 
-export default function SkeletonTable({ limit = 10 }) {
+export default function SkeletonTable({ limit = 5 }) {
   return (
     <>
       {Array(parseInt(limit))

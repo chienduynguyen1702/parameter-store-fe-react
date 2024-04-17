@@ -3,7 +3,7 @@ import { getTracking } from '../../../services/api';
 
 const useTracking = (id) => {
 
-  const { data, isSuccess } = useQuery({
+  const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['organizations'],
     queryFn: () => {
       return getTracking(id);
@@ -15,6 +15,7 @@ const useTracking = (id) => {
   return {
     data,
     isSuccess,
+    isLoading,
   };
 };
 

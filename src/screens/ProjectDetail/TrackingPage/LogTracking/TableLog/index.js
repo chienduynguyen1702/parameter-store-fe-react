@@ -26,6 +26,7 @@ const TableLog = ({ items }) => {
   const {
     data: listLoggers,
     isSuccess,
+    isLoading,
   } = useTracking(id);
   console.log ('listLoggers', listLoggers);
   const checkSelected = (id) => {
@@ -93,12 +94,12 @@ const TableLog = ({ items }) => {
             </div>
           </div>
           <div className={styles.col}>Agent Name</div>
-          <div className={styles.col}>Endpoint</div>
+          <div className={styles.col}>Actions</div>
+          {/* <div className={styles.col}>Endpoint</div> */}
           <div className={styles.col}>Message</div>
           <div className={styles.col}>
             Response Status
             <div className={styles.icon_container}>
-              {/* <Icon name="filter" size="16" fill="#6F767E" /> */}
               <Filters
                 className={styles.filters}
                 visible={visible}
@@ -119,18 +120,18 @@ const TableLog = ({ items }) => {
                   style={{ width: '100%', height: '30px' }}
                   onClick={() => handleTableFilter()}
                 >
-                  {/* {isLoading ? (
+                  {isLoading ? (
                     <ThreeDots width={50} height={32} />
                   ) : (
                     <span>OK</span>
-                  )} */}
+                  )}
                 </button>
               </Filters>
             </div>
           </div>
           <div className={styles.col}>Latency</div>
         </div>
-        {/* {isLoading && <SkeletonTable />} */}
+        {isLoading && <SkeletonTable />}
 
         {listLoggers?.map((log) => (
           <Row
