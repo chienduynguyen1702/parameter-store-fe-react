@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import Overview from './Overview';
 import UsersPage from './Users';
+import Stages from './Stages';
 import useProjectOverviewAndUserList  from '../../../hooks/data/projects/useProjectOverviewAndUserListById';
 
 const OverviewPage = () => {
@@ -22,6 +23,7 @@ const OverviewPage = () => {
       overview = {overview}
       usersList = {usersList}/>
       <UsersPage />
+      <Stages />
     </>
   );
 };

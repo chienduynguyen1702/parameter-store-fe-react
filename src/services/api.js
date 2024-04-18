@@ -243,6 +243,54 @@ export const deleteProject = (id) =>
     url: `/projects/${id}`,
   });
 
+// ------------------------------ Project stages ------------------------------
+export const getProjectStages = (id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${id}/stages/`,
+  });
+
+export const addStage = (id, data) =>
+  authApi({
+    method: 'POST',
+    url: `/projects/${id}/stages/`,
+    data,
+  });
+
+export const editStage = (project_id, stage_id, data) =>
+  authApi({
+    method: 'PUT',
+    url: `/projects/${project_id}/stages/${stage_id}`,
+    data,
+  });
+
+export const getStageByID = (project_id, stage_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/stages/${stage_id}`,
+  });
+
+export const getArchivedStages = (project_id) => {
+  return authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/stages/archived`,
+  });
+} 
+
+export const archiveStage = (project_id, stage_id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/projects/${project_id}/stages/${stage_id}/archive`,
+  });
+}
+
+export const unarchiveStage = (project_id, stage_id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/projects/${project_id}/stages/${stage_id}/unarchive`,
+  });
+}
+
 // ------------------------------ Parameter ------------------------------
 
 export const getListParameter = (project_id) =>
