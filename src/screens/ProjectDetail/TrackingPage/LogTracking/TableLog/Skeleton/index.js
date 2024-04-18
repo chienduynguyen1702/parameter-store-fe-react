@@ -29,9 +29,6 @@ export default function SkeletonTable({ limit = 5 }) {
               <div className={cn(styles.col)}>
                 <Skeleton count={1} height={50} width={'90%'} />
               </div>
-              <div className={cn(styles.col)}>
-                <Skeleton count={1} height={50} width={'90%'} />
-              </div>
             </div>
           );
         })}
