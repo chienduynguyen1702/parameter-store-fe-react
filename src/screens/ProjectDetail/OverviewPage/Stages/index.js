@@ -52,7 +52,6 @@ const Stages = () => {
     },
   });
 
-  console.log ('archivedList', archivedList);
   return (
     <>
       <Modal
@@ -82,7 +81,7 @@ const Stages = () => {
         classTitle="title-purple"
         head={
           <>
-            <FormSearch placeholder="Search by name" />
+            {/* <FormSearch placeholder="Search by name" /> */}
             <div className="d-flex">
               <ButtonAdd
                 handleClickAdd={() => setIsAddMode(true)}

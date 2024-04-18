@@ -291,6 +291,54 @@ export const unarchiveStage = (project_id, stage_id) => {
   });
 }
 
+// ------------------------------ Project environments ------------------------------
+export const getProjectEnvironments = (id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${id}/environments/`,
+  });
+
+export const addEnvironment = (id, data) =>
+  authApi({
+    method: 'POST',
+    url: `/projects/${id}/environments/`,
+    data,
+  });
+
+export const editEnvironment = (project_id, environment_id, data) =>
+  authApi({
+    method: 'PUT',
+    url: `/projects/${project_id}/environments/${environment_id}`,
+    data,
+  });
+
+export const getEnvironmentByID = (project_id, environment_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/environments/${environment_id}`,
+  });
+
+export const getArchivedEnvironments = (project_id) => {
+  return authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/environments/archived`,
+  });
+} 
+
+export const archiveEnvironment = (project_id, environment_id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/projects/${project_id}/environments/${environment_id}/archive`,
+  });
+}
+
+export const unarchiveEnvironment = (project_id, environment_id) => {
+  return authApi({
+    method: 'PATCH',
+    url: `/projects/${project_id}/environments/${environment_id}/unarchive`,
+  });
+}
+
 // ------------------------------ Parameter ------------------------------
 
 export const getListParameter = (project_id) =>

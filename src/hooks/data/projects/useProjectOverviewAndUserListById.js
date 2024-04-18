@@ -23,7 +23,7 @@ const useProjectOverviewAndUserList = (id) => {
         member_count: data?.users.length,
     };
     const usersList = data?.users;
-    console.log(data);
+    // console.log(data);
     // map to get stages
     const stages = data?.overview?.stages.map((stage) => ({
         id: stage?.ID,
@@ -31,7 +31,7 @@ const useProjectOverviewAndUserList = (id) => {
         description: stage?.description,
         color: stage?.color,
     }));
-    console.log("stages: ", stages);
+    // console.log("stages: ", stages);
     // map to get environments
     const environments = data?.overview?.environments.map((environment) => ({
         id: environment?.ID,
@@ -39,7 +39,7 @@ const useProjectOverviewAndUserList = (id) => {
         description: environment?.description,
         color: environment?.color,
     }));
-    console.log("environments: ", environments);
+    // console.log("environments: ", environments);
 
     return {
     // // overview tab

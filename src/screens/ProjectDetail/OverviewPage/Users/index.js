@@ -80,6 +80,7 @@ const UsersPage = () => {
       <Card
         title={`${isListUsersSuccess ? pagination?.total : '0'} Users`}
         classTitle="title-purple"
+        className={'mb-5'}
         head={
           <>
             <FormSearch placeholder="Search by name" />

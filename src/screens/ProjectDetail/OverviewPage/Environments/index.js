@@ -7,20 +7,20 @@ import {
   FormSearch,
   Archived,
   Modal,
-} from '../../../components';
+} from '../../../../components';
 
 import Table from './components/Table/Table';
 import AddEnvironmentForm from './components/AddEnvironmentForm';
 import EditEnvironmentForm from './components/EditEnvironmentForm';
 
-import { useListEnvironmentsArchived, useListEnvironments } from '../../../../hooks/data';
+import { useListEnvironmentsArchived, useListEnvironments, useListParameters } from '../../../../hooks/data';
 import {
   archiveEnvironment,
   getArchivedEnvironments,
   unarchiveEnvironment,
 } from '../../../../services/api';
 
-const EnvironmentPage = () => {
+const Environments = () => {
   const { id } = useParams();
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
@@ -45,8 +45,8 @@ const EnvironmentPage = () => {
       listArchivedAPI: getArchivedEnvironments,
       archiveAPI: archiveEnvironment,
       unarchiveAPI: unarchiveEnvironment,
-      keyArchivistList: 'agent-archivist-list',
-      keyList: 'agents',
+      keyArchivistList: 'environment-archivist-list',
+      keyList: 'environments',
       title: 'Environment',
       project_id: id,
     },
@@ -66,14 +66,12 @@ const EnvironmentPage = () => {
           <AddEnvironmentForm 
             project_id={id}
             onClose={() => setIsAddMode(false)} 
-            environments={environments}
           />}
         {typeof editedItemId !== 'undefined' && (
           <EditEnvironmentForm
             project_id={id}
             editedItemId={editedItemId}
             onClose={() => setEditedItemId(undefined)}
-            environments={environments}
           />
         )}
       </Modal>
@@ -83,7 +81,7 @@ const EnvironmentPage = () => {
         classTitle="title-purple"
         head={
           <>
-            <FormSearch placeholder="Search by name" />
+            {/* <FormSearch placeholder="Search by name" /> */}
             <div className="d-flex">
               <ButtonAdd
                 handleClickAdd={() => setIsAddMode(true)}
@@ -116,4 +114,4 @@ const EnvironmentPage = () => {
   );
 };
 
-export default EnvironmentPage;
+export default Environments;

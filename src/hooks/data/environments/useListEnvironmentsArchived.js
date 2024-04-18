@@ -29,11 +29,11 @@ const useListEnvironmentsArchived = ({
   const [search, setSearch] = useState('');
 
   const parseData = useCallback((data) => {
-    return data?.map((item) => {
+    // console.log('archived environments data', data);
+    return data?.environments.map((item) => {
       return {
-        id: item?.id,
+        id: item?.ID,
         name: item?.name,
-        // name: item.name,
         image: item?.avatar_url,
         archiver: item?.archiver_username,
         archivedAt: item?.archived_at,
@@ -46,7 +46,7 @@ const useListEnvironmentsArchived = ({
     queryFn: () => {
       return listArchivedAPI(project_id);
     },
-    select: (data) => parseData(data.data.environments),
+    select: (data) => parseData(data.data.data),
   });
 
   const dataFiltered = useMemo(() => {

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import Row from './Row/Row';
-import { NoData, Pagination } from '../../../../../components';
+import { NoData, Pagination } from '../../../../../../components';
 
 const Table = ({
-  listAgents,
+  listEnvironments,
   isSuccess,
   isLoading,
   totalPage,
@@ -17,14 +17,11 @@ const Table = ({
         <div className="tableContainer">
           <div className="tableHead">
             <div className="tableCell pb-4">Name</div>
-            <div className="tableCell">Workflow Name</div>
-            <div className="tableCell">Stage</div>
-            <div className="tableCell">Environment</div>
-            <div className="tableCell">Last used</div>
+            <div className="tableCell">Description</div>
             <div className="tableCell"></div>
           </div>
           {isSuccess &&
-            listAgents.map((agent) => (
+            listEnvironments.map((agent) => (
               <Row
                 key={agent.id}
                 item={agent}
@@ -33,9 +30,9 @@ const Table = ({
               />
             ))}
         </div>
-        {isSuccess && listAgents.length === 0 && <NoData />}
+        {isSuccess && listEnvironments.length === 0 && <NoData />}
       </div>
-      {((isSuccess && listAgents.length !== 0) || isLoading) && (
+      {((isSuccess && listEnvironments.length !== 0) || isLoading) && (
         <Pagination pageCount={totalPage || 5} />
       )}
     </>

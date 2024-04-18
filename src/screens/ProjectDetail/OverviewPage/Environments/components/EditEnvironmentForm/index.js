@@ -1,34 +1,34 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import AgentForm from '../EnvironmentForm';
-import { useListAgents } from '../../../../../hooks/data';
-import { getAgentById } from '../../../../../services/api';
+import EnvironmentForm from '../EnvironmentForm';
+import { useListEnvironments } from '../../../../../../hooks/data';
+import { getEnvironmentByID } from '../../../../../../services/api';
 
-const EditAgentForm = ({ project_id , editedItemId, stages, environments }) => {
-  const {id} = useParams();
+const EditEnvironmentForm = ({ project_id , editedItemId }) => {
+  // const {id} = useParams();
   // console.log('id', id);
-  const { editAgentMutation } = useListAgents(project_id);
+  const { editEnvironmentMutation } = useListEnvironments(project_id);
   const method = useForm({});
   // console.log('editedItemId', editedItemId);
   const handleSubmit = (data) => {
     const req = {
       data: data,
-      agent_id: editedItemId,
+      environment_id: editedItemId,
       project_id: project_id,
     }
-    editAgentMutation.mutate(req);
+    editEnvironmentMutation.mutate(req);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getAgentById(project_id, editedItemId);
-        const agentData =  response.data.agent;// Assuming response.data contains agent information
-        console.log('response', agentData);
-        method.reset(agentData); // Populate form fields with agent data
+        const response = await getEnvironmentByID(project_id, editedItemId);
+        const environmentData =  response.data.environment;// Assuming response.data contains environment information
+        console.log('response', environmentData);
+        method.reset(environmentData); // Populate form fields with environment data
       } catch (error) {
-        console.error('Error fetching agent data:', error);
+        console.error('Error fetching environment data:', error);
       }
     };
 
@@ -37,16 +37,14 @@ const EditAgentForm = ({ project_id , editedItemId, stages, environments }) => {
 
 
   return (
-    <AgentForm
-      title="Edit Agent"
+    <EnvironmentForm
+      title="Edit Environment"
       method={method}
       handleSubmit={handleSubmit}
       onLoading={false}
-      stages={stages}
-      environments={environments}
       onClose={() => {}}
     />
   );
 };
 
-export default EditAgentForm;
+export default EditEnvironmentForm;

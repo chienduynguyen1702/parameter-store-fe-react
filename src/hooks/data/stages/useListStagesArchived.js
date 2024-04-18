@@ -2,7 +2,6 @@ import { useMemo, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { getArchivedStages } from '../../../services/api';
 const useListStagesArchived = ({
   archivedStage = {
     // listArchivedAPI: '',

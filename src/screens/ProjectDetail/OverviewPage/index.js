@@ -4,6 +4,8 @@ import Overview from './Overview';
 import UsersPage from './Users';
 import Stages from './Stages';
 import useProjectOverviewAndUserList  from '../../../hooks/data/projects/useProjectOverviewAndUserListById';
+import { Col, Row } from 'react-bootstrap';
+import Environments from './Environments';
 
 const OverviewPage = () => {
 
@@ -23,7 +25,14 @@ const OverviewPage = () => {
       overview = {overview}
       usersList = {usersList}/>
       <UsersPage />
-      <Stages />
+      <Row>
+        <Col>
+          <Stages />
+        </Col>
+        <Col>
+          <Environments />
+        </Col>
+      </Row>
     </>
   );
 };

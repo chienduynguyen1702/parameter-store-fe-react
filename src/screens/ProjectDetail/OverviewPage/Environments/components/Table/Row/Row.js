@@ -1,5 +1,5 @@
 import React from 'react';
-import { PopoverEditAndArchive } from '../../../../../../components';
+import { PopoverEditAndArchive } from '../../../../../../../components';
 
 const Row = ({ item, setEditedItemId, archiveMutation }) => {
   return (
@@ -8,29 +8,12 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
         <p>{item?.name}</p>
       </div>
       <div className="tableCell">
-        <p>{item.workflow_name}</p>
+        <p>{item?.description}</p>
       </div>
-      <div className="tableCell">
-        <p
-          className="status-default"
-          style={{ backgroundColor: item.stage.color }}
-        >
-          {item.stage.name}
-        </p>
-      </div>
-      <div className="tableCell">
-        <p
-          className="status-default"
-          style={{ backgroundColor: item.environment.color }}
-        >
-          {item.environment.name}
-        </p>
-      </div>
-      <p className="tableCell">{item.last_used}</p>
       <div className="tableCell roundedRight">
         <PopoverEditAndArchive
           itemId={item.id}
-          name="parameter"
+          name="environment"
           setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
         />

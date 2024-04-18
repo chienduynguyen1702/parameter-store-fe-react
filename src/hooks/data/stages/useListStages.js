@@ -25,14 +25,13 @@ const useListStages = (project_id) => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    console.log ('parse stages data', data);
     const stages = data?.stages.map((item) => {
       return {
         name: item?.name,
         id: item?.ID,
         description: item?.description,
-        workflow_name: item.workflow_name,
-        last_used: item.last_used,
+        // workflow_name: item.workflow_name,
+        // last_used: item.last_used,
       };
     });
 

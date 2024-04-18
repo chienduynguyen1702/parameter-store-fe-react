@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
-import { addAgent, editAgent, getListAgent, deleteAgent } from '../../../services/api';
+import { addEnvironment, editEnvironment, getProjectEnvironments } from '../../../services/api';
 import { toast } from 'react-toastify';
 
 const DEFAULT_QUERY_STRING = {
@@ -25,20 +25,11 @@ const useListEnvironments = (project_id) => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const environments = data?.map((item) => {
+    const environments = data?.environments.map((item) => {
       return {
         name: item?.name,
-        id: item?.id,
+        id: item?.ID,
         description: item?.description,
-        environment: {
-          id: item.Environment.ID,
-          name: item.Environment.name,
-        },
-        environment: {
-          id: item.Environment.ID,
-          name: item.Environment.name,
-        },
-        workflow_name: item.workflow_name,
         // last_used: item.last_used,
       };
     });
@@ -54,15 +45,15 @@ const useListEnvironments = (project_id) => {
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['environments', queryString],
-    queryFn: () => getListAgent(project_id),
+    queryFn: () => getProjectEnvironments(project_id),
     staleTime: 10 * 1000,
-    select: (data) => parseData(data.data.environments),
+    select: (data) => parseData(data.data.data),
     enabled: !!page && !!limit,
   });
 
-  const addAgentMutation = useMutation(
+  const addEnvironmentMutation = useMutation(
     (data) => {
-      return addAgent(data.project_id, data.data);
+      return addEnvironment(data.project_id, data.data);
     },
     {
       onSuccess: () => {
@@ -79,9 +70,9 @@ const useListEnvironments = (project_id) => {
     },
   );
 
-  const editAgentMutation = useMutation(
+  const editEnvironmentMutation = useMutation(
     (body) => {
-      return editAgent(body.project_id, body.environment_id, body.data);
+      return editEnvironment(body.project_id, body.environment_id, body.data);
     },
     {
       onSuccess: () => {
@@ -98,32 +89,32 @@ const useListEnvironments = (project_id) => {
     },
   );
 
-  const deleteAgentMutation = useMutation(
-    (id) => {
-      return deleteAgent(id);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['environments'],
-        });
-        toast.success('Delete environment successfully');
-      },
-      onError: (error) => {
-        toast.error(error.response.data.message, {
-          autoClose: 5000,
-        });
-      },
-    },
-  );
+  // const deleteEnvironmentMutation = useMutation(
+  //   (id) => {
+  //     return deleteEnvironment(id);
+  //   },
+  //   {
+  //     onSuccess: () => {
+  //       queryClient.invalidateQueries({
+  //         queryKey: ['environments'],
+  //       });
+  //       toast.success('Delete environment successfully');
+  //     },
+  //     onError: (error) => {
+  //       toast.error(error.response.data.message, {
+  //         autoClose: 5000,
+  //       });
+  //     },
+  //   },
+  // );
 
   return {
     listEnvironments: data?.environments,
     pagination: data?.pagination,
     isSuccess,
     isLoading,
-    addAgentMutation,
-    editAgentMutation,
+    addEnvironmentMutation,
+    editEnvironmentMutation,
   };
 };
 
