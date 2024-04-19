@@ -93,7 +93,7 @@ const TableLog = ({ items }) => {
               <Icon name="arrows-up-down" size="16" fill="#6F767E" />
             </div>
           </div>
-          <div className={styles.col}>Agent Name</div>
+          <div className={styles.col}>Actor</div>
           <div className={styles.col}>Actions</div>
           {/* <div className={styles.col}>Endpoint</div> */}
           <div className={styles.col}>Message</div>

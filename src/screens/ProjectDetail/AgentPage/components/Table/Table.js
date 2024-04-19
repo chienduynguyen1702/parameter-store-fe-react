@@ -20,6 +20,7 @@ const Table = ({
             <div className="tableCell">Workflow Name</div>
             <div className="tableCell">Stage</div>
             <div className="tableCell">Environment</div>
+            <div className="tableCell">Description</div>
             <div className="tableCell">Last used</div>
             <div className="tableCell"></div>
           </div>

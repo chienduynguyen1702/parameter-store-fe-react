@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form';
 import AgentForm from '../AgentForm';
 import { useListAgents } from '../../../../../hooks/data';
 import { getAgentById } from '../../../../../services/api';
+import { toast } from 'react-toastify';
 
-const EditAgentForm = ({ project_id , editedItemId, stages, environments }) => {
+const EditAgentForm = ({ project_id ,onClose, editedItemId, stages, environments }) => {
   const {id} = useParams();
   // console.log('id', id);
   const { editAgentMutation } = useListAgents(project_id);
@@ -17,16 +18,36 @@ const EditAgentForm = ({ project_id , editedItemId, stages, environments }) => {
       agent_id: editedItemId,
       project_id: project_id,
     }
-    editAgentMutation.mutate(req);
+    editAgentMutation.mutate(req, {
+      onSuccess: () => {
+        onClose();
+      },
+      onError: (error) => {
+        console.log("error", error.response.data.error)
+        toast.error(error.response.data.error, {
+          autoClose: 5000,
+        });
+      }
+    });
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getAgentById(project_id, editedItemId);
-        const agentData =  response.data.agent;// Assuming response.data contains agent information
-        console.log('response', agentData);
-        method.reset(agentData); // Populate form fields with agent data
+        const agentData =  response.data.agent;
+        const parseAgentData = {
+          name : agentData.name,
+          description : agentData.description,
+          environment_id: agentData.Environment.ID,
+          environment: agentData.Environment.name,
+          stage_id: agentData.Stage.ID,
+          stage: agentData.Stage.name,
+          workflow_name: agentData.workflow_name,
+          
+        };
+        // console.log('response', parseAgentData);
+        method.reset(parseAgentData); // Populate form fields with agent data
       } catch (error) {
         console.error('Error fetching agent data:', error);
       }

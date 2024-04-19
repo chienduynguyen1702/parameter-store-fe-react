@@ -26,6 +26,9 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
           {item.environment.name}
         </p>
       </div>
+      <div className="tableCell">
+        <p>{item.description}</p>
+      </div>
       <p className="tableCell">{item.last_used}</p>
       <div className="tableCell roundedRight">
         <PopoverEditAndArchive

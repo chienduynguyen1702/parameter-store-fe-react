@@ -62,6 +62,7 @@ const useListAgents = (project_id) => {
 
   const addAgentMutation = useMutation(
     (data) => {
+      console.log('addAgentMutation data', data);
       return addAgent(data.project_id, data.data);
     },
     {

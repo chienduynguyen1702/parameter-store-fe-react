@@ -38,7 +38,7 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
           <RHFTextInput
             name="repo_api_token"
             label="Repository API Token"
-            type="text"
+            type="password"
             placeholder="Enter Repository API Token"
           />
         </Item>

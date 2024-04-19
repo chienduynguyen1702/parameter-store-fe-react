@@ -13,7 +13,7 @@ import Table from './components/Table/Table';
 import AddAgentForm from './components/AddAgentForm';
 import EditAgentForm from './components/EditAgentForm';
 
-import { useListAgentsArchived, useListAgents, useListParameters } from '../../../hooks/data';
+import { useListAgentsArchived, useListAgents, useProjectOverviewAndUserList } from '../../../hooks/data';
 import {
   archiveAgent,
   getArchivedAgents,
@@ -27,7 +27,7 @@ const AgentPage = () => {
   const {
     stages,
     environments,
-  } = useListParameters(id);
+  } = useProjectOverviewAndUserList(id);
   const {
     listAgents,
     pagination,
