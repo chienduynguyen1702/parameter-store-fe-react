@@ -29,6 +29,7 @@ const useListUsers = () => {
         username: item?.username,
         phone: item?.phone,
         email: item?.email,
+        is_organization_admin: item?.is_organization_admin,
         // avatarUrl: item.avatar_url,
         // projects: item.projects,
         // permissionsCount: item.permissions_count,

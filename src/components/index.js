@@ -51,6 +51,7 @@ export { default as RHFDateAndTime } from './RHF/RHFDateAndTime';
 export { default as RHFDateInput } from './RHF/RHFDateInput';
 export { default as RHFDropdown } from './RHF/RHFDropdown';
 export { default as RHFSwitch } from './RHF/RHFSwitch';
+export { default as RHFRadio } from './RHF/RHFRadio';
 export { default as RHFTagInput } from './RHF/RHFTagInput';
 export { default as RHFEditor } from './RHF/RHFEditor';
 export { default as RHFCheckbox } from './RHF/RHFCheckbox';

@@ -8,7 +8,6 @@ const EditUserForm = ({ editedItemId ,onClose}) => {
   const { editUserMutation } = useListUsers();
   const method = useForm({});
   const handleSubmit = (data) => {
-    // console.log('handleSubmit data', data);
     editUserMutation.mutate(data, {
       onSuccess: () => {
         onClose();
@@ -20,7 +19,6 @@ const EditUserForm = ({ editedItemId ,onClose}) => {
     const fetchData = async () => {
       try {
         const response = await getUser(editedItemId);
-        console.log('users', response.data.data.users);
 
         const userData =  response.data.data.users;// Assuming response.data contains user information
         method.reset(userData); // Populate form fields with user data

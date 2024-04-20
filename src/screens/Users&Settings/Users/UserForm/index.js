@@ -4,12 +4,12 @@ import { Col, Row } from 'react-bootstrap';
 
 import Item from '../../../../components/Item';
 
-import { RHFTextInput, AsyncButton } from '../../../../components';
+import { RHFTextInput, AsyncButton, RHFCheckbox } from '../../../../components';
 
 const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose, userInfo }) => {
   return (
     <FormProvider {...method}>
-      <form onSubmit={method.handleSubmit(handleSubmit)}>
+      <form onSubmit={method.handleSubmit(handleSubmit)}sm={12} md={6}>
         <Item
           title={title}
           className="pb-4 borderBottom"
@@ -39,8 +39,13 @@ const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose, userIn
             tooltip="Phone number is required"
             defaultValue={userInfo ? userInfo.phone : ''}
           />
-          <Row>
-          </Row>
+          <RHFCheckbox
+            name="is_organization_admin"
+            defaultValue="Select role"
+            content="Is Organization Admin"
+            tooltip="Role for user"
+          />
+          
         </Item>
         <Item
           title="Update Password"
@@ -48,7 +53,7 @@ const UserForm = ({ title = '', method, handleSubmit, onLoading, onClose, userIn
           classTitle="title-purple"
         >
           <Row>
-            <Col sm={12} md={6}>
+            <Col >
               <RHFTextInput
                 tooltip="New password is required"
                 label="New password"
