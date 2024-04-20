@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import Item from '../../../../../components/Item';
 
-import { RHFTextInput, AsyncButton } from '../../../../../components';
+import { RHFTextInput, AsyncButton, RHFCheckbox, RHFSwitch } from '../../../../../components';
 
 const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
   return (
@@ -33,13 +33,21 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             name="repo_url"
             label="Repository URL"
             type="text"
+            tooltip="With format: github.com/OWNER/REPO_NAME"
             placeholder="Enter Repository URL"
           />
           <RHFTextInput
             name="repo_api_token"
             label="Repository API Token"
             type="password"
+            tooltip="Write workflow is required to update the repository."
             placeholder="Enter Repository API Token"
+          />
+          <RHFSwitch
+            name="auto_update"
+            label="Auto update parameters"
+            tooltip="Auto update parameters"
+            defaultChecked={true}
           />
         </Item>
 
