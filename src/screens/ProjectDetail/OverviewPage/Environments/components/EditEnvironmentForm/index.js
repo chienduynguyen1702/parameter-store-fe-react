@@ -24,8 +24,8 @@ const EditEnvironmentForm = ({ project_id , editedItemId }) => {
     const fetchData = async () => {
       try {
         const response = await getEnvironmentByID(project_id, editedItemId);
-        const environmentData =  response.data.environment;// Assuming response.data contains environment information
-        console.log('response', environmentData);
+        const environmentData =  response.data.data.environment;// Assuming response.data contains environment information
+        // console.log('response', environmentData);
         method.reset(environmentData); // Populate form fields with environment data
       } catch (error) {
         console.error('Error fetching environment data:', error);

@@ -17,6 +17,9 @@ const AddForm = ({project_id, onClose, stages, environments }) => {
       onSuccess: () => {
         onClose();
       },
+      onError: () => {
+        console.log('Add parameter error');
+      },
     });
   };
 

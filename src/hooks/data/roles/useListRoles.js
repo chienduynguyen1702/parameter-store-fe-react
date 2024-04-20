@@ -24,7 +24,7 @@ export default function useListRoles() {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    console.log('data.roles: ', data);
+    // console.log('data.roles: ', data);
     const roles = data.roles.map((item) => {
       return {
         id: item.id,
@@ -34,7 +34,7 @@ export default function useListRoles() {
         permissions: item.permissions_count,
       };
     });
-    console.log('roles: ', roles);
+    // console.log('roles: ', roles);
 
     // const pagination = {
     //   total: data.pagination.total,

@@ -32,8 +32,8 @@ const useListArchived = ({
         id: item.id,
         name: item.username,
         // name: item.name,
-        image: item.avatar_url,
-        archiver: item.archiver_username,
+        // image: item.avatar_url,
+        archiver: item.archived_by,
         archivedAt: item.archived_at,
       };
     });

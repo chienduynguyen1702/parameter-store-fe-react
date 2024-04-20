@@ -34,8 +34,7 @@ const useListEnvironmentsArchived = ({
       return {
         id: item?.ID,
         name: item?.name,
-        image: item?.avatar_url,
-        archiver: item?.archiver_username,
+        archiver: item?.archived_by,
         archivedAt: item?.archived_at,
       };
     });

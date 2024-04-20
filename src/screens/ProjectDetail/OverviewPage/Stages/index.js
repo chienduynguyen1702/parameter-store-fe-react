@@ -78,7 +78,7 @@ const Stages = () => {
 
       <Card
         title={`${isListStagesSuccess ? pagination?.total : '0'} Stages`}
-        classTitle="title-purple"
+        classTitle="title-yellow"
         head={
           <>
             {/* <FormSearch placeholder="Search by name" /> */}

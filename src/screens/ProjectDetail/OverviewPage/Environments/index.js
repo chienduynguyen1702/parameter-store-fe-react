@@ -78,7 +78,7 @@ const Environments = () => {
 
       <Card
         title={`${isListEnvironmentsSuccess ? pagination?.total : '0'} Environments`}
-        classTitle="title-purple"
+        classTitle="title-green"
         head={
           <>
             {/* <FormSearch placeholder="Search by name" /> */}

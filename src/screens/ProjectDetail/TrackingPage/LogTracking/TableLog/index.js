@@ -28,7 +28,7 @@ const TableLog = ({ items }) => {
     isSuccess,
     isLoading,
   } = useTracking(id);
-  console.log ('listLoggers', listLoggers);
+  // console.log ('listLoggers', listLoggers);
   const checkSelected = (id) => {
     return selectedFilters.includes(id);
   };

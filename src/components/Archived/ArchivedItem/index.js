@@ -31,12 +31,9 @@ const ArchivedItem = ({
               ? item?.name.substring(0, 36) + '...'
               : item?.name}
           </div>
-          <div className={styles.information}>{`Archived at ${moment(
-            item.archivedAt,
-          ).fromNow()}`}</div>
-          {/* <div
+          <div
             className={styles.information}
-          >{`Archived by ${item.archiver} ${item.archivedAt}`}</div> */}
+          >{`Archived by ${item.archiver}, at ${moment.utc(item.archivedAt).format('MMMM Do YYYY, hh:mm:ss A')}`}</div>
         </div>
       </div>
       <div className={styles.actions}>

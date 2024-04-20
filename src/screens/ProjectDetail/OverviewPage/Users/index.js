@@ -79,7 +79,7 @@ const UsersPage = () => {
 
       <Card
         title={`${isListUsersSuccess ? pagination?.total : '0'} Users`}
-        classTitle="title-purple"
+        classTitle="title-blue"
         className={'mb-5'}
         head={
           <>

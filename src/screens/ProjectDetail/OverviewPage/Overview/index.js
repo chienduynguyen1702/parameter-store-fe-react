@@ -1,11 +1,8 @@
 import { Col, Row, Stack } from 'react-bootstrap';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
-import { ButtonSetting, Card, Icon, Modal } from '../../../../components';
-import EditOrganizationForm from './EditOrganizationForm';
-import SettingsForm from './SettingsForm';
+import {  Card, Icon, Modal } from '../../../../components';
+import EditProjectForm from './EditProjectForm';
 import moment from 'moment';
 
 const Overview = ({ overview , usersList}) => {
@@ -39,7 +36,7 @@ const Overview = ({ overview , usersList}) => {
         }}
       >
         {typeof editedItemId !== 'undefined' && (
-          <EditOrganizationForm 
+          <EditProjectForm 
             editedItemId={editedItemId}
             onClose={() => setEditedItemId(undefined)}
           />
@@ -56,7 +53,7 @@ const Overview = ({ overview , usersList}) => {
       </Modal> */}
       <Card
         title=  {overview?.name}
-        classTitle="title-blue"
+        classTitle="title-purple"
         className="mb-5"
         head={
           <>

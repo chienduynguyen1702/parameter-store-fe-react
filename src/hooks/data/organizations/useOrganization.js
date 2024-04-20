@@ -3,7 +3,7 @@ import { getOrganizationById } from '../../../services/api';
 
 const useOrganization = (id) => {
 
-  const { data, isSuccess } = useQuery({
+  const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['organizations'],
     queryFn: () => {
       return getOrganizationById();
@@ -15,6 +15,7 @@ const useOrganization = (id) => {
   return {
     data,
     isSuccess,
+    isLoading,
   };
 };
 

@@ -35,7 +35,7 @@ const useListAgentsArchived = ({
         name: item?.name,
         // name: item.name,
         image: item?.avatar_url,
-        archiver: item?.archiver_username,
+        archiver: item?.archived_by,
         archivedAt: item?.archived_at,
       };
     });
