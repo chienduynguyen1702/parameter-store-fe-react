@@ -30,11 +30,25 @@ const UsersPage = () => {
     pagination,
     isSuccess: isListUsersSuccess,
     isLoading: isListUsersLoading,
-    removeMutation,
+    removeUserMutation,
   } = useProjectUserList(id);
+  
   const {
     listUsers :orgListUsers,
   } =useListUsers();
+
+  const handleRemoveUser = (userId) => {
+    removeUserMutation.mutate({ project_id: id, user_id: userId },
+      {
+        onSuccess: () => {
+          console.log('remove user success');
+        },
+        onError: () => {
+          console.log('remove user error');
+        },
+      }
+    );
+  }
 
   return (
     <>
@@ -81,7 +95,7 @@ const UsersPage = () => {
           isLoading={isListUsersLoading}
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
-          removeMutation={removeMutation}
+          handleRemoveUser={handleRemoveUser}
         />
       </Card>
     </>

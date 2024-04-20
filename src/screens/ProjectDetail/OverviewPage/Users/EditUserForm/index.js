@@ -47,7 +47,7 @@ const EditUserForm = ({ editedItemId ,onClose}) => {
 
     fetchData(); // Call fetchData function when editedItemId changes
   }, [editedItemId, method]);
-  console.log('method', method);
+  
   return (
     <UserForm
       title="Edit User and Role"

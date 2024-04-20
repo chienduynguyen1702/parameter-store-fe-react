@@ -9,7 +9,7 @@ const Table = ({
   isLoading,
   totalPage,
   setEditedItemId,
-  removeMutation,
+  handleRemoveUser,
 }) => {
   return (
     <>
@@ -28,7 +28,7 @@ const Table = ({
                 key={user.id}
                 item={user}
                 setEditedItemId={setEditedItemId}
-                removeMutation={removeMutation}
+                handleRemoveUser={handleRemoveUser}
               />
             ))}
         </div>

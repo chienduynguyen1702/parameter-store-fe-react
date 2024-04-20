@@ -6,7 +6,7 @@ import UserForm from '../UserForm';
 const AddUserForm = ({ listUsers, onClose }) => {
 
   const { id } = useParams();
-  const { addUserMutation } = useProjectUserList({ onClose });
+  const { addUserMutation } = useProjectUserList(id);
   const method = useForm({});
 
   const handleSubmit = (data) => {

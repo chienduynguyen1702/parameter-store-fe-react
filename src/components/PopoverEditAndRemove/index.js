@@ -12,7 +12,7 @@ const PopoverEditAndRemove = ({
   itemId,
   name = '',
   setEditedItemId,
-  removeMutation,
+  handleRemove,
 }) => {
   const [isRemoveMode, setIsRemoveMode] = useState(false);
   return (
@@ -24,9 +24,9 @@ const PopoverEditAndRemove = ({
             content={`Are you sure you want to remove this ${name}?`}
             contentBtnSubmit="Remove"
             contentBtnCancel="Cancel"
-            isLoading={removeMutation.isLoading}
+            // isLoading={removeMutation.isLoading}
             onClose={() => {}}
-            handleSubmit={() => removeMutation.mutate(itemId)}
+            handleSubmit={() => handleRemove(itemId)}
           />
         </Modal>
       )}

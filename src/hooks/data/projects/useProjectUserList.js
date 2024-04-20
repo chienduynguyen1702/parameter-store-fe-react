@@ -95,9 +95,9 @@ const useProjectUserList = (id) => {
     },
   );
 
-  const removeMutation = useMutation(
-    (id,user_id) => {
-      return removeUserInProject(id,user_id);
+  const removeUserMutation = useMutation(
+    (data) => {
+      return removeUserInProject(data.project_id,data.user_id);
     },
     {
       onSuccess: () => {
@@ -121,6 +121,7 @@ const useProjectUserList = (id) => {
     isLoading,
     addUserMutation,
     editUserMutation,
+    removeUserMutation,
   };
 };
 
