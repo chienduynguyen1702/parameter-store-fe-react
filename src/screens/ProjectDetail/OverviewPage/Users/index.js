@@ -30,30 +30,11 @@ const UsersPage = () => {
     pagination,
     isSuccess: isListUsersSuccess,
     isLoading: isListUsersLoading,
+    removeMutation,
   } = useProjectUserList(id);
-  // console.log(listUsers);
   const {
     listUsers :orgListUsers,
   } =useListUsers();
-  // console.log("orgListUsers :",orgListUsers)
-  // const {
-  //   archivedList,
-  //   isSuccess: isListArchivedSuccess,
-  //   isLoading: isListArchivedLoading,
-  //   search,
-  //   handleSearch,
-  //   archiveMutation,
-  //   unarchiveMutation,
-  // } = useListArchived({
-  //   archivedObject: {
-  //     listArchivedAPI: getArchivedUsers,
-  //     archiveAPI: archiveUser,
-  //     unarchiveAPI: unarchiveUser,
-  //     keyArchivistList: 'user-archivist-list',
-  //     keyList: 'users',
-  //     title: 'User',
-  //   },
-  // });
 
   return (
     <>
@@ -71,7 +52,7 @@ const UsersPage = () => {
                       />}
         {typeof editedItemId !== 'undefined' && (
           <EditUserForm
-            id={editedItemId}
+            editedItemId={editedItemId}
             onClose={() => setEditedItemId(undefined)}
           />
         )}
@@ -90,16 +71,6 @@ const UsersPage = () => {
                 titleButton="Add User"
                 className="me-2"
               />
-              {/* <Archived
-                title="Archived users"
-                name="users"
-                archivedList={archivedList}
-                isSuccess={isListArchivedSuccess}
-                isLoading={isListArchivedLoading}
-                search={search}
-                handleSearch={handleSearch}
-                unarchiveMutation={unarchiveMutation}
-              /> */}
             </div>
           </>
         }
@@ -110,7 +81,7 @@ const UsersPage = () => {
           isLoading={isListUsersLoading}
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
-          // archiveMutation={archiveMutation}
+          removeMutation={removeMutation}
         />
       </Card>
     </>

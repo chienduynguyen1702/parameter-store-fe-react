@@ -223,24 +223,39 @@ export const editProject = (id, data) =>
   });
 // ------------------------------ Project Detail ------------------------------
 
-export const addUserToProject = (id, data) =>
+export const addUserToProject = (project_id, data) =>
 console.log("addUserToProject data",data) ||
   authApi({
     method: 'POST',
-    url: `/projects/${id}/overview/add-user`,
+    url: `/projects/${project_id}/overview/add-user`,
     data,
   });
-
-export const getProjectOverview = (id) =>
+export const editUserInProject = (project_id, user_id, data) =>
   authApi({
-    method: 'GET',
-    url: `/projects/${id}/overview/`,
+    method: 'PUT',
+    url: `/projects/${project_id}/overview/users/${user_id}`,
+    data,
   });
-
-export const deleteProject = (id) =>
+export const removeUserInProject = (project_id, user_id) =>
   authApi({
     method: 'DELETE',
-    url: `/projects/${id}`,
+    url: `/projects/${project_id}/overview/remove-user/${user_id}`,
+  });
+export const getUserInProject = (project_id, user_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/overview/users/${user_id}`,
+  });
+export const getProjectOverview = (project_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/overview/`,
+  });
+
+export const deleteProject = (project_id) =>
+  authApi({
+    method: 'DELETE',
+    url: `/projects/${project_id}`,
   });
 
 // ------------------------------ Project stages ------------------------------

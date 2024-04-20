@@ -2,9 +2,9 @@ import React from 'react';
 
 import cn from 'classnames';
 import AvatarAndInfo from './AvatarAndInfo';
-import { PopoverEditAndArchive } from '../../../../../../components';
+import { PopoverEditAndRemove } from '../../../../../../components';
 
-const Row = ({ item, setEditedItemId, archiveMutation }) => {
+const Row = ({ item, setEditedItemId, setRemovedItemId, removeMutation }) => {
   return (
 <div className="tableRow">
       <div className="tableCell py-3 ps-2 roundedLeft">
@@ -29,13 +29,13 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
       {/* <div className="tableCell">{item?.lastSignIn}</div> */}
       <div className="tableCell">{item.email}</div>
       <div className="tableCell">{item.role}</div>
-      <div className="tableCell">{item.phone}</div>
+      {/* <div className="tableCell">{item.phone}</div> */}
       <div className="tableCell roundedRight">
-        <PopoverEditAndArchive
+        <PopoverEditAndRemove
           itemId={item?.id}
           name="user"
           setEditedItemId={setEditedItemId}
-          archiveMutation={archiveMutation}
+          removeMutation={removeMutation}
         />
       </div>
     </div>

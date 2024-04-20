@@ -7,6 +7,7 @@ import Item from '../../../../../components/Item';
 import { RHFTextInput, AsyncButton, RHFDropdown, RHFInputSelect } from '../../../../../components';
 
 const UserForm = ({ title = '',listUsers, method, handleSubmit, onLoading, onClose }) => {
+  console.log('listUsers', listUsers);
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>
@@ -21,10 +22,6 @@ const UserForm = ({ title = '',listUsers, method, handleSubmit, onLoading, onClo
                 name="username"
                 label="Select username"
                 tooltip="Username is required"
-                suggestions={listUsers.map((user) => ({
-                  label: user.username,
-                  value: user.username,
-                }))}
               />
             </Col>
             <Col sm={12} md={6}>

@@ -86,3 +86,4 @@ export { default as Avatar } from './Avatar';
 export { default as MonthYearDatePicker } from './DatePicker/MonthYearDatePicker';
 
 export { default as PopoverEditAndArchive } from './PopoverEditAndArchive';
+export { default as PopoverEditAndRemove } from './PopoverEditAndRemove';

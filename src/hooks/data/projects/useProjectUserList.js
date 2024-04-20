@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import useQueryString from '../../useQueryString';
 import { getProjectOverview } from '../../../services/api';
-import { addUserToProject, editUser, getListUser } from '../../../services/api';
+import { addUserToProject, editUserInProject, getListUser, removeUserInProject } from '../../../services/api';
 
 const DEFAULT_QUERY_STRING = {
   page: 1,
@@ -77,8 +77,8 @@ const useProjectUserList = (id) => {
   );
 
   const editUserMutation = useMutation(
-    (id, data) => {
-      return editUser(id, data);
+    (data) => {
+      return editUserInProject(data.project_id, data.user_id, data.data);
     },
     {
       onSuccess: () => {
@@ -94,6 +94,26 @@ const useProjectUserList = (id) => {
       },
     },
   );
+
+  const removeMutation = useMutation(
+    (id,user_id) => {
+      return removeUserInProject(id,user_id);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['users', queryString],
+        });
+        toast.success('Remove user successfully');
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message, {
+          autoClose: 5000,
+        });
+      },
+    },
+  );
+
   return {
     listUsers: data?.users,
     pagination: data?.pagination,

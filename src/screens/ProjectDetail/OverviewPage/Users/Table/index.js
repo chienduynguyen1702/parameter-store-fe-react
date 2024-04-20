@@ -9,7 +9,7 @@ const Table = ({
   isLoading,
   totalPage,
   setEditedItemId,
-  archiveMutation,
+  removeMutation,
 }) => {
   return (
     <>
@@ -19,7 +19,7 @@ const Table = ({
             <div className="tableCell pb-4">Name</div>
             <div className="tableCell">Mail</div>
             <div className="tableCell">Role</div>
-            <div className="tableCell">Phone</div>
+            {/* <div className="tableCell">Phone</div> */}
             <div className="tableCell"></div>
           </div>
           {isSuccess &&
@@ -28,7 +28,7 @@ const Table = ({
                 key={user.id}
                 item={user}
                 setEditedItemId={setEditedItemId}
-                archiveMutation={archiveMutation}
+                removeMutation={removeMutation}
               />
             ))}
         </div>
