@@ -19,6 +19,7 @@ export { default as SingleLineChart } from './Chart/SingleLineChart';
 
 export { default as ColorInput } from './ColorInput';
 export { default as ConfirmContent } from './ConfirmContent';
+export { default as ConfirmReturnContent } from './ConfirmReturnContent';
 export { default as Checkbox } from './Checkbox';
 export { default as Dropdown } from './Dropdown';
 export { default as Editor } from './Editor';

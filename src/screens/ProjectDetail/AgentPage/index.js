@@ -7,7 +7,7 @@ import {
   FormSearch,
   Archived,
   Modal,
-  ConfirmContent
+  ConfirmReturnContent
 } from '../../../components';
 
 import Table from './components/Table/Table';
@@ -99,9 +99,9 @@ const AgentPage = () => {
           />
         )}
         {showConfirmation && ( // Render confirmation popup here
-          <ConfirmContent
+          <ConfirmReturnContent
             title="Agent created successfully!"
-            message={`Agent has been created successfully. Please copy the token below and keep it safe. You won't be able to see it again.`}
+            message={`Please copy the token below and keep it safe. You won't be able to see it again.`}
             content={`${returnToken}`}
             contentBtnSubmit="Done"
             onClose={() => setShowConfirmation(false)}
