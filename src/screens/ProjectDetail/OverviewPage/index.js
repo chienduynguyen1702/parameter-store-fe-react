@@ -6,11 +6,12 @@ import Stages from './Stages';
 import useProjectOverviewAndUserList  from '../../../hooks/data/projects/useProjectOverviewAndUserListById';
 import { Col, Row } from 'react-bootstrap';
 import Environments from './Environments';
+import WorkflowsPage from './Workflow';
 
 const OverviewPage = () => {
 
   const { id } = useParams();
-  const {overview, usersList, isSuccess} = useProjectOverviewAndUserList(id);
+  const {overview, usersList, isSuccess, listWorkflows, pagination} = useProjectOverviewAndUserList(id);
   if (!isSuccess) {
     // Handle loading state if needed
     return <p>Loading...</p>;
@@ -25,6 +26,11 @@ const OverviewPage = () => {
       overview = {overview}
       usersList = {usersList}/>
       <UsersPage />
+      <WorkflowsPage
+        listWorkflows={listWorkflows}
+        // isListWorkflowsSuccess={isSuccess}
+        // pagination={pagination}
+      />
       <Row>
         <Col>
           <Stages />

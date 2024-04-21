@@ -40,7 +40,13 @@ const useProjectOverviewAndUserList = (id) => {
         color: environment?.color,
     }));
     // console.log("environments: ", environments);
-
+    console.log("workflow: ", data?.workflow);
+    const listWorkflows = data?.workflow?.workflows?.map((workflow) => ({
+        id: workflow?.id,
+        name: workflow?.name,
+        path: workflow?.path,
+        state: workflow?.state,
+    }));
     return {
     // // overview tab
     overview: overview,
@@ -48,6 +54,7 @@ const useProjectOverviewAndUserList = (id) => {
     environments: environments,
     usersList: usersList,
     isSuccess,
+    listWorkflows,
 
 
 

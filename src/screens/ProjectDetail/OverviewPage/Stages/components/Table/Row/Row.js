@@ -4,7 +4,7 @@ import { PopoverEditAndArchive } from '../../../../../../../components';
 const Row = ({ item, setEditedItemId, archiveMutation }) => {
   return (
     <div className="tableRow">
-      <div className="tableCell py-3 ps-2 roundedLeft">
+      <div className="tableCell py-3 ps-3 roundedLeft">
         <p>{item?.name}</p>
       </div>
       <div className="tableCell">
