@@ -16,7 +16,7 @@ import AddParameterForm from './components/AddParameterForm';
 import EditParameterForm from './components/EditParameterForm';
 import FormFilter from './components/FormFilter';
 
-import { useListParameters, useListParametersArchived } from '../../../hooks/data';
+import { useListParameters, useListParametersArchived, useProjectOverviewAndUserList } from '../../../hooks/data';
 import {
   archiveParameter,
   getArchivedParameters,
@@ -33,13 +33,17 @@ const ParametersPage = () => {
     isLoading: isListParametersLoading,
     isSuccess: isListUsersSuccess,
     pagination,
-    stages,
-    environments,
+    // stages,
+    // environments,
     versions,
     editParameterMutation,
     addParameterMutation,
   } = useListParameters(id);
 
+  const {
+    stages,
+    environments,
+  } = useProjectOverviewAndUserList(id);
   const {
     archivedList,
     isSuccess: isListArchivedSuccess,
