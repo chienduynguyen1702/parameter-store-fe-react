@@ -45,6 +45,7 @@ const useProjectOverviewAndUserList = (id) => {
         workflow_name: workflow?.name,
         path: workflow?.path,
         state: workflow?.state,
+        url_path: `https://${data?.overview.repo_url}/blob/main/${workflow?.path}`,
     }));
     return {
     // // overview tab
