@@ -66,11 +66,12 @@ const useListAgents = (project_id) => {
       return addAgent(data.project_id, data.data);
     },
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
         queryClient.invalidateQueries({
           queryKey: ['agents'],
         });
         toast.success('Add agent successfully');
+        return data;
       },
       onError: (error) => {
         toast.error(error.response.data.message, {

@@ -7,6 +7,7 @@ import {
   FormSearch,
   Archived,
   Modal,
+  ConfirmContent
 } from '../../../components';
 
 import Table from './components/Table/Table';
@@ -24,6 +25,9 @@ const AgentPage = () => {
   const { id } = useParams();
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [returnToken, setReturnToken] = useState(''); // Return token for confirmation popup
+
   const {
     stages,
     environments,
@@ -56,15 +60,22 @@ const AgentPage = () => {
     },
   });
 
+  const handleCloseAddForm = () => {
+    setIsAddMode(false);
+    setEditedItemId(undefined);
+  };
+
+  const handleConfirmClose = () => {
+    setShowConfirmation(false);
+    handleCloseAddForm(); // Close the AddForm when confirmed
+  };
+
   return (
     <>
       <Modal
         outerClassName={'outerModal'}
-        visible={isAddMode || typeof editedItemId !== 'undefined'}
-        onClose={() => {
-          setIsAddMode(false);
-          setEditedItemId(undefined);
-        }}
+        visible={isAddMode || typeof editedItemId !== 'undefined' || showConfirmation}
+        onClose={handleCloseAddForm}
       >
         {isAddMode && 
           <AddAgentForm 
@@ -72,6 +83,8 @@ const AgentPage = () => {
             onClose={() => setIsAddMode(false)} 
             stages={stages}
             environments={environments}
+            setShowConfirmation={setShowConfirmation} 
+            setReturnToken={setReturnToken}
           />}
         {typeof editedItemId !== 'undefined' && (
           <EditAgentForm
@@ -80,6 +93,16 @@ const AgentPage = () => {
             onClose={() => setEditedItemId(undefined)}
             stages={stages}
             environments={environments}
+          />
+        )}
+        {showConfirmation && ( // Render confirmation popup here
+          <ConfirmContent
+            title="Agent created successfully!"
+            message={`Agent has been created successfully. Please copy the token below and keep it safe. You won't be able to see it again.`}
+            content={`${returnToken}`}
+            contentBtnSubmit="Done"
+            onClose={() => setShowConfirmation(false)}
+            handleSubmit={handleConfirmClose}
           />
         )}
       </Modal>
