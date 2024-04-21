@@ -103,7 +103,7 @@ const Overview = ({ overview , usersList}) => {
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Start date:</p>
-              <p className="detail-content status-text">{moment(overview?.start_at).format("DD/MM/YYYY")}</p>
+              <p className="detail-content status-text">{moment(overview?.start_at).format("DD-MM-YYYY")}</p>
             </Stack>
           </Col>
           <Col xs={12} md={{ span: 6, offset: 1 }}>

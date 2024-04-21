@@ -72,6 +72,7 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
               label="Start date"
               type="text"
               placeholder="Enter start date"
+              tooltip="Date format: DD-MM-YYYY"
             />
             <RHFTextInput
               name="address"

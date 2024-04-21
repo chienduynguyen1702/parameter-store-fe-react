@@ -21,14 +21,13 @@ const AddForm = ({editedItemId, onClose }) => {
     const fetchData = async () => {
       try {
         const response = await getProjectOverview(editedItemId);
-        console.log('project overview in fetch', response.data.overview);
         
         const orgData = {
             id: response.data.overview.ID,
             name: response.data.overview.name,
             description: response.data.overview.description,
             status: response.data.overview.status,
-            start_at: moment(response.data.overview.start_at).format('YYYY-MM-DD'),
+            start_at: moment(response.data.overview.start_at).format('DD-MM-YYYY'),
             current_sprint: response.data.overview.current_sprint,
             address: response.data.overview.address,
             repo_url: response.data.overview.repo_url,
