@@ -26,9 +26,10 @@ const Overview = () => {
     <>
       <Modal
         outerClassName={'outerModal'}
-        visible={isEditMode}
+        visible={isEditMode || typeof editedItemId !== 'undefined'}
         onClose={() => {
           setIdEditMode(false);
+          setEditedItemId(undefined)
         }}
       >
         {typeof editedItemId !== 'undefined' && (
@@ -45,7 +46,7 @@ const Overview = () => {
               className="cursor-pointer ms-auto"
               onClick={() => {
                 setIdEditMode(true);
-                console.log('x');
+                // console.log('x');
                 handleEditClick(org.id)
               }}
             >

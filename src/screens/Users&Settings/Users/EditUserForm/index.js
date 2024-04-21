@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useListUsers } from '../../../../hooks/data';
 import UserForm from '../UserForm';
 import { getUser } from '../../../../services/api';
+import { toast } from 'react-toastify';
 
 const EditUserForm = ({ editedItemId ,onClose}) => {
   const { editUserMutation } = useListUsers();
@@ -12,6 +13,12 @@ const EditUserForm = ({ editedItemId ,onClose}) => {
       onSuccess: () => {
         onClose();
       },
+      onError: (error) => {
+        console.log("error", error.response.data.error)
+        toast.error(error.response.data.error, {
+          autoClose: 5000,
+        });
+      }
     });
   };
 

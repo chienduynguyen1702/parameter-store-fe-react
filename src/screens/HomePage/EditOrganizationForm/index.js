@@ -43,7 +43,7 @@ const EditOrganizationForm = ({ orgData, onClose, editedItemId }) => {
       handleSubmit={handleSubmit}
       onLoading={false}
       orgData={orgData}
-      onClose={() => {}}
+      onClose={onClose}
     />
   );
 };
