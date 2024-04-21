@@ -244,7 +244,7 @@ export const removeUserInProject = (project_id, user_id) =>
 export const getUserInProject = (project_id, user_id) =>
   authApi({
     method: 'GET',
-    url: `/projects/${project_id}/overview/users/${user_id}`,
+    url: `/projects/${project_id}/overview/users/${user_id}`, 
   });
 export const getProjectOverview = (project_id) =>
   authApi({

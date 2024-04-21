@@ -30,12 +30,14 @@ const EditUserForm = ({ editedItemId ,onClose}) => {
       }
     });
   };
-
+  
   useEffect(() => {
+    console.log('EditUserForm editedItemId',editedItemId);
     const fetchData = async () => {
       try {
         const project_id = id;
         const response = await getUserInProject(project_id,editedItemId);
+        console.log ('response',response)
 
         const userData =  response.data.data?.users;// Assuming response.data contains user information
         console.log ('userData',userData)

@@ -8,10 +8,9 @@ import { toast } from 'react-toastify';
 
 const EditAgentForm = ({ project_id ,onClose, editedItemId, stages, environments }) => {
   const {id} = useParams();
-  // console.log('id', id);
   const { editAgentMutation } = useListAgents(project_id);
   const method = useForm({});
-  // console.log('editedItemId', editedItemId);
+
   const handleSubmit = (data) => {
     const req = {
       data: data,

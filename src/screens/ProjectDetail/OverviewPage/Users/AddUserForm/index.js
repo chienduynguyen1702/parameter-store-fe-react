@@ -4,7 +4,7 @@ import { useProjectUserList } from '../../../../../hooks/data';
 import UserForm from '../UserForm';
 
 const AddUserForm = ({ listUsers, onClose }) => {
-
+  console.log('AddUserForm listUsers',listUsers);
   const { id } = useParams();
   const { addUserMutation } = useProjectUserList(id);
   const method = useForm({});
@@ -15,7 +15,14 @@ const AddUserForm = ({ listUsers, onClose }) => {
       data: data,
       project_id: id,
     }
-    addUserMutation.mutate(body);
+    addUserMutation.mutate(body,{
+      onSuccess: () => {
+        onClose();
+      },
+      onError: (error) => {
+        console.log(error);
+      }
+    });
   };
 
   return (
