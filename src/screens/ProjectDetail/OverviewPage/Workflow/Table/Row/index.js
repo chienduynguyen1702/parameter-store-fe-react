@@ -8,7 +8,7 @@ const Row = ({ item }) => {
   return (
     <div className="tableRow ">
       <div className="tableCell py-3 ps-3 roundedLeft">{item.id}</div>
-      <div className="tableCell ">{item.name}</div>
+      <div className="tableCell ">{item.workflow_name}</div>
       <div className="tableCell">{item.path}</div>
       <div className="tableCell roundedRight">{item.state}</div>
     </div>

@@ -31,6 +31,7 @@ const AgentPage = () => {
   const {
     stages,
     environments,
+    listWorkflows
   } = useProjectOverviewAndUserList(id);
   const {
     listAgents,
@@ -85,6 +86,7 @@ const AgentPage = () => {
             environments={environments}
             setShowConfirmation={setShowConfirmation} 
             setReturnToken={setReturnToken}
+            workflows={listWorkflows}
           />}
         {typeof editedItemId !== 'undefined' && (
           <EditAgentForm
@@ -93,6 +95,7 @@ const AgentPage = () => {
             onClose={() => setEditedItemId(undefined)}
             stages={stages}
             environments={environments}
+            workflows={listWorkflows}
           />
         )}
         {showConfirmation && ( // Render confirmation popup here

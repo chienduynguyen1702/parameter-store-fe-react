@@ -9,13 +9,15 @@ import {
   Item,
 } from '../../../../../components';
 
-const Form = ({ title = '', method, handleSubmit, onLoading, onClose, stages, environments }) => {
+const Form = ({ title = '', method, handleSubmit, onLoading, onClose, stages, environments, workflows }) => {
   // //parse stages to get only name
   const stagesName = stages.map((item) => item.name);
   // console.log('stagesName', stagesName);
   // //parse environments to get only name
   const environmentsName = environments.map((item) => item.name);
   // console.log('environmentsName', environmentsName);
+  const workflowsName = workflows.map((item) => item.workflow_name);
+  // console.log('workflowsName', workflowsName);
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>
@@ -86,11 +88,11 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose, stages, en
           </Row> */}
           <Row>
             <Col sm={12} md={6}>
-              <RHFTextInput
+              <RHFDropdown
                 label="Workflow name"
                 name="workflow_name"
                 placeholder="Enter workflow name"
-                type="text"
+                data={workflowsName}
                 tooltip="Workflow name is required"
               />
             </Col>

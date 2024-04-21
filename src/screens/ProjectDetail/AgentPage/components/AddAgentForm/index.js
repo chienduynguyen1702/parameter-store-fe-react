@@ -5,7 +5,7 @@ import AgentForm from '../AgentForm';
 import { useListAgents } from '../../../../../hooks/data';
 import { toast } from 'react-toastify';
 
-const AddForm = ({ project_id, onClose ,stages, environments, setShowConfirmation , setReturnToken}) => {
+const AddForm = ({ project_id, onClose ,stages, environments, workflows, setShowConfirmation , setReturnToken}) => {
   const { addAgentMutation } = useListAgents(project_id);
   const method = useForm({});
   // console.log('project_id in AddForm', project_id);
@@ -39,6 +39,7 @@ const AddForm = ({ project_id, onClose ,stages, environments, setShowConfirmatio
       onClose={onClose}
       stages={stages}
       environments={environments}
+      workflows={workflows}
     />
   );
 };

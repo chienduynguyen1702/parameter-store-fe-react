@@ -6,7 +6,7 @@ import { useListAgents } from '../../../../../hooks/data';
 import { getAgentById } from '../../../../../services/api';
 import { toast } from 'react-toastify';
 
-const EditAgentForm = ({ project_id ,onClose, editedItemId, stages, environments }) => {
+const EditAgentForm = ({ project_id ,onClose, editedItemId, stages, environments, workflows }) => {
   const {id} = useParams();
   const { editAgentMutation } = useListAgents(project_id);
   const method = useForm({});
@@ -64,6 +64,7 @@ const EditAgentForm = ({ project_id ,onClose, editedItemId, stages, environments
       onLoading={false}
       stages={stages}
       environments={environments}
+      workflows={workflows}
       onClose={() => {}}
     />
   );

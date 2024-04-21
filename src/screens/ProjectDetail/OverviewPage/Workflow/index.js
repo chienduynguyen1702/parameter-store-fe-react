@@ -9,11 +9,10 @@ import Table from './Table';
 import {  } from '../../../../hooks/data';
 
 const WorkflowsPage = ({listWorkflows}) => {
-  console.log('listWorkflows', listWorkflows);
   return (
     <>
       <Card
-        title={`${listWorkflows?.length} Workflows`}
+        title={`Found ${listWorkflows?.length} Workflows In GitHub`}
         classTitle="title-red"
         className={'mb-5'}
       >
