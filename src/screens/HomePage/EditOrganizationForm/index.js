@@ -14,7 +14,6 @@ const EditOrganizationForm = ({ orgData, onClose, editedItemId }) => {
   const { editOrganizationMutation } = useOrganization(editedItemId);
 
   const handleSubmit = (orgData) => {
-    console.log("orgData.establishment_date", orgData?.establishment_date)
     const req = {
       data: orgData,
       org_id: editedItemId,
