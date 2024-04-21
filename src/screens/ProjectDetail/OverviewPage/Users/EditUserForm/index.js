@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 const EditUserForm = ({ editedItemId ,onClose}) => {
   const { id } = useParams();
-  const { editUserMutation } = useProjectUserList();
+  const { editUserMutation } = useProjectUserList(id);
   const method = useForm({});
 
   const handleSubmit = (data) => {
@@ -32,15 +32,15 @@ const EditUserForm = ({ editedItemId ,onClose}) => {
   };
   
   useEffect(() => {
-    console.log('EditUserForm editedItemId',editedItemId);
+    // console.log('EditUserForm editedItemId',editedItemId);
     const fetchData = async () => {
       try {
         const project_id = id;
         const response = await getUserInProject(project_id,editedItemId);
-        console.log ('response',response)
+        // console.log ('response',response)
 
         const userData =  response.data.data?.users;// Assuming response.data contains user information
-        console.log ('userData',userData)
+        // console.log ('userData',userData)
         method.reset(userData); // Populate form fields with user data
       } catch (error) {
         console.error('Error fetching user data:', error);

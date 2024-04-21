@@ -7,7 +7,7 @@ import Item from '../../../../../components/Item';
 import { RHFTextInput, AsyncButton, RHFDropdown, RHFInputSelect } from '../../../../../components';
 
 const UserForm = ({ title = '',listUsers, method, handleSubmit, onLoading, onClose }) => {
-  console.log('UserForm listUsers',listUsers);
+  // console.log('UserForm listUsers',listUsers);
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>
