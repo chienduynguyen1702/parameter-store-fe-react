@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Col, Row, Stack } from 'react-bootstrap';
 import moment from 'moment';
 
-// import EditOrganizationForm from './EditOrganizationForm';
+import EditOrganizationForm from '../EditOrganizationForm';
 import { Card ,Icon,Modal} from '../../../components';
 import { useOrganization } from '../../../hooks/data';
 const Overview = () => {
@@ -31,12 +31,13 @@ const Overview = () => {
           setIdEditMode(false);
         }}
       >
-        {/* {typeof editedItemId !== 'undefined' && (
+        {typeof editedItemId !== 'undefined' && (
           <EditOrganizationForm 
             editedItemId={editedItemId}
+            orgData={org}
             onClose={() => setEditedItemId(undefined)}
           /> 
-        )}*/}
+        )}
       </Modal>
       <Card title={`${org.name}`} classTitle="title-blue" className="mb-5"head={
           <>
@@ -44,8 +45,8 @@ const Overview = () => {
               className="cursor-pointer ms-auto"
               onClick={() => {
                 setIdEditMode(true);
-                // console.log('x');
-                // handleEditClick(overview.id)
+                console.log('x');
+                handleEditClick(org.id)
               }}
             >
               <Icon 
@@ -75,8 +76,8 @@ const Overview = () => {
               <p className="status-text ">{org.project_count}</p>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
-              <p className="me-auto">Created date:</p>
-              <p className="detail-content status-text">{moment(org.create_at).format('DD/MM/YYYY')}</p>
+              <p className="me-auto">Establishment date:</p>
+              <p className="detail-content status-text">{moment(org.establishment_date).format('DD-MM-YYYY')}</p>
             </Stack>
           </Col>
           <Col xs={12} md={{ span: 5, offset: 1 }}>
