@@ -13,9 +13,9 @@
         display: block
 
 .row
-    display: table-row
-    +t
-        display: none
+    
+    &.d-flex.justify-content-between.pb-3.fs-7.colorN4.borderBottom
+        display: table-row
 
 .col
     position: relative
@@ -42,6 +42,51 @@
     &:last-child
         &:after
             right: 12px
+    &:nth-child(1)
+        width: 150/1413*100%
+        overflow-x: hidden
+        +t
+            width: 100%
+            padding-right: 42px
+    &:nth-child(2)
+        width: 100/1413*100%
+        overflow-x: hidden
+        +t
+            width: 100%
+            padding-right: 42px
+    &:nth-child(3)
+        width: 100/1413*100%
+        overflow-x: hidden
+        +t
+            width: 100%
+            padding-right: 42px
+    &:nth-child(4)
+        width: 350/1413*100%
+        +t
+            width: 100%
+            padding-right: 42px
+    &:nth-child(5)
+        width: 50/1413*100%
+        +t
+            width: 100%
+            padding-right: 42px
+    &:nth-child(6)
+        width: 70/1413*100%
+        overflow-x: hidden
+        +t
+            width: 100%
+            padding-right: 42px
+    &:not(:first-child):not(:nth-child(2))
+        padding-top: 20px
+        +t
+            padding-top: 0
+    &:last-child
+        border-radius: 0 8px 8px 0
+        &:after
+            right: 12px
+    &:not(:first-child):not(:last-child)
+        +t
+            margin-bottom: 12px
 
 .foot
     display: flex

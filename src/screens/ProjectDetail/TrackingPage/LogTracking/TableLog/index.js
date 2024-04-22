@@ -83,7 +83,7 @@ const TableLog = ({ items }) => {
   return (
     <div className={styles.market}>
       <div className={styles.table}>
-        <div className={styles.row}>
+        <div className={styles.row} >
           <div className={styles.col}>
             Time
             <div
@@ -95,7 +95,6 @@ const TableLog = ({ items }) => {
           </div>
           <div className={styles.col}>Actor</div>
           <div className={styles.col}>Actions</div>
-          {/* <div className={styles.col}>Endpoint</div> */}
           <div className={styles.col}>Message</div>
           <div className={styles.col}>
             Response Status
@@ -131,17 +130,23 @@ const TableLog = ({ items }) => {
           </div>
           <div className={styles.col}>Latency</div>
         </div>
-        {isLoading && <SkeletonTable />}
 
-        {listLoggers?.map((log) => (
-          <Row
-            item={log}
-            // key={index}
-            // up={items.length - index <= 2}
-            // value={selectedFilters.includes(x.id)}
-            // onChange={() => handleChange(x.id)}
-          />
-        ))}
+
+        <div className="d-flex flex-column justify-content-between flex-fill">
+          <div style={{ height: '600px' }} className=" overflow-y-scroll">
+          {isLoading && <SkeletonTable />}
+
+            {listLoggers?.map((log) => (
+              <Row
+                item={log}
+                // key={index}
+                // up={items.length - index <= 2}
+                // value={selectedFilters.includes(x.id)}
+                // onChange={() => handleChange(x.id)}
+              />
+            ))}
+          </div>
+        </div>
       </div>
       {/* {isSuccess && listLoggers.length === 0 && <NoData />} */}
       {((isSuccess && listLoggers.length !== 0)) && (

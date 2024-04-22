@@ -91,7 +91,7 @@ const updateScreenName = (endpoint) => {
 const Row = ({ item }) => {
   const [visibleActions, setVisibleActions] = useState(false);
   const [visibleModalProduct, setVisibleModalProduct] = useState(false);
-  console.log('tracking item each row', item);
+  // console.log('tracking item each row', item);
 
   return (
     <>
