@@ -5,7 +5,6 @@ import AvatarAndInfo from './AvatarAndInfo';
 import { PopoverEditAndRemove } from '../../../../../../components';
 
 const Row = ({ item }) => {
-  console.log('workflow item: ', item);
   return (
     <div className="tableRow ">
       <div className="tableCell py-3 ps-3 roundedLeft">{item.id}</div>
