@@ -91,7 +91,7 @@ const updateScreenName = (endpoint) => {
 const Row = ({ item }) => {
   const [visibleActions, setVisibleActions] = useState(false);
   const [visibleModalProduct, setVisibleModalProduct] = useState(false);
-  // console.log('tracking item', item);
+  console.log('tracking item each row', item);
 
   return (
     <>
@@ -102,7 +102,7 @@ const Row = ({ item }) => {
           {/* <div className={styles.label}>Screen</div> */}
           <div className={styles.number}>
             {/* {updateScreenName(item?.agent.name ?? 'get-param-set')} */}
-            {item?.agent.name }
+            {item?.actor }
           </div>
         </div>
         <div className={styles.col}>

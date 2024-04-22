@@ -33,7 +33,7 @@ const Overview = ({ overview , usersList}) => {
         onClose={() => {
           setIdEditMode(false);
           // setIsSetting(false);
-          setEditedItemId(undefined)
+          
         }}
       >
         {typeof editedItemId !== 'undefined' && (
