@@ -106,6 +106,10 @@ function App() {
                   >
                     <Route index element={<Navigate to="overview" />} />
                     <Route
+                      path="dashboard/*"
+                      element={<ProjectOverviewPage />}
+                    />
+                    <Route
                       path="overview/*"
                       element={<ProjectOverviewPage />}
                     />

@@ -79,6 +79,7 @@ const useListParameters = (project_id) => {
         toast.success('Add parameter successfully! Start rerun cicd to apply changes.');
       },
       onError: (error) => {
+        // if 500 internal server error
         toast.error(error.response.data.message, {
           autoClose: 5000,
         });

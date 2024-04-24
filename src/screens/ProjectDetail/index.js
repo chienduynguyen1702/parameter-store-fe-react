@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, Outlet, useLocation, useParams } from 'react-router-dom';
 
 const TABS = [
+  { name: 'Dashboard', subPath: 'dashboard' },
   { name: 'Overview', subPath: 'overview' },
   { name: 'Parameters', subPath: 'parameters' },
   { name: 'Agent', subPath: 'agents' },

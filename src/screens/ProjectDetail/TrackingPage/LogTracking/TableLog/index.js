@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './TableLog.module.sass';
+import styles from './Row/Row.module.sass';
 import { useParams } from 'react-router-dom';
 // import cn from "classnames";
 import { Icon, Pagination } from '../../../../../components';
@@ -131,10 +131,10 @@ const TableLog = ({ items }) => {
           <div className={styles.col}>Latency</div>
         </div>
 
+        {isLoading && <SkeletonTable />}
 
         <div className="d-flex flex-column justify-content-between flex-fill">
-          <div style={{ height: '600px' }} className=" overflow-y-scroll">
-          {isLoading && <SkeletonTable />}
+          <div style={{ height: '650px' }} className=" overflow-y-scroll">
 
             {listLoggers?.map((log) => (
               <Row
