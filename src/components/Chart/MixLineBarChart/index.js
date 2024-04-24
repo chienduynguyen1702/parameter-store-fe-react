@@ -75,7 +75,7 @@ export default function MixLineBarChart({
           <YAxis
             axisLine={false}
             label={{
-              value: 'KOCs',
+              value: 'AVG Duration time',
               position: 'top',
               offset: 25,
               fontSize: 12,
@@ -93,7 +93,7 @@ export default function MixLineBarChart({
           <YAxis
             axisLine={false}
             label={{
-              value: 'Views',
+              value: 'Updated Count',
               position: 'top',
               offset: 25,
               fontSize: 12,
@@ -109,7 +109,8 @@ export default function MixLineBarChart({
 
           <Legend
             payload={[
-              { id: '1', value: 'Views', type: 'square', color: '#FFBC99' },
+              { id: '1', value: 'Average Duration time (minutes)', type: 'square', color: '#659EEA' },
+              { id: '2', value: 'Updated Count', type: 'square', color: '#FFBC99' },
             ]}
           />
           <Bar
