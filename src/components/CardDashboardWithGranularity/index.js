@@ -1,61 +1,17 @@
 import { AiOutlinePlus } from 'react-icons/ai';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 
 import cn from 'classnames';
 import styles from './CardDashboard.module.sass';
 
-import {
-  handleDataWithGranularity,
-  handleObjectArrayToArrayObject,
-} from '../../utils/helpers';
-
 export default function CardDashboard({
-  handelGetKOCActiveMutation,
   title,
   children,
   classTitle,
   addTarget,
-  dates,
-  data,
-  dataAPI,
+  granularity = 'day',
+  setGranularity,
 }) {
-  const [result, setResult] = useState([]);
-  const [granularity, setGranularity] = useState('day');
-  const handleChangeRangeTime = useCallback(
-    (granularity) => {
-      setGranularity(granularity);
-      if (handelGetKOCActiveMutation) {
-        handelGetKOCActiveMutation(granularity);
-      }
-    },
-    [handelGetKOCActiveMutation],
-  );
-
-  useEffect(() => {
-    if (data && dates) {
-      setGranularity(granularity);
-      let bucket = handleDataWithGranularity(granularity, dates);
-      let handleData = data?.map((item) => {
-        let bucket = handleDataWithGranularity(
-          granularity,
-          dates,
-          item?.delta,
-          item?.name,
-        );
-        return bucket;
-      });
-
-      if (dataAPI?.delta) {
-        handleData = [...handleData, { [dataAPI.name]: [...dataAPI.delta] }];
-      }
-      const result = handleObjectArrayToArrayObject({
-        bucket,
-        ...handleData,
-      });
-      setResult(result);
-    }
-  }, [data, dataAPI, dates, granularity]);
-
   return (
     <>
       <div className={cn(styles.card)}>
@@ -86,7 +42,7 @@ export default function CardDashboard({
                     [styles.active]: granularity === 'day' ? true : false,
                   })}
                   onClick={() => {
-                    handleChangeRangeTime('day');
+                    setGranularity('day');
                   }}
                 >
                   Day
@@ -96,7 +52,7 @@ export default function CardDashboard({
                     [styles.active]: granularity === 'week' ? true : false,
                   })}
                   onClick={() => {
-                    handleChangeRangeTime('week');
+                    setGranularity('week');
                   }}
                 >
                   Week
@@ -106,7 +62,7 @@ export default function CardDashboard({
                     [styles.active]: granularity === 'month' ? true : false,
                   })}
                   onClick={() => {
-                    handleChangeRangeTime('month');
+                    setGranularity('month');
                   }}
                 >
                   Month
@@ -116,7 +72,7 @@ export default function CardDashboard({
                     [styles.active]: granularity === 'quarter' ? true : false,
                   })}
                   onClick={() => {
-                    handleChangeRangeTime('quarter');
+                    setGranularity('quarter');
                   }}
                 >
                   Quarter
@@ -126,7 +82,7 @@ export default function CardDashboard({
                     [styles.active]: granularity === 'year' ? true : false,
                   })}
                   onClick={() => {
-                    handleChangeRangeTime('year');
+                    setGranularity('year');
                   }}
                 >
                   Year
@@ -135,9 +91,7 @@ export default function CardDashboard({
             </div>
           </div>
         )}
-        {React.Children.map(children, (child) => {
-          return React.cloneElement(child, { data: result });
-        })}
+        {children}
       </div>
     </>
   );

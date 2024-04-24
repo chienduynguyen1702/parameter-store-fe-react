@@ -7,6 +7,7 @@ import styles from './SummaryCard.module.sass';
 import useQueryString from '../../../../hooks/useQueryString';
 
 export default function SummaryCard({ counters }) {
+  console.log('counters', counters);
   const { queryString } = useQueryString();
   const { from, to } = queryString;
 

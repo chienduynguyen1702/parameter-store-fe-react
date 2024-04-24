@@ -21,23 +21,26 @@ import SummaryCard from './SummaryCard';
 import Content from './CardTopHighLight/Content';
 
 import {
-  useDashboardHighlight,
-  // useKOCActiveStatistic,
+  useProjectDashboardLogs,
+  useProjectDashboardTotal,
 } from '../../../hooks/data';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function DashboardHighLight() {
   const refDashboardHighLight = useRef();
-  const { statisticsHighlights } = useDashboardHighlight();
-  const [time, setTime] = useState('day');
-  // const { KOCs } = useKOCActiveStatistic(time);
 
-  const [visibleModalPreview, setVisibleModalPreview] = useState(false);
-  const [videoModalPreview, setVideoModalPreview] = useState();
+  const { id: projectId } = useParams();
+  const { total } = useProjectDashboardTotal(projectId);
+
+  const [granularity, setGranularity] = useState('day');
+  const { logs, isSuccess: isLogsSuccess } = useProjectDashboardLogs(
+    projectId,
+    granularity,
+  );
 
   const addLoadingChart = useCallback(
-    (elm, name, height = 488) =>
-      statisticsHighlights.isSuccess?.[name] ? (
+    (elm, height = 488) =>
+      isLogsSuccess ? (
         elm
       ) : (
         <div className="w-100 d-flex justify-content-center">
@@ -54,7 +57,7 @@ export default function DashboardHighLight() {
           />
         </div>
       ),
-    [statisticsHighlights.isSuccess],
+    [isLogsSuccess],
   );
 
   return (
@@ -88,27 +91,20 @@ export default function DashboardHighLight() {
         <div className="print-highlight-dashboard">
           <SummaryCard
             counters={[
-              statisticsHighlights?.totals[0],
-              statisticsHighlights?.totals[1],
-              statisticsHighlights?.totals[2],
-              statisticsHighlights?.totals[3],
-              statisticsHighlights?.totals[4],
-              statisticsHighlights?.totals[5],
+              total?.count_agent_actions_this_month,
+              total?.count_agent_actions_this_week,
+              total?.count_updated_this_month,
+              total?.count_updated_this_week,
+              total?.count_workflows,
+              total?.count_workflows,
             ]}
           />
           <div className="mt-4">
             <CardDashboardWithGranularity
               title={'Overlook Performance'}
               classTitle={'title-purple'}
-              // handelGetKOCActiveMutation = {handelGetKOCActiveMutation}
-              dates={statisticsHighlights?.rangeTime}
-              data={[
-                // statisticsHighlights?.orders,
-                statisticsHighlights?.statisticsViews,
-              ]}
-              handelGetKOCActiveMutation={setTime}
-              dataAPI={{}}
-              // dataAPI={KOCs}
+              granularity={granularity}
+              setGranularity={(value) => setGranularity(value)}
             >
               {addLoadingChart(
                 <MixLineBarChart
@@ -117,9 +113,8 @@ export default function DashboardHighLight() {
                   className={'mt-4'}
                   name={'overLookChart'}
                   height={488}
-                  KOCsMax={statisticsHighlights?.totals[0]}
+                  data={logs}
                 />,
-                'views',
               )}
             </CardDashboardWithGranularity>
           </div>
@@ -200,13 +195,6 @@ export default function DashboardHighLight() {
           </div>
         </div> */}
       </div>
-
-      <ModalPreview
-        visible={visibleModalPreview}
-        onClose={() => setVisibleModalPreview(false)}
-        video={videoModalPreview}
-        title="Preview TikTok"
-      />
     </>
   );
 }

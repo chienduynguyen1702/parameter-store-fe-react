@@ -8,6 +8,8 @@ export { default as useProjectById } from './projects/useProjectOverviewAndUserL
 export { default as useProjectUserList } from './projects/useProjectUserList';
 export { default as useProjectOverviewAndUserList } from './projects/useProjectOverviewAndUserListById';
 export { default as useListProjectsArchived } from './projects/useListProjectsArchived';
+export { default as useProjectDashboardLogs } from './projects/useProjectDashboardLogs';
+export { default as useProjectDashboardTotal } from './projects/useProjectDashboardTotal';
 // Project / Parameters
 export { default as useListParameters } from './parameters/useListParameters';
 export { default as useListParametersArchived } from './parameters/useListParametersArchived';
