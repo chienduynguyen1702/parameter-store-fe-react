@@ -18,6 +18,7 @@ export { default as SingleBarChart } from './Chart/SingleBarChart';
 export { default as SingleLineChart } from './Chart/SingleLineChart';
 
 export { default as ColorInput } from './ColorInput';
+export { default as CardDashboardWithGranularity } from './CardDashboardWithGranularity';
 export { default as ConfirmContent } from './ConfirmContent';
 export { default as ConfirmReturnContent } from './ConfirmReturnContent';
 export { default as Checkbox } from './Checkbox';
@@ -69,6 +70,7 @@ export { default as Sidebar } from './Sidebar';
 export { default as SkeletonTable } from './SkeletonTable';
 export { default as Smile } from './Smile';
 export { default as SummaryCard } from './SummaryCard';
+export { default as SummaryCardCustom } from './SummaryCardCustom';
 export { default as Switch } from './Switch';
 export { default as TagInput } from './TagInput';
 export { default as TextInput } from './TextInput';

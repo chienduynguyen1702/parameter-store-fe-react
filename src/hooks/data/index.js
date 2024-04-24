@@ -1,5 +1,7 @@
 // Organization
 export { default as useOrganization } from './organizations/useOrganization';
+// Project / Dashboard
+export { default as useDashboardHighlight } from './dashboard/useDashboardHighlight';
 // Project / Overview
 export { default as useListProjects } from './projects/useListProjects';
 export { default as useProjectById } from './projects/useProjectOverviewAndUserListById';

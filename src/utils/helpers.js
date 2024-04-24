@@ -187,3 +187,35 @@ export const handleDataWithGranularity = (data, granularity) => {
 
   return result;
 };
+
+export const handleObjectArrayToArrayObject = (objectArray) => {
+  const result = [];
+
+  const keys = Object.keys(objectArray.bucket);
+  const length = objectArray.bucket[keys[0]].length;
+
+  for (let i = 0; i < length; i++) {
+    const obj = {};
+
+    for (const key in objectArray) {
+      const innerKey = Object.keys(objectArray[key])[0];
+      obj[innerKey] = objectArray[key][innerKey][i];
+    }
+
+    result.push(obj);
+  }
+  return result;
+};
+
+export const changeArrayInt = (arr) => {
+  return (arr = arr.map(function (element) {
+    return parseInt(element);
+  }));
+};
+
+
+export function filterHashTags(str) {
+  const hashtags = str.match(/#\w+/g);
+  const hashtagsString = hashtags?.join(' ');
+  return hashtagsString;
+}

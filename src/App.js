@@ -38,6 +38,9 @@ const ProjectAgentPage = lazy(() =>
   import('./screens/ProjectDetail/AgentPage'),
 );
 
+const DashboardHighLight = lazy(() =>
+  import('./screens/ProjectDetail/Dashboard'),
+);
 const SignIn = lazy(() => import('./screens/Authentication/SignIn'));
 const ResetPassword = lazy(() =>
   import('./screens/Authentication/ResetPassword'),
@@ -104,10 +107,10 @@ function App() {
                       </SuspenseContainer>
                     }
                   >
-                    <Route index element={<Navigate to="overview" />} />
+                    <Route index element={<Navigate to="dashboard" />} />
                     <Route
                       path="dashboard/*"
-                      element={<ProjectOverviewPage />}
+                      element={<DashboardHighLight />}
                     />
                     <Route
                       path="overview/*"
