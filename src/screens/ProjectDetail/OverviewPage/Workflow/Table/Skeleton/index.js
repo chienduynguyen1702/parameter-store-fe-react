@@ -25,7 +25,8 @@ export default function SkeletonTable({ limit = 1 }) {
               </div>
             </div>
           );
-        })}
+        })
+      }
     </>
   );
 }
