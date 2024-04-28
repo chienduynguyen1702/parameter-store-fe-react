@@ -40,13 +40,14 @@ const useProjectOverviewAndUserList = (id) => {
         color: environment?.color,
     }));
     // console.log("environments: ", environments);
-    const listWorkflows = data?.overview?.workflows?.map((workflow) => ({
-        id: workflow?.workflow_id,
-        workflow_name: workflow?.name,
-        path: workflow?.path,
-        state: workflow?.state,
-        url_path: `https://${data?.overview.repo_url}/blob/main/${workflow?.path}`,
-    }));
+
+    // const listWorkflows = data?.overview?.workflows?.map((workflow) => ({
+    //     id: workflow?.workflow_id,
+    //     workflow_name: workflow?.name,
+    //     path: workflow?.path,
+    //     state: workflow?.state,
+    //     url_path: `https://${data?.overview.repo_url}/blob/main/${workflow?.path}`,
+    // }));
     return {
     // // overview tab
     overview: overview,
@@ -54,7 +55,7 @@ const useProjectOverviewAndUserList = (id) => {
     environments: environments,
     usersList: usersList,
     isSuccess,
-    listWorkflows,
+    // listWorkflows,
 
 
 

@@ -51,6 +51,7 @@
     "react-toastify": "^8.2.0",
     "react-tooltip": "^4.2.21",
     "recharts": "^2.1.5",
+    "universal-cookie": "^7.1.4",
     "use-dark-mode": "^2.3.1",
     "xlsx": "^0.18.5",
     "yup": "^0.32.11"

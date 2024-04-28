@@ -96,7 +96,7 @@ export default function DashboardHighLight() {
               total?.count_updated_this_month,
               total?.count_updated_this_week,
               total?.count_workflows,
-              total?.count_workflows,
+              // total?.count_workflows,
             ]}
           />
           <div className="mt-4">

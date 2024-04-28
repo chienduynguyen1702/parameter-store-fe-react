@@ -8,18 +8,15 @@ import {
 import Table from './Table';
 import {  } from '../../../../hooks/data';
 
-const WorkflowsPage = ({listWorkflows}) => {
+const WorkflowsPage = ({}) => {
   return (
     <>
       <Card
-        title={`Found ${listWorkflows?.length} Workflows In GitHub`}
+        title={`Workflows In GitHub`}
         classTitle="title-red"
         className={'mb-5'}
       >
-        <Table
-          listWorkflows={listWorkflows}
-          // totalPage={pagination?.totalPage}
-        />
+        <Table/>
       </Card>
     </>
   );

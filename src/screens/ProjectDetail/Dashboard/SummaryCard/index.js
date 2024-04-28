@@ -16,8 +16,8 @@ export default function SummaryCard({ counters }) {
   const items = [
     {
       icon: 'dashboard-info-green',
-      title: 'Total KOCs',
-      tooltip: `Active KOCs from ${dateFrom} to ${dateTo}`,
+      title: 'Total Updates',
+      tooltip: `Updates from ${dateFrom} to ${dateTo}`,
     },
     {
       icon: 'dashboard-shopping-carts-purple',
@@ -40,15 +40,15 @@ export default function SummaryCard({ counters }) {
       tooltip: `Total views from ${dateFrom} to ${dateTo}`,
     },
 
-    {
-      icon: 'dashboard-eye-red',
-      title: 'Average views per KOC',
-      tooltip: `Average views per KOC from ${dateFrom} to ${dateTo}`,
-    },
+    // {
+    //   icon: 'dashboard-eye-red',
+    //   title: 'Average views per KOC',
+    //   tooltip: `Average views per KOC from ${dateFrom} to ${dateTo}`,
+    // },
   ];
 
   return (
-    <Card className={cn('row d-flex justify-content-center mx-0', styles.card)}>
+    <Card className={cn('row d-flex justify-content mx-0', styles.card)}>
       {items.map((x, index) => (
         <div
           key={index}

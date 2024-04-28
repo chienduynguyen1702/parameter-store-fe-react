@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
     async (data) => {
       try {
         const response = await loginFn(data);
-
+        console.log("response",response);
         saveMe(response?.data?.['user']);
 
         console.log(getCookie());
@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
   const loginWithCookie = useCallback(async () => {
     try {
       const response = await validateFn();
-      saveMe(response.data?.['user']);
+      saveMe(response.data?.user);
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
@@ -118,7 +118,7 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(document.cookie);
+    // console.log(document.cookie);
     loginWithCookie();
   }, [loginWithCookie]);
 
