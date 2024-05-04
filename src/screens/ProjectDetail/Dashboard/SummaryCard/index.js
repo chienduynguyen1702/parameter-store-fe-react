@@ -15,36 +15,36 @@ export default function SummaryCard({ counters }) {
   const dateTo = moment(to).format('DD/MM/YYYY');
   const items = [
     {
+      icon: 'dashboard-eye-red',
+      title: 'Average duration',
+      tooltip: `Average duration of workflows this month (second)`,
+    },
+    {
+      icon: 'dashboard-eye-blue',
+      title: 'Total workflows',
+      tooltip: `Total workflows in project`,
+    },
+    {
       icon: 'dashboard-info-green',
-      title: 'Total Updates',
+      title: 'Total updates this sprint',
       tooltip: `Updates from ${dateFrom} to ${dateTo}`,
     },
     {
       icon: 'dashboard-shopping-carts-purple',
-      title: 'Total revenues',
+      title: 'Total updates this month',
       tooltip: `Total revenues generated from products from ${dateFrom} to ${dateTo}`,
     },
     {
       icon: 'dashboard-storage-bag-orange',
-      title: 'Total products sold',
-      tooltip: `Number of products sold from ${dateFrom} to ${dateTo}`,
+      title: 'Total agent run this sprint',
+      tooltip: `Total agent run this sprint`,
     },
     {
       icon: 'dashboard-camera-blue',
-      title: 'Total contents',
-      tooltip: `Total contents from ${dateFrom} to ${dateTo}`,
-    },
-    {
-      icon: 'dashboard-eye-blue',
-      title: 'Total views',
-      tooltip: `Total views from ${dateFrom} to ${dateTo}`,
+      title: 'Total agent run this month',
+      tooltip: `Total agent run from ${dateFrom} to ${dateTo}`,
     },
 
-    // {
-    //   icon: 'dashboard-eye-red',
-    //   title: 'Average views per KOC',
-    //   tooltip: `Average views per KOC from ${dateFrom} to ${dateTo}`,
-    // },
   ];
 
   return (

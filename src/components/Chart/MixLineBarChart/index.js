@@ -13,7 +13,7 @@ import {
 
 import cn from 'classnames';
 
-import { handleLongNumber } from '../../../utils/helpers';
+import { handleLongNumber, handleLongNumberToDuration } from '../../../utils/helpers';
 import ChartTooltip from '../../../components/ChartTooltip/index';
 
 export default function MixLineBarChart({
@@ -83,7 +83,7 @@ export default function MixLineBarChart({
               fill: '#9A9FA5',
               dx: 0,
             }}
-            tickFormatter={(value) => handleLongNumber(value, 0)}
+            tickFormatter={(value) => handleLongNumberToDuration(value)}
             yAxisId="left"
             allowDecimals={false}
             // domain={[0, KOCsMax || 'auto']}

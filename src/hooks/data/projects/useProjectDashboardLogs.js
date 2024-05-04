@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getProjectDashboard } from '../../../services/api';
+import { getProjectDashboard, getProjectDashboardTotals,getProjectDashboardLogs } from '../../../services/api';
 
 const useProjectDashboard = (projectId, granularity) => {
-  console.log('useProjectDashboard', granularity);
+  // console.log('useProjectDashboard', granularity);
   const parseData = (data) => {
     const logs = data?.logs?.map((log) => ({
       ...log,
@@ -20,7 +20,7 @@ const useProjectDashboard = (projectId, granularity) => {
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['project-dashboard', projectId, granularity],
     // tách api
-    queryFn: () => getProjectDashboard(projectId, granularity),
+    queryFn: () => getProjectDashboardLogs(projectId, granularity),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data),
   });

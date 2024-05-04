@@ -8,9 +8,12 @@ import styles from './SummaryCard.module.sass';
 import Tooltip from '../Tooltip';
 import Icon from '../Icon';
 
-import { handleLongNumber } from '../../utils/helpers';
+import { handleLongNumberToDuration } from '../../utils/helpers';
 
 export default function SummaryCard({ data, counter, index }) {
+  // console.log('data', data);
+  // console.log('counter', handleLongNumberToDuration(counter));
+  // console.log('index', index);
   return (
     <div
       className={cn(
@@ -36,7 +39,7 @@ export default function SummaryCard({ data, counter, index }) {
           counter !== null &&
           !isNaN(counter) &&
           !data.disabled && (
-            <div className={styles.counter}>{handleLongNumber(counter)}</div>
+            <div className={styles.counter}>{data.title === 'Average duration'? handleLongNumberToDuration(counter) : counter }</div>
           )}
         {(counter === undefined || isNaN(counter)) && (
           <Skeleton width={100} height={36} className="mb-1" />

@@ -262,10 +262,18 @@ export const deleteProject = (project_id) =>
     url: `/projects/${project_id}`,
   });
 
-export const getProjectDashboard = (project_id, granularity) =>
+export const getProjectDashboardTotals = (project_id, granularity) =>
   authApi({
     method: 'GET',
-    url: `/projects/${project_id}/dashboard/`,
+    url: `/projects/${project_id}/dashboard/totals`,
+    params: {
+      granularity,
+    },
+  });
+  export const getProjectDashboardLogs = (project_id, granularity) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/dashboard/logs`,
     params: {
       granularity,
     },

@@ -91,12 +91,12 @@ export default function DashboardHighLight() {
         <div className="print-highlight-dashboard">
           <SummaryCard
             counters={[
-              total?.count_agent_actions_this_month,
-              total?.count_agent_actions_this_week,
-              total?.count_updated_this_month,
-              total?.count_updated_this_week,
+              total?.avg_duration_of_workflows_current_month,
               total?.count_workflows,
-              // total?.count_workflows,
+              total?.count_updated_this_week,
+              total?.count_updated_this_month,
+              total?.count_agent_actions_this_week,
+              total?.count_agent_actions_this_month,
             ]}
           />
           <div className="mt-4">

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getProjectDashboard } from '../../../services/api';
+import { getProjectDashboard, getProjectDashboardTotals } from '../../../services/api';
 
 const useProjectDashboard = (projectId) => {
   const parseData = (data) => {
@@ -10,6 +10,7 @@ const useProjectDashboard = (projectId) => {
       count_updated_this_month: data?.count_updated_this_month,
       count_updated_this_week: data?.count_updated_this_week,
       count_workflows: data?.count_workflows,
+      avg_duration_of_workflows_current_month: data?.avg_duration_of_workflows_current_month,
     };
 
     return { total };
@@ -18,7 +19,7 @@ const useProjectDashboard = (projectId) => {
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['project-dashboard', projectId],
     // tách api
-    queryFn: () => getProjectDashboard(projectId),
+    queryFn: () => getProjectDashboardTotals(projectId),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data),
   });

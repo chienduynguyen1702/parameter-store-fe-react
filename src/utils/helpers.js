@@ -73,6 +73,15 @@ export function handleLongNumber(number, format = 2, isDecimal = false) {
   );
 }
 
+export function handleLongNumberToDuration (number ) {
+  // default unit is ms
+  const secondDuration = Math.floor(number / 1000);
+  if (secondDuration < 60) {
+    return `${secondDuration} s`;
+  }
+  return `${Math.floor(secondDuration / 60)} m ${secondDuration % 60} s`;
+}
+
 export const onInvalidSubmit = (data) => {
   let errorMessage = (
     <div>
