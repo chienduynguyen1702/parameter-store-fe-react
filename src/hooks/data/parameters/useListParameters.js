@@ -52,6 +52,7 @@ const useListParameters = (project_id) => {
         },
         createdAt: moment(item.CreatedAt).format('DD/MM/YYYY'),
         updatedAt: moment(item.UpdatedAt).format('DD/MM/YYYY'),
+        isApplied: item.is_applied,
       };
     });
     const pagination = {

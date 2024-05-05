@@ -4,6 +4,7 @@ export { default as ButtonImport } from './ButtonImport';
 export { default as ButtonExport } from './ButtonExport';
 export { default as ButtonSetting } from './ButtonSetting';
 export { default as ButtonAdd } from './ButtonAdd';
+export { default as ButtonApply } from './ButtonApply';
 export { default as Button } from './Button';
 export { default as Card } from './Card';
 
