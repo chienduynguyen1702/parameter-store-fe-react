@@ -221,6 +221,12 @@ export const editProject = (id, data) =>
     url: `/projects/${id}/overview/`,
     data,
   });
+
+export const applyParameters = (project_id) =>
+  authApi({
+    method: 'POST',
+    url: `/projects/${project_id}/apply-parameters`,
+  });
 // ------------------------------ Project Detail ------------------------------
 
 export const addUserToProject = (project_id, data) =>
@@ -251,7 +257,7 @@ export const getProjectOverview = (project_id) =>
     method: 'GET',
     url: `/projects/${project_id}/overview/`,
   });
-  export const getProjectListWorkflows = (project_id) =>
+export const getProjectListWorkflows = (project_id) =>
   authApi({
     method: 'GET',
     url: `/projects/${project_id}/workflows/`,
@@ -270,7 +276,7 @@ export const getProjectDashboardTotals = (project_id, granularity) =>
       granularity,
     },
   });
-  export const getProjectDashboardLogs = (project_id, granularity) =>
+export const getProjectDashboardLogs = (project_id, granularity) =>
   authApi({
     method: 'GET',
     url: `/projects/${project_id}/dashboard/logs`,

@@ -10,13 +10,14 @@ import {
   Modal,
   FiltersCustom,
   RHFInputSelect,
+  ButtonApply,
 } from '../../../components';
 
 import Table from './components/Table/Table';
 import AddParameterForm from './components/AddParameterForm';
 import EditParameterForm from './components/EditParameterForm';
 import FormFilter from './components/FormFilter';
-import UpdateForm from './components/UpdateForm';
+import ApplyParamForm from './components/ApplyParamForm';
 
 import styles from './Parameter.module.sass';
 import {
@@ -97,18 +98,23 @@ const ParametersPage = () => {
         )}
       </Modal>
       <Modal
+        outerClassName={'outerModal'}
         visible={isUpdating}
         onClose={() => {
           setIsUpdating(false);
         }}
       >
-        <UpdateForm />
+        <ApplyParamForm
+          listParameters={listParameters}
+          // handleSubmit={() => {}}
+          onClose={() => setIsUpdating(false)}
+        />
       </Modal>
 
       <div className={styles.filter}>
-        <ButtonSetting
-          handleClickSetting={() => setIsUpdating(true)}
-          titleButton="Update Parameters"
+        <ButtonApply
+          handleClickApply={() => setIsUpdating(true)}
+          titleButton="Apply Parameters"
           className="me-2"
         />
       </div>

@@ -5,7 +5,12 @@ import moment from 'moment';
 
 import Item from '../../../../../components/Item';
 
-import { RHFTextInput, AsyncButton, RHFCheckbox, RHFSwitch } from '../../../../../components';
+import {
+  RHFTextInput,
+  AsyncButton,
+  RHFCheckbox,
+  RHFSwitch,
+} from '../../../../../components';
 
 const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
   return (
@@ -47,7 +52,7 @@ const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
             name="auto_update"
             label="Auto update parameters"
             tooltip="Auto update parameters"
-            defaultChecked={true}
+            // defaultChecked={true}
           />
         </Item>
 

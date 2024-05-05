@@ -2,7 +2,12 @@ import { useCallback, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
-import { addProject, editProject, getListProjects } from '../../../services/api';
+import {
+  addProject,
+  editProject,
+  getListProjects,
+  applyParameters,
+} from '../../../services/api';
 import { toast } from 'react-toastify';
 
 const DEFAULT_QUERY_STRING = {
@@ -36,6 +41,7 @@ const useListProjects = () => {
         currentSprint: project?.CurrentSprint,
         startDate: project?.startDate,
         status: project?.status,
+        autoUpdate: project?.auto_update,
       };
     });
     const pagination = {
@@ -77,7 +83,7 @@ const useListProjects = () => {
 
   const editProjectMutation = useMutation(
     (data) => {
-      return editProject(data.id,data);
+      return editProject(data.id, data);
     },
     {
       onSuccess: () => {
@@ -93,6 +99,25 @@ const useListProjects = () => {
       },
     },
   );
+
+  const applyParametersMutation = useMutation(
+    (data) => {
+      return applyParameters(data);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['projects'],
+        });
+        toast.success('Apply parameters successfully, waiting for agent pull');
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message, {
+          autoClose: 5000,
+        });
+      },
+    },
+  );
   return {
     listProjects: data?.projects,
     pagination: data?.pagination,
@@ -100,6 +125,7 @@ const useListProjects = () => {
     isLoading,
     addProjectMutation,
     editProjectMutation,
+    applyParametersMutation,
   };
 };
 
