@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
+  ButtonSetting,
   ButtonAdd,
   Card,
   FormSearch,
@@ -15,8 +16,14 @@ import Table from './components/Table/Table';
 import AddParameterForm from './components/AddParameterForm';
 import EditParameterForm from './components/EditParameterForm';
 import FormFilter from './components/FormFilter';
+import UpdateForm from './components/UpdateForm';
 
-import { useListParameters, useListParametersArchived, useProjectOverviewAndUserList } from '../../../hooks/data';
+import styles from './Parameter.module.sass';
+import {
+  useListParameters,
+  useListParametersArchived,
+  useProjectOverviewAndUserList,
+} from '../../../hooks/data';
 import {
   archiveParameter,
   getArchivedParameters,
@@ -27,7 +34,7 @@ const ParametersPage = () => {
   const { id } = useParams();
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
-
+  const [isUpdating, setIsUpdating] = useState(false);
   const {
     listParameters,
     isLoading: isListParametersLoading,
@@ -40,10 +47,7 @@ const ParametersPage = () => {
     addParameterMutation,
   } = useListParameters(id);
 
-  const {
-    stages,
-    environments,
-  } = useProjectOverviewAndUserList(id);
+  const { stages, environments } = useProjectOverviewAndUserList(id);
   const {
     archivedList,
     isSuccess: isListArchivedSuccess,
@@ -74,14 +78,14 @@ const ParametersPage = () => {
           setEditedItemId(undefined);
         }}
       >
-        {isAddMode && 
-          <AddParameterForm 
-          project_id={id}
-          onClose={() => setIsAddMode(false)} 
-          stages={stages}
-          environments={environments}
+        {isAddMode && (
+          <AddParameterForm
+            project_id={id}
+            onClose={() => setIsAddMode(false)}
+            stages={stages}
+            environments={environments}
           />
-        }
+        )}
         {typeof editedItemId !== 'undefined' && (
           <EditParameterForm
             project_id={id}
@@ -92,7 +96,22 @@ const ParametersPage = () => {
           />
         )}
       </Modal>
+      <Modal
+        visible={isUpdating}
+        onClose={() => {
+          setIsUpdating(false);
+        }}
+      >
+        <UpdateForm />
+      </Modal>
 
+      <div className={styles.filter}>
+        <ButtonSetting
+          handleClickSetting={() => setIsUpdating(true)}
+          titleButton="Update Parameters"
+          className="me-2"
+        />
+      </div>
       <Card
         title={`${isListUsersSuccess ? pagination?.total : '0'} Parameters`}
         classTitle="title-purple"
@@ -101,7 +120,7 @@ const ParametersPage = () => {
             <FormSearch placeholder="Search by name" />
             <div className="d-flex">
               <FiltersCustom className="me-2">
-                <FormFilter 
+                <FormFilter
                   stages={stages}
                   environments={environments}
                   versions={versions}

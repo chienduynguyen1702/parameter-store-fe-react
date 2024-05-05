@@ -21,6 +21,10 @@ const DEFAULT_QUERY_STRING = {
 };
 
 const useListParameters = (project_id) => {
+  const { id } = useParams();
+  if (!project_id) {
+    project_id = id;
+  }
   const queryClient = useQueryClient();
   const { queryString, setQueryString } = useQueryString();
 
@@ -69,14 +73,16 @@ const useListParameters = (project_id) => {
 
   const addParameterMutation = useMutation(
     (data) => {
-      return addParameter(data.project_id,data.data);
+      return addParameter(data.project_id, data.data);
     },
     {
       onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: ['parameters'],
         });
-        toast.success('Add parameter successfully! Start rerun cicd to apply changes.');
+        toast.success(
+          'Add parameter successfully! Start rerun cicd to apply changes.',
+        );
       },
       onError: (error) => {
         // if 500 internal server error
@@ -89,18 +95,17 @@ const useListParameters = (project_id) => {
 
   const editParameterMutation = useMutation(
     (data) => {
-      return editParameter(data.project_id,data.parameter_id, data.data);
+      return editParameter(data.project_id, data.parameter_id, data.data);
     },
     {
       onSuccess: (response) => {
         queryClient.invalidateQueries({
           queryKey: ['parameters'],
-        });  
-        console.log("editParameterMutation response:", response)
+        });
+        console.log('editParameterMutation response:', response);
         const successMessage = response.data.message;
-        toast.success(successMessage,{
+        toast.success(successMessage, {
           autoClose: 10000,
-        
         });
       },
       onError: (error) => {
@@ -123,7 +128,7 @@ const useListParameters = (project_id) => {
     });
     return stages;
   }, []);
-  
+
   const { data: stages } = useQuery({
     queryKey: ['stages'],
     queryFn: () => getStages(),
@@ -169,7 +174,7 @@ const useListParameters = (project_id) => {
 
   const { data: versions } = useQuery({
     queryKey: ['versions'],
-    queryFn: () => getVersions( project_id),
+    queryFn: () => getVersions(project_id),
     select: (data) => parseVersions(data.data.versions),
     staleTime: 10 * 1000,
     enabled: true,
