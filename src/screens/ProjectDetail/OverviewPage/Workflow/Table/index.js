@@ -31,7 +31,7 @@ const Table = (
             <div className="tableCell">Path</div>
             <div className="tableCell">State</div>
           </div>
-          {isLoadingListWorkflows && <SkeletonTable />}
+          {isSuccess && isLoadingListWorkflows && <SkeletonTable />}
           {/* {<SkeletonTable />} */}
           {listWorkflows?.map((workflow) => (
             <Row

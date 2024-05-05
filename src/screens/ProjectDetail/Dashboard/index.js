@@ -105,7 +105,7 @@ export default function DashboardHighLight() {
           />
           <div className="mt-4">
             <CardDashboardWithGranularity
-              title={'Overlook Performance'}
+              title={'Workflow Avg Duration And Param Updated Count'}
               classTitle={'title-purple'}
               granularity={granularity}
               setGranularity={(value) => setGranularity(value)}

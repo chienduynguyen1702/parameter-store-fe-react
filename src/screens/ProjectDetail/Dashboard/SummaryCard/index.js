@@ -27,22 +27,22 @@ export default function SummaryCard({ counters }) {
     {
       icon: 'dashboard-info-green',
       title: 'Count updates this sprint',
-      tooltip: `Updates from ${dateFrom} to ${dateTo}`,
+      tooltip: `Count updates from this sprint`,
     },
     {
       icon: 'dashboard-storage-bag-orange',
       title: 'Count agent actions this sprint',
-      tooltip: `Total agent actions this sprint`,
+      tooltip: `Count agent actions this sprint`,
     },
     {
       icon: 'dashboard-shopping-carts-purple',
-      title: 'Total updates', //this month
-      tooltip: `Total revenues generated from products from ${dateFrom} to ${dateTo}`,
+      title: 'Total updates',
+      tooltip: `All updates of project `,
     },
     {
       icon: 'dashboard-camera-blue',
       title: 'Total agent actions',
-      tooltip: `Total agent actions from ${dateFrom} to ${dateTo}`,
+      tooltip: `Total agent actions in this project`,
     },
   ];
 
