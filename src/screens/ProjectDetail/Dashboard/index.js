@@ -9,6 +9,8 @@ import {
   MixLineBarChart,
   CardDashboardWithGranularity,
   NoData,
+  ClusteredBarChart,
+  MixBarChart,
 } from '../../../components';
 
 import CardProduct from './CardTopHighLight/CardProduct';
@@ -94,9 +96,11 @@ export default function DashboardHighLight() {
               total?.avg_duration_of_workflows_current_month,
               total?.count_workflows,
               total?.count_updated_this_week,
-              total?.count_updated_this_month,
               total?.count_agent_actions_this_week,
-              total?.count_agent_actions_this_month,
+              total?.count_total_updated,
+              // total?.count_updated_this_month,
+              total?.count_total_agent_actions,
+              // total?.count_agent_actions_this_month,
             ]}
           />
           <div className="mt-4">
@@ -107,6 +111,13 @@ export default function DashboardHighLight() {
               setGranularity={(value) => setGranularity(value)}
             >
               {addLoadingChart(
+                <ClusteredBarChart
+                  colors={['#659EEA', '#FFBC99']}
+                  className={'mt-4'}
+                  name={'overLookChart'}
+                  height={500}
+                  data={logs}
+                />,
                 <MixLineBarChart
                   color={'#FFD3B7'}
                   hoverColor={'#FFBC99'}

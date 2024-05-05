@@ -6,23 +6,21 @@ import { NoData, Pagination } from '../../../../../components';
 import SkeletonTable from './Skeleton';
 import { useProjectListWorkflow } from '../../../../../hooks/data';
 
-const Table = ({
-  // listWorkflows,
-  // isListWorkflowsSuccess,
-  // isLoading,
-  // totalPage,
-  // setEditedItemId,
-  // handleRemoveUser,
-}) => {
-  const {id} = useParams();
-  const {
-    listWorkflows,
-    isLoadingListWorkflows,
-    totalPage,
-    isSuccess
-  } = useProjectListWorkflow(id);
-  console.log('listWorkflows', listWorkflows);
-  console.log('isLoadingListWorkflows', isLoadingListWorkflows);
+const Table = (
+  {
+    // listWorkflows,
+    // isListWorkflowsSuccess,
+    // isLoading,
+    // totalPage,
+    // setEditedItemId,
+    // handleRemoveUser,
+  },
+) => {
+  const { id } = useParams();
+  const { listWorkflows, isLoadingListWorkflows, totalPage, isSuccess } =
+    useProjectListWorkflow(id);
+  // console.log('listWorkflows', listWorkflows);
+  // console.log('isLoadingListWorkflows', isLoadingListWorkflows);
   return (
     <div>
       <div className="tableOuter">
@@ -35,22 +33,19 @@ const Table = ({
           </div>
           {isLoadingListWorkflows && <SkeletonTable />}
           {/* {<SkeletonTable />} */}
-          {
-            listWorkflows?.map((workflow) => (
-              <Row
-                // key={workflow.id}
-                item={workflow}
-                // setEditedItemId={setEditedItemId}
-                // handleRemoveUser={handleRemoveUser}
-              />
-            ))
-          }
+          {listWorkflows?.map((workflow) => (
+            <Row
+              // key={workflow.id}
+              item={workflow}
+              // setEditedItemId={setEditedItemId}
+              // handleRemoveUser={handleRemoveUser}
+            />
+          ))}
         </div>
         {isSuccess && listWorkflows.length === 0 && <NoData />}
       </div>
-      {((isSuccess && listWorkflows.length !== 0) || isLoadingListWorkflows) && (
-        <Pagination pageCount={totalPage || 0} />
-      )}
+      {((isSuccess && listWorkflows.length !== 0) ||
+        isLoadingListWorkflows) && <Pagination pageCount={totalPage || 0} />}
     </div>
   );
 };

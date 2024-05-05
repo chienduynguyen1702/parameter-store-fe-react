@@ -1,18 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getProjectDashboard, getProjectDashboardTotals,getProjectDashboardLogs } from '../../../services/api';
+import {
+  getProjectDashboard,
+  getProjectDashboardTotals,
+  getProjectDashboardLogs,
+} from '../../../services/api';
 
 const useProjectDashboard = (projectId, granularity) => {
   // console.log('useProjectDashboard', granularity);
   const parseData = (data) => {
-    const logs = data?.logs?.map((log) => ({
-      ...log,
+    const logs = data?.logs_with_granularity?.map((log) => ({
+      // ...log,
       // bucket sẽ là ngày - trục x
-      bucket: log.CreatedAt.split('T')[0],
+      bucket: log.period_start,
 
       // 2 thằng này sẽ là data cho trục y, t fix cứng 2 cái tên này trong component Chart luôn
-      averageDuration: log.duration,
-      count: log.attempt_number,
+      averageDuration: log.avg_duration_in_period,
+      count: log.count,
     }));
     return { logs };
   };

@@ -13,7 +13,10 @@ import {
 
 import cn from 'classnames';
 
-import { handleLongNumber, handleLongNumberToDuration } from '../../../utils/helpers';
+import {
+  handleLongNumber,
+  handleLongNumberToDuration,
+} from '../../../utils/helpers';
 import ChartTooltip from '../../../components/ChartTooltip/index';
 
 export default function MixLineBarChart({
@@ -109,8 +112,18 @@ export default function MixLineBarChart({
 
           <Legend
             payload={[
-              { id: '1', value: 'Average Duration time (minutes)', type: 'square', color: '#659EEA' },
-              { id: '2', value: 'Updated Count', type: 'square', color: '#FFBC99' },
+              {
+                id: '1',
+                value: 'Average Duration time (minutes)',
+                type: 'line',
+                color: '#659EEA',
+              },
+              {
+                id: '2',
+                value: 'Updated Count',
+                type: 'square',
+                color: '#FFBC99',
+              },
             ]}
           />
           <Bar
