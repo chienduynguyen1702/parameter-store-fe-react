@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import {
   ButtonSetting,
@@ -48,6 +49,7 @@ const ParametersPage = () => {
     addParameterMutation,
   } = useListParameters(id);
 
+  const { overview } = useProjectOverviewAndUserList(id);
   const { stages, environments } = useProjectOverviewAndUserList(id);
   const {
     archivedList,
@@ -69,6 +71,15 @@ const ParametersPage = () => {
     },
   });
 
+  const handleClickApply = () => {
+    if (overview.auto_update === true) {
+      toast.warning(
+        'This project is in auto update mode. No need to apply parameters.',
+      );
+    } else {
+      setIsUpdating(true);
+    }
+  };
   return (
     <>
       <Modal
@@ -104,16 +115,20 @@ const ParametersPage = () => {
           setIsUpdating(false);
         }}
       >
+        {/* if overview.auto_update == false then render <ApplyParamForm/>
+            else render toast warning message "This project auto update mode is not set."
+          */}
+
         <ApplyParamForm
-          listParameters={listParameters}
-          // handleSubmit={() => {}}
+          project_id={id}
           onClose={() => setIsUpdating(false)}
+          versions={versions}
         />
       </Modal>
 
       <div className={styles.filter}>
         <ButtonApply
-          handleClickApply={() => setIsUpdating(true)}
+          handleClickApply={handleClickApply}
           titleButton="Apply Parameters"
           className="me-2"
         />
