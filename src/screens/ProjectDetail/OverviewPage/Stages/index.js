@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-  ButtonAdd,
-  Card,
-  FormSearch,
-  Archived,
-  Modal,
-} from '../../../../components';
+import { ButtonAdd, Card, Archived, Modal } from '../../../../components';
 
 import Table from './components/Table/Table';
 import AddStageForm from './components/AddStageForm';
 import EditStageForm from './components/EditStageForm';
 
-import { useListStagesArchived, useListStages, useListParameters } from '../../../../hooks/data';
+import { useListStagesArchived, useListStages } from '../../../../hooks/data';
 import {
   archiveStage,
   getArchivedStages,
@@ -29,8 +23,6 @@ const Stages = () => {
     pagination,
     isLoading: isListStagesLoading,
     isSuccess: isListStagesSuccess,
-    addStageMutation,
-    editStageMutation,
   } = useListStages(id);
   const {
     archivedList,
@@ -62,11 +54,9 @@ const Stages = () => {
           setEditedItemId(undefined);
         }}
       >
-        {isAddMode && 
-          <AddStageForm 
-            project_id={id}
-            onClose={() => setIsAddMode(false)} 
-          />}
+        {isAddMode && (
+          <AddStageForm project_id={id} onClose={() => setIsAddMode(false)} />
+        )}
         {typeof editedItemId !== 'undefined' && (
           <EditStageForm
             project_id={id}

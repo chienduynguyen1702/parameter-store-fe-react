@@ -1,9 +1,13 @@
 import { useCallback, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
-import { addAgent, editAgent, getListAgent, deleteAgent } from '../../../services/api';
+import {
+  addAgent,
+  editAgent,
+  getListAgent,
+  deleteAgent,
+} from '../../../services/api';
 import { toast } from 'react-toastify';
 
 const DEFAULT_QUERY_STRING = {
@@ -46,7 +50,7 @@ const useListAgents = (project_id) => {
     const pagination = {
       total: agents.length,
       currentPage: 1,
-      totalPage: Math.ceil(agents.length/10),
+      totalPage: Math.ceil(agents.length / 10),
       limit: 10,
     };
     return { pagination, agents };
@@ -126,6 +130,7 @@ const useListAgents = (project_id) => {
     isLoading,
     addAgentMutation,
     editAgentMutation,
+    deleteAgentMutation,
   };
 };
 

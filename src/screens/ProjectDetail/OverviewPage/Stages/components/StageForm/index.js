@@ -1,13 +1,7 @@
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
-import { Col, Row } from 'react-bootstrap';
 
-import {
-  RHFTextInput,
-  AsyncButton,
-  RHFDropdown,
-  Item,
-} from '../../../../../../components';
+import { RHFTextInput, AsyncButton, Item } from '../../../../../../components';
 
 const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
   // //parse stages to get only name

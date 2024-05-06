@@ -1,12 +1,11 @@
 import React from 'react';
 
-import cn from 'classnames';
 import AvatarAndInfo from './AvatarAndInfo';
 import { PopoverEditAndRemove } from '../../../../../../components';
 
 const Row = ({ item, setEditedItemId, setRemovedItemId, handleRemoveUser }) => {
   return (
-<div className="tableRow">
+    <div className="tableRow">
       <div className="tableCell py-3 ps-2 roundedLeft">
         <AvatarAndInfo
           itemId={item?.id}

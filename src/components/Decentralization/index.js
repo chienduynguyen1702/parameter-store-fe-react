@@ -1,9 +1,10 @@
-import React, { useMemo, useContext } from 'react';
+// import React, { useMemo, useContext } from 'react';
+import React from 'react';
 
 export default function Decentralization({
   children,
-  permissions = [],
-  exact = false,
+  // permissions = [],
+  // exact = false,
 }) {
   // const { me } = useContext(AuthContext);
   // // check permission in permissions array have in me.permissions

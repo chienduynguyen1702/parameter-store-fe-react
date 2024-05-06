@@ -1,37 +1,20 @@
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Stack } from 'react-bootstrap';
-import { useQueryClient } from '@tanstack/react-query';
 
-import { Col, Row } from 'react-bootstrap';
-import {
-  AsyncButton,
-  RHFDropdown,
-  Item,
-  RHFTextInput,
-  SettingItem,
-} from '../../../../../components';
+import { AsyncButton, Item } from '../../../../../components';
 import NotAppliedParamTable from './NotAppliedParamTable/Table';
 import { useListProjects } from '../../../../../hooks/data';
-import { toast } from 'react-toastify';
 function UpdateForm({ title = 'Apply Parameters', onClose, listParameters }) {
-  const queryClient = useQueryClient();
   const { applyParametersMutation } = useListProjects();
   // Handle id and current data of form in setting item
-  const [id, setId] = useState(0);
-  const [modalTitle, setModalTitle] = useState('Add New Tier');
+  // const [id, setId] = useState(0);
+  // const [modalTitle, setModalTitle] = useState('Add New Tier');
 
   // Handle modal add and edit setting
-  const [typeAdd, setTypeAdd] = useState('none');
-  const [typeEdit, setTypeEdit] = useState('none');
+  // const [typeAdd, setTypeAdd] = useState('none');
+  // const [typeEdit, setTypeEdit] = useState('none');
 
-  const handleCloseModal = () => {
-    setTypeAdd('none');
-    setTypeEdit('none');
-  };
   const { id: project_id } = useParams();
-  // console.log('listParameters', listParameters);
   const listNotAppliedParameters = listParameters.filter(
     (item) => item.isApplied === false,
   );
@@ -53,38 +36,6 @@ function UpdateForm({ title = 'Apply Parameters', onClose, listParameters }) {
     });
   };
 
-  // const handleSubmit = (data) => {
-  //   if (typeAdd !== 'none') {
-  //     const body = {
-  //       color: data.color,
-  //       type: typeAdd,
-  //       name: data.name,
-  //     };
-  //     return addSettingMutation.mutate(body, {
-  //       onSuccess: () => {
-  //         queryClient.invalidateQueries(typeAdd);
-  //         toast.success(`${modalTitle} Success`);
-  //         handleCloseModal();
-  //       },
-  //     });
-  //   }
-  //   const body = {
-  //     color: data.color,
-  //     type: typeEdit,
-  //     name: data.name,
-  //   };
-  //   return editSettingMutation.mutate(
-  //     { id, data: body },
-  //     {
-  //       onSuccess: () => {
-  //         queryClient.invalidateQueries(typeEdit);
-  //         toast.success(`${modalTitle} Success`);
-  //         handleCloseModal();
-  //       },
-  //     },
-  //   );
-  // };
-
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>
@@ -100,20 +51,6 @@ function UpdateForm({ title = 'Apply Parameters', onClose, listParameters }) {
           </p>
           <div></div>
           <br></br>
-          {/* <RHFTextInput
-            name="name"
-            label="Parameter name"
-            type="text"
-            placeholder="Enter Parameter name"
-            tooltip="Parameter name is required"
-          />
-          <RHFTextInput
-            name="value"
-            label="Value"
-            type="text"
-            placeholder="Enter value"
-            tooltip="Parameter value is required"
-          /> */}
 
           <NotAppliedParamTable
             listNotAppliedParameters={listNotAppliedParameters}

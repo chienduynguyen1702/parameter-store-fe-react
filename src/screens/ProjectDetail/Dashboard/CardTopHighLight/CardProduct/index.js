@@ -1,14 +1,12 @@
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 
 import cn from 'classnames';
 import styles from './CardProduct.module.sass';
 
-import ProductItem from './ProductItem';
-
 import { NoData } from '../../../../../components';
 
 export default function CardProduct({ data }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <>

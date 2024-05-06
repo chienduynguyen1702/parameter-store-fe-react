@@ -1,5 +1,4 @@
 import { AiFillEdit } from 'react-icons/ai';
-import { BiRemoveIn } from 'react-icons/bi';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { HiDotsHorizontal } from 'react-icons/hi';
 

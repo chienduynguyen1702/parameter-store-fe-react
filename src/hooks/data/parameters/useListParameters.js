@@ -11,7 +11,7 @@ import {
   getEnvironments,
   getVersions,
 } from '../../../services/api';
-import { PARAMETERS } from '../../mocks/parameters';
+// import { PARAMETERS } from '../../mocks/parameters';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 

@@ -1,32 +1,19 @@
 import { useCallback, useState, useRef } from 'react';
 import { TailSpin } from 'react-loader-spinner';
-import cn from 'classnames';
-import styles from './DashboardHighLight.module.sass';
 
 import {
-  Card,
-  ModalPreview,
   MixLineBarChart,
   CardDashboardWithGranularity,
-  NoData,
   ClusteredBarChart,
-  MixBarChart,
 } from '../../../components';
 
-import CardProduct from './CardTopHighLight/CardProduct';
-import CardKOC from './CardTopHighLight/CardKOC';
-import CardHashtag from './CardTopHighLight/CardHashtag';
-import TextDateFilter from './TextDateFilter';
-import DashboardFilter from './Filter';
-import FormFilter from './Filter/FormFilterHighlights';
 import SummaryCard from './SummaryCard';
-import Content from './CardTopHighLight/Content';
 
 import {
   useProjectDashboardLogs,
   useProjectDashboardTotal,
 } from '../../../hooks/data';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function DashboardHighLight() {
   const refDashboardHighLight = useRef();

@@ -1,18 +1,17 @@
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
 import EnvironmentForm from '../EnvironmentForm';
 
 import { useListEnvironments } from '../../../../../../hooks/data';
 
-const AddForm = ({ project_id, onClose}) => {
+const AddForm = ({ project_id, onClose }) => {
   const { addEnvironmentMutation } = useListEnvironments(project_id);
   const method = useForm({});
   // console.log('project_id in AddForm', project_id);
   const handleSubmit = (data) => {
     const body = {
-        data : data,
-        project_id : project_id,
-      };
+      data: data,
+      project_id: project_id,
+    };
     addEnvironmentMutation.mutate(body, {
       onSuccess: () => {
         onClose();

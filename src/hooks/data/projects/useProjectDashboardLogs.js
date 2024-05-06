@@ -1,10 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  getProjectDashboard,
-  getProjectDashboardTotals,
-  getProjectDashboardLogs,
-} from '../../../services/api';
+import { getProjectDashboardLogs } from '../../../services/api';
 
 const useProjectDashboard = (projectId, granularity) => {
   // console.log('useProjectDashboard', granularity);

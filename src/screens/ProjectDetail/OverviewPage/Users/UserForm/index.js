@@ -4,9 +4,13 @@ import { Col, Row } from 'react-bootstrap';
 
 import Item from '../../../../../components/Item';
 
-import { RHFTextInput, AsyncButton, RHFDropdown, RHFInputSelect } from '../../../../../components';
+import {
+  AsyncButton,
+  RHFDropdown,
+  RHFInputSelect,
+} from '../../../../../components';
 
-const UserForm = ({ title = '',listUsers, method, handleSubmit, onLoading, onClose }) => {
+const UserForm = ({ title = '', listUsers, method, handleSubmit, onClose }) => {
   // console.log('UserForm listUsers',listUsers);
   return (
     <FormProvider {...method}>

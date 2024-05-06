@@ -3,14 +3,12 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import {
-  ButtonSetting,
   ButtonAdd,
   Card,
   FormSearch,
   Archived,
   Modal,
   FiltersCustom,
-  RHFInputSelect,
   ButtonApply,
 } from '../../../components';
 
@@ -45,8 +43,6 @@ const ParametersPage = () => {
     // stages,
     // environments,
     versions,
-    editParameterMutation,
-    addParameterMutation,
   } = useListParameters(id);
 
   const { overview } = useProjectOverviewAndUserList(id);

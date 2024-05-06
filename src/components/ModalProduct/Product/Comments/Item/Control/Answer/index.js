@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import cn from "classnames";
-import styles from "./Answer.module.sass";
+import React, { useEffect, useRef } from 'react';
+import cn from 'classnames';
+import styles from './Answer.module.sass';
 
 const Answer = ({
   className,
@@ -13,9 +13,9 @@ const Answer = ({
   const textareaRef = useRef(null);
 
   useEffect(() => {
-    textareaRef.current.style.height = "0px";
+    textareaRef.current.style.height = '0px';
     const scrollHeight = textareaRef.current.scrollHeight;
-    textareaRef.current.style.height = scrollHeight + "px";
+    textareaRef.current.style.height = scrollHeight + 'px';
   }, [currentValue]);
 
   return (
@@ -37,14 +37,14 @@ const Answer = ({
         </div>
         <div className={styles.btns}>
           <button
-            className={cn("button button-small", styles.button, {
-              disabled: currentValue === "",
+            className={cn('button button-small', styles.button, {
+              disabled: currentValue === '',
             })}
           >
             Reply
           </button>
           <button
-            className={cn("button-stroke button-small", styles.button)}
+            className={cn('button-stroke button-small', styles.button)}
             onClick={onClose}
           >
             Cancel

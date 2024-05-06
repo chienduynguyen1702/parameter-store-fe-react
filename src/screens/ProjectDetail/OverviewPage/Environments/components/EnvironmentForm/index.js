@@ -1,15 +1,9 @@
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
-import { Col, Row } from 'react-bootstrap';
 
-import {
-  RHFTextInput,
-  AsyncButton,
-  RHFDropdown,
-  Item,
-} from '../../../../../../components';
+import { RHFTextInput, AsyncButton, Item } from '../../../../../../components';
 
-const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
+const Form = ({ title = '', method, handleSubmit, onClose }) => {
   // //parse environments to get only name
   // const environmentsName = environments.map((item) => item.name);
   // console.log('environmentsName', environmentsName);

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import cn from "classnames";
-import styles from "./Details.module.sass";
-import Icon from "../../../Icon";
-import Overview from "./Overview";
-import Products from "./Products";
+import React from 'react';
+import cn from 'classnames';
+import styles from './Details.module.sass';
+import Icon from '../../../Icon';
+import Overview from './Overview';
+import Products from './Products';
 
-const navigation = ["Product", "Comments"];
+const navigation = ['Product', 'Comments'];
 
 const Details = ({ className, setValue, activeIndex, setActiveIndex }) => {
   const handleClick = (index) => {
@@ -31,11 +31,11 @@ const Details = ({ className, setValue, activeIndex, setActiveIndex }) => {
           ))}
         </div>
         <div className={styles.btns}>
-          <button className={cn("button-stroke", styles.favorite)}>
+          <button className={cn('button-stroke', styles.favorite)}>
             <Icon name="heart-fill" size="24" />
             <span>32</span>
           </button>
-          <button className={cn("button", styles.buy)}>
+          <button className={cn('button', styles.buy)}>
             <span className={styles.price}>$89</span>
             <span className={styles.inner}>
               Download<span> now</span>

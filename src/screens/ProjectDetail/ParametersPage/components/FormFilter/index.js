@@ -10,11 +10,12 @@ import {
 
 import { useQueryString } from '../../../../../hooks';
 
-import { STAGES } from '../../../../../hooks/mocks/stages';
-import { ENVIRONMENTS } from '../../../../../hooks/mocks/environments';
-import { VERSIONS } from '../../../../../hooks/mocks/versions';
-
-export default function FormFilter({ stages, environments, versions ,parentFc }) {
+export default function FormFilter({
+  stages,
+  environments,
+  versions,
+  parentFc,
+}) {
   const { queryString, setQueryString } = useQueryString();
 
   const settings = useMemo(() => {
@@ -89,7 +90,11 @@ export default function FormFilter({ stages, environments, versions ,parentFc })
             tooltip="Search and filter by Environments"
           />
           {environments.map((environment) => (
-            <RHFCheckbox key={environment.id} name={environment.name} content={environment.name} />
+            <RHFCheckbox
+              key={environment.id}
+              name={environment.name}
+              content={environment.name}
+            />
           ))}
         </div>
 

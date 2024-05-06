@@ -3,13 +3,13 @@ import { Col, Row, Stack } from 'react-bootstrap';
 import moment from 'moment';
 
 import EditOrganizationForm from '../EditOrganizationForm';
-import { Card ,Icon,Modal} from '../../../components';
+import { Card, Icon, Modal } from '../../../components';
 import { useOrganization } from '../../../hooks/data';
 const Overview = () => {
-  const { data: org, isSuccess, isLoading } = useOrganization();
+  const { data: org, isLoading } = useOrganization();
 
   const [editedItemId, setEditedItemId] = useState(undefined);
-  const [isEditMode, setIdEditMode] = useState(false);  
+  const [isEditMode, setIdEditMode] = useState(false);
   const handleEditClick = (id) => {
     setEditedItemId(id);
   };
@@ -29,31 +29,32 @@ const Overview = () => {
         visible={isEditMode || typeof editedItemId !== 'undefined'}
         onClose={() => {
           setIdEditMode(false);
-          setEditedItemId(undefined)
+          setEditedItemId(undefined);
         }}
       >
         {typeof editedItemId !== 'undefined' && (
-          <EditOrganizationForm 
+          <EditOrganizationForm
             editedItemId={editedItemId}
             orgData={org}
             onClose={() => setEditedItemId(undefined)}
-          /> 
+          />
         )}
       </Modal>
-      <Card title={`${org.name}`} classTitle="title-blue" className="mb-5"head={
+      <Card
+        title={`${org.name}`}
+        classTitle="title-blue"
+        className="mb-5"
+        head={
           <>
             <div
               className="cursor-pointer ms-auto"
               onClick={() => {
                 setIdEditMode(true);
                 // console.log('x');
-                handleEditClick(org.id)
+                handleEditClick(org.id);
               }}
             >
-              <Icon 
-                name="edit" 
-                size={24} 
-              />
+              <Icon name="edit" size={24} />
             </div>
             {/* <ButtonSetting
               titleButton="Config Stages and Environments"
@@ -78,7 +79,9 @@ const Overview = () => {
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Establishment date:</p>
-              <p className="detail-content status-text">{moment(org.establishment_date).format('DD-MM-YYYY')}</p>
+              <p className="detail-content status-text">
+                {moment(org.establishment_date).format('DD-MM-YYYY')}
+              </p>
             </Stack>
           </Col>
           <Col xs={12} md={{ span: 5, offset: 1 }}>

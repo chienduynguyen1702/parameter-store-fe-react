@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  getProjectDashboard,
-  getProjectDashboardTotals,
-} from '../../../services/api';
+import { getProjectDashboardTotals } from '../../../services/api';
 
 const useProjectDashboard = (projectId) => {
   const parseData = (data) => {

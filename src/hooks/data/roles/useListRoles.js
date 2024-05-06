@@ -2,7 +2,6 @@ import { useCallback, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
-import { ROLES } from '../../mocks/roles';
 import { addRole, editRole, getListRoles } from '../../../services/api';
 import { toast } from 'react-toastify';
 
@@ -30,7 +29,7 @@ export default function useListRoles() {
         id: item.id,
         name: item.name,
         description: item.description,
-        usersCount: item.user_count ,
+        usersCount: item.user_count,
         permissions: item.permissions_count,
       };
     });

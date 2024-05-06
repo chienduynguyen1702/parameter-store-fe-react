@@ -1,9 +1,8 @@
 import { useCallback, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import useQueryString from '../../useQueryString';
-import { addStage, editStage, getProjectStages, deleteStage } from '../../../services/api';
+import { addStage, editStage, getProjectStages } from '../../../services/api';
 import { toast } from 'react-toastify';
 
 const DEFAULT_QUERY_STRING = {
@@ -38,7 +37,7 @@ const useListStages = (project_id) => {
     const pagination = {
       total: stages.length,
       currentPage: 1,
-      totalPage: Math.ceil(stages.length/10),
+      totalPage: Math.ceil(stages.length / 10),
       limit: 10,
     };
     return { pagination, stages };

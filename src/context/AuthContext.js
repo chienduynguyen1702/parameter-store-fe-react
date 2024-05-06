@@ -26,6 +26,7 @@ const AuthProvider = ({ children }) => {
       username: data?.username,
       email: data?.email,
       organizationId: data?.organization_id,
+      isOrganizationAdmin: data?.is_organization_admin,
       // address: data.address,
       // avatarUrl: data.avatar_url,
       // bio: data.bio,
@@ -53,7 +54,7 @@ const AuthProvider = ({ children }) => {
     async (data) => {
       try {
         const response = await loginFn(data);
-        console.log("response",response);
+        console.log('response', response);
         saveMe(response?.data?.['user']);
 
         console.log(getCookie());

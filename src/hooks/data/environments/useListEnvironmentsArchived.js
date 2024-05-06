@@ -2,7 +2,7 @@ import { useMemo, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { getArchivedEnvironments } from '../../../services/api';
+// import { getArchivedEnvironments } from '../../../services/api';
 const useListEnvironmentsArchived = ({
   archivedEnvironment = {
     // listArchivedAPI: '',
@@ -62,7 +62,7 @@ const useListEnvironmentsArchived = ({
 
   const unarchiveMutation = useMutation(
     async (id) => {
-      return unarchiveAPI(project_id,id);
+      return unarchiveAPI(project_id, id);
     },
     {
       onSuccess: () => {
@@ -79,7 +79,7 @@ const useListEnvironmentsArchived = ({
 
   const archiveMutation = useMutation(
     (id) => {
-      return archiveAPI(project_id,id);
+      return archiveAPI(project_id, id);
     },
     {
       onSuccess: () => {

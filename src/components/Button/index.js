@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import { AiOutlinePlus } from 'react-icons/ai';
 
 export default function Button({
   className,

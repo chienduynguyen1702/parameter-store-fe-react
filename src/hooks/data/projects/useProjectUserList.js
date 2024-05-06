@@ -4,7 +4,11 @@ import { toast } from 'react-toastify';
 
 import useQueryString from '../../useQueryString';
 import { getProjectOverview } from '../../../services/api';
-import { addUserToProject, editUserInProject, getListUser, removeUserInProject } from '../../../services/api';
+import {
+  addUserToProject,
+  editUserInProject,
+  removeUserInProject,
+} from '../../../services/api';
 
 const DEFAULT_QUERY_STRING = {
   page: 1,
@@ -36,12 +40,11 @@ const useProjectUserList = (id) => {
         // last_login: user.last_login,
       };
     });
-    
 
     const pagination = {
       total: users.length,
       currentPage: 1,
-      totalPage: Math.ceil(users.length/10),
+      totalPage: Math.ceil(users.length / 10),
       limit: 10,
     };
     return { pagination, users };
@@ -59,7 +62,7 @@ const useProjectUserList = (id) => {
   const addUserMutation = useMutation(
     (body) => {
       // console.log("addUserMutation data: ",body);
-      return addUserToProject(body.project_id,body.data);
+      return addUserToProject(body.project_id, body.data);
     },
     {
       onSuccess: () => {
@@ -97,7 +100,7 @@ const useProjectUserList = (id) => {
 
   const removeUserMutation = useMutation(
     (data) => {
-      return removeUserInProject(data.project_id,data.user_id);
+      return removeUserInProject(data.project_id, data.user_id);
     },
     {
       onSuccess: () => {

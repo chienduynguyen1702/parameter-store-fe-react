@@ -11,14 +11,14 @@ import {
   fromNow,
 } from '../../../utils/helpers';
 
-import {
-  getStatisticsContentsOfTotalViews,
-  getStatisticsContentsOfViews,
-  getStatisticsHighlights,
-  getTopHashtags,
-  getTopUsers,
-  getTopVideos,
-} from '../../../services/api';
+// import {
+//   getStatisticsContentsOfTotalViews,
+//   getStatisticsContentsOfViews,
+//   getStatisticsHighlights,
+//   getTopHashtags,
+//   getTopUsers,
+//   getTopVideos,
+// } from '../../../services/api';
 
 export default function useDashboardHighlights() {
   const { queryString, setQueryString } = useQueryString();

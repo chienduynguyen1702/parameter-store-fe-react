@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 
-import {
-  Card,
-} from '../../../../components';
+import { Card } from '../../../../components';
 
 import Table from './Table';
-import {  } from '../../../../hooks/data';
 
 const WorkflowsPage = ({}) => {
   return (
@@ -16,7 +12,7 @@ const WorkflowsPage = ({}) => {
         classTitle="title-red"
         className={'mb-5'}
       >
-        <Table/>
+        <Table />
       </Card>
     </>
   );

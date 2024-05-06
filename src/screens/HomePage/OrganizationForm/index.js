@@ -1,27 +1,18 @@
 import React from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { Col, Row } from 'react-bootstrap';
-import moment from 'moment';
+import { FormProvider } from 'react-hook-form';
 
-import {
-  RHFTextInput,
-  AsyncButton,
-  RHFDropdown,
-  Item,
-  RHFDateInput,
-} from '../../../components';
+import { RHFTextInput, AsyncButton, Item } from '../../../components';
 
-const OrganizationForm = ({ orgData, title = '', method, handleSubmit, onLoading, onClose }) => {
+const OrganizationForm = ({ title = '', method, handleSubmit, onClose }) => {
   // console.log('OrganizationForm orgData',orgData);
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>
-        <Item 
+        <Item
           title={title}
           className="pb-4 borderBottom"
           classTitle="title-green"
         >
-
           <RHFTextInput
             name="name"
             label="Organization name"
@@ -65,7 +56,7 @@ const OrganizationForm = ({ orgData, title = '', method, handleSubmit, onLoading
             tooltip="Enter establishment date with format DD-MM-YYYY"
           />
         </Item>
-      
+
         <div className="pt-5 d-flex justify-content-end align-items-center">
           <div>
             <p onClick={onClose} className="button-white me-2">

@@ -7,14 +7,18 @@ import {
   FormSearch,
   Archived,
   Modal,
-  ConfirmReturnContent
+  ConfirmReturnContent,
 } from '../../../components';
 
 import Table from './components/Table/Table';
 import AddAgentForm from './components/AddAgentForm';
 import EditAgentForm from './components/EditAgentForm';
 
-import { useListAgentsArchived, useListAgents, useProjectOverviewAndUserList } from '../../../hooks/data';
+import {
+  useListAgentsArchived,
+  useListAgents,
+  useProjectOverviewAndUserList,
+} from '../../../hooks/data';
 import {
   archiveAgent,
   getArchivedAgents,
@@ -28,18 +32,13 @@ const AgentPage = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [returnToken, setReturnToken] = useState(''); // Return token for confirmation popup
 
-  const {
-    stages,
-    environments,
-    listWorkflows
-  } = useProjectOverviewAndUserList(id);
+  const { stages, environments, listWorkflows } =
+    useProjectOverviewAndUserList(id);
   const {
     listAgents,
     pagination,
     isLoading: isListAgentsLoading,
     isSuccess: isListAgentsSuccess,
-    addAgentMutation,
-    editAgentMutation,
   } = useListAgents(id);
   const {
     archivedList,
@@ -75,19 +74,22 @@ const AgentPage = () => {
     <>
       <Modal
         outerClassName={'outerModal'}
-        visible={isAddMode || typeof editedItemId !== 'undefined' || showConfirmation}
+        visible={
+          isAddMode || typeof editedItemId !== 'undefined' || showConfirmation
+        }
         onClose={handleCloseAddForm}
       >
-        {isAddMode && 
-          <AddAgentForm 
+        {isAddMode && (
+          <AddAgentForm
             project_id={id}
-            onClose={() => setIsAddMode(false)} 
+            onClose={() => setIsAddMode(false)}
             stages={stages}
             environments={environments}
-            setShowConfirmation={setShowConfirmation} 
+            setShowConfirmation={setShowConfirmation}
             setReturnToken={setReturnToken}
             workflows={listWorkflows}
-          />}
+          />
+        )}
         {typeof editedItemId !== 'undefined' && (
           <EditAgentForm
             project_id={id}

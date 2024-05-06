@@ -2,7 +2,7 @@ import { useMemo, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { getArchivedAgents } from '../../../services/api';
+// import { getArchivedAgents } from '../../../services/api';
 const useListParametersArchived = ({
   archivedParameters = {
     // listArchivedAPI: '',
@@ -61,7 +61,7 @@ const useListParametersArchived = ({
 
   const unarchiveMutation = useMutation(
     async (id) => {
-      return unarchiveAPI(project_id,id);
+      return unarchiveAPI(project_id, id);
     },
     {
       onSuccess: () => {
@@ -78,7 +78,7 @@ const useListParametersArchived = ({
 
   const archiveMutation = useMutation(
     (id) => {
-      return archiveAPI(project_id,id);
+      return archiveAPI(project_id, id);
     },
     {
       onSuccess: () => {

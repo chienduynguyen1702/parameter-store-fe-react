@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import styles from './Sidebar.module.sass';
@@ -7,6 +7,7 @@ import cn from 'classnames';
 import Icon from '../Icon';
 import Dropdown from './Dropdown';
 import LogoContainer from '../LogoContainer';
+import { AuthContext } from '../../context/AuthContext';
 
 const navigation = [
   {
@@ -30,6 +31,9 @@ const navigation = [
 ];
 
 const Sidebar = ({ className, onClose }) => {
+  // get me from AuthContext
+  const { me } = useContext(AuthContext);
+  console.log('me', me);
   const { pathname } = useLocation();
   const firstLevelPath = '/' + pathname.split('/')[1];
 

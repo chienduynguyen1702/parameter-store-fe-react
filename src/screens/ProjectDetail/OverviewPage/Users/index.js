@@ -1,26 +1,14 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-  Card,
-  FormSearch,
-  ButtonAdd,
-  Modal,
-  Archived,
-} from '../../../../components';
+import { Card, FormSearch, ButtonAdd, Modal } from '../../../../components';
 
 import Table from './Table';
-import {
-  archiveUser,
-  getArchivedUsers,
-  unarchiveUser,
-} from '../../../../services/api';
 import AddUserForm from './AddUserForm';
 import EditUserForm from './EditUserForm';
-import { useListArchived,useListUsers, useProjectUserList } from '../../../../hooks/data';
+import { useListUsers, useProjectUserList } from '../../../../hooks/data';
 
 const UsersPage = () => {
-
   const { id } = useParams();
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
@@ -32,13 +20,12 @@ const UsersPage = () => {
     isLoading: isListUsersLoading,
     removeUserMutation,
   } = useProjectUserList(id);
-  
-  const {
-    listUsers :orgListUsers,
-  } =useListUsers();
+
+  const { listUsers: orgListUsers } = useListUsers();
 
   const handleRemoveUser = (userId) => {
-    removeUserMutation.mutate({ project_id: id, user_id: userId },
+    removeUserMutation.mutate(
+      { project_id: id, user_id: userId },
       {
         onSuccess: () => {
           console.log('remove user success');
@@ -46,9 +33,9 @@ const UsersPage = () => {
         onError: () => {
           console.log('remove user error');
         },
-      }
+      },
     );
-  }
+  };
 
   return (
     <>
@@ -60,10 +47,12 @@ const UsersPage = () => {
           setEditedItemId(undefined);
         }}
       >
-        {isAddMode && <AddUserForm 
-                      onClose={() => setIsAddMode(false)} 
-                      listUsers={orgListUsers}
-                      />}
+        {isAddMode && (
+          <AddUserForm
+            onClose={() => setIsAddMode(false)}
+            listUsers={orgListUsers}
+          />
+        )}
         {typeof editedItemId !== 'undefined' && (
           <EditUserForm
             editedItemId={editedItemId}

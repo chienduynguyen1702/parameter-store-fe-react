@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-  ButtonAdd,
-  Card,
-  FormSearch,
-  Archived,
-  Modal,
-} from '../../../../components';
+import { ButtonAdd, Card, Archived, Modal } from '../../../../components';
 
 import Table from './components/Table/Table';
 import AddEnvironmentForm from './components/AddEnvironmentForm';
 import EditEnvironmentForm from './components/EditEnvironmentForm';
 
-import { useListEnvironmentsArchived, useListEnvironments, useListParameters } from '../../../../hooks/data';
+import {
+  useListEnvironmentsArchived,
+  useListEnvironments,
+} from '../../../../hooks/data';
 import {
   archiveEnvironment,
   getArchivedEnvironments,
@@ -29,8 +26,6 @@ const Environments = () => {
     pagination,
     isLoading: isListEnvironmentsLoading,
     isSuccess: isListEnvironmentsSuccess,
-    addEnvironmentMutation,
-    editEnvironmentMutation,
   } = useListEnvironments(id);
   const {
     archivedList,
@@ -62,11 +57,12 @@ const Environments = () => {
           setEditedItemId(undefined);
         }}
       >
-        {isAddMode && 
-          <AddEnvironmentForm 
+        {isAddMode && (
+          <AddEnvironmentForm
             project_id={id}
-            onClose={() => setIsAddMode(false)} 
-          />}
+            onClose={() => setIsAddMode(false)}
+          />
+        )}
         {typeof editedItemId !== 'undefined' && (
           <EditEnvironmentForm
             project_id={id}
@@ -77,7 +73,9 @@ const Environments = () => {
       </Modal>
 
       <Card
-        title={`${isListEnvironmentsSuccess ? pagination?.total : '0'} Environments`}
+        title={`${
+          isListEnvironmentsSuccess ? pagination?.total : '0'
+        } Environments`}
         classTitle="title-green"
         head={
           <>

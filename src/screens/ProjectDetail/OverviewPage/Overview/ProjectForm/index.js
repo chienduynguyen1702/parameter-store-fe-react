@@ -1,18 +1,16 @@
 import React from 'react';
-import { Col, Row, Stack } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { FormProvider } from 'react-hook-form';
-import moment from 'moment';
 
 import Item from '../../../../../components/Item';
 
 import {
   RHFTextInput,
   AsyncButton,
-  RHFCheckbox,
   RHFSwitch,
 } from '../../../../../components';
 
-const Form = ({ title = '', method, handleSubmit, onLoading, onClose }) => {
+const Form = ({ title = '', method, handleSubmit, onClose }) => {
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>

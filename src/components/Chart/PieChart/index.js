@@ -1,5 +1,5 @@
 import React from 'react';
-import { PieChart, Pie, Cell, Legend, Tooltip, Text } from 'recharts';
+import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 import ChartTooltip from '../../../components/ChartTooltip/index';
 
 import { NoData } from '../../../components';

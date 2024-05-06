@@ -1,7 +1,6 @@
 import { useMemo, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ARCHIVED_USERS } from '../mocks/users';
 
 const useListArchived = ({
   archivedObject = {
