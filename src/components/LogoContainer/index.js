@@ -16,9 +16,10 @@ function LogoContainer() {
         />
       </Link>
       <div className={styles.subLogo}>
-        <p>{process.env.REACT_APP_PROJECT_NAME?.split(' ')[0]}</p>
+        {/* <p>{process.env.REACT_APP_PROJECT_NAME}</p> */}
+        <p>Parameter Store</p>
         <p>
-          {process.env.REACT_APP_PROJECT_NAME?.split(' ').slice(1).join(' ')}
+          {/* {process.env.REACT_APP_PROJECT_NAME?.split(' ').slice(1).join(' ')} */}
         </p>
       </div>
     </div>

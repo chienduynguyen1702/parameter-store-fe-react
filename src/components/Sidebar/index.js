@@ -16,6 +16,12 @@ const navigation = [
     permissions: [''],
   },
   {
+    title: 'Dashboard',
+    icon: 'activity',
+    url: '/dashboard',
+    permissions: [''],
+  },
+  {
     title: 'Projects',
     icon: 'diamond',
     url: '/projects',
