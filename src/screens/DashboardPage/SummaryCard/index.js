@@ -5,7 +5,6 @@ import cn from 'classnames';
 import styles from './SummaryCard.module.sass';
 
 import useQueryString from '../../../hooks/useQueryString';
-import { Row } from 'react-bootstrap';
 
 export default function SummaryCard({ counters }) {
   // console.log('counters', counters);
@@ -18,7 +17,7 @@ export default function SummaryCard({ counters }) {
     {
       icon: 'dashboard-eye-red',
       title: 'Total projects',
-      tooltip: `Includes all projects from ${dateFrom} to ${dateTo}`,
+      tooltip: `Includes all projects in organization`,
     },
     {
       icon: 'dashboard-eye-red',
@@ -66,9 +65,6 @@ export default function SummaryCard({ counters }) {
       tooltip: `Total agent actions in this project`,
     },
   ];
-
-  const firstRowItems = items.slice(0, 5);
-  const secondRowItems = items.slice(5);
 
   return (
     <Card className={cn('row d-flex justify-content-center mx-0', styles.card)}>

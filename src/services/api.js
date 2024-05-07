@@ -179,13 +179,13 @@ export const getOrganizationByID = (org_id) =>
 export const getOrganizationDashboardTotals = (org_id) =>
   authApi({
     method: 'GET',
-    url: `/organizations/${org_id}/dashboard/totals`,
+    url: `/organizations/dashboard/totals`,
   });
 
 export const getOrganizationDashboardLogs = (org_id) =>
   authApi({
     method: 'GET',
-    url: `/organizations/${org_id}/dashboard/logs`,
+    url: `/organizations/dashboard/logs`,
   });
 // ------------------------------ Project List ------------------------------
 

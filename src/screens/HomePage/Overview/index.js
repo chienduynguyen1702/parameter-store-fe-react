@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Col, Row, Stack } from 'react-bootstrap';
 import moment from 'moment';
 
@@ -6,6 +7,8 @@ import EditOrganizationForm from '../EditOrganizationForm';
 import { Card, Icon, Modal } from '../../../components';
 import { useOrganization } from '../../../hooks/data';
 const Overview = () => {
+  const { id } = useParams();
+  console.log('org id', id);
   const { data: org, isLoading } = useOrganization();
 
   const [editedItemId, setEditedItemId] = useState(undefined);

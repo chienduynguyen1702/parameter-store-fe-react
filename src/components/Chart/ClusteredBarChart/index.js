@@ -81,7 +81,7 @@ export default function ClusteredBarChart({
             tick={{ fontSize: 12, fontWeight: '500', fill: '#9A9FA5' }}
             orientation="right"
           />
-          {data.length !== 0 &&
+          {data?.length !== 0 &&
             Object.keys(data[0])
               .filter((key) => key !== 'bucket')
               .map((value, index) => {

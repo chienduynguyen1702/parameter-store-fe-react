@@ -5,15 +5,11 @@ import { getOrganizationDashboardTotals } from '../../../services/api';
 const useOrganizationDashboard = (organizationId) => {
   const parseData = (data) => {
     const total = {
-      count_total_updated: data?.count_total_updated,
-      count_total_agent_actions: data?.count_total_agent_actions,
-      count_agent_actions_this_month: data?.count_agent_actions_this_month,
-      count_agent_actions_this_week: data?.count_agent_actions_this_week,
-      count_updated_this_month: data?.count_updated_this_month,
-      count_updated_this_week: data?.count_updated_this_week,
-      count_workflows: data?.count_workflows,
-      avg_duration_of_workflows_current_month:
-        data?.avg_duration_of_workflows_current_month,
+      project_count: data?.project_count,
+      active_projects_count: data?.active_projects_count,
+      pending_projects_count: data?.pending_projects_count,
+      user_count: data?.user_count,
+      workflow_count: data?.workflow_count,
     };
 
     return { total };
