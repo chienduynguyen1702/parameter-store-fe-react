@@ -119,6 +119,7 @@ const ParametersPage = () => {
           project_id={id}
           onClose={() => setIsUpdating(false)}
           versions={versions}
+          listParameters={listParameters}
         />
       </Modal>
 
