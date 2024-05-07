@@ -1,5 +1,6 @@
 import React from 'react';
 import { PopoverEditAndArchive } from '../../../../../../components';
+import moment from 'moment';
 
 const Row = ({ item, setEditedItemId, archiveMutation }) => {
   // console.log('item', item);
@@ -26,7 +27,9 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
         </p>
       </div>
       {/* <p className="tableCell">{item.createdAt}</p> */}
-      <p className="tableCell">{item.updatedAt}</p>
+      <p className="tableCell">
+        {moment(item.updatedAt).format('YYYY-MM-DD HH:MM:SS')}
+      </p>
       <p className="tableCell">{item.isApplied.toString()}</p>
       <div className="tableCell roundedRight">
         <PopoverEditAndArchive

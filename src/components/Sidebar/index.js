@@ -53,39 +53,50 @@ const Sidebar = ({ className, onClose }) => {
         </button>
         <LogoContainer className={styles.logo} />
         <div className={styles.menu}>
-          {navigation.map((x, index) =>
-            x.url ? (
-              <NavLink
-                className={({ isActive }) =>
-                  cn(styles.item, {
-                    [styles.active]: isActive || firstLevelPath === x.subUrl,
-                  })
-                }
-                to={x.url}
-                end
-                onClick={() => {
-                  onClose();
-                  setVisible(false);
-                }}
-              >
-                <Icon name={x.icon} size="24" />
-                {x.title}
-              </NavLink>
-            ) : (
-              <Dropdown
-                className={styles.dropdown}
-                visibleSidebar={visible}
-                setValue={setVisible}
-                key={index}
-                item={x}
-                onClick={() => {
-                  onClose();
-                  setVisible(false);
-                }}
-              />
-            ),
-          )}
+          {navigation.map((x, index) => {
+            if (x.url) {
+              if (x.title === 'Dashboard' && !me?.isOrganizationAdmin) {
+                return null; // Skip rendering NavLink for Dashboard
+              } else {
+                return (
+                  <NavLink
+                    key={index}
+                    className={({ isActive }) =>
+                      cn(styles.item, {
+                        [styles.active]:
+                          isActive || firstLevelPath === x.subUrl,
+                      })
+                    }
+                    to={x.url}
+                    end
+                    onClick={() => {
+                      onClose();
+                      setVisible(false);
+                    }}
+                  >
+                    <Icon name={x.icon} size="24" />
+                    {x.title}
+                  </NavLink>
+                );
+              }
+            } else {
+              return (
+                <Dropdown
+                  key={index}
+                  className={styles.dropdown}
+                  visibleSidebar={visible}
+                  setValue={setVisible}
+                  item={x}
+                  onClick={() => {
+                    onClose();
+                    setVisible(false);
+                  }}
+                />
+              );
+            }
+          })}
         </div>
+
         <button className={styles.toggle} onClick={() => setVisible(!visible)}>
           <Icon name="arrow-right" size="24" />
           <Icon name="close" size="24" />

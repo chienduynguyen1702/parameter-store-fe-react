@@ -23,6 +23,7 @@ const UsersPage = lazy(() => import('./screens/Users&Settings/Users'));
 const RolesPage = lazy(() => import('./screens/Users&Settings/Roles'));
 
 const ProjectsPage = lazy(() => import('./screens/Projects'));
+const DashboardPage = lazy(() => import('./screens/DashboardPage'));
 
 const ProjectDetailPage = lazy(() => import('./screens/ProjectDetail'));
 const ProjectOverviewPage = lazy(() =>
@@ -81,6 +82,17 @@ function App() {
                       <SuspenseContainer>
                         <PageContent title="Home Page" wide>
                           <HomePage />
+                        </PageContent>
+                      </SuspenseContainer>
+                    }
+                  />
+                  <Route
+                    exact
+                    path="dashboard/*"
+                    element={
+                      <SuspenseContainer>
+                        <PageContent title="Dashboard" wide>
+                          <DashboardPage />
                         </PageContent>
                       </SuspenseContainer>
                     }

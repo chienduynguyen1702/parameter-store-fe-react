@@ -176,7 +176,17 @@ export const getOrganizationByID = (org_id) =>
     method: 'GET',
     url: `/organizations/${org_id}`,
   });
+export const getOrganizationDashboardTotals = (org_id) =>
+  authApi({
+    method: 'GET',
+    url: `/organizations/${org_id}/dashboard/totals`,
+  });
 
+export const getOrganizationDashboardLogs = (org_id) =>
+  authApi({
+    method: 'GET',
+    url: `/organizations/${org_id}/dashboard/logs`,
+  });
 // ------------------------------ Project List ------------------------------
 
 export const getListProjects = (params) =>
