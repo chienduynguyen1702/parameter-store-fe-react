@@ -81,6 +81,9 @@ export default function DashboardPage() {
           <SummaryCard
             counters={[
               total?.avg_duration_of_workflows_current_month,
+              total?.avg_duration_of_workflows_current_month,
+              total?.avg_duration_of_workflows_current_month,
+              total?.avg_duration_of_workflows_current_month,
               total?.count_workflows,
               total?.count_updated_this_week,
               total?.count_agent_actions_this_week,

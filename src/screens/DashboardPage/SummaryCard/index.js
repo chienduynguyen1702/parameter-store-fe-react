@@ -5,6 +5,7 @@ import cn from 'classnames';
 import styles from './SummaryCard.module.sass';
 
 import useQueryString from '../../../hooks/useQueryString';
+import { Row } from 'react-bootstrap';
 
 export default function SummaryCard({ counters }) {
   // console.log('counters', counters);
@@ -16,8 +17,23 @@ export default function SummaryCard({ counters }) {
   const items = [
     {
       icon: 'dashboard-eye-red',
-      title: 'Average duration',
-      tooltip: `Average duration of workflows this month (second)`,
+      title: 'Total projects',
+      tooltip: `Includes all projects from ${dateFrom} to ${dateTo}`,
+    },
+    {
+      icon: 'dashboard-eye-red',
+      title: 'Number of running projects',
+      tooltip: `Number of running projects`,
+    },
+    {
+      icon: 'dashboard-eye-red',
+      title: 'Number of archived projects',
+      tooltip: `Number of archived projects`,
+    },
+    {
+      icon: 'dashboard-eye-red',
+      title: 'Total users',
+      tooltip: `Total active users`,
     },
     {
       icon: 'dashboard-eye-blue',
@@ -44,16 +60,23 @@ export default function SummaryCard({ counters }) {
       title: 'Total agent actions',
       tooltip: `Total agent actions in this project`,
     },
+    {
+      icon: 'dashboard-camera-blue',
+      title: 'Total agent actions',
+      tooltip: `Total agent actions in this project`,
+    },
   ];
 
+  const firstRowItems = items.slice(0, 5);
+  const secondRowItems = items.slice(5);
+
   return (
-    <Card className={cn('row d-flex justify-content mx-0', styles.card)}>
+    <Card className={cn('row d-flex justify-content-center mx-0', styles.card)}>
       {items.map((x, index) => (
         <div
-          key={index}
-          className={cn('col-12 col-sm-4 col-xl-2', styles.item)}
+          className={cn('col-12 col-sm-6 col-md-2.5 col-lg-2dot4', styles.item)}
         >
-          <SummaryCardCustom data={x} counter={counters[index]} />
+          <SummaryCardCustom data={x} counter={counters[index]} index={index} />
         </div>
       ))}
     </Card>
