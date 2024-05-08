@@ -10,6 +10,12 @@ const useOrganizationDashboard = (organizationId) => {
       pending_projects_count: data?.pending_projects_count,
       user_count: data?.user_count,
       workflow_count: data?.workflow_count,
+
+      avg_duration: data?.avg_duration,
+      total_updated: data?.total_updated,
+      total_agent_actions: data?.total_agent_actions,
+      total_updated_this_month: data?.total_updated_this_month,
+      total_agent_actions_this_month: data?.total_agent_actions_this_month,
     };
 
     return { total };

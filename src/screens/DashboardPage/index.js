@@ -83,14 +83,14 @@ export default function DashboardPage() {
               total?.project_count,
               total?.active_projects_count,
               total?.pending_projects_count,
-              total?.user_count,
               total?.workflow_count,
-              total?.count_updated_this_week,
-              total?.count_agent_actions_this_week,
-              total?.count_total_updated,
-              // total?.count_updated_this_month,
-              total?.count_total_agent_actions,
-              // total?.count_agent_actions_this_month,
+              total?.user_count,
+
+              total?.avg_duration,
+              total?.total_updated_this_month,
+              total?.total_agent_actions_this_month,
+              total?.total_updated,
+              total?.total_agent_actions,
             ]}
           />
           <div className="mt-4">
@@ -100,22 +100,23 @@ export default function DashboardPage() {
               granularity={granularity}
               setGranularity={(value) => setGranularity(value)}
             >
-              {addLoadingChart()
-              // <ClusteredBarChart
-              //   colors={['#659EEA', '#FFBC99']}
-              //   className={'mt-4'}
-              //   name={'overLookChart'}
-              //   height={500}
-              //   data={logs}
-              // />,
-              // <MixLineBarChart
-              //   color={'#FFD3B7'}
-              //   hoverColor={'#FFBC99'}
-              //   className={'mt-4'}
-              //   name={'overLookChart'}
-              //   height={488}
-              //   data={logs}
-              // />,
+              {
+                addLoadingChart()
+                // <ClusteredBarChart
+                //   colors={['#659EEA', '#FFBC99']}
+                //   className={'mt-4'}
+                //   name={'overLookChart'}
+                //   height={500}
+                //   data={logs}
+                // />,
+                // <MixLineBarChart
+                //   color={'#FFD3B7'}
+                //   hoverColor={'#FFBC99'}
+                //   className={'mt-4'}
+                //   name={'overLookChart'}
+                //   height={488}
+                //   data={logs}
+                // />,
               }
             </CardDashboardWithGranularity>
           </div>

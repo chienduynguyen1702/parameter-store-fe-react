@@ -30,39 +30,39 @@ export default function SummaryCard({ counters }) {
       tooltip: `Number of archived projects`,
     },
     {
-      icon: 'dashboard-eye-red',
-      title: 'Total users',
-      tooltip: `Total active users`,
-    },
-    {
       icon: 'dashboard-eye-blue',
       title: 'Total workflows',
       tooltip: `Total workflows in project`,
     },
     {
-      icon: 'dashboard-info-green',
-      title: 'Count updates this sprint',
-      tooltip: `Count updates from this sprint`,
+      icon: 'dashboard-eye-red',
+      title: 'Total users',
+      tooltip: `Total active users`,
     },
     {
-      icon: 'dashboard-storage-bag-orange',
-      title: 'Count agent actions this sprint',
-      tooltip: `Count agent actions this sprint`,
+      icon: 'dashboard-info-green',
+      title: 'Average duration',
+      tooltip: `Average duration all CICD workflows in organization`,
     },
     {
       icon: 'dashboard-shopping-carts-purple',
+      title: 'Total updates this month',
+      tooltip: `Number of updates this month`,
+    },
+    {
+      icon: 'dashboard-storage-bag-orange',
+      title: 'Total agent actions this month',
+      tooltip: `Number of agent pull parameter this month`,
+    },
+    {
+      icon: 'dashboard-camera-blue',
       title: 'Total updates',
-      tooltip: `All updates of project `,
+      tooltip: `Number of all updates within the organization`,
     },
     {
       icon: 'dashboard-camera-blue',
       title: 'Total agent actions',
-      tooltip: `Total agent actions in this project`,
-    },
-    {
-      icon: 'dashboard-camera-blue',
-      title: 'Total agent actions',
-      tooltip: `Total agent actions in this project`,
+      tooltip: `Number of all agent pull parameter within the organization`,
     },
   ];
 

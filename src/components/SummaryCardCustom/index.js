@@ -39,7 +39,12 @@ export default function SummaryCard({ data, counter, index }) {
           counter !== null &&
           !isNaN(counter) &&
           !data.disabled && (
-            <div className={styles.counter}>{data.title === 'Average duration'? handleLongNumberToDuration(counter) : counter }</div>
+            <div className={styles.counter}>
+              {data.title ===
+              ('Average duration' || 'Average duration CICD workflows')
+                ? handleLongNumberToDuration(counter)
+                : counter}
+            </div>
           )}
         {(counter === undefined || isNaN(counter)) && (
           <Skeleton width={100} height={36} className="mb-1" />
