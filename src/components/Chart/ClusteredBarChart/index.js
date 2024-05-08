@@ -104,7 +104,7 @@ export default function ClusteredBarChart({
               },
               {
                 id: '2',
-                value: 'Updated Count',
+                value: 'Parameter Update Count',
                 type: 'square',
                 color: '#FFBC99',
               },

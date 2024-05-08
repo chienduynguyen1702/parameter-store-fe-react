@@ -182,10 +182,13 @@ export const getOrganizationDashboardTotals = (org_id) =>
     url: `/organizations/dashboard/totals`,
   });
 
-export const getOrganizationDashboardLogs = (org_id) =>
+export const getOrganizationDashboardLogs = (org_id, granularity) =>
   authApi({
     method: 'GET',
     url: `/organizations/dashboard/logs`,
+    params: {
+      granularity,
+    },
   });
 // ------------------------------ Project List ------------------------------
 

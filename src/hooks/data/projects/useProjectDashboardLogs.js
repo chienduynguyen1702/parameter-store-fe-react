@@ -12,7 +12,7 @@ const useProjectDashboard = (projectId, granularity) => {
 
       // 2 thằng này sẽ là data cho trục y, t fix cứng 2 cái tên này trong component Chart luôn
       averageDuration: log.avg_duration_in_period,
-      count: log.count,
+      paramUpdateCount: log.count,
     }));
     return { logs };
   };

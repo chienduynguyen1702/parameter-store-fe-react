@@ -18,15 +18,15 @@ import { useParams } from 'react-router-dom';
 export default function DashboardPage() {
   const refDashboardHighLight = useRef();
 
-  const { id: projectId } = useParams();
-  const { total } = useOrganizationDashboardTotal(projectId);
+  const { id: organizationId } = useParams();
+  const { total } = useOrganizationDashboardTotal(organizationId);
 
   const [granularity, setGranularity] = useState('day');
   const { logs, isSuccess: isLogsSuccess } = useOrganizationDashboardLogs(
-    projectId,
+    organizationId,
     granularity,
   );
-
+  console.log('granularity', granularity);
   const addLoadingChart = useCallback(
     (elm, height = 488) =>
       isLogsSuccess ? (
@@ -95,20 +95,21 @@ export default function DashboardPage() {
           />
           <div className="mt-4">
             <CardDashboardWithGranularity
-              title={'Workflow Avg Duration And Param Updated Count'}
+              title={
+                'Average Duration of CI/CD Workflows and Parameter Update Count'
+              }
               classTitle={'title-purple'}
               granularity={granularity}
               setGranularity={(value) => setGranularity(value)}
             >
-              {
-                addLoadingChart()
-                // <ClusteredBarChart
-                //   colors={['#659EEA', '#FFBC99']}
-                //   className={'mt-4'}
-                //   name={'overLookChart'}
-                //   height={500}
-                //   data={logs}
-                // />,
+              {addLoadingChart(
+                <ClusteredBarChart
+                  colors={['#659EEA', '#FFBC99']}
+                  className={'mt-4'}
+                  name={'overLookChart'}
+                  height={500}
+                  data={logs}
+                />,
                 // <MixLineBarChart
                 //   color={'#FFD3B7'}
                 //   hoverColor={'#FFBC99'}
@@ -117,7 +118,7 @@ export default function DashboardPage() {
                 //   height={488}
                 //   data={logs}
                 // />,
-              }
+              )}
             </CardDashboardWithGranularity>
           </div>
           {/* <div className="mt-4">
