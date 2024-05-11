@@ -43,43 +43,42 @@ jobs:
         #if cache is true then skip npm i, else run npm i
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn 
-          
-      # - name: Change API URL
-      #   run: sed -i 's/https:\/\/api.dev.maybelline.website/https:\/\/api.maybelline.website/g' src/services/config/baseUrl.js
-
-          
-      # - name: cat baseURL file to check
-      #   run: cat src/services/config/baseUrl.js
-
       - name: Build
-        run: CI=false yarn build
-
-      # - name: Test unit
-      #   run: yarn test
-
-  # deploy:
-  #   needs: build-test
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     NODE_ENV: production
-  #   steps:
-  #     - uses: actions/checkout@v2
-      - name: Setup AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ vars.AWS_REGION }}
-
-      - name: Deploy to S3
-        run: aws s3 sync build/ s3://${{ vars.AWS_S3_REACT }} --follow-symlinks --delete
-
-      # - name: Invalidate CloudFront
-      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
-
-      # - name: Deploy to old S3
-      #   run: aws s3 sync build/ s3://${{ vars.AWS_OLD_S3_REACT }} --follow-symlinks --delete
+        run: yarn build
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
         
-      # - name: Invalidate old CloudFront
-      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.OLD_DISTRIBUTION_ID }} --paths "/*"
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
 
+      - name: Build and publish Docker image to GitHub Container Registry
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./docker/Dockerfile 
+          push: true
+          tags: |
+            ghcr.io/chienduynguyen1702/parameter-store-fe:${{ env.SHORT_SHA }}
+            ghcr.io/chienduynguyen1702/parameter-store-fe:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+    deploy:
+      name: Deploy to remote server
+      needs: build-and-push-image-docker-to-ghcr
+      runs-on: ubuntu-latest
+      steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_ADDRESS }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            cd /home/${{ secrets.SERVER_USERNAME }}/${{ secrets.SERVER_FOLDER }}
+            ./docker-compose-restart.sh
+            # . ./export-token.sh  && ./get-parameters.sh  -o .env  

@@ -1,0 +1,7 @@
+services:
+  param-fe:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:80"
