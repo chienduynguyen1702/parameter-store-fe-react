@@ -1,6 +1,7 @@
 {
   "name": "clouding-frontend",
   "version": "0.1.0",
+  "homepage": "https://chienduynguyen1702.github.io/parameter-store-fe-react",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -62,6 +63,7 @@
     }
   },
   "devDependencies": {
+    "gh-pages": "^6.1.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "prettier": "^2.8.3"
@@ -71,6 +73,8 @@
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "prepare": "husky install"
   },
   "jest": {
