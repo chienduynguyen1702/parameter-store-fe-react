@@ -68,7 +68,7 @@ jobs:
           cache-to: type=gha,mode=max
   deploy:
     name: Deploy to remote server
-    needs: build-and-push-image-docker-to-ghcr
+    needs: build-test
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
