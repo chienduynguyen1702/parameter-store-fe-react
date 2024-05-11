@@ -66,19 +66,19 @@ jobs:
             ghcr.io/chienduynguyen1702/parameter-store-fe:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-    deploy:
-      name: Deploy to remote server
-      needs: build-and-push-image-docker-to-ghcr
-      runs-on: ubuntu-latest
-      steps:
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_ADDRESS }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          port: ${{ secrets.SERVER_PORT }}
-          script: |
-            cd /home/${{ secrets.SERVER_USERNAME }}/${{ secrets.SERVER_FOLDER }}
-            ./docker-compose-restart.sh
-            # . ./export-token.sh  && ./get-parameters.sh  -o .env  
+  deploy:
+    name: Deploy to remote server
+    needs: build-and-push-image-docker-to-ghcr
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SERVER_ADDRESS }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        port: ${{ secrets.SERVER_PORT }}
+        script: |
+          cd /home/${{ secrets.SERVER_USERNAME }}/${{ secrets.SERVER_FOLDER }}
+          ./docker-compose-restart-fe.sh
+          # . ./export-token.sh  && ./get-parameters.sh  -o .env  
