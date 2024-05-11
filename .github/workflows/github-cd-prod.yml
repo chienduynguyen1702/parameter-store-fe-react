@@ -8,7 +8,7 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
-    environment: Clouding-aws
+    # environment: Clouding-aws
     env:
       NODE_ENV: production
     steps:
