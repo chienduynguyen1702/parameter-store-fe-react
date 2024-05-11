@@ -23,7 +23,7 @@ FROM nginx:stable-alpine
 COPY ./build /usr/share/nginx/html
 
 # Copy file cấu hình nginx.conf của bạn
-COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+# COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
 # Expose cổng 80 để có thể truy cập ứng dụng qua trình duyệt
 EXPOSE 80
