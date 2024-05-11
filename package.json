@@ -1,7 +1,7 @@
 {
   "name": "clouding-frontend",
   "version": "0.1.0",
-  "homepage": "https://chienduynguyen1702.github.io/parameter-store-fe-react",
+  "homepage": "https://chienduynguyen1702.github.io/",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
