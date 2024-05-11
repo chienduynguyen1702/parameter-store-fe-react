@@ -44,7 +44,7 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn 
       - name: Build
-        run: yarn build
+        run: CI=false yarn build
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         
