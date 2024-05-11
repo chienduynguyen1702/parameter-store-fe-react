@@ -6,10 +6,26 @@ on:
       - main
 
 jobs:
+#
+  prepare:
+    name: Get Short SHA of commit for tagging Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: get SHORT_SHA
+        id: get_sha
+        run: |
+          SHORT_SHA=$(git rev-parse --short ${{ github.sha }})
+          echo "SHORT_SHA=$SHORT_SHA" >> "$GITHUB_OUTPUT"
+          echo "SHORT_SHA=$SHORT_SHA"
+    outputs:
+      SHORT_SHA: ${{ steps.get_sha.outputs.SHORT_SHA }}
+#
   build-test:
     runs-on: ubuntu-latest
-    # environment: Clouding-aws
+    needs: [prepare]
     env:
+      SHORT_SHA: ${{ needs.prepare.outputs.SHORT_SHA }}
       NODE_ENV: production
     steps:
       - uses: actions/checkout@v2
@@ -66,26 +82,10 @@ jobs:
             ghcr.io/chienduynguyen1702/parameter-store-fe:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-  prepare:
-    name: Get Short SHA of commit for tagging Docker image
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: get SHORT_SHA
-        id: get_sha
-        run: |
-          SHORT_SHA=$(git rev-parse --short ${{ github.sha }})
-          echo "SHORT_SHA=$SHORT_SHA" >> "$GITHUB_OUTPUT"
-          echo "SHORT_SHA=$SHORT_SHA"
-    outputs:
-      SHORT_SHA: ${{ steps.get_sha.outputs.SHORT_SHA }}
-
+#
   deploy:
     name: Deploy to remote server
-    needs: [build-test, prepare]
-    env:
-      SHORT_SHA: ${{ needs.prepare.outputs.SHORT_SHA }}
+    needs: [build-test]
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
