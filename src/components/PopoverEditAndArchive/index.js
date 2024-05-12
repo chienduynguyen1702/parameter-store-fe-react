@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Modal from '../Modal';
 import ConfirmContent from '../ConfirmContent';
 import Popover from '../Popover';
+import { set } from 'react-hook-form';
 
 const PopoverEditAndArchive = ({
   itemId,
@@ -24,7 +25,7 @@ const PopoverEditAndArchive = ({
             contentBtnSubmit="Archive"
             contentBtnCancel="Cancel"
             isLoading={archiveMutation.isLoading}
-            onClose={() => {}}
+            onClose={() => setIsArchiveMode(false)}
             handleSubmit={() => archiveMutation.mutate(itemId)}
           />
         </Modal>
