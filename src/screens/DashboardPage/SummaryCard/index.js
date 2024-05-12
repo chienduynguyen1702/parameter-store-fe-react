@@ -26,13 +26,13 @@ export default function SummaryCard({ counters }) {
     },
     {
       icon: 'dashboard-eye-red',
-      title: 'Number of archived projects',
-      tooltip: `Number of archived projects`,
+      title: 'Number of running agents',
+      tooltip: `Number of running agents`,
     },
     {
       icon: 'dashboard-eye-blue',
-      title: 'Total workflows',
-      tooltip: `Total workflows in project`,
+      title: 'Total active workflows',
+      tooltip: `Total active workflows in all projects`,
     },
     {
       icon: 'dashboard-eye-red',

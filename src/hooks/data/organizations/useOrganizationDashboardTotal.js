@@ -7,7 +7,7 @@ const useOrganizationDashboard = (organizationId) => {
     const total = {
       project_count: data?.project_count,
       active_projects_count: data?.active_projects_count,
-      pending_projects_count: data?.pending_projects_count,
+      active_agent: data?.active_agent,
       user_count: data?.user_count,
       workflow_count: data?.workflow_count,
 

@@ -90,7 +90,7 @@ export default function DashboardPage() {
             counters={[
               total?.project_count,
               total?.active_projects_count,
-              total?.pending_projects_count,
+              total?.active_agent,
               total?.workflow_count,
               total?.user_count,
 
