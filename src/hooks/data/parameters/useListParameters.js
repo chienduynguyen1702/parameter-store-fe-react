@@ -38,6 +38,7 @@ const useListParameters = (project_id) => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
+    console.log('data:', data);
     const parameters = data?.map((item) => {
       return {
         id: item.ID,
@@ -51,8 +52,8 @@ const useListParameters = (project_id) => {
           name: item.environment.name,
           color: item.environment.color,
         },
-        createdAt: moment(item.CreatedAt).format('DD/MM/YYYY'),
-        updatedAt: moment(item.UpdatedAt).format('DD/MM/YYYY'),
+        createdAt: item.CreatedAt, //moment(item.CreatedAt).format('YYYY/MM/DD HH:MM:SS'),
+        updatedAt: moment(item.edited_at).format('YYYY/MM/DD HH:MM:SS'),
         isApplied: item.is_applied,
         description: item.description,
       };

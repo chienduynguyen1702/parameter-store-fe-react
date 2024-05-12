@@ -3,7 +3,12 @@ import { PopoverEditAndArchive } from '../../../../../../components';
 import moment from 'moment';
 
 const Row = ({ item, setEditedItemId, archiveMutation, isArchivedSuccess }) => {
-  // console.log('item', item);
+  console.log('item', item);
+  console.log('item.updatedAt', item.updatedAt);
+  console.log(
+    'item.updatedAt moment',
+    moment(item.updatedAt).format('yyyy/MM/DD h:mm:ss a'),
+  );
   return (
     <div className="tableRow">
       <div className="tableCell py-3 ps-2 roundedLeft">
@@ -27,9 +32,7 @@ const Row = ({ item, setEditedItemId, archiveMutation, isArchivedSuccess }) => {
         </p>
       </div>
       {/* <p className="tableCell">{item.createdAt}</p> */}
-      <p className="tableCell">
-        {moment(item.updatedAt).format('YYYY-MM-DD HH:MM:SS')}
-      </p>
+      <p className="tableCell">{item.updatedAt}</p>
       <p className="tableCell">{item.isApplied.toString()}</p>
       <div className="tableCell roundedRight">
         <PopoverEditAndArchive
