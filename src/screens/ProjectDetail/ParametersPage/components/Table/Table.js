@@ -10,6 +10,7 @@ const Table = ({
   totalPage,
   setEditedItemId,
   archiveMutation,
+  isArchivedSuccess,
 }) => {
   return (
     <>
@@ -33,6 +34,7 @@ const Table = ({
                 item={item}
                 setEditedItemId={setEditedItemId}
                 archiveMutation={archiveMutation}
+                isArchivedSuccess={isArchivedSuccess}
               />
             ))}
         </div>

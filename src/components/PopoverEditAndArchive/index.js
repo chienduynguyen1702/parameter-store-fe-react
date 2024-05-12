@@ -13,11 +13,12 @@ const PopoverEditAndArchive = ({
   name = '',
   archiveMutation,
   setEditedItemId,
+  isArchivedSuccess,
 }) => {
   const [isArchiveMode, setIsArchiveMode] = useState(false);
   return (
     <>
-      {isArchiveMode && (
+      {isArchiveMode && !isArchivedSuccess && (
         <Modal visible={true} onClose={() => setIsArchiveMode(false)}>
           <ConfirmContent
             title="Confirm"
@@ -25,7 +26,10 @@ const PopoverEditAndArchive = ({
             contentBtnSubmit="Archive"
             contentBtnCancel="Cancel"
             isLoading={archiveMutation.isLoading}
-            onClose={() => setIsArchiveMode(false)}
+            onClose={() => {
+              console.log('isArchivedSuccess: ', isArchivedSuccess);
+              setIsArchiveMode(false);
+            }}
             handleSubmit={() => archiveMutation.mutate(itemId)}
           />
         </Modal>

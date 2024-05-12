@@ -54,6 +54,7 @@ const ParametersPage = () => {
     search,
     handleSearch,
     archiveMutation,
+    isArchivedSuccess,
     unarchiveMutation,
   } = useListParametersArchived({
     archivedParameters: {
@@ -169,6 +170,7 @@ const ParametersPage = () => {
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
+          isArchivedSuccess={isArchivedSuccess}
         />
       </Card>
     </>

@@ -75,7 +75,7 @@ const useListParametersArchived = ({
       },
     },
   );
-
+  const [isArchivedSuccess, setIsArchivedSuccess] = useState(false);
   const archiveMutation = useMutation(
     (id) => {
       return archiveAPI(project_id, id);
@@ -88,7 +88,13 @@ const useListParametersArchived = ({
         queryClient.invalidateQueries({
           queryKey: [keyArchivistList],
         });
+        setIsArchivedSuccess(true);
         toast.success(`${title} archived successfully`);
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message, {
+          autoClose: 5000,
+        });
       },
     },
   );
@@ -100,6 +106,7 @@ const useListParametersArchived = ({
     search,
     handleSearch,
     archiveMutation,
+    isArchivedSuccess,
     unarchiveMutation,
   };
 };

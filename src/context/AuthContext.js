@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
     async (data) => {
       try {
         const response = await loginFn(data);
-        console.log('response', response);
+        // console.log('response', response);
         saveMe(response?.data?.['user']);
 
         console.log(getCookie());
