@@ -97,7 +97,7 @@ const Row = ({ item }) => {
     <>
       <div className={styles.row} onMouseLeave={() => setVisibleActions(false)}>
         <div className={styles.col}>
-          {moment(item?.CreatedAt).format('YYYY-MM-DD hh:mm:ss')}
+          {moment(item?.CreatedAt).format('YYYY-MM-DD HH:mm:ss')}
         </div>
         {/* <div className={styles.col}>17:12, 13 Sep 2023</div> */}
         <div className={styles.col}>
