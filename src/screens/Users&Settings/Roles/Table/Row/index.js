@@ -24,9 +24,9 @@ const Row = ({ item }) => {
           )}
         </div> */}
 
-        <div className={'tableCell text-end roundedRight'}>
+        {/* <div className={'tableCell text-end roundedRight'}>
           <PopoverEditRole item={item} />
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -10,6 +10,7 @@ import {
 
 import Table from './Table';
 import { useListRoles } from '../../../hooks/data';
+import { toast } from 'react-toastify';
 // import {
 //   archiveRole,
 //   getArchivedRoles,
@@ -76,7 +77,10 @@ function Roles() {
               <ButtonAdd
                 titleButton="Add Role"
                 className="me-2"
-                handleClickAdd={() => setIsAddMode(true)}
+                handleClickAdd={() => {
+                  toast.info('Add Role feature is comming soon!');
+                  // setIsAddMode(true)
+                }}
               />
               {/* <Archived
                 title="Archived roles"
