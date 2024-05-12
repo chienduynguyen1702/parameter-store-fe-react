@@ -66,7 +66,7 @@ export default function ClusteredBarChart({
           <YAxis
             axisLine={false}
             label={{
-              value: 'Updated Count',
+              value: 'Applied Count',
               position: 'top',
               offset: 25,
               fontSize: 12,
@@ -104,7 +104,7 @@ export default function ClusteredBarChart({
               },
               {
                 id: '2',
-                value: 'Parameter Update Count',
+                value: 'Parameter Applied Count',
                 type: 'square',
                 color: '#FFBC99',
               },

@@ -28,7 +28,7 @@ const useListProjects = () => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const projects = data?.projects.map((project) => {
+    const projects = data?.projects?.map((project) => {
       return {
         id: project?.id,
         createdAt: project?.CreatedAt,

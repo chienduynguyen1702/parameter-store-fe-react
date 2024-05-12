@@ -16,7 +16,7 @@ const useProjectListWorkflow = (id) => {
       state: workflow?.state,
       url_path: `https://${repoURL}/blob/main/${workflow?.path}`,
     }));
-    console.log('useProjectListWorkflow listWorkflows : ', listWorkflows);
+    // console.log('useProjectListWorkflow listWorkflows : ', listWorkflows);
     return listWorkflows;
   };
 

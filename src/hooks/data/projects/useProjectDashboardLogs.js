@@ -5,6 +5,7 @@ import { getProjectDashboardLogs } from '../../../services/api';
 const useProjectDashboard = (projectId, granularity) => {
   // console.log('useProjectDashboard', granularity);
   const parseData = (data) => {
+    // console.log('useProjectDashboard data:', data);
     const logs = data?.logs_with_granularity?.map((log) => ({
       // ...log,
       // bucket sẽ là ngày - trục x
@@ -12,7 +13,7 @@ const useProjectDashboard = (projectId, granularity) => {
 
       // 2 thằng này sẽ là data cho trục y, t fix cứng 2 cái tên này trong component Chart luôn
       averageDuration: log.avg_duration_in_period,
-      paramUpdateCount: log.count,
+      paramAppliedCount: log.count,
     }));
     return { logs };
   };

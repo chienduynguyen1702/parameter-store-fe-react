@@ -8,7 +8,7 @@ import { Card, Icon, Modal } from '../../../components';
 import { useOrganization } from '../../../hooks/data';
 const Overview = () => {
   const { id } = useParams();
-  console.log('org id', id);
+  // console.log('org id', id);
   const { data: org, isLoading } = useOrganization();
 
   const [editedItemId, setEditedItemId] = useState(undefined);

@@ -26,7 +26,7 @@ export default function DashboardPage() {
     organizationId,
     granularity,
   );
-  console.log('granularity', granularity);
+  // console.log('granularity', granularity);
   const addLoadingChart = useCallback(
     (elm, height = 488) =>
       isLogsSuccess ? (
