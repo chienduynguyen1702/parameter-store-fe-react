@@ -33,7 +33,7 @@ const navigation = [
 const Sidebar = ({ className, onClose }) => {
   // get me from AuthContext
   const { me } = useContext(AuthContext);
-  console.log('me', me);
+  // console.log('me', me);
   const { pathname } = useLocation();
   const firstLevelPath = '/' + pathname.split('/')[1];
 
