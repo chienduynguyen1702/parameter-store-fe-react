@@ -49,11 +49,11 @@ export const getMe = () =>
 
 // ------------------------------ User ------------------------------
 
-export const getListUser = (params) =>
+export const getListUser = (queryString) =>
   authApi({
     method: 'GET',
     url: '/settings/users',
-    params,
+    params: queryString,
   });
 
 export const addUser = (data) =>

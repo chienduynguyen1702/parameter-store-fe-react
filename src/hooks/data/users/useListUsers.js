@@ -39,9 +39,9 @@ const useListUsers = () => {
     });
 
     const pagination = {
-      total: users.length,
+      total: data?.total,
       currentPage: 1,
-      totalPage: Math.ceil(users.length / 10),
+      totalPage: Math.ceil(data?.total / 10),
       limit: 10,
     };
     // console.log ("pagination ",pagination);
