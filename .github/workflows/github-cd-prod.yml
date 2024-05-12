@@ -22,14 +22,7 @@ jobs:
   prepare:
     name: Get Short SHA of commit and get parameters from parameter store
     runs-on: ubuntu-latest
-    env:
-      PARAMETER_STORE_TOKEN: ${{ secrets.AGENT_PARAMETER_STORE }}
     steps:
-      - name: 'Setup jq'
-        uses: dcarbone/install-jq-action@v2
-        with:
-          version: '${{ inputs.version }}'
-          force: '${{ inputs.force }}'
       - uses: actions/checkout@v2
       - name: get SHORT_SHA
         id: get_sha
@@ -37,10 +30,6 @@ jobs:
           SHORT_SHA=$(git rev-parse --short ${{ github.sha }})
           echo "SHORT_SHA=$SHORT_SHA" >> "$GITHUB_OUTPUT"
           echo "SHORT_SHA=$SHORT_SHA"
-      - name: Get parameters from parameter store
-        id: get_parameters
-        run: |
-          ./scripts/get-parameters.sh -o .env && cat .env
     outputs:
       SHORT_SHA: ${{ steps.get_sha.outputs.SHORT_SHA }}
 #
@@ -49,8 +38,14 @@ jobs:
     needs: [prepare]
     env:
       SHORT_SHA: ${{ needs.prepare.outputs.SHORT_SHA }}
+      PARAMETER_STORE_TOKEN: ${{ secrets.AGENT_PARAMETER_STORE }}
       NODE_ENV: production
     steps:
+      - name: 'Setup jq'
+        uses: dcarbone/install-jq-action@v2
+        with:
+          version: '${{ inputs.version }}'
+          force: '${{ inputs.force }}'
       - uses: actions/checkout@v2
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -65,6 +60,10 @@ jobs:
           restore-keys: |
             clouding-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
 
+      - name: Get parameters from parameter store
+        id: get_parameters
+        run: |
+          ./scripts/get-parameters.sh -o .env && cat .env
       - name: check env file
         env:
           PROJECT_NAME: ${{vars.PROJECT_NAME}}
@@ -108,7 +107,7 @@ jobs:
 #
   deploy:
     name: Deploy to remote server
-    needs: [build-test]
+    needs: [build-test, prepare]
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
