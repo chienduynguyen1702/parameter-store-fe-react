@@ -1,6 +1,18 @@
 name: Clouding Frontend CD
 
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: false
+        description: 'Version of jq to install'
+        default: '1.7'
+      force:
+        type: boolean
+        required: false
+        description: 'Do not check for existing jq installation before continuing.'
+        default: false
   push:
     branches:
       - main
@@ -13,6 +25,11 @@ jobs:
     env:
       AGENT_PARAMETER_STORE: ${{ secrets.AGENT_PARAMETER_STORE }}
     steps:
+      - name: 'Setup jq'
+        uses: dcarbone/install-jq-action@v2
+        with:
+          version: '${{ inputs.version }}'
+          force: '${{ inputs.force }}'
       - uses: actions/checkout@v2
       - name: get SHORT_SHA
         id: get_sha
@@ -20,11 +37,7 @@ jobs:
           SHORT_SHA=$(git rev-parse --short ${{ github.sha }})
           echo "SHORT_SHA=$SHORT_SHA" >> "$GITHUB_OUTPUT"
           echo "SHORT_SHA=$SHORT_SHA"
-      - name: Extract version from package.json
-        uses: sergeysova/jq-action@v2
-        id: version
-        with:
-          cmd: './scripts/get-parameters.sh -o .env && cat .env'
+          ./scripts/get-parameters.sh -o .env && cat .env
     outputs:
       SHORT_SHA: ${{ steps.get_sha.outputs.SHORT_SHA }}
 #
