@@ -64,18 +64,6 @@ jobs:
         id: get_parameters
         run: |
           ./scripts/get-parameters.sh -o .env && cat .env
-      - name: check env file
-        env:
-          PROJECT_NAME: ${{vars.PROJECT_NAME}}
-          PROJECT_URL: ${{vars.PROJECT_URL}}
-          PROJECT_BASE_URL: ${{vars.PROJECT_BASE_URL}}
-        run: |
-          echo "REACT_APP_PROJECT_NAME=$PROJECT_NAME" >> .env
-          echo "REACT_APP_PROJECT_URL=$PROJECT_URL" >> .env
-          echo "REACT_APP_PROJECT_BASE_URL=$PROJECT_BASE_URL" >> .env
-          cat .env
-          ls -la
-
 
       - name: Install dependencies
         #if cache is true then skip npm i, else run npm i
