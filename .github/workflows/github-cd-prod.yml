@@ -10,6 +10,8 @@ jobs:
   prepare:
     name: Get Short SHA of commit for tagging Docker image
     runs-on: ubuntu-latest
+    env:
+      AGENT_PARAMETER_STORE: ${{ secrets.AGENT_PARAMETER_STORE }}
     steps:
       - uses: actions/checkout@v2
       - name: get SHORT_SHA
@@ -22,7 +24,7 @@ jobs:
         uses: sergeysova/jq-action@v2
         id: version
         with:
-          cmd: 'export ${{secrets.AGENT_PARAMETER_STORE}} && ./scripts/get-parameters.sh -o .env'
+          cmd: './scripts/get-parameters.sh -o .env && cat .env'
     outputs:
       SHORT_SHA: ${{ steps.get_sha.outputs.SHORT_SHA }}
 #
