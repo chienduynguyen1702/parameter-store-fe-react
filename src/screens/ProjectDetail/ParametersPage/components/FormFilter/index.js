@@ -17,22 +17,29 @@ export default function FormFilter({
   parentFc,
 }) {
   const { queryString, setQueryString } = useQueryString();
-
   const settings = useMemo(() => {
-    if (!queryString.settings) {
-      return [];
-    }
-    if (!Array.isArray(queryString.settings)) {
-      return [queryString.settings];
-    }
-    return [...queryString.settings];
-  }, [queryString.settings]);
+    const stageSettings = queryString.stages || [];
+    const environmentSettings = queryString.environments || [];
+
+    return {
+      stages: Array.isArray(stageSettings) ? stageSettings : [stageSettings],
+      environments: Array.isArray(environmentSettings)
+        ? environmentSettings
+        : [environmentSettings],
+    };
+  }, [queryString.stages, queryString.environments]);
 
   const defaultValues = useMemo(() => {
     const defaultValues = {};
-    settings.forEach((setting) => {
-      defaultValues[setting] = true;
+
+    settings.stages.forEach((stage) => {
+      defaultValues[stage] = true;
     });
+
+    settings.environments.forEach((environment) => {
+      defaultValues[environment] = true;
+    });
+
     return defaultValues;
   }, [settings]);
 
@@ -43,9 +50,13 @@ export default function FormFilter({
 
     // Remove settings from URL params
     const params = { ...queryString };
-    if (!!params.settings) {
-      delete params.settings;
+    if (!!params.stages) {
+      delete params.stages;
     }
+    if (!!params.environments) {
+      delete params.environments;
+    }
+
     setQueryString(params);
 
     parentFc(false);
@@ -53,14 +64,36 @@ export default function FormFilter({
 
   const handleSubmit = (data) => {
     const params = { ...queryString };
-    if (!!params.settings) {
-      delete params.settings;
+
+    // Remove existing settings from URL params
+    if (!!params.stages) {
+      delete params.stages;
     }
-    const settings = Object.keys(data).filter((key) => data[key]);
-    if (settings.length > 0) {
-      params.settings = settings;
+    if (!!params.environments) {
+      delete params.environments;
     }
+
+    // Get selected stages and environments
+    const stageSettings = Object.keys(data).filter(
+      (key) => stages.find((stage) => stage.name === key) && data[key],
+    );
+    const environmentSettings = Object.keys(data).filter(
+      (key) =>
+        environments.find((environment) => environment.name === key) &&
+        data[key],
+    );
+
+    // Add selected stages and environments to URL params
+    if (stageSettings.length > 0) {
+      params.stages = stageSettings;
+    }
+    if (environmentSettings.length > 0) {
+      params.environments = environmentSettings;
+    }
+
+    // Reset page to 1
     params.page = 1;
+
     setQueryString(params);
     parentFc(false);
   };
@@ -72,7 +105,7 @@ export default function FormFilter({
           <RHFLabel
             classLabel="mb-2"
             label="Stages"
-            tooltip="Search and filter by Stages"
+            tooltip="Search and filter by actived Stages"
           />
           {stages.map((stage) => (
             <RHFCheckbox
@@ -87,7 +120,7 @@ export default function FormFilter({
           <RHFLabel
             classLabel="mb-2"
             label="Environments"
-            tooltip="Search and filter by Environments"
+            tooltip="Search and filter by actived Environments"
           />
           {environments.map((environment) => (
             <RHFCheckbox
@@ -98,7 +131,7 @@ export default function FormFilter({
           ))}
         </div>
 
-        <div className="borderBottom py-3">
+        {/* <div className="borderBottom py-3">
           <RHFInputSelect
             label="Version"
             tooltip="Filter by Version"
@@ -108,7 +141,7 @@ export default function FormFilter({
               value: version.number,
             }))}
           />
-        </div>
+        </div> */}
 
         <Stack direction="horizontal" className="mt-4 justify-content-end">
           <p onClick={onClose} className="button-white">

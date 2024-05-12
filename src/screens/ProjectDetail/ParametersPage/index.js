@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import useQueryString from '../../../hooks/useQueryString';
 
 import {
   ButtonAdd,
@@ -35,6 +36,7 @@ const ParametersPage = () => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
   const [isUpdating, setIsUpdating] = useState(false);
+  const { queryString, setQueryString } = useQueryString();
   const {
     listParameters,
     isLoading: isListParametersLoading,
@@ -142,7 +144,7 @@ const ParametersPage = () => {
                 <FormFilter
                   stages={stages}
                   environments={environments}
-                  versions={versions}
+                  // versions={versions}
                 />
               </FiltersCustom>
               <ButtonAdd
