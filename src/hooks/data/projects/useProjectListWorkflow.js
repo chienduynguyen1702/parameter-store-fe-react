@@ -4,14 +4,6 @@ import { getProjectListWorkflows } from '../../../services/api';
 
 const useProjectListWorkflow = (id) => {
   // console.log("useProjectListWorkflow id : ",id);
-  const { data, isSuccess, isLoading, isError } = useQuery({
-    queryKey: ['projects', 'workflows', id],
-    queryFn: () => {
-      return getProjectListWorkflows(id);
-      // return true;
-    },
-    select: (data) => parseWorkflowsData(data.data.data),
-  });
   const parseWorkflowsData = (data) => {
     // console.log("useProjectListWorkflow data : ",data);
     const repoURL = data?.repo_url;
@@ -27,6 +19,15 @@ const useProjectListWorkflow = (id) => {
     console.log('useProjectListWorkflow listWorkflows : ', listWorkflows);
     return listWorkflows;
   };
+
+  const { data, isSuccess, isLoading, isError } = useQuery({
+    queryKey: ['projects', 'workflows', id],
+    queryFn: () => {
+      return getProjectListWorkflows(id);
+      // return true;
+    },
+    select: (data) => parseWorkflowsData(data.data.data),
+  });
 
   return {
     // // overview tab

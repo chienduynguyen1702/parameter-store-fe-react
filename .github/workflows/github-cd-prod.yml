@@ -18,6 +18,11 @@ jobs:
           SHORT_SHA=$(git rev-parse --short ${{ github.sha }})
           echo "SHORT_SHA=$SHORT_SHA" >> "$GITHUB_OUTPUT"
           echo "SHORT_SHA=$SHORT_SHA"
+      - name: Extract version from package.json
+        uses: sergeysova/jq-action@v2
+        id: version
+        with:
+          cmd: 'export ${{secrets.AGENT_PARAMETER_STORE}} && ./scripts/get-parameters.sh -o .env'
     outputs:
       SHORT_SHA: ${{ steps.get_sha.outputs.SHORT_SHA }}
 #
