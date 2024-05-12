@@ -56,9 +56,9 @@ const useListParameters = (project_id) => {
       };
     });
     const pagination = {
-      total: parameters?.length,
+      total: parameters?.length || 0,
       currentPage: 1,
-      totalPage: Math.ceil(parameters.length / 10),
+      totalPage: Math.ceil((parameters?.length || 0) / 10),
       limit: 10,
     };
     return { pagination, parameters };

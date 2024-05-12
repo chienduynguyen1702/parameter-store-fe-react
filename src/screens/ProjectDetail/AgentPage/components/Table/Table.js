@@ -25,7 +25,7 @@ const Table = ({
             <div className="tableCell"></div>
           </div>
           {isSuccess &&
-            listAgents.map((agent) => (
+            listAgents?.map((agent) => (
               <Row
                 key={agent.id}
                 item={agent}
@@ -34,9 +34,9 @@ const Table = ({
               />
             ))}
         </div>
-        {isSuccess && listAgents.length === 0 && <NoData />}
+        {isSuccess && listAgents?.length === 0 && <NoData />}
       </div>
-      {((isSuccess && listAgents.length !== 0) || isLoading) && (
+      {((isSuccess && listAgents?.length !== 0) || isLoading) && (
         <Pagination pageCount={totalPage || 5} />
       )}
     </>

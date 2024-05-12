@@ -27,7 +27,7 @@ const Table = ({
             <div className="tableCell"></div>
           </div>
           {isSuccess &&
-            listParameters.map((item) => (
+            listParameters?.map((item) => (
               <Row
                 key={item.id}
                 item={item}
@@ -36,9 +36,9 @@ const Table = ({
               />
             ))}
         </div>
-        {isSuccess && listParameters.length === 0 && <NoData />}
+        {isSuccess && listParameters?.length === 0 && <NoData />}
       </div>
-      {((isSuccess && listParameters.length !== 0) || isLoading) && (
+      {((isSuccess && listParameters?.length !== 0) || isLoading) && (
         <Pagination pageCount={totalPage || 5} />
       )}
     </>

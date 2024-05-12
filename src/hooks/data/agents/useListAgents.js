@@ -48,9 +48,9 @@ const useListAgents = (project_id) => {
     });
 
     const pagination = {
-      total: agents.length,
+      total: agents?.length || 0,
       currentPage: 1,
-      totalPage: Math.ceil(agents.length / 10),
+      totalPage: Math.ceil((agents?.length || 0) / 10),
       limit: 10,
     };
     return { pagination, agents };

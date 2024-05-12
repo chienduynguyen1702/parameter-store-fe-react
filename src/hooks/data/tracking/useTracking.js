@@ -2,14 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getTracking } from '../../../services/api';
 
 const useTracking = (id) => {
-  const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['organizations'],
-    queryFn: () => {
-      return getTracking(id);
-      // return true;
-    },
-    select: (data) => combineLogs(data.data.data),
-  });
   const combineLogs = (data) => {
     // console.log("combineLogs data",data)
     const logs = [...data?.agent_logs, ...data?.project_logs].map((log) => {
@@ -29,6 +21,14 @@ const useTracking = (id) => {
     // console.log("sortedLogs",sortedLogs)
     return sortedLogs;
   };
+  const { data, isSuccess, isLoading } = useQuery({
+    queryKey: ['organizations'],
+    queryFn: () => {
+      return getTracking(id);
+      // return true;
+    },
+    select: (data) => combineLogs(data.data.data),
+  });
 
   return {
     data,

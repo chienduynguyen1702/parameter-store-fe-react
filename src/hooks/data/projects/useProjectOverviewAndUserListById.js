@@ -19,7 +19,7 @@ const useProjectOverviewAndUserList = (id) => {
     address: data?.overview.address,
     current_sprint: data?.overview.current_sprint,
     repo_url: data?.overview.repo_url,
-    member_count: data?.users.length,
+    member_count: data?.users?.length,
     auto_update: data?.overview.auto_update,
   };
   const usersList = data?.users;
