@@ -4,7 +4,7 @@ import { getProjectListWorkflows } from '../../../services/api';
 
 const useProjectListWorkflow = (id) => {
   // console.log("useProjectListWorkflow id : ",id);
-  const { data, isSuccess, isLoading } = useQuery({
+  const { data, isSuccess, isLoading, isError } = useQuery({
     queryKey: ['projects', 'workflows', id],
     queryFn: () => {
       return getProjectListWorkflows(id);
@@ -34,7 +34,7 @@ const useProjectListWorkflow = (id) => {
     listWorkflows: data,
     isLoadingListWorkflows: isLoading,
     totalPage: data?.length,
-
+    isError,
     // listUsersAndRoles,
     // updateProject,
     // addUserAndRole,

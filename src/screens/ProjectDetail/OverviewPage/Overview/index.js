@@ -1,18 +1,18 @@
 import { Col, Row, Stack } from 'react-bootstrap';
 import { useState } from 'react';
 
-import {  Card, Icon, Modal } from '../../../../components';
+import { Card, Icon, Modal } from '../../../../components';
 import EditProjectForm from './EditProjectForm';
 import moment from 'moment';
 
-const Overview = ({ overview , usersList}) => {
+const Overview = ({ overview, usersList }) => {
   // const project = PROJECTS[0];
   // const { id } = useParams();
   // console.log("project id: ",id);
   // const {overview, usersList, isSuccess} = useProjectOverviewAndUserList(id);
   // console.log("overview: ",overview);
   const [editedItemId, setEditedItemId] = useState(undefined);
-  const [isEditMode, setIdEditMode] = useState(false);  
+  const [isEditMode, setIdEditMode] = useState(false);
   const handleEditClick = (id) => {
     setEditedItemId(id);
   };
@@ -33,13 +33,15 @@ const Overview = ({ overview , usersList}) => {
         onClose={() => {
           setIdEditMode(false);
           // setIsSetting(false);
-          
         }}
       >
         {typeof editedItemId !== 'undefined' && (
-          <EditProjectForm 
+          <EditProjectForm
             editedItemId={editedItemId}
-            onClose={() => setEditedItemId(undefined)}
+            onClose={() => {
+              setEditedItemId(undefined);
+              setIdEditMode(false);
+            }}
           />
         )}
       </Modal>
@@ -53,7 +55,7 @@ const Overview = ({ overview , usersList}) => {
         <SettingsForm />
       </Modal> */}
       <Card
-        title=  {overview?.name}
+        title={overview?.name}
         classTitle="title-purple"
         className="mb-5"
         head={
@@ -63,13 +65,10 @@ const Overview = ({ overview , usersList}) => {
               onClick={() => {
                 setIdEditMode(true);
                 // console.log('x');
-                handleEditClick(overview.id)
+                handleEditClick(overview.id);
               }}
             >
-              <Icon 
-                name="edit" 
-                size={24} 
-              />
+              <Icon name="edit" size={24} />
             </div>
             {/* <ButtonSetting
               titleButton="Config Stages and Environments"
@@ -104,7 +103,9 @@ const Overview = ({ overview , usersList}) => {
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Start date:</p>
-              <p className="detail-content status-text">{moment(overview?.start_at).format("DD-MM-YYYY")}</p>
+              <p className="detail-content status-text">
+                {moment(overview?.start_at).format('DD-MM-YYYY')}
+              </p>
             </Stack>
           </Col>
           <Col xs={12} md={{ span: 6, offset: 1 }}>
@@ -116,13 +117,15 @@ const Overview = ({ overview , usersList}) => {
                 rel="noopener noreferrer"
                 // className="mb-1 text-dark d-block"
               >
-                <p className="detail-content status-text">{overview?.repo_url}</p>
+                <p className="detail-content status-text">
+                  {overview?.repo_url}
+                </p>
               </a>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">
               <p className="me-auto">Members: </p>
               <p className="detail-content status-text">
-                {usersList? usersList.length: "0"}
+                {usersList ? usersList.length : '0'}
               </p>
             </Stack>
             <Stack direction="horizontal" gap={3} className="py-2">

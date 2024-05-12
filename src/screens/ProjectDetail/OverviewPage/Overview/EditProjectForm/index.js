@@ -41,7 +41,7 @@ const AddForm = ({ editedItemId, onClose }) => {
           address: response.data.overview.address,
           repo_url: response.data.overview.repo_url,
           repo_api_token: response.data.overview.repo_api_token,
-          autoUpdate: response.data.overview.auto_update,
+          auto_update: response.data.overview.auto_update,
         };
         method.reset(projectData); // Populate form fields with org data
       } catch (error) {

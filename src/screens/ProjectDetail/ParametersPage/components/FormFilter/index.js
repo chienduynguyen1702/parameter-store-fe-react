@@ -104,8 +104,8 @@ export default function FormFilter({
             tooltip="Filter by Version"
             name="version"
             suggestions={versions.map((version) => ({
-              label: version.name,
-              value: version.name,
+              label: version.number,
+              value: version.number,
             }))}
           />
         </div>

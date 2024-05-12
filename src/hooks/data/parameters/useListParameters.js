@@ -14,6 +14,7 @@ import {
 // import { PARAMETERS } from '../../mocks/parameters';
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import { number } from 'yup';
 
 const DEFAULT_QUERY_STRING = {
   page: 1,
@@ -53,6 +54,7 @@ const useListParameters = (project_id) => {
         createdAt: moment(item.CreatedAt).format('DD/MM/YYYY'),
         updatedAt: moment(item.UpdatedAt).format('DD/MM/YYYY'),
         isApplied: item.is_applied,
+        description: item.description,
       };
     });
     const pagination = {
@@ -166,6 +168,7 @@ const useListParameters = (project_id) => {
       return {
         id: version.ID,
         name: version.name,
+        number: version.number,
         description: version.description,
         color: version.color,
       };

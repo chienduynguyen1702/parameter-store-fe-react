@@ -5,6 +5,7 @@ import Row from './Row';
 import { NoData, Pagination } from '../../../../../components';
 import SkeletonTable from './Skeleton';
 import { useProjectListWorkflow } from '../../../../../hooks/data';
+import { toast } from 'react-toastify';
 
 const Table = (
   {
@@ -17,8 +18,19 @@ const Table = (
   },
 ) => {
   const { id } = useParams();
-  const { listWorkflows, isLoadingListWorkflows, totalPage, isSuccess } =
-    useProjectListWorkflow(id);
+  const {
+    listWorkflows,
+    isLoadingListWorkflows,
+    totalPage,
+    isSuccess,
+    isError,
+  } = useProjectListWorkflow(id);
+  if (isError) {
+    console.log('isError in Table', isError);
+    toast.warn(
+      'Failed to fetch workflows, please configure your repo url and token in settings.',
+    );
+  }
   // console.log('listWorkflows', listWorkflows);
   // console.log('isLoadingListWorkflows', isLoadingListWorkflows);
   return (
@@ -32,7 +44,7 @@ const Table = (
             <div className="tableCell">State</div>
           </div>
           {isSuccess && isLoadingListWorkflows && <SkeletonTable />}
-          {/* {<SkeletonTable />} */}
+
           {listWorkflows?.map((workflow) => (
             <Row
               // key={workflow.id}

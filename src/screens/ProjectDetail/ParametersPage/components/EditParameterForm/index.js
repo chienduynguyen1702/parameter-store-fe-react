@@ -6,7 +6,13 @@ import ParameterForm from '../ParameterForm';
 import { useListParameters } from '../../../../../hooks/data';
 import { getParameterByID } from '../../../../../services/api';
 
-const EditForm = ({project_id, editedItemId, onClose, stages, environments }) => {
+const EditForm = ({
+  project_id,
+  editedItemId,
+  onClose,
+  stages,
+  environments,
+}) => {
   const { editParameterMutation } = useListParameters();
   const method = useForm({});
 
@@ -22,17 +28,17 @@ const EditForm = ({project_id, editedItemId, onClose, stages, environments }) =>
       },
       onError: (error) => {
         console.error('Error editing parameter:', error);
-      }
+      },
     });
   };
-  console.log('editedItemId', editedItemId);
-  console.log('project_id', project_id);
-  
+  // console.log('editedItemId', editedItemId);
+  // console.log('project_id', project_id);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getParameterByID(project_id, editedItemId);
-        const parameterData =  response.data.data.parameter;// Assuming response.data contains parameter information
+        const parameterData = response.data.data.parameter; // Assuming response.data contains parameter information
         console.log('parameterData EditForm', parameterData);
         method.reset(parameterData); // Populate form fields with parameter data
       } catch (error) {
