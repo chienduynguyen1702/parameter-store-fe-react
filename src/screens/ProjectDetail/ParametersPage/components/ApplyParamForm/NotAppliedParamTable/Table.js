@@ -25,9 +25,10 @@ const NotAppliedParamTable = ({ listNotAppliedParameters, totalPage }) => {
         </div>
         {listNotAppliedParameters.length === 0 && <NoData />}
       </div>
-      {listNotAppliedParameters.length !== 0 && (
-        <Pagination pageCount={listNotAppliedParameters.length} />
-      )}
+      {/* {listNotAppliedParameters.length !== 0 && (
+        <Pagination pageCount={1} />
+        // <Pagination pageCount={Math.ceil(listNotAppliedParameters.length/10)} />
+      )} */}
     </>
   );
 };
