@@ -29,7 +29,7 @@ const useListAgents = (project_id) => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const agents = data?.map((item) => {
+    const agents = data?.agents?.map((item) => {
       return {
         name: item?.name,
         id: item?.id,
@@ -48,9 +48,9 @@ const useListAgents = (project_id) => {
     });
 
     const pagination = {
-      total: agents?.length || 0,
+      total: data?.total,
       currentPage: 1,
-      totalPage: Math.ceil((agents?.length || 0) / 10),
+      totalPage: Math.ceil((data?.total || 0) / 10),
       limit: 10,
     };
     return { pagination, agents };
@@ -58,9 +58,9 @@ const useListAgents = (project_id) => {
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['agents', queryString],
-    queryFn: () => getListAgent(project_id),
+    queryFn: () => getListAgent(project_id, queryString),
     staleTime: 10 * 1000,
-    select: (data) => parseData(data.data.agents),
+    select: (data) => parseData(data.data),
     enabled: !!page && !!limit,
   });
 

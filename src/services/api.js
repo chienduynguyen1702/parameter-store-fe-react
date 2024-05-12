@@ -464,11 +464,11 @@ export const getVersions = (project_id) =>
   });
 // ------------------------------ Agent ------------------------------
 
-export const getListAgent = (project_id) =>
+export const getListAgent = (project_id, queryString) =>
   authApi({
     method: 'GET',
     url: `/projects/${project_id}/agents/`,
-    // params,
+    params: queryString,
   });
 
 export const addAgent = (project_id, data) =>
