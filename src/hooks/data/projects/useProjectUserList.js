@@ -28,7 +28,7 @@ const useProjectUserList = (id) => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    const users = data?.users.map((user) => {
+    const users = data?.users?.map((user) => {
       return {
         id: user.id,
         name: user.name,
@@ -42,9 +42,9 @@ const useProjectUserList = (id) => {
     });
 
     const pagination = {
-      total: users.length,
+      total: users.length || 0,
       currentPage: 1,
-      totalPage: Math.ceil(users.length / 10),
+      totalPage: Math.ceil((users.length || 0) / 10),
       limit: 10,
     };
     return { pagination, users };
