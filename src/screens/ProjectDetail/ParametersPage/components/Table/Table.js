@@ -1,4 +1,6 @@
 import React from 'react';
+import style from './Table.module.sass';
+import cn from 'classnames';
 
 import Row from './Row/Row';
 import { NoData, Pagination } from '../../../../../components';
@@ -12,9 +14,12 @@ const Table = ({
   archiveMutation,
   isArchivedSuccess,
 }) => {
+  console.log('listParameters', listParameters);
+  console.log('totalPage', totalPage);
+
   return (
     <>
-      <div className="tableOuter">
+      <div className={cn(style.head, 'tableOuter')}>
         <div className="tableContainer">
           <div className="tableHead">
             <div className="tableCell pb-4">Name</div>

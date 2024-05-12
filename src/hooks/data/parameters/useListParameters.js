@@ -38,8 +38,8 @@ const useListParameters = (project_id) => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    // console.log('data:', data);
-    const parameters = data?.map((item) => {
+    console.log('data:', data);
+    const parameters = data?.parameters?.map((item) => {
       return {
         id: item.ID,
         name: item.name,
@@ -59,19 +59,18 @@ const useListParameters = (project_id) => {
       };
     });
     const pagination = {
-      total: parameters?.length || 0,
-      currentPage: 1,
-      totalPage: Math.ceil((parameters?.length || 0) / 10),
-      limit: 10,
+      total: data?.total,
+      currentPage: queryString.page,
+      totalPage: Math.ceil(data?.total / limit),
     };
     return { pagination, parameters };
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['projects', queryString],
-    queryFn: () => getListParameter(project_id),
+    queryFn: () => getListParameter(project_id, queryString),
     staleTime: 10 * 1000,
-    select: (data) => parseData(data.data.parameters),
+    select: (data) => parseData(data.data),
     enabled: !!page && !!limit,
   });
 
