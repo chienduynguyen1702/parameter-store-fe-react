@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getProjectListWorkflows } from '../../../services/api';
 // import { toBeInTheDOM } from '@testing-library/jest-dom/dist/matchers';
-
+const DEFAULT_QUERY_STRING = {
+  page: 1,
+  limit: 10,
+};
 const useProjectListWorkflow = (id) => {
   // console.log("useProjectListWorkflow id : ",id);
   const parseWorkflowsData = (data) => {
@@ -34,7 +37,7 @@ const useProjectListWorkflow = (id) => {
     isSuccess,
     listWorkflows: data,
     isLoadingListWorkflows: isLoading,
-    totalPage: data?.length,
+    totalPage: Math.ceil(data?.length / DEFAULT_QUERY_STRING.limit),
     isError,
     // listUsersAndRoles,
     // updateProject,

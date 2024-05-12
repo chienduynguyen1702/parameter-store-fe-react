@@ -10,22 +10,22 @@ import {
 } from '../../../services/api';
 import { toast } from 'react-toastify';
 
-const DEFAULT_QUERY_STRING = {
-  page: 1,
-  limit: 10,
-};
+// const DEFAULT_QUERY_STRING = {
+//   page: 1,
+//   limit: 10,
+// };
 
 const useListProjects = () => {
   const queryClient = useQueryClient();
-  const { queryString, setQueryString } = useQueryString();
+  // const { queryString, setQueryString } = useQueryString();
 
-  const { page, limit } = queryString;
+  // const { page, limit } = queryString;
 
-  useEffect(() => {
-    if (!page || !limit) {
-      setQueryString(DEFAULT_QUERY_STRING);
-    }
-  }, [limit, page, queryString, setQueryString]);
+  // useEffect(() => {
+  //   if (!page || !limit) {
+  //     setQueryString(DEFAULT_QUERY_STRING);
+  //   }
+  // }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
     const projects = data?.projects?.map((project) => {
@@ -44,21 +44,21 @@ const useListProjects = () => {
         autoUpdate: project?.auto_update,
       };
     });
-    const pagination = {
-      total: projects?.length || 0,
-      currentPage: page,
-      totalPage: Math.ceil(projects?.length / limit),
-      limit: limit,
-    };
-    return { pagination, projects };
+    // const pagination = {
+    //   total: projects?.length || 0,
+    //   currentPage: page,
+    //   totalPage: Math.ceil(projects?.length / limit),
+    //   limit: limit,
+    // };
+    return { projects };
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['projects', queryString],
-    queryFn: () => getListProjects(queryString),
+    queryKey: ['projects'],
+    queryFn: () => getListProjects(),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data),
-    enabled: !!page && !!limit,
+    // enabled: !!page && !!limit,
   });
 
   const addProjectMutation = useMutation(
