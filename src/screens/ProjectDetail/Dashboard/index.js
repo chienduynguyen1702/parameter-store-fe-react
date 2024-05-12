@@ -1,12 +1,14 @@
 import { useCallback, useState, useRef } from 'react';
 import { TailSpin } from 'react-loader-spinner';
+import { useQueryString } from '../../../hooks';
 
 import {
   MixLineBarChart,
   CardDashboardWithGranularity,
   ClusteredBarChart,
+  FiltersCustom,
 } from '../../../components';
-
+import FormFilter from './FormFilter';
 import SummaryCard from './SummaryCard';
 
 import {
@@ -21,10 +23,17 @@ export default function DashboardHighLight() {
   const { id: projectId } = useParams();
   const { total } = useProjectDashboardTotal(projectId);
 
+  const { queryString, setQueryString } = useQueryString();
+  const from = queryString?.from;
+  const to = queryString?.to;
   const [granularity, setGranularity] = useState('day');
+  // console.log('DashboardHighLight from', from);
+  // console.log('DashboardHighLight to', to);
   const { logs, isSuccess: isLogsSuccess } = useProjectDashboardLogs(
     projectId,
     granularity,
+    from,
+    to,
   );
 
   const addLoadingChart = useCallback(
@@ -96,6 +105,13 @@ export default function DashboardHighLight() {
               classTitle={'title-purple'}
               granularity={granularity}
               setGranularity={(value) => setGranularity(value)}
+              head={
+                <div className="d-flex">
+                  <FiltersCustom className="me-2 flex-wrap flex-row flex-lg-col gap-3 min-height: 40px">
+                    <FormFilter />
+                  </FiltersCustom>
+                </div>
+              }
             >
               {addLoadingChart(
                 <ClusteredBarChart

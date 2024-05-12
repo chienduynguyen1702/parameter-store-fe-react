@@ -10,6 +10,7 @@ export default function CardDashboard({
   classTitle,
   addTarget,
   granularity = 'day',
+  head,
   setGranularity,
 }) {
   return (
@@ -37,6 +38,7 @@ export default function CardDashboard({
                 )}
               </div>
               <div className="d-flex py-4 py-md-0">
+                {head && head}
                 <div
                   className={cn(styles.rangeTimeBtn, {
                     [styles.active]: granularity === 'day' ? true : false,

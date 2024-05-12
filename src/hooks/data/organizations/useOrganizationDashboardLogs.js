@@ -2,7 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getOrganizationDashboardLogs } from '../../../services/api';
 
-const useOrganizationDashboardLogs = (organizationId, granularity) => {
+const useOrganizationDashboardLogs = (
+  organizationId,
+  granularity,
+  from,
+  to,
+) => {
   // console.log('useOrganizationDashboard', granularity);
   const parseData = (data) => {
     const logs = data?.logs_with_granularity?.map((log) => ({
@@ -18,9 +23,10 @@ const useOrganizationDashboardLogs = (organizationId, granularity) => {
   };
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['organization-dashboard', organizationId, granularity],
+    queryKey: ['organization-dashboard', organizationId, granularity, from, to],
     // tách api
-    queryFn: () => getOrganizationDashboardLogs(organizationId, granularity),
+    queryFn: () =>
+      getOrganizationDashboardLogs(organizationId, granularity, from, to),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data),
   });

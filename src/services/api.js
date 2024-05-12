@@ -182,12 +182,14 @@ export const getOrganizationDashboardTotals = (org_id) =>
     url: `/organizations/dashboard/totals`,
   });
 
-export const getOrganizationDashboardLogs = (org_id, granularity) =>
+export const getOrganizationDashboardLogs = (org_id, granularity, from, to) =>
   authApi({
     method: 'GET',
     url: `/organizations/dashboard/logs`,
     params: {
       granularity,
+      from,
+      to,
     },
   });
 // ------------------------------ Project List ------------------------------
@@ -289,12 +291,14 @@ export const getProjectDashboardTotals = (project_id, granularity) =>
       granularity,
     },
   });
-export const getProjectDashboardLogs = (project_id, granularity) =>
+export const getProjectDashboardLogs = (project_id, granularity, from, to) =>
   authApi({
     method: 'GET',
     url: `/projects/${project_id}/dashboard/logs`,
     params: {
       granularity,
+      from,
+      to,
     },
   });
 
@@ -515,10 +519,14 @@ export const unarchiveAgent = (project_id, agent_id) => {
 };
 
 // ------------------------------ Tracking ------------------------------
-export const getTracking = (project_id) =>
+export const getTracking = (project_id, from, to) =>
   authApi({
     method: 'GET',
-    url: `/projects/${project_id}/tracking/`,
+    url: `/projects/${project_id}/tracking/logs`,
+    params: {
+      from,
+      to,
+    },
   });
 // ------------------------------ Logger ------------------------------
 export const getListLogger = (params) =>

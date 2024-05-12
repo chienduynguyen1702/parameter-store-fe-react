@@ -16,22 +16,22 @@ const statusAlias = ['2xx', '3xx', '4xx', '5xx'];
 const sortByTime = ['asc', 'desc'];
 
 const TableLog = ({ items }) => {
-  const {id} = useParams();
+  const { id } = useParams();
   const { queryString, setQueryString } = useQueryString();
 
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [visible, setVisible] = useState(false);
   const [indexSort, setIndexSort] = useState(1);
 
-  const {
-    data: listLoggers,
-    isSuccess,
-    isLoading,
-  } = useTracking(id);
+  // from: "2024-05-01"
+  // to : "2024-05-31"
+  const from = queryString?.from;
+  const to = queryString?.to;
+  const { data: listLoggers, isSuccess, isLoading } = useTracking(id, from, to);
   // console.log ('listLoggers', listLoggers);
-  const checkSelected = (id) => {
-    return selectedFilters.includes(id);
-  };
+  // const checkSelected = (id) => {
+  //   return selectedFilters.includes(id);
+  // };
 
   useEffect(() => {
     if (queryString?.responseStatus) {
@@ -51,29 +51,29 @@ const TableLog = ({ items }) => {
     }
   }, [isSuccess]);
 
-  const handleChange = (id) => {
-    if (checkSelected(id)) {
-      setSelectedFilters(selectedFilters.filter((x) => x !== id));
-    } else {
-      setSelectedFilters((selectedFilters) => [...selectedFilters, id]);
-    }
-  };
+  // const handleChange = (id) => {
+  //   if (checkSelected(id)) {
+  //     setSelectedFilters(selectedFilters.filter((x) => x !== id));
+  //   } else {
+  //     setSelectedFilters((selectedFilters) => [...selectedFilters, id]);
+  //   }
+  // };
 
-  const handleTableFilter = () => {
-    console.log(queryString.responseStatus);
-    if (queryString.responseStatus) {
-      console.log('params', [queryString.responseStatus]);
-      delete queryString.responseStatus;
-    }
-    if (selectedFilters.length !== 0) {
-      console.log('selected filters', selectedFilters, selectedFilters.length);
-      const responseStatus = selectedFilters?.map((x) => statusAlias[x]);
-      setQueryString({
-        ...queryString,
-        responseStatus,
-      });
-    } else setQueryString(queryString);
-  };
+  // const handleTableFilter = () => {
+  //   console.log(queryString.responseStatus);
+  //   if (queryString.responseStatus) {
+  //     console.log('params', [queryString.responseStatus]);
+  //     delete queryString.responseStatus;
+  //   }
+  //   if (selectedFilters.length !== 0) {
+  //     console.log('selected filters', selectedFilters, selectedFilters.length);
+  //     const responseStatus = selectedFilters?.map((x) => statusAlias[x]);
+  //     setQueryString({
+  //       ...queryString,
+  //       responseStatus,
+  //     });
+  //   } else setQueryString(queryString);
+  // };
 
   const handleSortByTime = () => {
     setIndexSort(indexSort === 0 ? 1 : 0);
@@ -83,7 +83,7 @@ const TableLog = ({ items }) => {
   return (
     <div className={styles.market}>
       <div className={styles.table}>
-        <div className={styles.row} >
+        <div className={styles.row}>
           <div className={styles.col}>
             Time
             <div
@@ -99,7 +99,7 @@ const TableLog = ({ items }) => {
           <div className={styles.col}>
             Response Status
             <div className={styles.icon_container}>
-              <Filters
+              {/* <Filters
                 className={styles.filters}
                 visible={visible}
                 setVisible={setVisible}
@@ -125,7 +125,7 @@ const TableLog = ({ items }) => {
                     <span>OK</span>
                   )}
                 </button>
-              </Filters>
+              </Filters> */}
             </div>
           </div>
           <div className={styles.col}>Latency</div>
@@ -135,7 +135,6 @@ const TableLog = ({ items }) => {
 
         <div className="d-flex flex-column justify-content-between flex-fill">
           <div style={{ height: '650px' }} className=" overflow-y-scroll">
-
             {listLoggers?.map((log) => (
               <Row
                 item={log}
@@ -149,9 +148,9 @@ const TableLog = ({ items }) => {
         </div>
       </div>
       {/* {isSuccess && listLoggers.length === 0 && <NoData />} */}
-      {((isSuccess && listLoggers.length !== 0)) && (
+      {/* {((isSuccess && listLoggers.length !== 0)) && (
         <Pagination pageCount={1} />
-      )}
+      )} */}
     </div>
   );
 };

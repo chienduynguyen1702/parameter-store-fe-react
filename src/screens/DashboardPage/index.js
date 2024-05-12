@@ -1,12 +1,15 @@
 import { useCallback, useState, useRef } from 'react';
 import { TailSpin } from 'react-loader-spinner';
+import { useQueryString } from '../../hooks';
 
 import {
   MixLineBarChart,
   CardDashboardWithGranularity,
   ClusteredBarChart,
+  FiltersCustom,
 } from '../../components';
 
+import FormFilter from './FormFilter';
 import SummaryCard from './SummaryCard';
 
 import {
@@ -21,10 +24,15 @@ export default function DashboardPage() {
   const { id: organizationId } = useParams();
   const { total } = useOrganizationDashboardTotal(organizationId);
 
+  const { queryString, setQueryString } = useQueryString();
+  const from = queryString?.from;
+  const to = queryString?.to;
   const [granularity, setGranularity] = useState('day');
   const { logs, isSuccess: isLogsSuccess } = useOrganizationDashboardLogs(
     organizationId,
     granularity,
+    from,
+    to,
   );
   // console.log('granularity', granularity);
   const addLoadingChart = useCallback(
@@ -101,6 +109,13 @@ export default function DashboardPage() {
               classTitle={'title-purple'}
               granularity={granularity}
               setGranularity={(value) => setGranularity(value)}
+              head={
+                <div className="d-flex">
+                  <FiltersCustom className="me-2 flex-wrap flex-row flex-lg-col gap-3 min-height: 40px">
+                    <FormFilter />
+                  </FiltersCustom>
+                </div>
+              }
             >
               {addLoadingChart(
                 <ClusteredBarChart

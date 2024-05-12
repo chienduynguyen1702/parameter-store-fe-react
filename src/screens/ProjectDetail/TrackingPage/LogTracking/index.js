@@ -8,37 +8,35 @@ import useQueryString from '../../../../hooks/useQueryString';
 // data
 import { market } from '../../../../mocks/market';
 
-const navigation = ['All', 'Success', 'Error'];
+// const navigation = ['All', 'Success', 'Error'];
 
 const LogTracking = () => {
   const { queryString, setQueryString } = useQueryString();
 
-  const [activeTab, setActiveTab] = useState();
+  // useEffect(() => {
+  //   if (activeTab === 'All') {
+  //     const { typeTabLog, ...rest } = queryString;
+  //     setQueryString(rest);
+  //   } else if (activeTab === 'Success') {
+  //     setQueryString({
+  //       ...queryString,
+  //       typeTabLog: 'success',
+  //     });
+  //   } else if (activeTab === 'Error') {
+  //     setQueryString({
+  //       ...queryString,
+  //       typeTabLog: 'error',
+  //     });
+  //   }
+  // }, [activeTab]);
 
-  useEffect(() => {
-    if (activeTab === 'All') {
-      const { typeTabLog, ...rest } = queryString;
-      setQueryString(rest);
-    } else if (activeTab === 'Success') {
-      setQueryString({
-        ...queryString,
-        typeTabLog: 'success',
-      });
-    } else if (activeTab === 'Error') {
-      setQueryString({
-        ...queryString,
-        typeTabLog: 'error',
-      });
-    }
-  }, [activeTab]);
-
-  useEffect(() => {
-    if (!queryString.typeTabLog) {
-      setActiveTab('All');
-    } else {
-      setActiveTab(queryString.typeTabLog === 'success' ? 'Success' : 'Error');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!queryString.typeTabLog) {
+  //     setActiveTab('All');
+  //   } else {
+  //     setActiveTab(queryString.typeTabLog === 'success' ? 'Success' : 'Error');
+  //   }
+  // }, []);
 
   return (
     <Card
@@ -57,7 +55,7 @@ const LogTracking = () => {
             </button>
             <div className={styles.counter}>3 selected</div>
           </div>
-          <div className={cn(styles.nav, 'tablet-hide')}>
+          {/* <div className={cn(styles.nav, 'tablet-hide')}>
             {navigation.map((x, index) => (
               <button
                 className={cn(styles.link, {
@@ -69,8 +67,8 @@ const LogTracking = () => {
                 {x}
               </button>
             ))}
-          </div>
-          <div className={cn(styles.dropdown, 'tablet-show')}>
+          </div> */}
+          {/* <div className={cn(styles.dropdown, 'tablet-show')}>
             <Dropdown
               classDropdownHead={styles.dropdownHead}
               value={activeTab}
@@ -78,7 +76,7 @@ const LogTracking = () => {
               options={navigation}
               small
             />
-          </div>
+          </div> */}
         </>
       }
     >
