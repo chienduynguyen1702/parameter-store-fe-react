@@ -20,10 +20,10 @@ on:
 jobs:
 #
   prepare:
-    name: Get Short SHA of commit for tagging Docker image
+    name: Get Short SHA of commit and get parameters from parameter store
     runs-on: ubuntu-latest
     env:
-      AGENT_PARAMETER_STORE: ${{ secrets.AGENT_PARAMETER_STORE }}
+      PARAMETER_STORE_TOKEN: ${{ secrets.AGENT_PARAMETER_STORE }}
     steps:
       - name: 'Setup jq'
         uses: dcarbone/install-jq-action@v2
@@ -37,6 +37,7 @@ jobs:
           SHORT_SHA=$(git rev-parse --short ${{ github.sha }})
           echo "SHORT_SHA=$SHORT_SHA" >> "$GITHUB_OUTPUT"
           echo "SHORT_SHA=$SHORT_SHA"
+      - name: Get parameters from parameter store
           ./scripts/get-parameters.sh -o .env && cat .env
     outputs:
       SHORT_SHA: ${{ steps.get_sha.outputs.SHORT_SHA }}
