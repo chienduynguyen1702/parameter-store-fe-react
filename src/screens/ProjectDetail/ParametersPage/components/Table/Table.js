@@ -14,8 +14,8 @@ const Table = ({
   archiveMutation,
   isArchivedSuccess,
 }) => {
-  console.log('listParameters', listParameters);
-  console.log('totalPage', totalPage);
+  // console.log('listParameters', listParameters);
+  // console.log('totalPage', totalPage);
 
   return (
     <>

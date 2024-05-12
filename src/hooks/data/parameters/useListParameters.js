@@ -38,7 +38,7 @@ const useListParameters = (project_id) => {
   }, [limit, page, queryString, setQueryString]);
 
   const parseData = useCallback((data) => {
-    console.log('data:', data);
+    // console.log('data:', data);
     const parameters = data?.parameters?.map((item) => {
       return {
         id: item.ID,

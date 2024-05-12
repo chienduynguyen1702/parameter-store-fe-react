@@ -44,7 +44,7 @@ const ParametersPage = () => {
     // environments,
     versions,
   } = useListParameters(id);
-  console.log('pagination', pagination);
+  // console.log('pagination', pagination);
   const { overview } = useProjectOverviewAndUserList(id);
   const { stages, environments } = useProjectOverviewAndUserList(id);
   const {
