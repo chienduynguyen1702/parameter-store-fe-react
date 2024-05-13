@@ -121,12 +121,12 @@ const useListProjects = () => {
   );
   const releaseVersionParametersMutation = useMutation(
     (data) => {
-      return releaseVersionParameters(data.project_id, data.body);
+      return releaseVersionParameters(data.project_id, data.data);
     },
     {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ['projects'],
+          queryKey: ['projects', 'releaseVersion'],
         });
         toast.success('Release version successfully');
       },

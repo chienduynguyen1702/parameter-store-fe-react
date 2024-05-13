@@ -31,8 +31,9 @@ function UpdateForm({
   const handleSubmit = (data) => {
     const req = {
       project_id: project_id,
-      body: {
+      data: {
         release_version: data.release_version,
+        description: data.description,
       },
     };
     // console.log('req', req);
