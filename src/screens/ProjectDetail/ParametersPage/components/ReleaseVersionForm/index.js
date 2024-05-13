@@ -14,15 +14,7 @@ function UpdateForm({
   listParameters,
   currentVersion,
 }) {
-  // currentVersion = '1.0.0'; // set default value
   const { releaseVersionParametersMutation } = useListProjects();
-  // Handle id and current data of form in setting item
-  // const [id, setId] = useState(0);
-  // const [modalTitle, setModalTitle] = useState('Add New Tier');
-
-  // Handle modal add and edit setting
-  // const [typeAdd, setTypeAdd] = useState('none');
-  // const [typeEdit, setTypeEdit] = useState('none');
 
   const { id: project_id } = useParams();
   const listNotAppliedParameters = listParameters;
@@ -65,6 +57,7 @@ function UpdateForm({
                   name="current_version"
                   label="Current version Number"
                   defaultValue={currentVersion}
+                  disabled={true}
                 />
               </Col>
               {/* <Col>

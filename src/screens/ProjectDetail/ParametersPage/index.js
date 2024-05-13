@@ -48,7 +48,7 @@ const ParametersPage = () => {
     // environments,
     versions,
   } = useListParameters(id);
-  console.log('versions', versions);
+  // console.log('versions', versions);
   const { overview } = useProjectOverviewAndUserList(id);
   const { stages, environments } = useProjectOverviewAndUserList(id);
   const {

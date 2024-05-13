@@ -15,7 +15,7 @@ const Table = ({
   isArchivedSuccess,
 }) => {
   // console.log('listParameters', listParameters);
-  console.log('listParameters table totalPage', totalPage);
+  // console.log('listParameters table totalPage', totalPage);
 
   return (
     <>
