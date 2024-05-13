@@ -9,6 +9,7 @@ import TextInput from '../../TextInput';
 
 RHFTextInput.propTypes = {
   name: PropTypes.string,
+  defaultValue: PropTypes.string,
 };
 
 // classError, classLabel, classInput, className
@@ -19,7 +20,7 @@ function RHFTextInput({ name, classError, ...others }) {
     <Controller
       name={name}
       control={control}
-      defaultValue=""
+      defaultValue={others.defaultValue || ''}
       render={({ field: { value, onChange }, fieldState: { error } }) => (
         <>
           <TextInput

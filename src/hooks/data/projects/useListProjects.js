@@ -7,6 +7,7 @@ import {
   editProject,
   getListProjects,
   applyParameters,
+  releaseVersionParameters,
 } from '../../../services/api';
 import { toast } from 'react-toastify';
 
@@ -118,6 +119,24 @@ const useListProjects = () => {
       },
     },
   );
+  const releaseVersionParametersMutation = useMutation(
+    (data) => {
+      return releaseVersionParameters(data.project_id, data.body);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['projects'],
+        });
+        toast.success('Release version successfully');
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message, {
+          autoClose: 5000,
+        });
+      },
+    },
+  );
   return {
     listProjects: data?.projects,
     pagination: data?.pagination,
@@ -126,6 +145,7 @@ const useListProjects = () => {
     addProjectMutation,
     editProjectMutation,
     applyParametersMutation,
+    releaseVersionParametersMutation,
   };
 };
 

@@ -1,5 +1,6 @@
 export { default as Archived } from './Archived';
 export { default as Balance } from './Balance';
+export { default as ButtonDuplicate } from './ButtonDuplicate';
 export { default as ButtonImport } from './ButtonImport';
 export { default as ButtonExport } from './ButtonExport';
 export { default as ButtonSetting } from './ButtonSetting';

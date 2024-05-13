@@ -1,12 +1,21 @@
 import { useParams } from 'react-router-dom';
+import { Col, Row } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { FormProvider, useForm } from 'react-hook-form';
+import { TiArrowRightThick } from 'react-icons/ti';
 
-import { AsyncButton, Item } from '../../../../../components';
+import { AsyncButton, Item, RHFTextInput } from '../../../../../components';
 import NotAppliedParamTable from './NotAppliedParamTable/Table';
 import { useListProjects } from '../../../../../hooks/data';
-import { toast } from 'react-toastify';
-function UpdateForm({ title = 'Apply Parameters', onClose, listParameters }) {
-  const { applyParametersMutation } = useListProjects();
+
+function UpdateForm({
+  title = 'Release New Version of Parameters',
+  onClose,
+  listParameters,
+  currentVersion,
+}) {
+  // currentVersion = '1.0.0'; // set default value
+  const { releaseVersionParametersMutation } = useListProjects();
   // Handle id and current data of form in setting item
   // const [id, setId] = useState(0);
   // const [modalTitle, setModalTitle] = useState('Add New Tier');
@@ -16,19 +25,20 @@ function UpdateForm({ title = 'Apply Parameters', onClose, listParameters }) {
   // const [typeEdit, setTypeEdit] = useState('none');
 
   const { id: project_id } = useParams();
-  const listNotAppliedParameters = listParameters.filter(
-    (item) => item.isApplied === false,
-  );
+  const listNotAppliedParameters = listParameters;
   const method = useForm({});
 
   const handleSubmit = (data) => {
     const req = {
-      data: data,
       project_id: project_id,
+      body: {
+        release_version: data.release_version,
+      },
     };
-    applyParametersMutation.mutate(req.project_id, {
+    // console.log('req', req);
+    releaseVersionParametersMutation.mutate(req, {
       onSuccess: () => {
-        toast.success('Apply Parameters Success, waiting for agent pull');
+        // toast.success('Apply Parameters Success, waiting for agent pull');
         onClose();
       },
       onError: (error) => {
@@ -45,13 +55,37 @@ function UpdateForm({ title = 'Apply Parameters', onClose, listParameters }) {
           className="pb-4 borderBottom"
           classTitle="title-green"
         >
-          <p>This project auto update mode is not set.</p>
-          <p>
-            These parameters below was updated, but was not applied by agent
-            pull. Confirm to apply
-          </p>
-          <div></div>
+          <p>All of these parameters gonna be release in new version.</p>
           <br></br>
+          <>
+            <Row>
+              <Col>
+                <RHFTextInput
+                  name="current_version"
+                  label="Current version Number"
+                  defaultValue={currentVersion}
+                />
+              </Col>
+              {/* <Col>
+                <TiArrowRightThick />
+              </Col> */}
+              <Col>
+                <RHFTextInput
+                  name="release_version"
+                  placeholder="Enter New Version Number with formart a.b.c"
+                  label="Release Version Number"
+                  tooltip="Release Version Number is required, format a.b.c"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <RHFTextInput
+                name="description"
+                label="Description"
+                placeholder="Enter description for this release version"
+              />
+            </Row>
+          </>
 
           <NotAppliedParamTable
             listNotAppliedParameters={listNotAppliedParameters}

@@ -242,6 +242,12 @@ export const applyParameters = (project_id) =>
     method: 'POST',
     url: `/projects/${project_id}/apply-parameters`,
   });
+export const releaseVersionParameters = (project_id, data) =>
+  authApi({
+    method: 'POST',
+    url: `/projects/${project_id}/versions/`,
+    data,
+  });
 // ------------------------------ Project Detail ------------------------------
 
 export const addUserToProject = (project_id, data) =>
