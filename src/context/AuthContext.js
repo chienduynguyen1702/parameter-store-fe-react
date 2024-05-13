@@ -2,8 +2,8 @@ import React, { useState, createContext, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import { useQueryClient } from '@tanstack/react-query';
-import baseUrl from '../services/config/baseUrl';
 import { toast } from 'react-toastify';
+import token from '../utils/token';
 import {
   login as loginFn,
   logout as logoutFn,
@@ -62,10 +62,13 @@ const AuthProvider = ({ children }) => {
         console.log(getCookie());
         cookies.set('Authorization', response?.data?.['token'], {
           path: '/',
-          domain: 'param-store-be.datn.live',
+          maxAge: 60 * 60 * 24 * 7,
+          // domain: 'param-store.datn.live',
+          secure: true,
+          sameSite: 'none',
         });
         setIsAuthenticated(true);
-
+        token.setAccessToken(response?.data?.['token']);
         toast.success('Login success');
         navigate.push('/', { replace: true });
         console.log('X');
