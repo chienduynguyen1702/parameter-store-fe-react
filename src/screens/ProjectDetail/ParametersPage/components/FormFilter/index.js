@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, set, useForm } from 'react-hook-form';
 import { Stack } from 'react-bootstrap';
 
 import {
@@ -16,18 +16,21 @@ export default function FormFilter({
   versions,
   parentFc,
 }) {
+  console.log('version in formfilter', versions);
   const { queryString, setQueryString } = useQueryString();
   const settings = useMemo(() => {
     const stageSettings = queryString.stages || [];
     const environmentSettings = queryString.environments || [];
+    const version = queryString.version;
 
     return {
       stages: Array.isArray(stageSettings) ? stageSettings : [stageSettings],
       environments: Array.isArray(environmentSettings)
         ? environmentSettings
         : [environmentSettings],
+      version: version,
     };
-  }, [queryString.stages, queryString.environments]);
+  }, [queryString.stages, queryString.environments, queryString.version]);
 
   const defaultValues = useMemo(() => {
     const defaultValues = {};
@@ -39,7 +42,7 @@ export default function FormFilter({
     settings.environments.forEach((environment) => {
       defaultValues[environment] = true;
     });
-
+    settings.version && (defaultValues.version = settings.version);
     return defaultValues;
   }, [settings]);
 
@@ -55,6 +58,9 @@ export default function FormFilter({
     }
     if (!!params.environments) {
       delete params.environments;
+    }
+    if (!!params.version) {
+      delete params.version;
     }
 
     setQueryString(params);
@@ -72,6 +78,9 @@ export default function FormFilter({
     if (!!params.environments) {
       delete params.environments;
     }
+    if (!!params.version) {
+      delete params.version;
+    }
 
     // Get selected stages and environments
     const stageSettings = Object.keys(data).filter(
@@ -82,7 +91,7 @@ export default function FormFilter({
         environments.find((environment) => environment.name === key) &&
         data[key],
     );
-
+    const versionSettings = data.version;
     // Add selected stages and environments to URL params
     if (stageSettings.length > 0) {
       params.stages = stageSettings;
@@ -90,7 +99,9 @@ export default function FormFilter({
     if (environmentSettings.length > 0) {
       params.environments = environmentSettings;
     }
-
+    if (versionSettings) {
+      params.version = versionSettings;
+    }
     // Reset page to 1
     params.page = 1;
 
@@ -131,17 +142,17 @@ export default function FormFilter({
           ))}
         </div>
 
-        {/* <div className="borderBottom py-3">
+        <div className="borderBottom py-3">
           <RHFInputSelect
             label="Version"
             tooltip="Filter by Version"
             name="version"
-            suggestions={versions.map((version) => ({
+            suggestions={versions?.map((version) => ({
               label: version.number,
               value: version.number,
             }))}
           />
-        </div> */}
+        </div>
 
         <Stack direction="horizontal" className="mt-4 justify-content-end">
           <p onClick={onClose} className="button-white">

@@ -144,7 +144,7 @@ const ParametersPage = () => {
                 <FormFilter
                   stages={stages}
                   environments={environments}
-                  // versions={versions}
+                  versions={versions}
                 />
               </FiltersCustom>
               <ButtonAdd
