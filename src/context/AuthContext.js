@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import {
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }) => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
+  const cookies = new Cookies();
   const [me, setMe] = useState(null);
 
   const saveMe = useCallback((data) => {
@@ -54,11 +56,10 @@ const AuthProvider = ({ children }) => {
     async (data) => {
       try {
         const response = await loginFn(data);
-        // console.log('response', response);
+        console.log('response', response);
         saveMe(response?.data?.['user']);
-
         console.log(getCookie());
-
+        cookies.set('Authorization', response?.data?.['token'], { path: '/' });
         setIsAuthenticated(true);
 
         toast.success('Login success');
@@ -74,6 +75,8 @@ const AuthProvider = ({ children }) => {
 
   const loginWithCookie = useCallback(async () => {
     try {
+      // console log response ma cung deo thay gi het
+      // console.log('response from validateFn', response);
       const response = await validateFn();
       saveMe(response.data?.user);
       setIsAuthenticated(true);

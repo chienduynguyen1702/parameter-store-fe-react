@@ -67,6 +67,8 @@ authApi.interceptors.response.use(
           .catch(() => {
             token.removeAccessToken();
             token.removeRefreshToken();
+            if (window.location.pathname === '/sign-in')
+              return Promise.reject(error);
             window.location.href = '/sign-in';
             return Promise.reject(error);
           });
@@ -84,6 +86,7 @@ authApi.interceptors.response.use(
       error.response.statusText === 'Forbidden'
     ) {
       alert('Your permissions have been changed, please reload the page');
+      if (window.location.pathname === '/') return Promise.reject(error);
       window.location.href = '/';
       return Promise.reject(error);
     }
