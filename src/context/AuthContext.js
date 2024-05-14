@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import token from '../utils/token';
@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
-  const cookies = new Cookies();
+  // const cookies = new Cookies();
   const [me, setMe] = useState(null);
 
   const saveMe = useCallback((data) => {
@@ -60,13 +60,13 @@ const AuthProvider = ({ children }) => {
         console.log('response', response);
         saveMe(response?.data?.['user']);
         console.log(getCookie());
-        cookies.set('Authorization', response?.data?.['token'], {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7,
-          // domain: 'param-store.datn.live',
-          secure: true,
-          sameSite: 'none',
-        });
+        // cookies.set('Authorization', response?.data?.['token'], {
+        //   path: '/',
+        //   maxAge: 60 * 60 * 24 * 7,
+        //   // domain: 'param-store.datn.live',
+        //   secure: true,
+        //   sameSite: 'none',
+        // });
         setIsAuthenticated(true);
         token.setAccessToken(response?.data?.['token']);
         toast.success('Login success');
