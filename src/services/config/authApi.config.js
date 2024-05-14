@@ -34,7 +34,7 @@ const refreshAccessToken = async () => {
 authApi.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('accessToken');
-    console.log(token);
+    // console.log(token);
     if (token) {
       config.headers.setAuthorization(`${token}`);
     }
