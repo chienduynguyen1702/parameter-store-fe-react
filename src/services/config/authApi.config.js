@@ -35,7 +35,7 @@ authApi.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('accessToken');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Authorization ${token}`;
     }
     return config;
   },
@@ -61,7 +61,7 @@ authApi.interceptors.response.use(
         return refreshAccessToken()
           .then(() => {
             const accessToken = token.getAccessToken();
-            error.config.headers.Authorization = `Bearer ${accessToken}`;
+            error.config.headers.Authorization = `Authorization ${accessToken}`;
             return authApi.request(error.config);
           })
           .catch(() => {
