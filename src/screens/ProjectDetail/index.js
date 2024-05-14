@@ -19,7 +19,7 @@ const ProjectDetailPage = () => {
   const pathname = useLocation().pathname;
 
   return (
-    <PageContent title={overview?.name}>
+    <PageContent title={overview?.name} wide>
       <>
         <div className="d-flex mb-3 responsiveTwoButtons">
           {TABS.map((tab) => (
