@@ -67,6 +67,7 @@ function App() {
           <AuthProvider>
             <UnderDevelopmentProvider>
               <Routes>
+                <Route exact path="/" element={<Navigate to="/dashboard" />} />
                 <Route
                   exact
                   path="/*"
@@ -76,23 +77,24 @@ function App() {
                     </RequireAuth>
                   }
                 >
-                  {/* <Route
-                    index
-                    element={
-                      <SuspenseContainer>
-                        <PageContent title="Home Page" wide>
-                          <HomePage />
-                        </PageContent>
-                      </SuspenseContainer>
-                    }
-                  /> */}
                   <Route
-                    exact
+                    index
                     path="dashboard/*"
                     element={
                       <SuspenseContainer>
                         <PageContent title="Dashboard" wide>
                           <DashboardPage />
+                        </PageContent>
+                      </SuspenseContainer>
+                    }
+                  />
+                  <Route
+                    index
+                    path="home/*"
+                    element={
+                      <SuspenseContainer>
+                        <PageContent title="Home Page" wide>
+                          <HomePage />
                         </PageContent>
                       </SuspenseContainer>
                     }
@@ -119,7 +121,7 @@ function App() {
                       </SuspenseContainer>
                     }
                   >
-                    <Route index element={<Navigate to="dashboard" />} />
+                    <Route index element={<Navigate to="parameters" />} />
                     <Route
                       path="dashboard/*"
                       element={<DashboardHighLight />}

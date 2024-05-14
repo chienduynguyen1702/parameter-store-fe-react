@@ -57,9 +57,9 @@ const AuthProvider = ({ children }) => {
     async (data) => {
       try {
         const response = await loginFn(data);
-        console.log('response', response);
+        // console.log('response', response);
         saveMe(response?.data?.['user']);
-        console.log(getCookie());
+        // console.log(getCookie());
         // cookies.set('Authorization', response?.data?.['token'], {
         //   path: '/',
         //   maxAge: 60 * 60 * 24 * 7,
@@ -70,7 +70,8 @@ const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
         token.setAccessToken(response?.data?.token);
         toast.success('Login success');
-        navigate.push('/', { replace: true });
+        navigate.push('/dashboard', { replace: true });
+        alert('Login success');
         console.log('X');
         return true;
       } catch {
