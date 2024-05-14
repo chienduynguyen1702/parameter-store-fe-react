@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
         //   sameSite: 'none',
         // });
         setIsAuthenticated(true);
-        token.setAccessToken(response?.data?.['token']);
+        token.setAccessToken(response?.data?.token);
         toast.success('Login success');
         navigate.push('/', { replace: true });
         console.log('X');
@@ -122,7 +122,7 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     } finally {
-      removeCookie();
+      token.removeAccessToken();
       setIsAuthenticated(false);
       queryClient.clear();
     }
