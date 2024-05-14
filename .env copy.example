@@ -1,3 +1,0 @@
-REACT_APP_PROJECT_NAME='Parameter Store'
-REACT_APP_PROJECT_URL=param-store.datn.live
-REACT_APP_PROJECT_BASE_URL=http://api.backend_server_ip:port/api/v1
