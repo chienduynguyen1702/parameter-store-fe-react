@@ -23,7 +23,7 @@ const navigation = [
     permissions: [''],
   },
   {
-    title: 'Projects',
+    title: 'Parameters',
     icon: 'diamond',
     url: '/projects',
     permissions: [''],
