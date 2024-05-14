@@ -76,7 +76,7 @@ function App() {
                     </RequireAuth>
                   }
                 >
-                  <Route
+                  {/* <Route
                     index
                     element={
                       <SuspenseContainer>
@@ -85,7 +85,7 @@ function App() {
                         </PageContent>
                       </SuspenseContainer>
                     }
-                  />
+                  /> */}
                   <Route
                     exact
                     path="dashboard/*"

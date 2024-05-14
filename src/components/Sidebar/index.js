@@ -10,12 +10,12 @@ import LogoContainer from '../LogoContainer';
 import { AuthContext } from '../../context/AuthContext';
 
 const navigation = [
-  {
-    title: 'Home',
-    icon: 'home',
-    url: '/',
-    permissions: [''],
-  },
+  // {
+  //   title: 'Home',
+  //   icon: 'home',
+  //   url: '/',
+  //   permissions: [''],
+  // },
   {
     title: 'Dashboard',
     icon: 'activity',
