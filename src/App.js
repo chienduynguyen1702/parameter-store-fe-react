@@ -102,7 +102,7 @@ function App() {
                     path="projects/*"
                     element={
                       <SuspenseContainer>
-                        <PageContent title="Projects" wide>
+                        <PageContent wide>
                           <ProjectsPage />
                         </PageContent>
                       </SuspenseContainer>
@@ -113,9 +113,9 @@ function App() {
                     path="project-detail/:id/*"
                     element={
                       <SuspenseContainer>
-                        <PageContent title="Project Detail" wide>
-                          <ProjectDetailPage />
-                        </PageContent>
+                        {/* <PageContent title="Project Detail" wide> */}
+                        <ProjectDetailPage />
+                        {/* </PageContent> */}
                       </SuspenseContainer>
                     }
                   >

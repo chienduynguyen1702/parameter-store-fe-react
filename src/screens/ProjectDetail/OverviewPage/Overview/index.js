@@ -55,7 +55,7 @@ const Overview = ({ overview, usersList }) => {
         <SettingsForm />
       </Modal> */}
       <Card
-        title={overview?.name}
+        title={'Project Overview'}
         classTitle="title-purple"
         className="mb-5"
         head={
