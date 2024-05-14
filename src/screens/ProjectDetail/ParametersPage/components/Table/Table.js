@@ -17,7 +17,7 @@ const Table = ({
 }) => {
   const { id } = useParams();
   const { listParameters } = useListParameters(id);
-  console.log('listParameters', listParameters);
+  // console.log('listParameters', listParameters);
   // console.log('listParameters table totalPage', totalPage);
 
   return (
