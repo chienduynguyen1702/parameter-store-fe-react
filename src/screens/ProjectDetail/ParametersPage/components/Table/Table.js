@@ -1,12 +1,13 @@
 import React from 'react';
 import style from './Table.module.sass';
 import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 
 import Row from './Row/Row';
 import { NoData, Pagination } from '../../../../../components';
-
+import { useListParameters } from '../../../../../hooks/data';
 const Table = ({
-  listParameters,
+  // listParameters,
   isSuccess,
   isLoading,
   totalPage,
@@ -14,7 +15,9 @@ const Table = ({
   archiveMutation,
   isArchivedSuccess,
 }) => {
-  // console.log('listParameters', listParameters);
+  const { id } = useParams();
+  const { listParameters } = useListParameters(id);
+  console.log('listParameters', listParameters);
   // console.log('listParameters table totalPage', totalPage);
 
   return (

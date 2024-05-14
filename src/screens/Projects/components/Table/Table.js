@@ -2,15 +2,17 @@ import React from 'react';
 
 import Row from './Row/Row';
 import { NoData, Pagination } from '../../../../components';
-
+import { useListProjects } from '../../../../hooks/data';
 const Table = ({
-  listProjects,
+  // listProjects,
   isSuccess,
   isLoading,
   totalPage,
   setEditedItemId,
   archiveMutation,
 }) => {
+  const { listProjects } = useListProjects();
+  // console.log('listProjects:', listProjects);
   return (
     <>
       <div className="tableOuter">
@@ -21,7 +23,7 @@ const Table = ({
             <div className="tableCell"></div>
           </div>
           {isSuccess &&
-            listProjects.map((item) => (
+            listProjects?.map((item) => (
               <Row
                 key={item.id}
                 item={item}
@@ -30,9 +32,9 @@ const Table = ({
               />
             ))}
         </div>
-        {isSuccess && listProjects.length === 0 && <NoData />}
+        {isSuccess && listProjects?.length === 0 && <NoData />}
       </div>
-      {((isSuccess && listProjects.length !== 0) || isLoading) && (
+      {((isSuccess && listProjects?.length !== 0) || isLoading) && (
         <Pagination pageCount={totalPage || 5} />
       )}
     </>

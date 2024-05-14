@@ -90,7 +90,7 @@ const ProjectsPage = () => {
         }
       >
         <Table
-          listProjects={listProjects}
+          // listProjects={listProjects}
           isSuccess={isListUsersSuccess}
           isLoading={isListProjectsLoading}
           totalPage={pagination?.totalPage}

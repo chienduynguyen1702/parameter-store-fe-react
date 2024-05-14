@@ -28,7 +28,7 @@ const useListProjects = () => {
     }
   }, [limit, page, queryString, setQueryString]);
 
-  const parseData = useCallback((data) => {
+  const parseData = useCallback((data, page, limit) => {
     const projects = data?.projects?.map((project) => {
       return {
         id: project?.id,
@@ -49,8 +49,10 @@ const useListProjects = () => {
       total: projects?.length || 0,
       currentPage: page,
       limit: limit,
-      totalPage: Math.ceil(projects?.length / limit),
+      totalPage: Math.ceil((projects?.length || 0) / limit),
     };
+    // console.log('pagination', pagination);
+
     return { pagination, projects };
   }, []);
 
@@ -58,7 +60,7 @@ const useListProjects = () => {
     queryKey: ['projects', queryString],
     queryFn: () => getListProjects(queryString),
     staleTime: 10 * 1000,
-    select: (data) => parseData(data.data),
+    select: (data) => parseData(data.data, page, limit),
     enabled: !!page && !!limit,
   });
 
