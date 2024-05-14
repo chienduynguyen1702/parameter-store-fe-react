@@ -1,5 +1,6 @@
 // get access token from local storage
 const getAccessToken = () => {
+  alert('getAccessToken');
   return localStorage.getItem('accessToken');
 };
 
