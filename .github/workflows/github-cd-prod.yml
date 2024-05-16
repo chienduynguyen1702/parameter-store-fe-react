@@ -43,18 +43,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js
-          uses: actions/setup-node@v3
-          with:
-            node-version: ${{ vars.NODE_VER }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ vars.NODE_VER }}
+
       - name: Caching node modules # get cache hash file in runner
-          id:  node-modules-cache 
-          uses: actions/cache@v3
-          with:
-            path: node_modules
-            key: clouding-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
-            restore-keys: |
+        id:  node-modules-cache 
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: clouding-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
+          restore-keys: |
             clouding-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
-            
+
       - name: 'Setup jq'
         uses: dcarbone/install-jq-action@v2
         with:
