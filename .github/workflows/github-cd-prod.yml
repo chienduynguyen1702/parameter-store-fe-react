@@ -46,7 +46,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ vars.NODE_VER }}
-          - name: Caching node modules # get cache hash file in runner
+      - name: Caching node modules # get cache hash file in runner
           id:  node-modules-cache 
           uses: actions/cache@v3
           with:
