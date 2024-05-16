@@ -167,7 +167,7 @@ const ParametersPage = () => {
       <div className={styles.filter}>
         <ButtonApply
           handleClickApply={handleClickApply}
-          titleButton="Apply Parameters"
+          titleButton="Deploy Parameters"
           className="me-2"
         />
       </div>

@@ -41,25 +41,25 @@ jobs:
       PARAMETER_STORE_TOKEN: ${{ secrets.AGENT_PARAMETER_STORE }}
       NODE_ENV: production
     steps:
-      - name: 'Setup jq'
-        uses: dcarbone/install-jq-action@v2
-        with:
-          version: '${{ inputs.version }}'
-          force: '${{ inputs.force }}'
       - uses: actions/checkout@v2
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ vars.NODE_VER }}
-      - name: Caching node modules # get cache hash file in runner
-        id:  node-modules-cache 
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: clouding-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
-          restore-keys: |
+          - name: Caching node modules # get cache hash file in runner
+          id:  node-modules-cache 
+          uses: actions/cache@v3
+          with:
+            path: node_modules
+            key: clouding-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
+            restore-keys: |
             clouding-frontend-${{ runner.os }}-node_modules-cache-restore-key-from-package.json-${{ hashFiles('**/package.json') }}
-
+            
+      - name: 'Setup jq'
+        uses: dcarbone/install-jq-action@v2
+        with:
+          version: '1.7'
+          force: false
       - name: Get parameters from parameter store
         id: get_parameters
         run: |
