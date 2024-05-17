@@ -23,6 +23,7 @@ const ProjectsPage = () => {
     isSuccess: isListUsersSuccess,
     pagination,
   } = useListProjects();
+  console.log('listProjects', listProjects);
   const {
     archivedList,
     isSuccess: isListArchivedSuccess,
@@ -90,7 +91,7 @@ const ProjectsPage = () => {
         }
       >
         <Table
-          // listProjects={listProjects}
+          listProjects={listProjects}
           isSuccess={isListUsersSuccess}
           isLoading={isListProjectsLoading}
           totalPage={pagination?.totalPage}

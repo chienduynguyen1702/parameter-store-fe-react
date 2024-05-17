@@ -61,7 +61,7 @@ const useListProjects = () => {
     queryFn: () => getListProjects(queryString),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data, page, limit),
-    enabled: !!page && !!limit,
+    enabled: true,
   });
 
   const addProjectMutation = useMutation(

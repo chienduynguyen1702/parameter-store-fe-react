@@ -4,14 +4,14 @@ import Row from './Row/Row';
 import { NoData, Pagination } from '../../../../components';
 import { useListProjects } from '../../../../hooks/data';
 const Table = ({
-  // listProjects,
+  listProjects,
   isSuccess,
   isLoading,
   totalPage,
   setEditedItemId,
   archiveMutation,
 }) => {
-  const { listProjects } = useListProjects();
+  // const { listProjects } = useListProjects();
   // console.log('listProjects:', listProjects);
   return (
     <>
