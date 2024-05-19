@@ -23,7 +23,7 @@ const ProjectsPage = () => {
     isSuccess: isListUsersSuccess,
     pagination,
   } = useListProjects();
-  console.log('listProjects', listProjects);
+  // console.log('listProjects', listProjects);
   const {
     archivedList,
     isSuccess: isListArchivedSuccess,

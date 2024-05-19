@@ -67,7 +67,7 @@ const useListParameters = (project_id) => {
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['projects', queryString],
+    queryKey: ['parameters', queryString],
     queryFn: () => getListParameter(project_id, queryString),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data, page, limit),
