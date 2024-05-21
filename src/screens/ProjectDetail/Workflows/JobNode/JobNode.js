@@ -6,7 +6,7 @@ import { applyEdgeChanges, applyNodeChanges, addEdge } from 'reactflow';
 import CircleNode from '../CircleNode/CircleNode';
 
 const parseJobsToNodesAndEdges = (jobs) => {
-  console.log('jobs', jobs);
+  // console.log('jobs', jobs);
   const nodes = [];
   const edges = [];
   const parentWidth = 550; // Width for parent nodes

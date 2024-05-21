@@ -14,7 +14,7 @@ const CircleNode = ({ data }) => {
     case 'pending':
       circleColor = '#9CA8B3'; // gray
       break;
-    case 'running':
+    case 'in_progress':
       circleColor = '#ffc501';
       isLoading = true; // Set isLoading to true when status is 'running'
       break;
