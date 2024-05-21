@@ -6,15 +6,16 @@ import { applyEdgeChanges, applyNodeChanges, addEdge } from 'reactflow';
 import CircleNode from '../CircleNode/CircleNode';
 
 const parseJobsToNodesAndEdges = (jobs) => {
+  console.log('jobs', jobs);
   const nodes = [];
   const edges = [];
-  const parentWidth = 300; // Width for parent nodes
+  const parentWidth = 550; // Width for parent nodes
   const childHeight = 30; // Height for each step node
-  const childWidth = 200; // Width for child nodes
+  const childWidth = 500; // Width for child nodes
 
   jobs.forEach((job, jobIndex) => {
     const parentId = job.name;
-    const parentPositionX = jobIndex * 400; // Adjust the spacing between parent nodes
+    const parentPositionX = jobIndex * 600; // Adjust the spacing between parent nodes
     const parentPositionY = 50;
 
     // Create the parent node
@@ -49,29 +50,17 @@ const parseJobsToNodesAndEdges = (jobs) => {
         },
         extent: 'parent',
       });
-
-      // // Create the edges between child nodes of the same parent
-      // if (stepIndex > 0) {
-      //   edges.push({
-      //     id: `${parentId}-${stepIndex}-${stepIndex + 1}`,
-      //     source: `${parentId}-${stepIndex}`,
-      //     target: childId,
-      //     // sourceHandle: 'b',
-      //     // targetHandle: 'a',
-      //   });
-      // }
-    });
-
-    // Create the edges based on dependencies
-    job.depend_on.forEach((dependency) => {
-      edges.push({
-        id: `${dependency}-to-${parentId}`,
-        source: dependency,
-        target: parentId,
-        //   type: 'step',
-      });
     });
   });
+
+  for (let index = 0; index < jobs.length - 1; index++) {
+    edges.push({
+      id: `${jobs[index].name}-to-${jobs[index + 1].name}`,
+      source: jobs[index].name,
+      target: jobs[index + 1].name,
+    });
+  }
+
   return { nodes, edges };
 };
 
@@ -80,11 +69,10 @@ const nodeTypes = { step: CircleNode };
 const JobNode = ({ job }) => {
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
-
   useEffect(() => {
     if (job) {
       const { nodes: parsedNodes, edges: parsedEdges } =
-        parseJobsToNodesAndEdges(job);
+        parseJobsToNodesAndEdges(job?.jobs);
       setNodes(parsedNodes);
       setEdges(parsedEdges);
     }
