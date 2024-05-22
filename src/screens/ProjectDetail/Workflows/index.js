@@ -1,4 +1,4 @@
-import { Card, RHFInputSelect } from '../../../components';
+import { Card, InputSelect } from '../../../components';
 import 'reactflow/dist/style.css';
 import {
   useListWorkflowRunJobs,
@@ -22,14 +22,11 @@ export default function Workflows() {
     isSuccess: isWorkflowRunSuccess,
     refetch,
   } = useListWorkflowRunJobs(projectId, selectWorkflowID);
-  console.log('listWorkflowsJobs', listWorkflowsJobs);
 
-  const method = useForm(); // Initialize useForm
-
-  const onSubmit = (data) => {
-    console.log('data', data);
+  const setValue = (data) => {
+    // console.log('data', data);
     const selectedWorkflow = listWorkflows.find(
-      (workflow) => workflow.workflow_name === data.workflow,
+      (workflow) => workflow.workflow_name === data,
     );
     if (selectedWorkflow) {
       setSelectWorkflowID(selectedWorkflow.id);
@@ -48,47 +45,39 @@ export default function Workflows() {
   }, [projectId, refetch]);
 
   return (
-    <FormProvider {...method}>
-      <form onSubmit={method.handleSubmit(onSubmit)}>
-        <Card
-          title={'Workflows'}
-          classTitle="title-purple"
-          // className="mb-5"
-          head={
-            <>
-              {isSuccess && (
-                <div className="">
-                  <RHFInputSelect
-                    // label="Workflows"
-                    tooltip="Filter by workflow"
-                    name="workflow"
-                    suggestions={listWorkflows?.map((workflow) => ({
-                      label: workflow.workflow_name,
-                      value: workflow.workflow_name,
-                    }))}
-                    defaultValue={listWorkflows[0]?.workflow_name}
-                  />
-                </div>
-              )}
-            </>
-          }
-        >
-          <div style={{ width: '80vw', height: '60vh', marginTop: '10px' }}>
-            {isWorkflowRunSuccess ? (
-              <JobNode job={listWorkflowsJobs} />
-            ) : (
-              <ReactFlow attributionPosition="top-right">
-                <Controls />
-                <Background
-                  variant={BackgroundVariant.Dots}
-                  gap={12}
-                  size={1}
-                />
-              </ReactFlow>
-            )}
-          </div>
-        </Card>
-      </form>
-    </FormProvider>
+    <Card
+      title={'Workflows'}
+      classTitle="title-purple"
+      // className="mb-5"
+      head={
+        <>
+          {isSuccess && (
+            <div className="">
+              <InputSelect
+                tooltip="Filter by workflow"
+                name="workflow"
+                value={listWorkflows[0]?.workflow_name}
+                suggestions={listWorkflows?.map((workflow) => ({
+                  label: workflow.workflow_name,
+                  value: workflow.workflow_name,
+                }))}
+                setValue={setValue}
+              />
+            </div>
+          )}
+        </>
+      }
+    >
+      <div style={{ width: '80vw', height: '60vh', marginTop: '10px' }}>
+        {isWorkflowRunSuccess ? (
+          <JobNode job={listWorkflowsJobs} />
+        ) : (
+          <ReactFlow attributionPosition="top-right">
+            <Controls />
+            <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+          </ReactFlow>
+        )}
+      </div>
+    </Card>
   );
 }

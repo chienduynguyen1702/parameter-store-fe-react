@@ -66,7 +66,6 @@ const parseJobsToNodesAndEdges = (jobs) => {
 const nodeTypes = { step: CircleNode };
 
 const JobNode = ({ job }) => {
-  console.log('job', job);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
   useEffect(() => {

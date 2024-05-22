@@ -84,6 +84,7 @@ export { default as Users } from './Users';
 export { default as Icon } from './Icon';
 export { default as Image } from './Image';
 export { default as Item } from './Item';
+export { default as InputSelect } from './InputSelect';
 export { default as AsyncButton } from './AsyncButton';
 export { default as SuspenseContainer } from './SuspenseContainer';
 export { default as Decentralization } from './Decentralization';
