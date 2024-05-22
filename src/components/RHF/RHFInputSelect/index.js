@@ -20,7 +20,10 @@ function RHFInputSelect({ name, classError, defaultValue, ...others }) {
           <>
             <InputSelect
               value={value || defaultValue}
-              setValue={onChange}
+              setValue={(newValue) => {
+                console.log(`InputSelected : ${newValue}`);
+                onChange(newValue);
+              }}
               onBlur={onBlur}
               error={error}
               {...others}
