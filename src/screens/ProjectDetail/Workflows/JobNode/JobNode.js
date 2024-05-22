@@ -1,7 +1,6 @@
 import ReactFlow, { Controls, Background, BackgroundVariant } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { useCallback, useState, useEffect } from 'react';
-import { applyEdgeChanges, applyNodeChanges, addEdge } from 'reactflow';
 
 import CircleNode from '../CircleNode/CircleNode';
 
@@ -67,10 +66,11 @@ const parseJobsToNodesAndEdges = (jobs) => {
 const nodeTypes = { step: CircleNode };
 
 const JobNode = ({ job }) => {
+  console.log('job', job);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
   useEffect(() => {
-    if (job) {
+    if (job?.total_count > 0) {
       const { nodes: parsedNodes, edges: parsedEdges } =
         parseJobsToNodesAndEdges(job?.jobs);
       setNodes(parsedNodes);
