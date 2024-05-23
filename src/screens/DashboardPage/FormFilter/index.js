@@ -6,17 +6,34 @@ import moment from 'moment';
 
 import cn from 'classnames';
 
-import { BorderBottomOuter, RHFDate } from '../../../components';
+import {
+  BorderBottomOuter,
+  RHFDate,
+  RHFInputSelect,
+} from '../../../components';
 
+import { useListProjects } from '../../../hooks/data';
 import useQueryString from '../../../hooks/useQueryString';
 import { dateToUrl } from '../../../utils/helpers';
 
 export default function FormFilter({ parentFc }) {
+  const {
+    listProjects,
+    isLoading: isListProjectsLoading,
+    isSuccess: isListUsersSuccess,
+    pagination,
+  } = useListProjects();
+  const PROJECT = [
+    { name: 'Project 1', id: 1 },
+    { name: 'Project 2', id: 2 },
+    { name: 'Project 3', id: 3 },
+  ];
   const { queryString, setQueryString } = useQueryString();
   const defaultValues = useMemo(() => {
     return {
       from: queryString.from ? moment(queryString.from).toDate() : null,
       to: queryString.to ? moment(queryString.to).toDate() : null,
+      project: queryString.project || '',
     };
   }, [queryString]);
 
@@ -24,7 +41,7 @@ export default function FormFilter({ parentFc }) {
 
   const onClose = () => {
     method.reset();
-    setQueryString(({ from, to, ...params }) => params);
+    setQueryString(({ from, to, project, ...params }) => params);
     parentFc(false);
   };
 
@@ -42,6 +59,10 @@ export default function FormFilter({ parentFc }) {
       delete params.to;
       params.to = dateToUrl(data.to);
     }
+    if (data.project) {
+      delete params.project;
+      params.project = data.project;
+    }
     setQueryString(params);
     parentFc(false);
   };
@@ -56,6 +77,17 @@ export default function FormFilter({ parentFc }) {
             tooltip="Select the starting date"
           />
           <RHFDate nameDate="to" label="To" tooltip="Select the ending date" />
+          {/* <div className="borderBottom py-3"> */}
+          <RHFInputSelect
+            label="Projects"
+            tooltip="Filter by Project"
+            name="project"
+            suggestions={listProjects?.map((prj) => ({
+              label: prj.name,
+              value: prj.name,
+            }))}
+          />
+          {/* </div> */}
         </BorderBottomOuter>
         <Stack direction="horizontal" className="mt-4">
           <p onClick={onClose} className={cn('button-white ms-auto')}>
