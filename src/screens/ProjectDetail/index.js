@@ -4,9 +4,9 @@ import PageContent from '../../components/PageContent';
 import { useProjectOverviewAndUserList } from '../../hooks/data';
 
 const TABS = [
-  { name: 'Dashboard', subPath: 'dashboard' },
-  { name: 'Workflows', subPath: 'workflows' },
+  // { name: 'Dashboard', subPath: 'dashboard' },
   { name: 'Overview', subPath: 'overview' },
+  { name: 'Workflows', subPath: 'workflows' },
   { name: 'Parameters', subPath: 'parameters' },
   { name: 'Agent', subPath: 'agents' },
   { name: 'Tracking', subPath: 'tracking' },
