@@ -7,6 +7,7 @@ const DEFAULT_QUERY_STRING = {
 const useListWorkflowRunJobs = (project_id, workflow_id) => {
   const parseWorkflowsData = (data) => {
     const listWorkflowsJobs = data.jobs;
+    console.log('listWorkflowsJobs', listWorkflowsJobs);
     return listWorkflowsJobs;
   };
 

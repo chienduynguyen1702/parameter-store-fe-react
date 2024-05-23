@@ -9,8 +9,8 @@ import { BiLeftArrow } from 'react-icons/bi';
 const CircleNode = ({ data }) => {
   let circleColor;
   let isLoading = false; // Add a flag to track if loading effect should be applied
-
-  switch (data.status) {
+  // console.log('data', data);
+  switch (data.conclusion) {
     case 'pending':
       circleColor = '#9CA8B3'; // gray
       break;
@@ -18,7 +18,7 @@ const CircleNode = ({ data }) => {
       circleColor = '#ffc501';
       isLoading = true; // Set isLoading to true when status is 'running'
       break;
-    case 'completed':
+    case 'success':
       circleColor = '#30a14e';
       break;
     case 'failure':
@@ -50,9 +50,9 @@ const CircleNode = ({ data }) => {
             marginRight: 5,
           }}
         >
-          {data.status === 'completed' ? (
+          {data.conclusion === 'success' ? (
             <FaCheck />
-          ) : data.status === 'failure' ? (
+          ) : data.conclusion === 'failure' ? (
             <AiOutlineClose />
           ) : null}
         </div>
