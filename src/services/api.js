@@ -283,6 +283,11 @@ export const getProjectListWorkflows = (project_id) =>
     method: 'GET',
     url: `/projects/${project_id}/workflows/`,
   });
+export const getWorkflowsRunID = (project_id, workflow_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/workflows/${workflow_id}/run`,
+  });
 export const deleteProject = (project_id) =>
   authApi({
     method: 'DELETE',

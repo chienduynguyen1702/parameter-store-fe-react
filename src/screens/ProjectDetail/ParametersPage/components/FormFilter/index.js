@@ -16,7 +16,7 @@ export default function FormFilter({
   versions,
   parentFc,
 }) {
-  console.log('version in formfilter', versions);
+  // console.log('version in formfilter', versions);
   const { queryString, setQueryString } = useQueryString();
   const settings = useMemo(() => {
     const stageSettings = queryString.stages || [];

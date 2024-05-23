@@ -11,7 +11,7 @@ function RHFInputSelect({ name, classError, defaultValue, ...others }) {
     <Controller
       name={name}
       control={control}
-      defaultValue={[]}
+      // defaultValue={[]}
       render={({
         field: { value, onChange, onBlur },
         fieldState: { error },
@@ -20,16 +20,19 @@ function RHFInputSelect({ name, classError, defaultValue, ...others }) {
           <>
             <InputSelect
               value={value || defaultValue}
-              setValue={onChange}
+              setValue={(newValue) => {
+                // console.log(`InputSelected : ${newValue}`);
+                onChange(newValue);
+              }}
               onBlur={onBlur}
               error={error}
               {...others}
             />
-            {error ? (
+            {/* {error ? (
               <p className={cn(styles.redLine, classError)}>{error.message}</p>
             ) : (
               <p className={cn(styles.hidden, styles.redLine, classError)}>.</p>
-            )}
+            )} */}
           </>
         );
       }}

@@ -42,6 +42,7 @@ const ProjectAgentPage = lazy(() =>
 const DashboardHighLight = lazy(() =>
   import('./screens/ProjectDetail/Dashboard'),
 );
+const Workflows = lazy(() => import('./screens/ProjectDetail/Workflows'));
 const SignIn = lazy(() => import('./screens/Authentication/SignIn'));
 const ResetPassword = lazy(() =>
   import('./screens/Authentication/ResetPassword'),
@@ -122,6 +123,7 @@ function App() {
                     }
                   >
                     <Route index element={<Navigate to="parameters" />} />
+                    <Route path="workflows/*" element={<Workflows />} />
                     <Route
                       path="dashboard/*"
                       element={<DashboardHighLight />}

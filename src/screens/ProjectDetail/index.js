@@ -5,6 +5,7 @@ import { useProjectOverviewAndUserList } from '../../hooks/data';
 
 const TABS = [
   { name: 'Dashboard', subPath: 'dashboard' },
+  { name: 'Workflows', subPath: 'workflows' },
   { name: 'Overview', subPath: 'overview' },
   { name: 'Parameters', subPath: 'parameters' },
   { name: 'Agent', subPath: 'agents' },

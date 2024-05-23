@@ -24,7 +24,7 @@ const useProjectListWorkflow = (id) => {
   };
 
   const { data, isSuccess, isLoading, isError } = useQuery({
-    queryKey: ['projects', 'workflows', id],
+    queryKey: ['workflows', id],
     queryFn: () => {
       return getProjectListWorkflows(id);
       // return true;
