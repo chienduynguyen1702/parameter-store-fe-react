@@ -4,20 +4,62 @@ import { getOrganizationDashboardTotals } from '../../../services/api';
 
 const useOrganizationDashboard = (organizationId) => {
   const parseData = (data) => {
-    const total = {
-      project_count: data?.project_count,
-      active_projects_count: data?.active_projects_count,
-      active_agent: data?.active_agent,
-      user_count: data?.user_count,
-      workflow_count: data?.workflow_count,
+    // console.log('useOrganizationDashboard data', data);
+    //   [
+    //     {
+    //         "value": 6,
+    //         "name": "project_count",
+    //         "label": "Projects Count"
+    //     },
+    //     {
+    //         "value": 2,
+    //         "name": "active_projects_count",
+    //         "label": "Active Projects Count"
+    //     },
+    //     {
+    //         "value": 4,
+    //         "name": "active_agent",
+    //         "label": "Active Agent"
+    //     },
+    //     {
+    //         "value": 4,
+    //         "name": "user_count",
+    //         "label": "User Count"
+    //     },
+    //     {
+    //         "value": 4,
+    //         "name": "workflow_count",
+    //         "label": "Workflow Count"
+    //     },
+    //     {
+    //         "value": 122000,
+    //         "name": "avg_duration",
+    //         "label": "Average Duration"
+    //     },
+    //     {
+    //         "value": 118,
+    //         "name": "total_updated",
+    //         "label": "Total Updated"
+    //     },
+    //     {
+    //         "value": 118,
+    //         "name": "total_updated_this_month",
+    //         "label": "Total Updated This Month"
+    //     },
+    //     {
+    //         "value": 73,
+    //         "name": "total_agent_actions",
+    //         "label": "Total Agent Actions"
+    //     },
+    //     {
+    //         "value": 73,
+    //         "name": "total_agent_actions_this_month",
+    //         "label": "Total Agent Actions This Month"
+    //     }
+    // ]
+    const total = data;
 
-      avg_duration: data?.avg_duration,
-      total_updated: data?.total_updated,
-      total_agent_actions: data?.total_agent_actions,
-      total_updated_this_month: data?.total_updated_this_month,
-      total_agent_actions_this_month: data?.total_agent_actions_this_month,
-    };
-
+    // console.log('useOrganizationDashboard total', total);
     return { total };
   };
 

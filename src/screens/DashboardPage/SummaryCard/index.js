@@ -6,6 +6,12 @@ import styles from './SummaryCard.module.sass';
 
 import useQueryString from '../../../hooks/useQueryString';
 
+const splitItems = (items) => {
+  const mid = Math.ceil(items.length / 2);
+  const firstRow = items.slice(0, mid);
+  const secondRow = items.slice(mid);
+  return { firstRow, secondRow };
+};
 export default function SummaryCard({ counters }) {
   // console.log('counters', counters);
   const { queryString } = useQueryString();
@@ -13,68 +19,56 @@ export default function SummaryCard({ counters }) {
 
   const dateFrom = moment(from).format('DD/MM/YYYY');
   const dateTo = moment(to).format('DD/MM/YYYY');
-  const items = [
-    {
-      icon: 'dashboard-eye-red',
-      title: 'Total projects',
-      tooltip: `Includes all projects in organization`,
-    },
-    {
-      icon: 'dashboard-eye-red',
-      title: 'Number of running projects',
-      tooltip: `Number of running projects`,
-    },
-    {
-      icon: 'dashboard-eye-red',
-      title: 'Number of running agents',
-      tooltip: `Number of running agents`,
-    },
-    {
-      icon: 'dashboard-eye-blue',
-      title: 'Total active workflows',
-      tooltip: `Total active workflows in all projects`,
-    },
-    {
-      icon: 'dashboard-eye-red',
-      title: 'Total users',
-      tooltip: `Total active users`,
-    },
-    {
-      icon: 'dashboard-info-green',
-      title: 'Average duration',
-      tooltip: `Average duration all CICD workflows in organization`,
-    },
-    {
-      icon: 'dashboard-shopping-carts-purple',
-      title: 'Total updates this month',
-      tooltip: `Number of updates this month`,
-    },
-    {
-      icon: 'dashboard-storage-bag-orange',
-      title: 'Total agent actions this month',
-      tooltip: `Number of agent pull parameter this month`,
-    },
-    {
-      icon: 'dashboard-camera-blue',
-      title: 'Total updates',
-      tooltip: `Number of all updates within the organization`,
-    },
-    {
-      icon: 'dashboard-camera-blue',
-      title: 'Total agent actions',
-      tooltip: `Number of all agent pull parameter within the organization`,
-    },
-  ];
 
+  const items = counters?.map((x) => {
+    return {
+      icon: x?.icon,
+      title: x?.title,
+      tooltip: x?.tooltip,
+      // value : x?.value,
+    };
+  });
+  const { firstRow, secondRow } = splitItems(items);
   return (
-    <Card className={cn('row d-flex justify-content-center mx-0', styles.card)}>
-      {items.map((x, index) => (
-        <div
-          className={cn('col-12 col-sm-6 col-md-2.5 col-lg-2dot4', styles.item)}
-        >
-          <SummaryCardCustom data={x} counter={counters[index]} index={index} />
-        </div>
-      ))}
+    <Card
+      title={`Summary Information`}
+      classTitle="title-blue"
+      className={cn('mb-5', styles.card)}
+    >
+      <div className="d-flex justify-content-around">
+        {firstRow.map((x, index) => (
+          <div
+            key={index}
+            className={cn(
+              'col-12 col-sm-6 col-md-2.5 col-lg-2dot4',
+              styles.item,
+            )}
+          >
+            <SummaryCardCustom
+              data={x}
+              counter={counters[index].value}
+              index={index}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="d-flex justify-content-around">
+        {secondRow.map((x, index) => (
+          <div
+            key={index + firstRow.length}
+            className={cn(
+              'col-12 col-sm-6 col-md-2.5 col-lg-2dot4',
+              styles.item,
+            )}
+          >
+            <SummaryCardCustom
+              data={x}
+              counter={counters[index + firstRow.length].value}
+              index={index + firstRow.length}
+            />
+          </div>
+        ))}
+      </div>
     </Card>
   );
 }

@@ -40,8 +40,8 @@ export default function SummaryCard({ data, counter, index }) {
           !isNaN(counter) &&
           !data.disabled && (
             <div className={styles.counter}>
-              {data.title ===
-              ('Average duration' || 'Average duration CICD workflows')
+              {data.title ==
+              ('Average Duration' || 'Average Duration CICD Workflows')
                 ? handleLongNumberToDuration(counter)
                 : counter}
             </div>

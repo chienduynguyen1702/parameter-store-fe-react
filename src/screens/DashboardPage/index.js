@@ -22,7 +22,7 @@ export default function DashboardPage() {
   const refDashboardHighLight = useRef();
 
   const { id: organizationId } = useParams();
-  const { total } = useOrganizationDashboardTotal(organizationId);
+  const { total, isSuccess } = useOrganizationDashboardTotal(organizationId);
 
   const { queryString, setQueryString } = useQueryString();
   const from = queryString?.from;
@@ -86,21 +86,7 @@ export default function DashboardPage() {
       </div>
       <div ref={refDashboardHighLight}>
         <div className="print-highlight-dashboard">
-          <SummaryCard
-            counters={[
-              total?.project_count,
-              total?.active_projects_count,
-              total?.active_agent,
-              total?.workflow_count,
-              total?.user_count,
-
-              total?.avg_duration,
-              total?.total_updated_this_month,
-              total?.total_agent_actions_this_month,
-              total?.total_updated,
-              total?.total_agent_actions,
-            ]}
-          />
+          {isSuccess && <SummaryCard counters={total} />}
           <div className="mt-4">
             <CardDashboardWithGranularity
               title={
