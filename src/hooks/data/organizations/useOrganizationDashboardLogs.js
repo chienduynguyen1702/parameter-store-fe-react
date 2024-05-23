@@ -7,6 +7,7 @@ const useOrganizationDashboardLogs = (
   granularity,
   from,
   to,
+  project,
 ) => {
   // console.log('useOrganizationDashboard', granularity);
   const parseData = (data) => {
@@ -23,10 +24,23 @@ const useOrganizationDashboardLogs = (
   };
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['organization-dashboard', organizationId, granularity, from, to],
+    queryKey: [
+      'organization-dashboard-log',
+      organizationId,
+      project,
+      granularity,
+      from,
+      to,
+    ],
     // tách api
     queryFn: () =>
-      getOrganizationDashboardLogs(organizationId, granularity, from, to),
+      getOrganizationDashboardLogs(
+        organizationId,
+        project,
+        granularity,
+        from,
+        to,
+      ),
     staleTime: 10 * 1000,
     select: (data) => parseData(data.data),
   });

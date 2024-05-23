@@ -1,7 +1,7 @@
 import { useCallback, useState, useRef } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 import { useQueryString } from '../../hooks';
-
+import styles from './DashboardHighLight.module.sass';
 import {
   MixLineBarChart,
   CardDashboardWithGranularity,
@@ -20,19 +20,26 @@ import { useParams } from 'react-router-dom';
 
 export default function DashboardPage() {
   const refDashboardHighLight = useRef();
-
-  const { id: organizationId } = useParams();
-  const { total, isSuccess } = useOrganizationDashboardTotal(organizationId);
-
   const { queryString, setQueryString } = useQueryString();
   const from = queryString?.from;
   const to = queryString?.to;
+  const project = queryString?.project;
+
+  const { id: organizationId } = useParams();
+  const { total, isSuccess } = useOrganizationDashboardTotal(
+    organizationId,
+    project,
+    from,
+    to,
+  );
+
   const [granularity, setGranularity] = useState('day');
   const { logs, isSuccess: isLogsSuccess } = useOrganizationDashboardLogs(
     organizationId,
     granularity,
     from,
     to,
+    project,
   );
   // console.log('granularity', granularity);
   const addLoadingChart = useCallback(
@@ -60,6 +67,11 @@ export default function DashboardPage() {
   return (
     // <div className={cn(styles.container)}>
     <>
+      <div className={styles.filter}>
+        <FiltersCustom className="me-2 flex-wrap flex-row flex-lg-col gap-3 min-height: 40px">
+          <FormFilter />
+        </FiltersCustom>
+      </div>
       <div className="d-flex justify-content-between  row">
         <div className="col-12 col-sm-auto">
           {/* <div className={cn('h3', styles.title)}>Dashboard Highlights</div> */}
@@ -95,13 +107,13 @@ export default function DashboardPage() {
               classTitle={'title-purple'}
               granularity={granularity}
               setGranularity={(value) => setGranularity(value)}
-              head={
-                <div className="d-flex">
-                  <FiltersCustom className="me-2 flex-wrap flex-row flex-lg-col gap-3 min-height: 40px">
-                    <FormFilter />
-                  </FiltersCustom>
-                </div>
-              }
+              // head={
+              //   <div className="d-flex">
+              //     <FiltersCustom className="me-2 flex-wrap flex-row flex-lg-col gap-3 min-height: 40px">
+              //       <FormFilter />
+              //     </FiltersCustom>
+              //   </div>
+              // }
             >
               {addLoadingChart(
                 <ClusteredBarChart
