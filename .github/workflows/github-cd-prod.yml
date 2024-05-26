@@ -38,7 +38,6 @@ jobs:
     needs: [prepare]
     env:
       SHORT_SHA: ${{ needs.prepare.outputs.SHORT_SHA }}
-      PARAMETER_STORE_TOKEN: ${{ secrets.AGENT_PARAMETER_STORE }}
       NODE_ENV: production
     steps:
       - uses: actions/checkout@v2
@@ -61,9 +60,10 @@ jobs:
         with:
           version: '1.7'
           force: false
-      - name: Get parameters from parameter store
-        id: get_parameters
+      - name: Get build parameters
+        id: get_build_parameters
         run: |
+          export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_PROD_BUILD }}
           ./scripts/get-parameters.sh -o .env
           cat .env | grep TEST
 
@@ -73,6 +73,17 @@ jobs:
         run: yarn 
       - name: Build
         run: CI=false yarn build
+
+      - name: Get test parameters
+        id: get_build_parameters
+        run: |
+          export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_PROD_TEST }}
+          ./scripts/get-parameters.sh -o param.test
+          cat param.test
+      - name: Test
+        run: |
+          echo "Testing..."
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         
@@ -100,7 +111,20 @@ jobs:
     needs: [build-test, prepare]
     runs-on: ubuntu-latest
     steps:
-    - name: executing remote ssh commands using password
+
+    - name: 'Setup jq'
+      uses: dcarbone/install-jq-action@v2
+      with:
+        version: '1.7'
+        force: false
+    - name: Get deploy parameters
+      id: get_deploy_parameters
+      run: |
+        export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_PROD_DEPLOY }}
+        ./scripts/get-parameters.sh -o param.deploy
+        cat param.deploy
+
+    - name: Deploy to remote server
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.SERVER_ADDRESS }}
