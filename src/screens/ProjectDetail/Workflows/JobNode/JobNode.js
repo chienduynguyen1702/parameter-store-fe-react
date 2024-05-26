@@ -35,7 +35,11 @@ const parseJobsToNodesAndEdges = (jobs) => {
       const childId = `${parentId}-${stepIndex + 1}`;
       nodes.push({
         id: childId,
-        data: { label: step.name, conclusion: step.conclusion },
+        data: {
+          label: step.name,
+          conclusion: step.conclusion,
+          status: step.status,
+        },
         type: 'step',
         position: {
           x: 30,
