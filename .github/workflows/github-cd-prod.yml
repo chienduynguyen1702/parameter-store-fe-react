@@ -75,7 +75,7 @@ jobs:
         run: CI=false yarn build
 
       - name: Get test parameters
-        id: get_build_parameters
+        id: get_test_parameters
         run: |
           export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_PROD_TEST }}
           ./scripts/get-parameters.sh -o param.test
