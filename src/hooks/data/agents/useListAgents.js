@@ -43,7 +43,7 @@ const useListAgents = (project_id) => {
           name: item.Environment.name,
         },
         workflow_name: item.workflow_name,
-        // last_used: item.last_used,
+        last_used_at: item.last_used_at,
       };
     });
 

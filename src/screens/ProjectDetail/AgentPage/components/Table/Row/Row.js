@@ -1,5 +1,6 @@
 import React from 'react';
 import { PopoverEditAndArchive } from '../../../../../../components';
+import moment from 'moment';
 
 const Row = ({ item, setEditedItemId, archiveMutation }) => {
   return (
@@ -29,7 +30,9 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
       <div className="tableCell">
         <p>{item.description}</p>
       </div>
-      <p className="tableCell">{item.last_used}</p>
+      <p className="tableCell">
+        {moment(item.last_used_at).format('YYYY/MM/DD HH:mm:ss')}
+      </p>
       <div className="tableCell roundedRight">
         <PopoverEditAndArchive
           itemId={item.id}
