@@ -188,7 +188,7 @@ const useListParameters = (project_id) => {
   });
   // Hàm tải xuống danh sách tham số
   const downloadParameters = async (queryString) => {
-    // console.log('queryString:', queryString);
+    console.log('downloadParameters queryString:', queryString);
     try {
       // get project name
       const responseProject = await getProjectOverview(project_id);
@@ -199,6 +199,8 @@ const useListParameters = (project_id) => {
         blob,
         `Parameters_${projectName}_Ver_${
           queryString.version ? queryString.version : 'Latest'
+        }${queryString.stages ? queryString.stages : ''}${
+          queryString.environments ? queryString.environments : ''
         }.txt`,
       );
       toast.success('Download successfully!');
