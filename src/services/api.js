@@ -429,6 +429,13 @@ export const getListParameter = (project_id, queryString) =>
     url: `/projects/${project_id}/parameters/`,
     params: queryString,
   });
+export const downloadListParameter = (project_id, queryString) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/parameters/download`,
+    params: queryString,
+  });
+
 export const getParameterByID = (project_id, parameter_id) =>
   authApi({
     method: 'GET',

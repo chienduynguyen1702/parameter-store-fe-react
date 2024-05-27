@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { saveAs } from 'file-saver';
 
 import useQueryString from '../../useQueryString';
 import {
@@ -10,6 +11,8 @@ import {
   getStages,
   getEnvironments,
   getVersions,
+  getProjectOverview,
+  downloadListParameter,
 } from '../../../services/api';
 // import { PARAMETERS } from '../../mocks/parameters';
 import moment from 'moment';
@@ -183,7 +186,26 @@ const useListParameters = (project_id) => {
     staleTime: 10 * 1000,
     enabled: true,
   });
-
+  // Hàm tải xuống danh sách tham số
+  const downloadParameters = async (queryString) => {
+    // console.log('queryString:', queryString);
+    try {
+      // get project name
+      const responseProject = await getProjectOverview(project_id);
+      const projectName = responseProject.data.overview.name;
+      const response = await downloadListParameter(project_id, queryString);
+      const blob = new Blob([response.data], { type: 'text/csv' });
+      saveAs(
+        blob,
+        `Parameters_${projectName}_Ver_${
+          queryString.version ? queryString.version : 'Latest'
+        }.txt`,
+      );
+      toast.success('Download successfully!');
+    } catch (error) {
+      toast.error('Download failed!');
+    }
+  };
   return {
     listParameters: data?.parameters,
     pagination: data?.pagination,
@@ -194,6 +216,7 @@ const useListParameters = (project_id) => {
     isLoading,
     addParameterMutation,
     editParameterMutation,
+    downloadParameters,
   };
 };
 

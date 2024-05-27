@@ -15,6 +15,7 @@ export default function FormFilter({
   environments,
   versions,
   parentFc,
+  downloadParameters,
 }) {
   // console.log('version in formfilter', versions);
   const { queryString, setQueryString } = useQueryString();
@@ -109,6 +110,46 @@ export default function FormFilter({
     parentFc(false);
   };
 
+  const onDownload = () => {
+    const params = { ...queryString };
+
+    // Remove existing settings from URL params
+    if (!!params.stages) {
+      delete params.stages;
+    }
+    if (!!params.environments) {
+      delete params.environments;
+    }
+    if (!!params.version) {
+      delete params.version;
+    }
+
+    // Get selected stages and environments
+    const stageSettings = Object.keys(method.getValues()).filter(
+      (key) =>
+        stages.find((stage) => stage.name === key) && method.getValues()[key],
+    );
+    const environmentSettings = Object.keys(method.getValues()).filter(
+      (key) =>
+        environments.find((environment) => environment.name === key) &&
+        method.getValues()[key],
+    );
+    const versionSettings = method.getValues().version;
+    // Add selected stages and environments to URL params
+    if (stageSettings.length > 0) {
+      params.stages = stageSettings;
+    }
+    if (environmentSettings.length > 0) {
+      params.environments = environmentSettings;
+    }
+    if (versionSettings) {
+      params.version = versionSettings;
+    }
+
+    setQueryString(params);
+    downloadParameters(params);
+    parentFc(false);
+  };
   return (
     <FormProvider {...method}>
       <form onSubmit={method.handleSubmit(handleSubmit)}>
@@ -158,6 +199,9 @@ export default function FormFilter({
           <p onClick={onClose} className="button-white">
             Reset
           </p>
+          <button className="button-white ms-2" onClick={onDownload}>
+            Download
+          </button>
           <button className="button ms-2">Apply</button>
         </Stack>
       </form>

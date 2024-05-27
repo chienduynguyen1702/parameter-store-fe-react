@@ -47,6 +47,7 @@ const ParametersPage = () => {
     // stages,
     // environments,
     versions,
+    downloadParameters,
   } = useListParameters(id);
   // console.log('versions', versions);
   const { overview } = useProjectOverviewAndUserList(id);
@@ -183,6 +184,7 @@ const ParametersPage = () => {
                   stages={stages}
                   environments={environments}
                   versions={versions}
+                  downloadParameters={downloadParameters}
                 />
               </FiltersCustom>
               <ButtonDuplicate
