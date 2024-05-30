@@ -1,9 +1,9 @@
-name: Clouding Frontend CD - Production
+name: Clouding Frontend CD - Staging
 
 on:
   push:
     branches:
-      - main
+      - staging
 
 jobs:
 #
@@ -51,7 +51,7 @@ jobs:
       - name: Get build parameters
         id: get_build_parameters
         run: |
-          export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_PROD_BUILD }}
+          export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_STAGING_BUILD }}
           ./scripts/get-parameters.sh -o .env
           # cat .env | grep TEST
 
@@ -65,7 +65,7 @@ jobs:
       - name: Get test parameters
         id: get_test_parameters
         run: |
-          export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_PROD_TEST }}
+          export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_STAGING_TEST }}
           ./scripts/get-parameters.sh -o param.test
           cat param.test
       - name: Test
@@ -111,7 +111,7 @@ jobs:
     - name: Get deploy parameters
       id: get_deploy_parameters
       run: |
-        export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_PROD_DEPLOY }}
+        export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_STAGING_DEPLOY }}
         ./scripts/get-parameters.sh -o param.deploy
         cat param.deploy
 
