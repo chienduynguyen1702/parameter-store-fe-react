@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { ButtonAdd, Card, FormSearch, Archived, Modal } from '../../components';
+import { toast } from 'react-toastify';
 
 import Table from './components/Table/Table';
 import AddProjectForm from './components/AddProjectForm';
-// import EditProjectForm from './components/EditProjectForm';
+
+import { AuthContext } from '../../context/AuthContext';
 
 import { useListProjects, useListProjectsArchived } from '../../hooks/data';
 import {
@@ -16,6 +18,7 @@ import {
 const ProjectsPage = () => {
   const [isAddMode, setIsAddMode] = useState(false);
   // const [editedItemId, setEditedItemId] = useState(undefined);
+  const { me } = useContext(AuthContext);
 
   const {
     listProjects,
@@ -42,7 +45,14 @@ const ProjectsPage = () => {
       title: 'Project',
     },
   });
-
+  const roleRequired = 'Organization Admin';
+  const handleAddProjectClick = () => {
+    if (me.isOrganizationAdmin) {
+      setIsAddMode(true);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
   return (
     <>
       <Modal
@@ -72,7 +82,7 @@ const ProjectsPage = () => {
             <FormSearch placeholder="Search by name" />
             <div className="d-flex">
               <ButtonAdd
-                handleClickAdd={() => setIsAddMode(true)}
+                handleClickAdd={handleAddProjectClick}
                 titleButton="Add Project"
                 className="me-2"
               />
@@ -96,6 +106,7 @@ const ProjectsPage = () => {
           isLoading={isListProjectsLoading}
           totalPage={pagination?.totalPage}
           // setEditedItemId={setEditedItemId}
+          roleRequired={roleRequired}
           archiveMutation={archiveMutation}
         />
       </Card>

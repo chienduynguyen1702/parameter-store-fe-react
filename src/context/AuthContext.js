@@ -24,12 +24,14 @@ const AuthProvider = ({ children }) => {
   const [me, setMe] = useState(null);
 
   const saveMe = useCallback((data) => {
+    console.log('data', data);
     const me = {
       // id: data.id,
       username: data?.username,
       email: data?.email,
       organizationId: data?.organization_id,
       isOrganizationAdmin: data?.is_organization_admin,
+      isAdminOfProjects: data?.is_admin_of_projects,
       // address: data.address,
       // avatarUrl: data.avatar_url,
       // bio: data.bio,

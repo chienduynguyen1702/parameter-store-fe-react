@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
 
 import {
   Card,
@@ -17,11 +18,12 @@ import {
 import AddUserForm from './AddUserForm';
 import EditUserForm from './EditUserForm';
 import { useListArchived, useListUsers } from '../../../hooks/data';
+import { toast } from 'react-toastify';
 
 const UsersPage = () => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
-
+  const { me } = useContext(AuthContext);
   const {
     listUsers,
     pagination,
@@ -47,7 +49,23 @@ const UsersPage = () => {
       title: 'User',
     },
   });
-
+  // console.log('me', me);
+  const roleRequired = 'Organization Admin';
+  const handleAddUserClick = () => {
+    if (me.isOrganizationAdmin) {
+      setIsAddMode(true);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
+  const handleClickEdit = (editedItemId) => {
+    if (!me.isOrganizationAdmin) {
+      setEditedItemId(undefined);
+      toast.error('You are not authorized to perform this action');
+    } else {
+      setEditedItemId(editedItemId);
+    }
+  };
   return (
     <>
       <Modal
@@ -58,13 +76,17 @@ const UsersPage = () => {
           setEditedItemId(undefined);
         }}
       >
-        {isAddMode && <AddUserForm onClose={() => setIsAddMode(false)} />}
-        {typeof editedItemId !== 'undefined' && (
-          <EditUserForm
-            editedItemId={editedItemId}
-            onClose={() => setEditedItemId(undefined)}
-          />
-        )}
+        {/* if me.isOrganizationAdmin then be able to render modal, else run toast */}
+        <>
+          {isAddMode && <AddUserForm onClose={() => setIsAddMode(false)} />}
+          {typeof editedItemId !== 'undefined' && (
+            <EditUserForm
+              editedItemId={editedItemId}
+              onClose={() => setEditedItemId(undefined)}
+              handleClickEdit={handleClickEdit}
+            />
+          )}
+        </>
       </Modal>
 
       <Card
@@ -75,7 +97,7 @@ const UsersPage = () => {
             <FormSearch placeholder="Search by name" />
             <div className="d-flex">
               <ButtonAdd
-                handleClickAdd={() => setIsAddMode(true)}
+                handleClickAdd={handleAddUserClick}
                 titleButton="Add User"
                 className="me-2"
               />
@@ -98,8 +120,9 @@ const UsersPage = () => {
           isSuccess={isListUsersSuccess}
           isLoading={isListUsersLoading}
           totalPage={pagination?.totalPage}
-          setEditedItemId={setEditedItemId}
+          setEditedItemId={handleClickEdit}
           archiveMutation={archiveMutation}
+          roleRequired={roleRequired}
         />
       </Card>
     </>
