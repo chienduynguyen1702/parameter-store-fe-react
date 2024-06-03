@@ -1,12 +1,16 @@
 import { AiFillEdit } from 'react-icons/ai';
 import { BiArchiveIn } from 'react-icons/bi';
 import { HiDotsHorizontal } from 'react-icons/hi';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 import { useState } from 'react';
 import Modal from '../Modal';
 import ConfirmContent from '../ConfirmContent';
 import Popover from '../Popover';
 import { set } from 'react-hook-form';
+import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
 
 const PopoverEditAndArchive = ({
   itemId,
@@ -14,8 +18,37 @@ const PopoverEditAndArchive = ({
   archiveMutation,
   setEditedItemId,
   isArchivedSuccess,
+  roleRequired,
 }) => {
+  const { id } = useParams();
+  const { me } = useContext(AuthContext);
   const [isArchiveMode, setIsArchiveMode] = useState(false);
+  console.log('roleRequired: ', roleRequired);
+  console.log('me: ', me);
+  const handleEditClick = () => {
+    if (
+      (roleRequired === 'Organization Admin' && me.isOrganizationAdmin) ||
+      (roleRequired === 'Admin' &&
+        Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(id))
+    ) {
+      setEditedItemId(itemId);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
+  const handleArchiveClick = () => {
+    if (
+      (roleRequired === 'Organization Admin' && me.isOrganizationAdmin) ||
+      (roleRequired === 'Admin' &&
+        Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(id))
+    ) {
+      setIsArchiveMode(true);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
   return (
     <>
       {isArchiveMode && !isArchivedSuccess && (
@@ -27,7 +60,7 @@ const PopoverEditAndArchive = ({
             contentBtnCancel="Cancel"
             isLoading={archiveMutation.isLoading}
             onClose={() => {
-              console.log('isArchivedSuccess: ', isArchivedSuccess);
+              // console.log('isArchivedSuccess: ', isArchivedSuccess);
               setIsArchiveMode(false);
             }}
             handleSubmit={() => archiveMutation.mutate(itemId)}
@@ -43,7 +76,7 @@ const PopoverEditAndArchive = ({
                 <span className={'font15 ms-3'}>Edit</span>
               </span>
             ),
-            onClick: () => setEditedItemId(itemId),
+            onClick: handleEditClick,
           },
           {
             component: (
@@ -52,7 +85,7 @@ const PopoverEditAndArchive = ({
                 <span className="font15 ms-3">Archive</span>
               </span>
             ),
-            onClick: () => setIsArchiveMode(true),
+            onClick: handleArchiveClick,
           },
         ]}
       >

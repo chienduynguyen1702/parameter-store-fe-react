@@ -10,6 +10,7 @@ const Table = ({
   totalPage,
   setEditedItemId,
   archiveMutation,
+  roleRequired,
 }) => {
   // const { listProjects } = useListProjects();
   // console.log('listProjects:', listProjects);
@@ -29,6 +30,7 @@ const Table = ({
                 item={item}
                 setEditedItemId={setEditedItemId}
                 archiveMutation={archiveMutation}
+                roleRequired={roleRequired}
               />
             ))}
         </div>

@@ -4,7 +4,7 @@ import React from 'react';
 import AvatarAndInfo from './AvatarAndInfo';
 import { PopoverEditAndArchive } from '../../../../../components';
 
-const Row = ({ item, setEditedItemId, archiveMutation }) => {
+const Row = ({ item, setEditedItemId, archiveMutation, roleRequired }) => {
   return (
     <div className="tableRow">
       <div className="tableCell py-3 ps-2 roundedLeft">
@@ -45,6 +45,7 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
           name="user"
           setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
+          roleRequired={roleRequired}
         />
       </div>
     </div>
