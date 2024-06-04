@@ -53,7 +53,8 @@ const Environments = () => {
   const handleAddClick = () => {
     if (
       me.isOrganizationAdmin ||
-      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+      (Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setIsAddMode(true);
     } else {

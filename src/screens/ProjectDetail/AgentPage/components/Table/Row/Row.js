@@ -9,9 +9,6 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
         <p>{item?.name}</p>
       </div>
       <div className="tableCell">
-        <p>{item.workflow_name}</p>
-      </div>
-      <div className="tableCell">
         <p
           className="status-default"
           style={{ backgroundColor: item.stage.color }}
@@ -26,6 +23,9 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
         >
           {item.environment.name}
         </p>
+      </div>
+      <div className="tableCell">
+        <p>{item.workflow_name}</p>
       </div>
       <div className="tableCell">
         <p>{item.description}</p>

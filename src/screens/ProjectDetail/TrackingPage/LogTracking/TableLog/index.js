@@ -30,7 +30,7 @@ const TableLog = ({ items }) => {
   const { data: listLoggers, isSuccess, isLoading } = useTracking(id, from, to);
   // console.log ('listLoggers', listLoggers);
   // const checkSelected = (id) => {
-  //   return selectedFilters.includes(id);
+  //   return selectedFilters.includes(Number(id));
   // };
 
   useEffect(() => {

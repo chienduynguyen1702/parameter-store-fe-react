@@ -22,13 +22,14 @@ const PopoverEditAndArchive = ({
 }) => {
   const { id } = useParams();
   const { me } = useContext(AuthContext);
+
   const [isArchiveMode, setIsArchiveMode] = useState(false);
   const handleEditClick = () => {
     if (
       (roleRequired === 'Organization Admin' && me.isOrganizationAdmin) ||
       (roleRequired === 'Admin' &&
         Array.isArray(me.isAdminOfProjects) &&
-        me.isAdminOfProjects.includes(id))
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setEditedItemId(itemId);
     } else {
@@ -40,7 +41,7 @@ const PopoverEditAndArchive = ({
       (roleRequired === 'Organization Admin' && me.isOrganizationAdmin) ||
       (roleRequired === 'Admin' &&
         Array.isArray(me.isAdminOfProjects) &&
-        me.isAdminOfProjects.includes(id))
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setIsArchiveMode(true);
     } else {
