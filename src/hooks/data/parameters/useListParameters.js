@@ -61,10 +61,11 @@ const useListParameters = (project_id) => {
         description: item.description,
       };
     });
+    const pages = Math.ceil(data?.total / limit);
     const pagination = {
-      total: parameters?.length || 0,
+      total: data?.total || 0,
       currentPage: queryString.page,
-      totalPage: Math.ceil((parameters?.length || 0) / limit),
+      totalPage: pages,
     };
     return { pagination, parameters };
   }, []);
