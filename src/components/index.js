@@ -6,6 +6,7 @@ export { default as ButtonExport } from './ButtonExport';
 export { default as ButtonSetting } from './ButtonSetting';
 export { default as ButtonAdd } from './ButtonAdd';
 export { default as ButtonApply } from './ButtonApply';
+export { default as ButtonDownload } from './ButtonDownload';
 export { default as Button } from './Button';
 export { default as Card } from './Card';
 
@@ -24,6 +25,7 @@ export { default as ColorInput } from './ColorInput';
 export { default as CardDashboardWithGranularity } from './CardDashboardWithGranularity';
 export { default as ConfirmContent } from './ConfirmContent';
 export { default as ConfirmReturnContent } from './ConfirmReturnContent';
+export { default as ConfirmReturnContentAndDownload } from './ConfirmReturnContentAndDownload';
 export { default as Checkbox } from './Checkbox';
 export { default as Dropdown } from './Dropdown';
 export { default as Editor } from './Editor';
