@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom';
 
 import {
   ButtonAdd,
+  ButtonDownload,
   Card,
   FormSearch,
   Archived,
   Modal,
-  ConfirmReturnContent,
+  ConfirmReturnContentAndDownload,
 } from '../../../components';
 
 import { useContext } from 'react';
@@ -27,7 +28,9 @@ import {
   archiveAgent,
   getArchivedAgents,
   unarchiveAgent,
+  downloadAgentScript,
 } from '../../../services/api';
+import { saveAs } from 'file-saver';
 
 const AgentPage = () => {
   const { id } = useParams();
@@ -85,6 +88,20 @@ const AgentPage = () => {
     handleCloseAddForm(); // Close the AddForm when confirmed
   };
 
+  const handleDownload = async () => {
+    try {
+      const response = await downloadAgentScript();
+      const blob = new Blob([response.data], { type: 'text/plain' });
+      saveAs(blob, 'get-parameters.sh');
+      toast.success('Agent script downloaded successfully.');
+    } catch (error) {
+      console.error(error.response.data.error);
+      toast.error(
+        `Failed to download agent script: ${error.response.data.error}`,
+      );
+    }
+  };
+
   return (
     <>
       <Modal
@@ -116,13 +133,18 @@ const AgentPage = () => {
           />
         )}
         {showConfirmation && ( // Render confirmation popup here
-          <ConfirmReturnContent
+          <ConfirmReturnContentAndDownload
             title="Agent created successfully!"
             message={`Please copy the token below and keep it safe. You won't be able to see it again.`}
+            submessages={[
+              'Usage: export $PARAMETER_STORE_TOKEN=your_agent_token_above && . ./get-parameters.sh -o output.file',
+              "If you haven't had agent script yet, download now.",
+            ]}
             content={`${returnToken}`}
             contentBtnSubmit="Done"
             onClose={() => setShowConfirmation(false)}
             handleSubmit={handleConfirmClose}
+            handleDownload={handleDownload}
           />
         )}
       </Modal>
@@ -134,6 +156,11 @@ const AgentPage = () => {
           <>
             <FormSearch placeholder="Search by name" />
             <div className="d-flex">
+              <ButtonDownload
+                handleClick={handleDownload}
+                titleButton="Download Agent Script"
+                className="button-white-grey-border ms-auto me-2"
+              />
               <ButtonAdd
                 handleClickAdd={handleAddClick}
                 titleButton="Add Agent"

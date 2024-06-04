@@ -7,6 +7,7 @@ import {
   editAgent,
   getListAgent,
   deleteAgent,
+  downloadAgentScript,
 } from '../../../services/api';
 import { toast } from 'react-toastify';
 
@@ -66,7 +67,7 @@ const useListAgents = (project_id) => {
 
   const addAgentMutation = useMutation(
     (data) => {
-      console.log('addAgentMutation data', data);
+      // console.log('addAgentMutation data', data);
       return addAgent(data.project_id, data.data);
     },
     {
