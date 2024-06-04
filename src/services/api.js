@@ -527,7 +527,12 @@ export const deleteAgent = (project_id, agent_id) => {
     url: `/projects/${project_id}/agents/${agent_id}/`,
   });
 };
-
+export const downloadAgentScript = () => {
+  return authApi({
+    method: 'GET',
+    url: `/agents/download`,
+  });
+};
 export const getArchivedAgents = (project_id) => {
   return authApi({
     method: 'GET',
