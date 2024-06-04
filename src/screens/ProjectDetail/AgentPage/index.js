@@ -10,6 +10,10 @@ import {
   ConfirmReturnContent,
 } from '../../../components';
 
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
+import { toast } from 'react-toastify';
+
 import Table from './components/Table/Table';
 import AddAgentForm from './components/AddAgentForm';
 import EditAgentForm from './components/EditAgentForm';
@@ -60,6 +64,17 @@ const AgentPage = () => {
     },
   });
 
+  const { me } = useContext(AuthContext);
+  const handleAddClick = () => {
+    if (
+      me.isOrganizationAdmin ||
+      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+    ) {
+      setIsAddMode(true);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
   const handleCloseAddForm = () => {
     setIsAddMode(false);
     setEditedItemId(undefined);
@@ -120,7 +135,7 @@ const AgentPage = () => {
             <FormSearch placeholder="Search by name" />
             <div className="d-flex">
               <ButtonAdd
-                handleClickAdd={() => setIsAddMode(true)}
+                handleClickAdd={handleAddClick}
                 titleButton="Add Agent"
                 className="me-2"
               />
