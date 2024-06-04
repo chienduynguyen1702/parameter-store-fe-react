@@ -1,5 +1,8 @@
 import { Col, Row, Stack } from 'react-bootstrap';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 import { Card, Icon, Modal } from '../../../../components';
 import EditProjectForm from './EditProjectForm';
@@ -7,14 +10,22 @@ import moment from 'moment';
 
 const Overview = ({ overview, usersList }) => {
   // const project = PROJECTS[0];
-  // const { id } = useParams();
+  const { id } = useParams();
   // console.log("project id: ",id);
   // const {overview, usersList, isSuccess} = useProjectOverviewAndUserList(id);
   // console.log("overview: ",overview);
+  const { me } = useContext(AuthContext);
   const [editedItemId, setEditedItemId] = useState(undefined);
   const [isEditMode, setIdEditMode] = useState(false);
   const handleEditClick = (id) => {
-    setEditedItemId(id);
+    // if me is admin of projects include id and me is organization admin
+    if (
+      me.isOrganizationAdmin ||
+      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+    ) {
+      setIdEditMode(true);
+      setEditedItemId(id);
+    } else toast.error('You are not authorized to perform this action');
   };
   // const [isSetting, setIsSetting] = useState(false);
   // if (!isSuccess) {
@@ -63,7 +74,7 @@ const Overview = ({ overview, usersList }) => {
             <div
               className="cursor-pointer ms-auto"
               onClick={() => {
-                setIdEditMode(true);
+                // setIdEditMode(true);
                 // console.log('x');
                 handleEditClick(overview.id);
               }}
