@@ -21,7 +21,8 @@ const Overview = ({ overview, usersList }) => {
     // if me is admin of projects include id and me is organization admin
     if (
       me.isOrganizationAdmin ||
-      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+      (Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setIdEditMode(true);
       setEditedItemId(id);

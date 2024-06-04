@@ -101,7 +101,8 @@ const ParametersPage = () => {
   const handleClickApply = () => {
     if (
       me.isOrganizationAdmin ||
-      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+      (Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       if (overview.auto_update === true) {
         toast.warning(
@@ -118,7 +119,8 @@ const ParametersPage = () => {
   const handleAddClick = () => {
     if (
       me.isOrganizationAdmin ||
-      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+      (Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setIsAddMode(true);
     } else {
@@ -129,13 +131,15 @@ const ParametersPage = () => {
   const handleReleaseClick = () => {
     if (
       me.isOrganizationAdmin ||
-      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+      (Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setIsReleaseMode(true);
     } else {
       toast.error('You are not authorized to perform this action');
     }
   };
+  const roleRequired = 'Admin';
   return (
     <>
       <Modal
@@ -252,6 +256,7 @@ const ParametersPage = () => {
           setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
           isArchivedSuccess={isArchivedSuccess}
+          roleRequired={roleRequired}
         />
       </Card>
     </>
