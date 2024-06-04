@@ -3,6 +3,10 @@ import { useParams } from 'react-router-dom';
 import { Col, Row, Stack } from 'react-bootstrap';
 import moment from 'moment';
 
+import { useContext } from 'react';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../../context/AuthContext';
+
 import EditOrganizationForm from '../EditOrganizationForm';
 import { Card, Icon, Modal } from '../../../components';
 import { useOrganization } from '../../../hooks/data';
@@ -13,9 +17,8 @@ const Overview = () => {
 
   const [editedItemId, setEditedItemId] = useState(undefined);
   const [isEditMode, setIdEditMode] = useState(false);
-  const handleEditClick = (id) => {
-    setEditedItemId(id);
-  };
+  const { me } = useContext(AuthContext);
+
   if (isLoading) {
     // Handle loading state if needed
     return <p>Loading...</p>;
@@ -24,6 +27,14 @@ const Overview = () => {
     // Handle case when organization data is not available
     return <p>No organization data available</p>;
   }
+  const handleEditClick = () => {
+    if (me.isOrganizationAdmin) {
+      console.log('org.id', org.id);
+      console.log('me.isOrganizationAdmin', me.isOrganizationAdmin);
+      setIdEditMode(true);
+      setEditedItemId(org.id);
+    } else toast.error('You are not authorized to perform this action');
+  };
 
   return (
     <>
@@ -49,14 +60,7 @@ const Overview = () => {
         className="mb-5"
         head={
           <>
-            <div
-              className="cursor-pointer ms-auto"
-              onClick={() => {
-                setIdEditMode(true);
-                // console.log('x');
-                handleEditClick(org.id);
-              }}
-            >
+            <div className="cursor-pointer ms-auto" onClick={handleEditClick}>
               <Icon name="edit" size={24} />
             </div>
             {/* <ButtonSetting

@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useQueryString from '../../../hooks/useQueryString';
 
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
+
 import {
   ButtonDuplicate,
   ButtonAdd,
@@ -93,13 +96,44 @@ const ParametersPage = () => {
     return 0; // Versions are equal
   }
   const latestVersion = sortedVersions?.[0]?.number || '';
+  const { me } = useContext(AuthContext);
+
   const handleClickApply = () => {
-    if (overview.auto_update === true) {
-      toast.warning(
-        'This project is in auto update mode. No need to apply parameters.',
-      );
+    if (
+      me.isOrganizationAdmin ||
+      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+    ) {
+      if (overview.auto_update === true) {
+        toast.warning(
+          'This project is in auto update mode. No need to apply parameters.',
+        );
+      } else {
+        setIsApplying(true);
+      }
     } else {
-      setIsApplying(true);
+      toast.error('You are not authorized to perform this action');
+    }
+  };
+
+  const handleAddClick = () => {
+    if (
+      me.isOrganizationAdmin ||
+      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+    ) {
+      setIsAddMode(true);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
+
+  const handleReleaseClick = () => {
+    if (
+      me.isOrganizationAdmin ||
+      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+    ) {
+      setIsReleaseMode(true);
+    } else {
+      toast.error('You are not authorized to perform this action');
     }
   };
   return (
@@ -188,12 +222,12 @@ const ParametersPage = () => {
                 />
               </FiltersCustom>
               <ButtonDuplicate
-                handleClick={() => setIsReleaseMode(true)}
+                handleClick={handleReleaseClick}
                 titleButton="Release Version"
                 className="me-2"
               />
               <ButtonAdd
-                handleClickAdd={() => setIsAddMode(true)}
+                handleClickAdd={handleAddClick}
                 titleButton="Add Parameter"
                 className="me-2"
               />

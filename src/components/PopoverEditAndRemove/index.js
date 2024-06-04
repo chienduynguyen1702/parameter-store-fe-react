@@ -3,6 +3,11 @@ import { BsFillTrashFill } from 'react-icons/bs';
 import { HiDotsHorizontal } from 'react-icons/hi';
 
 import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
+
 import Modal from '../Modal';
 import ConfirmContent from '../ConfirmContent';
 import Popover from '../Popover';
@@ -12,8 +17,38 @@ const PopoverEditAndRemove = ({
   name = '',
   setEditedItemId,
   handleRemove,
+  roleRequired,
 }) => {
+  const { id } = useParams();
+  const { me } = useContext(AuthContext);
   const [isRemoveMode, setIsRemoveMode] = useState(false);
+  // console.log('roleRequired: ', roleRequired);
+  // console.log('me: ', me);
+
+  const handleEditClick = () => {
+    if (
+      (roleRequired === 'Organization Admin' && me.isOrganizationAdmin) ||
+      (roleRequired === 'Admin' &&
+        Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(id))
+    ) {
+      setEditedItemId(itemId);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
+  const handleRemoveClick = () => {
+    if (
+      (roleRequired === 'Organization Admin' && me.isOrganizationAdmin) ||
+      (roleRequired === 'Admin' &&
+        Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(id))
+    ) {
+      setIsRemoveMode(true);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
   return (
     <>
       {isRemoveMode && (
@@ -38,7 +73,7 @@ const PopoverEditAndRemove = ({
                 <span className={'font15 ms-3'}>Edit</span>
               </span>
             ),
-            onClick: () => setEditedItemId(itemId),
+            onClick: handleEditClick,
           },
           {
             component: (
@@ -47,7 +82,7 @@ const PopoverEditAndRemove = ({
                 <span className="font15 ms-3">Remove</span>
               </span>
             ),
-            onClick: () => setIsRemoveMode(true),
+            onClick: handleRemoveClick,
           },
         ]}
       >
