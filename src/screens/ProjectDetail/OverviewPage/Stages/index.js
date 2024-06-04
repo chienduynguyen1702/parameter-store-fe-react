@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 import { ButtonAdd, Card, Archived, Modal } from '../../../../components';
 
@@ -44,6 +46,17 @@ const Stages = () => {
     },
   });
 
+  const { me } = useContext(AuthContext);
+  const handleAddStageClick = () => {
+    if (
+      me.isOrganizationAdmin ||
+      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+    ) {
+      setIsAddMode(true);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
   return (
     <>
       <Modal
@@ -74,7 +87,7 @@ const Stages = () => {
             {/* <FormSearch placeholder="Search by name" /> */}
             <div className="d-flex">
               <ButtonAdd
-                handleClickAdd={() => setIsAddMode(true)}
+                handleClickAdd={handleAddStageClick}
                 titleButton="Add Stage"
                 className="me-2"
               />
