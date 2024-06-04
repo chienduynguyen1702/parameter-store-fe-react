@@ -27,7 +27,7 @@ const AddForm = ({
         onClose();
         setReturnToken(data.data?.api_token);
         setShowConfirmation(true);
-        console.log('data', data);
+        // console.log('data', data);
       },
       onError: (error) => {
         console.log('error', error.response.data.error);

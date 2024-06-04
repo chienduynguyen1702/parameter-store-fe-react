@@ -23,8 +23,6 @@ const PopoverEditAndArchive = ({
   const { id } = useParams();
   const { me } = useContext(AuthContext);
   const [isArchiveMode, setIsArchiveMode] = useState(false);
-  console.log('roleRequired: ', roleRequired);
-  console.log('me: ', me);
   const handleEditClick = () => {
     if (
       (roleRequired === 'Organization Admin' && me.isOrganizationAdmin) ||
