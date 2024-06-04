@@ -14,6 +14,7 @@ const Table = ({
   setEditedItemId,
   archiveMutation,
   isArchivedSuccess,
+  roleRequired,
 }) => {
   const { id } = useParams();
   const { listParameters } = useListParameters(id);
@@ -43,6 +44,7 @@ const Table = ({
                 setEditedItemId={setEditedItemId}
                 archiveMutation={archiveMutation}
                 isArchivedSuccess={isArchivedSuccess}
+                roleRequired={roleRequired}
               />
             ))}
         </div>

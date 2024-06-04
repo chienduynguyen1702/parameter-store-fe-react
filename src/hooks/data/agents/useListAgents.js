@@ -47,11 +47,11 @@ const useListAgents = (project_id) => {
         last_used_at: item.last_used_at,
       };
     });
-
+    const pages = Math.ceil(data?.total / 10);
     const pagination = {
-      total: data?.total,
+      total: data?.total || 0,
       currentPage: 1,
-      totalPage: Math.ceil((data?.total || 0) / 10),
+      totalPage: pages,
       limit: 10,
     };
     return { pagination, agents };

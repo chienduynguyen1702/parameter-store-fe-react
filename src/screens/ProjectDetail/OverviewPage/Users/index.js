@@ -43,7 +43,8 @@ const UsersPage = () => {
   const handleAddUserClick = () => {
     if (
       me.isOrganizationAdmin ||
-      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+      (Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setIsAddMode(true);
     } else {
@@ -53,7 +54,8 @@ const UsersPage = () => {
   const handleEditClick = (id) => {
     if (
       me.isOrganizationAdmin ||
-      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+      (Array.isArray(me.isAdminOfProjects) &&
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setEditedItemId(id);
     } else {

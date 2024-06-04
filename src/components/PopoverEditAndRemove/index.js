@@ -30,7 +30,7 @@ const PopoverEditAndRemove = ({
       (roleRequired === 'Organization Admin' && me.isOrganizationAdmin) ||
       (roleRequired === 'Admin' &&
         Array.isArray(me.isAdminOfProjects) &&
-        me.isAdminOfProjects.includes(id))
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setEditedItemId(itemId);
     } else {
@@ -42,7 +42,7 @@ const PopoverEditAndRemove = ({
       (roleRequired === 'Organization Admin' && me.isOrganizationAdmin) ||
       (roleRequired === 'Admin' &&
         Array.isArray(me.isAdminOfProjects) &&
-        me.isAdminOfProjects.includes(id))
+        me.isAdminOfProjects.includes(Number(id)))
     ) {
       setIsRemoveMode(true);
     } else {
