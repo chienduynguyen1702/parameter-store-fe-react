@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 import { Card, FormSearch, ButtonAdd, Modal } from '../../../../components';
 
@@ -12,6 +14,7 @@ const UsersPage = () => {
   const { id } = useParams();
   const [isAddMode, setIsAddMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
+  const { me } = useContext(AuthContext);
 
   const {
     listUsers,
@@ -36,7 +39,27 @@ const UsersPage = () => {
       },
     );
   };
-
+  const roleRequired = 'Admin';
+  const handleAddUserClick = () => {
+    if (
+      me.isOrganizationAdmin ||
+      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+    ) {
+      setIsAddMode(true);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
+  const handleEditClick = (id) => {
+    if (
+      me.isOrganizationAdmin ||
+      (Array.isArray(me.isAdminOfProjects) && me.isAdminOfProjects.includes(id))
+    ) {
+      setEditedItemId(id);
+    } else {
+      toast.error('You are not authorized to perform this action');
+    }
+  };
   return (
     <>
       <Modal
@@ -70,7 +93,7 @@ const UsersPage = () => {
             <FormSearch placeholder="Search by name" />
             <div className="d-flex">
               <ButtonAdd
-                handleClickAdd={() => setIsAddMode(true)}
+                handleClickAdd={handleAddUserClick}
                 titleButton="Add User"
                 className="me-2"
               />
@@ -85,6 +108,7 @@ const UsersPage = () => {
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
           handleRemoveUser={handleRemoveUser}
+          roleRequired={roleRequired}
         />
       </Card>
     </>

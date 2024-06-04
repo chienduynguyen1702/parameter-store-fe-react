@@ -3,7 +3,13 @@ import React from 'react';
 import AvatarAndInfo from './AvatarAndInfo';
 import { PopoverEditAndRemove } from '../../../../../../components';
 
-const Row = ({ item, setEditedItemId, setRemovedItemId, handleRemoveUser }) => {
+const Row = ({
+  item,
+  setEditedItemId,
+  setRemovedItemId,
+  handleRemoveUser,
+  roleRequired,
+}) => {
   return (
     <div className="tableRow">
       <div className="tableCell py-3 ps-2 roundedLeft">
@@ -23,6 +29,7 @@ const Row = ({ item, setEditedItemId, setRemovedItemId, handleRemoveUser }) => {
           name="user"
           setEditedItemId={setEditedItemId}
           handleRemove={handleRemoveUser}
+          roleRequired={roleRequired}
         />
       </div>
     </div>
