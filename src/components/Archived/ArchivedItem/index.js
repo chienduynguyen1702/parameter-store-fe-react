@@ -26,8 +26,8 @@ const ArchivedItem = ({
   const { me } = useContext(AuthContext);
   const roleRequired = 'Admin';
 
-  console.log('roleRequired: ', roleRequired);
-  console.log('me: ', me);
+  // console.log('roleRequired: ', roleRequired);
+  // console.log('me: ', me);
 
   const handleUnarchiveClick = () => {
     if (

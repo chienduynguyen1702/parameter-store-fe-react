@@ -22,8 +22,8 @@ const PopoverEditAndRemove = ({
   const { id } = useParams();
   const { me } = useContext(AuthContext);
   const [isRemoveMode, setIsRemoveMode] = useState(false);
-  console.log('roleRequired: ', roleRequired);
-  console.log('me: ', me);
+  // console.log('roleRequired: ', roleRequired);
+  // console.log('me: ', me);
 
   const handleEditClick = () => {
     if (
