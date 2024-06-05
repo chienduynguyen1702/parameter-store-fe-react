@@ -2,7 +2,7 @@ import React from 'react';
 import { PopoverEditAndArchive } from '../../../../../../components';
 import moment from 'moment';
 
-const Row = ({ item, setEditedItemId, archiveMutation }) => {
+const Row = ({ item, setEditedItemId, archiveMutation, roleRequired }) => {
   return (
     <div className="tableRow">
       <div className="tableCell py-3 ps-2 roundedLeft">
@@ -39,6 +39,7 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
           name="parameter"
           setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
+          roleRequired={roleRequired}
         />
       </div>
     </div>

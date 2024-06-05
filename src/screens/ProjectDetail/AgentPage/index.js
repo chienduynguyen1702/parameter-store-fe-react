@@ -102,7 +102,7 @@ const AgentPage = () => {
       );
     }
   };
-
+  const roleRequired = 'Admin';
   return (
     <>
       <Modal
@@ -187,6 +187,7 @@ const AgentPage = () => {
           totalPage={pagination?.totalPage}
           setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
+          roleRequired={roleRequired}
         />
       </Card>
     </>

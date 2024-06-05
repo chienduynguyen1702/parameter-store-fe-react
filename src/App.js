@@ -44,6 +44,7 @@ const DashboardHighLight = lazy(() =>
 );
 const Workflows = lazy(() => import('./screens/ProjectDetail/Workflows'));
 const SignIn = lazy(() => import('./screens/Authentication/SignIn'));
+const SignUp = lazy(() => import('./screens/Authentication/SignUp'));
 const ResetPassword = lazy(() =>
   import('./screens/Authentication/ResetPassword'),
 );
@@ -169,6 +170,15 @@ function App() {
                   element={
                     <SuspenseContainer isFullScreen>
                       <SignIn />
+                    </SuspenseContainer>
+                  }
+                />
+                <Route
+                  exact
+                  path="/sign-up"
+                  element={
+                    <SuspenseContainer isFullScreen>
+                      <SignUp />
                     </SuspenseContainer>
                   }
                 />
