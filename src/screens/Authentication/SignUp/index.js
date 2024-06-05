@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthContext } from '../../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 import cn from 'classnames';
 import styles from './SignIn.module.sass';
@@ -14,6 +15,7 @@ import AsyncButton from '../../../components/AsyncButton';
 
 import { SigninSchema } from '../../../utils/ValidateSchema';
 import { AiOutlineEye } from 'react-icons/ai';
+import { signUp } from '../../../services/api';
 
 const SignIn = () => {
   const heightWindow = use100vh();
@@ -34,11 +36,21 @@ const SignIn = () => {
   }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (data) => {
+    // check password and confirm password is same
+    if (data.password !== data.confirm_password) {
+      setIsError(true);
+      return;
+    }
     const { organization_name, email, password } = data;
     setLoading(true);
-    const isError = !(await login({ organization_name, email, password }));
+    const isError = !(await signUp({ organization_name, email, password }));
     setLoading(false);
     setIsError(isError);
+    if (!isError) {
+      // navigate to sign in page
+      toast.success('Sign up successfully');
+      navigate('/sign-in');
+    }
   };
 
   const handleShowPassword = () => {
@@ -53,7 +65,7 @@ const SignIn = () => {
     <div className={styles.login} style={{ minHeight: heightWindow }}>
       <div className={styles.wrapper}>
         <LogoContainer />
-        <div className={cn('h2', styles.title)}>Sign in</div>
+        <div className={cn('h2', styles.title)}>Sign Up</div>
         <div className={styles.head}></div>
         <FormProvider {...method}>
           <form
@@ -86,6 +98,20 @@ const SignIn = () => {
                 <AiOutlineEye />
               </div>
             </div>
+            <div className="position-relative">
+              <RHFTextInput
+                name="confirm_password"
+                type={typeOfPassword}
+                placeholder="Confirm Password"
+                icon="lock"
+              />
+              <div
+                className={cn(styles.iconEyePassword, 'position-absolute')}
+                onClick={handleShowPassword}
+              >
+                <AiOutlineEye />
+              </div>
+            </div>
             <AsyncButton loading={loading} value="Sign in" type="submit" />
 
             {isError ? (
@@ -99,8 +125,9 @@ const SignIn = () => {
               This site is protected by reCAPTCHA and the Google Privacy Policy.
             </div>
             <div className={styles.info}>
-              <Link className={styles.link} to="/sign-up">
-                Sign Up
+              Already have an account ?{'  '}
+              <Link className={styles.link} to="/sign-in">
+                Sign In
               </Link>
             </div>
           </form>

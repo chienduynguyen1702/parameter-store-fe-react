@@ -15,6 +15,14 @@ export const validate = () =>
     url: '/auth/validate',
   });
 
+export const signUp = (data) => {
+  return publicApi({
+    method: 'POST',
+    url: '/auth/register',
+    data,
+  });
+};
+
 export const logout = () =>
   authApi({
     method: 'POST',
