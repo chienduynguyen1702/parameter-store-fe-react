@@ -65,7 +65,7 @@ const SignIn = () => {
     <div className={styles.login} style={{ minHeight: heightWindow }}>
       <div className={styles.wrapper}>
         <LogoContainer />
-        <div className={cn('h2', styles.title)}>Sign in</div>
+        <div className={cn('h2', styles.title)}>Sign Up</div>
         <div className={styles.head}></div>
         <FormProvider {...method}>
           <form

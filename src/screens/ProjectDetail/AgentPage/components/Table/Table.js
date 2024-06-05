@@ -10,6 +10,7 @@ const Table = ({
   totalPage,
   setEditedItemId,
   archiveMutation,
+  roleRequired,
 }) => {
   return (
     <>
@@ -31,6 +32,7 @@ const Table = ({
                 item={agent}
                 setEditedItemId={setEditedItemId}
                 archiveMutation={archiveMutation}
+                roleRequired={roleRequired}
               />
             ))}
         </div>
