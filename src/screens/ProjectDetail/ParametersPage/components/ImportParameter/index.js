@@ -60,7 +60,7 @@ const ImportParameter = ({ title, onClose }) => {
       toast.success(`Param imported successfully: ${response.data.message}`);
       onClose();
     } catch (error) {
-      toast.error(`Error importing Param: ${error.response.data.message}`);
+      toast.error(`Error importing Param: ${error.response.data.error}`);
       // console.log('Error', error);
     }
   };
@@ -74,7 +74,7 @@ const ImportParameter = ({ title, onClose }) => {
       <div>
         Warning: Importing a Param will overwrite the existing Param with the
         {'\n\n\n'}
-        same name and IP.
+        same name and value.
         <br />
         Selected file: {file.name}
       </div>
