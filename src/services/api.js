@@ -483,7 +483,22 @@ export const unarchiveParameter = (project_id, parameter_id) => {
     url: `/projects/${project_id}/parameters/${parameter_id}/unarchive`,
   });
 };
+export const downloadTemplateParam = (project_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/parameters/download-template`,
+    responseType: 'blob',
+  });
 
+export const uploadFileParam = (project_id, data) =>
+  authApi({
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    method: 'POST',
+    url: `/projects/${project_id}/parameters/upload`,
+    data,
+  });
 export const getStages = () =>
   authApi({
     method: 'GET',
