@@ -14,7 +14,7 @@ const Table = ({
 }) => {
   return (
     <>
-      <div className="tableOuter">
+      <div style={{ height: '650px' }} className="tableOuter">
         <div className="tableContainer">
           <div className="tableHead">
             <div className="tableCell pb-4">Name</div>

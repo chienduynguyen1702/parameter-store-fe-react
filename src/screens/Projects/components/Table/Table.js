@@ -13,13 +13,14 @@ const Table = ({
   roleRequired,
 }) => {
   // const { listProjects } = useListProjects();
-  // console.log('listProjects:', listProjects);
+  console.log('listProjects:', listProjects);
   return (
     <>
       <div className="tableOuter">
         <div className="tableContainer">
           <div className="tableHead">
             <div className="tableCell pb-4">Project Name</div>
+            <div className="tableCell">Status</div>
             <div className="tableCell">Assigned to user</div>
             <div className="tableCell"></div>
           </div>
