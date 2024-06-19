@@ -23,7 +23,7 @@ const Table = ({
 
   return (
     <>
-      <div className={cn(style.head, 'tableOuter')}>
+      <div className={'tableOuter'}>
         <div className="tableContainer">
           <div className="tableHead">
             <div className="tableCell pb-4">Name</div>
