@@ -24,17 +24,17 @@ const Row = ({
       <div className="tableCell">
         <p
           className="status-default"
-          style={{ backgroundColor: item.stage.color }}
+          style={{ backgroundColor: item.environment.color }}
         >
-          {item.stage.name}
+          {item.environment.name}
         </p>
       </div>
       <div className="tableCell">
         <p
           className="status-default"
-          style={{ backgroundColor: item.environment.color }}
+          style={{ backgroundColor: item.stage.color }}
         >
-          {item.environment.name}
+          {item.stage.name}
         </p>
       </div>
       {/* <p className="tableCell">{item.createdAt}</p> */}
