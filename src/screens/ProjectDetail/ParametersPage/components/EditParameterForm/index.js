@@ -62,7 +62,7 @@ const EditForm = ({
 
   const formatIsUsedAtFile = (isUsedAtFile) => {
     return isUsedAtFile
-      .map((file) => `${file.file_name}: [${file.line_number.join(', ')}]\n`)
+      ?.map((file) => `${file.file_name}: [${file.line_number.join(', ')}]\n`)
       .join('; ');
   };
   useEffect(() => {
@@ -77,7 +77,7 @@ const EditForm = ({
           parseStringToArray(parameterData.is_using_at_file),
         );
         setParameterData(parameterData); // Update state with fetched data
-        console.log('parameterData', parameterData);
+        // console.log('parameterData', parameterData);
         method.reset(parameterData); // Populate form fields with parameter data
       } catch (error) {
         console.error('Error fetching parameter data:', error);
