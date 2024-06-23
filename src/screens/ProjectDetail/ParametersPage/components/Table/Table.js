@@ -33,6 +33,7 @@ const Table = ({
             {/* <div className="tableCell">Created at</div> */}
             <div className="tableCell">Edited At</div>
             <div className="tableCell">Is Applied</div>
+            <div className="tableCell">Is Used At</div>
             {/* <div className="tableCell">Expired at</div> */}
             <div className="tableCell"></div>
           </div>

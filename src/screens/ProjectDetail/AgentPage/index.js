@@ -139,7 +139,7 @@ const AgentPage = () => {
             message={`Please copy the token below and keep it safe. You won't be able to see it again.`}
             submessages={[
               'Usage: export $PARAMETER_STORE_TOKEN=your_agent_token_above && . ./get-parameters.sh -o output.file',
-              "If you haven't had agent script yet, download now.",
+              "If you haven't had agent script yet, download now and store it source code repository",
             ]}
             content={`${returnToken}`}
             contentBtnSubmit="Done"

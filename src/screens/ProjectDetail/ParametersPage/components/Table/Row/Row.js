@@ -15,6 +15,13 @@ const Row = ({
   //   'item.updatedAt moment',
   //   moment(item.updatedAt).format('yyyy/MM/DD h:mm:ss a'),
   // );
+  const formatIsUsedAtFile = (isUsedAtFile) => {
+    return isUsedAtFile
+      ?.map((file) => `${file.file_name}: [${file.line_number.join(', ')}]`)
+      .join('; ');
+  };
+
+  const isUsedAtFile = formatIsUsedAtFile(item.isUsedAtFile);
   return (
     <div className="tableRow">
       <div className="tableCell py-3 ps-2 roundedLeft">
@@ -40,6 +47,7 @@ const Row = ({
       {/* <p className="tableCell">{item.createdAt}</p> */}
       <p className="tableCell">{item.updatedAt}</p>
       <p className="tableCell">{item.isApplied.toString()}</p>
+      <p className="tableCell">{isUsedAtFile}</p>
       <div className="tableCell roundedRight">
         <PopoverEditAndArchive
           itemId={item.id}

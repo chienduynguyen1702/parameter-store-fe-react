@@ -39,6 +39,16 @@ const useListParameters = (project_id) => {
       setQueryString(DEFAULT_QUERY_STRING);
     }
   }, [limit, page, queryString, setQueryString]);
+  const parseStringToArray = (string) => {
+    try {
+      // Check if the string is a valid JSON
+      return JSON.parse(string);
+    } catch (error) {
+      // If the string is not a valid JSON, handle the error appropriately
+      console.error('Failed to parse string to array:', error);
+      return [];
+    }
+  };
 
   const parseData = useCallback((data, page, limit) => {
     // console.log('data:', data);
@@ -58,6 +68,7 @@ const useListParameters = (project_id) => {
         createdAt: item.CreatedAt, //moment(item.CreatedAt).format('YYYY/MM/DD HH:MM:SS'),
         updatedAt: moment(item.edited_at).format('YYYY/MM/DD HH:MM:SS'),
         isApplied: item.is_applied,
+        isUsedAtFile: parseStringToArray(item?.is_using_at_file), //example [{\"file_name\":\"main.go\",\"line_number\":[27]},{\"file_name\":\".env.example\",\"line_number\":[13]}]
         description: item.description,
       };
     });

@@ -13,7 +13,7 @@ const Table = ({
   roleRequired,
 }) => {
   // const { listProjects } = useListProjects();
-  console.log('listProjects:', listProjects);
+  // console.log('listProjects:', listProjects);
   return (
     <>
       <div className="tableOuter">

@@ -490,6 +490,13 @@ export const downloadTemplateParam = (project_id) =>
     responseType: 'blob',
   });
 
+export const checkParamUsingInRepo = (project_id, data) =>
+  authApi({
+    method: 'POST',
+    url: `/projects/${project_id}/parameters/check-using`,
+    data,
+  });
+
 export const uploadFileParam = (project_id, data) =>
   authApi({
     headers: {
