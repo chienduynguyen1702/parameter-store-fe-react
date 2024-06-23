@@ -8,6 +8,7 @@ import {
   login as loginFn,
   logout as logoutFn,
   validate as validateFn,
+  loginWithGithub as loginWithGithubFn,
 } from '../services/api';
 import { getCookie, removeCookie } from '../utils/cookie';
 
@@ -18,11 +19,22 @@ const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // const cookies = new Cookies();
   const [me, setMe] = useState(null);
 
+  const clientID = `${process.env.REACT_APP_GITHUB_CLIENT_ID}`;
+  const redirectURI = `${process.env.REACT_APP_GITHUB_REDIRECT_URI}`;
+  // const redirectURI = `http://localhost:3000/auth/github/callback`;
+  const clientSecret = `${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`;
+  const navigateWindowToGitHub = useCallback(async () => {
+    try {
+      window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientID}&redirect_uri=${redirectURI}`;
+    } catch (error) {
+      console.error('Error during GitHub login:', error);
+    }
+  }, [clientID, redirectURI]);
   const saveMe = useCallback((data) => {
     // console.log('data', data);
     const me = {
@@ -55,6 +67,36 @@ const AuthProvider = ({ children }) => {
     setMe(me);
   }, []);
 
+  const loginWithGithub = useCallback(
+    async (code) => {
+      if (!code) {
+        console.log('No code found in URL');
+        return false;
+      }
+
+      try {
+        // alert(`isAuthenticated ${isAuthenticated}`);
+        // alert(`🚀 ~ HandleCallback ~ code: ${code}`);
+        const response = await loginWithGithubFn({ code });
+        setIsAuthenticated(true);
+        // alert(`isAuthenticated ${isAuthenticated}`);
+        // alert(`🚀 ~ HandleCallback ~ code: ${response}`);
+        // alert(`Login success ${response?.data?.['user']}`);
+        console.log('response.data', response?.data);
+        saveMe(response?.data?.['user']);
+        token.setAccessToken(response?.data?.token);
+        toast.success('Login success');
+        navigate('/home', { replace: true });
+        return true;
+      } catch (error) {
+        console.error('Error fetching access token:');
+        alert(`Error fetching access token ${error}`);
+        return false;
+      }
+    },
+    [navigate, saveMe, setIsAuthenticated],
+  );
+
   const login = useCallback(
     async (data) => {
       try {
@@ -73,8 +115,8 @@ const AuthProvider = ({ children }) => {
         token.setAccessToken(response?.data?.token);
         toast.success('Login success');
         navigate.push('/dashboard', { replace: true });
-        alert('Login success');
-        console.log('X');
+        // alert('Login success');
+        // console.log('X');
         return true;
       } catch {
         return false;
@@ -132,12 +174,23 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // console.log(document.cookie);
-    loginWithCookie();
-  }, [loginWithCookie]);
+    if (isAuthenticated === null) {
+      // alert('loginWithCookie is called');
+      loginWithCookie();
+    }
+  }, [loginWithCookie, isAuthenticated]);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, me }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        login,
+        logout,
+        me,
+        loginWithGithub,
+        navigateWindowToGitHub,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

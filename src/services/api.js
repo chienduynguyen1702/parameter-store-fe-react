@@ -8,6 +8,12 @@ export const login = (data) =>
     url: '/auth/login',
     data,
   });
+export const loginWithGithub = (data) =>
+  publicApi({
+    method: 'POST',
+    url: '/auth/login/github',
+    data,
+  });
 
 export const validate = () =>
   authApi({

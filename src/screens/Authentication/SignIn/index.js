@@ -17,7 +17,8 @@ import { AiOutlineEye } from 'react-icons/ai';
 
 const SignIn = () => {
   const heightWindow = use100vh();
-  const { isAuthenticated, login } = useContext(AuthContext);
+  const { isAuthenticated, login, navigateWindowToGitHub } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -103,8 +104,18 @@ const SignIn = () => {
                 Sign Up
               </Link>
             </div>
+            <div className={styles.info}></div>
           </form>
         </FormProvider>
+        <div className={styles.info}>
+          <button
+            loading={loading}
+            // type="submit"
+            onClick={() => navigateWindowToGitHub()}
+          >
+            Login with Github
+          </button>
+        </div>
       </div>
     </div>
   );

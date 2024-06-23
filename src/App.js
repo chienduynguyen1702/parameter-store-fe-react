@@ -38,7 +38,7 @@ const ProjectTrackingPage = lazy(() =>
 const ProjectAgentPage = lazy(() =>
   import('./screens/ProjectDetail/AgentPage'),
 );
-
+const GithubHandleCallback = lazy(() => import('./screens/GithubCallback'));
 const DashboardHighLight = lazy(() =>
   import('./screens/ProjectDetail/Dashboard'),
 );
@@ -69,6 +69,15 @@ function App() {
           <AuthProvider>
             <UnderDevelopmentProvider>
               <Routes>
+                <Route
+                  exact
+                  path="/auth/github/callback"
+                  element={
+                    <SuspenseContainer>
+                      <GithubHandleCallback />
+                    </SuspenseContainer>
+                  }
+                />
                 <Route exact path="/" element={<Navigate to="/projects" />} />
                 <Route
                   exact
