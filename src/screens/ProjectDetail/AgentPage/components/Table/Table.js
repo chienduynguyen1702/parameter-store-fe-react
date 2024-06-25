@@ -14,12 +14,12 @@ const Table = ({
 }) => {
   return (
     <>
-      <div className="tableOuter">
+      <div style={{ height: '650px' }} className="tableOuter">
         <div className="tableContainer">
           <div className="tableHead">
             <div className="tableCell pb-4">Name</div>
-            <div className="tableCell">Stage</div>
             <div className="tableCell">Environment</div>
+            <div className="tableCell">Stage</div>
             <div className="tableCell">Workflow Name</div>
             <div className="tableCell">Description</div>
             <div className="tableCell">Last used</div>

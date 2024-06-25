@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
   const [me, setMe] = useState(null);
 
   const saveMe = useCallback((data) => {
-    console.log('data', data);
+    // console.log('data', data);
     const me = {
       // id: data.id,
       username: data?.username,
@@ -86,8 +86,8 @@ const AuthProvider = ({ children }) => {
   const loginWithCookie = useCallback(async () => {
     try {
       // console log response ma cung deo thay gi het
-      // console.log('response from validateFn', response);
       const response = await validateFn();
+      // console.log('response from validateFn', response);
       saveMe(response.data?.user);
       setIsAuthenticated(true);
     } catch (error) {

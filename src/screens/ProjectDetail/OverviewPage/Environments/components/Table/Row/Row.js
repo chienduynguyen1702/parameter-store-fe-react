@@ -16,6 +16,7 @@ const Row = ({ item, setEditedItemId, archiveMutation }) => {
           name="environment"
           setEditedItemId={setEditedItemId}
           archiveMutation={archiveMutation}
+          roleRequired="Admin"
         />
       </div>
     </div>

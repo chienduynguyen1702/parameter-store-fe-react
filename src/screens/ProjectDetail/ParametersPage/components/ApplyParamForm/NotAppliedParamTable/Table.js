@@ -22,6 +22,12 @@ const NotAppliedParamTable = ({ listNotAppliedParameters, totalPage }) => {
               <Row key={item.id} item={item} />
             ))
           }
+          {listNotAppliedParameters.map((item) => (
+            <Row key={item.id} item={item} />
+          ))}
+          {listNotAppliedParameters.map((item) => (
+            <Row key={item.id} item={item} />
+          ))}
         </div>
         {listNotAppliedParameters.length === 0 && <NoData />}
       </div>

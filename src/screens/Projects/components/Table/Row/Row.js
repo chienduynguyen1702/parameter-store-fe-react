@@ -17,7 +17,10 @@ const Row = ({ item, setEditedItemId, archiveMutation, roleRequired }) => {
         </div>
       </div>
       <div className="tableCell">
-        <div className="status-green-dark">{item.usersCount}</div>
+        <div className="status-green-dark">{item.status}</div>
+      </div>
+      <div className="tableCell">
+        <div className="status-yellow">{item.usersCount}</div>
       </div>
       <div className="tableCell cursor-pointer roundedRight">
         {/* <Icon name="arrow-right" size={24} /> */}

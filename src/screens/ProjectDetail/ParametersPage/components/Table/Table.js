@@ -23,16 +23,17 @@ const Table = ({
 
   return (
     <>
-      <div className={cn(style.head, 'tableOuter')}>
+      <div style={{ height: '650px' }} className={'tableOuter'}>
         <div className="tableContainer">
           <div className="tableHead">
             <div className="tableCell pb-4">Name</div>
             <div className="tableCell">Value</div>
-            <div className="tableCell">Stage</div>
             <div className="tableCell">Environment</div>
+            <div className="tableCell">Stage</div>
             {/* <div className="tableCell">Created at</div> */}
             <div className="tableCell">Edited At</div>
             <div className="tableCell">Is Applied</div>
+            <div className="tableCell">Is Used At</div>
             {/* <div className="tableCell">Expired at</div> */}
             <div className="tableCell"></div>
           </div>

@@ -23,7 +23,7 @@ const FormSearch = ({
   const handleSubmitSearch = (e) => {
     e.preventDefault();
     const params = { ...queryString };
-    const formatSearch = search.trim().toLowerCase();
+    const formatSearch = search.trim();
     if (params.search) {
       delete params.search;
     }

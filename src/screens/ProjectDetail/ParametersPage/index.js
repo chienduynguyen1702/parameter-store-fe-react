@@ -23,6 +23,7 @@ import EditParameterForm from './components/EditParameterForm';
 import FormFilter from './components/FormFilter';
 import ApplyParamForm from './components/ApplyParamForm';
 import ReleaseVersionForm from './components/ReleaseVersionForm';
+import ImportParameter from './components/ImportParameter';
 import styles from './Parameter.module.sass';
 import {
   useListParameters,
@@ -39,6 +40,7 @@ const ParametersPage = () => {
   const { id } = useParams();
   const [isAddMode, setIsAddMode] = useState(false);
   const [isReleaseMode, setIsReleaseMode] = useState(false);
+  const [isImportMode, setIsImportMode] = useState(false);
   const [editedItemId, setEditedItemId] = useState(undefined);
   const [isApplying, setIsApplying] = useState(false);
   const { queryString, setQueryString } = useQueryString();
@@ -189,6 +191,20 @@ const ParametersPage = () => {
 
       <Modal
         outerClassName={'outerModal'}
+        visible={isImportMode}
+        onClose={() => {
+          setIsImportMode(false);
+        }}
+      >
+        <ImportParameter
+          title={overview.name}
+          onClose={() => {
+            setIsImportMode(false);
+          }}
+        ></ImportParameter>
+      </Modal>
+      <Modal
+        outerClassName={'outerModal'}
         visible={isReleaseMode}
         onClose={() => {
           setIsReleaseMode(false);
@@ -225,6 +241,12 @@ const ParametersPage = () => {
                   downloadParameters={downloadParameters}
                 />
               </FiltersCustom>
+
+              <ButtonDuplicate
+                handleClick={() => setIsImportMode(true)}
+                titleButton="Import Parameters"
+                className="me-2"
+              />
               <ButtonDuplicate
                 handleClick={handleReleaseClick}
                 titleButton="Release Version"
