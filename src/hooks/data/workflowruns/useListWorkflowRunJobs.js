@@ -8,7 +8,17 @@ const useListWorkflowRunJobs = (project_id, workflow_id) => {
   const parseWorkflowsData = (data) => {
     const listWorkflowsJobs = data.jobs;
     // console.log('listWorkflowsJobs', listWorkflowsJobs);
-    return listWorkflowsJobs;
+    let overallConclusion = 'success';
+    for (const job of listWorkflowsJobs.jobs) {
+      if (job.conclusion === 'in_progress') {
+        overallConclusion = 'in_progress';
+        break;
+      }
+    }
+    return {
+      ...listWorkflowsJobs,
+      conclusion: overallConclusion,
+    };
   };
 
   const { data, isSuccess, isLoading, isError, refetch } = useQuery({

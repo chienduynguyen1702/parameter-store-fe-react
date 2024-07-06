@@ -29,6 +29,8 @@ export { default as useListAgentsArchived } from './agents/useListAgentsArchived
 export { default as useTracking } from './tracking/useTracking';
 // Project / Workflows
 export { default as useListWorkflowRunJobs } from './workflowruns/useListWorkflowRunJobs';
+export { default as useWorkflowLogs } from './workflowruns/useWorkflowLogs';
+export { default as useWorkflowLogsParamDiff } from './workflowruns/useWorkflowLogsParamDiff';
 // Users and Roles
 export { default as useListUsers } from './users/useListUsers';
 export { default as useListRoles } from './roles/useListRoles';
