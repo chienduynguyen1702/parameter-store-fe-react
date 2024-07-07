@@ -20,7 +20,7 @@ const Row = ({ item }) => {
       <div className="tableCell py-3 ps-2 roundedLeft">
         <p>{item.name}</p>
       </div>
-      <div className="tableCell roundedRight">
+      <div className="tableCell">
         <p
           className="status-default"
           style={{

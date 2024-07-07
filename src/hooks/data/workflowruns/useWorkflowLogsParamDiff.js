@@ -11,7 +11,7 @@ const useParamDiffInWorkflowLog = (
 ) => {
   const parseWorkflowsData = (data) => {
     const parameterDiff = data.diff;
-    console.log('listWorkflowsJobs', parameterDiff);
+    // console.log('listWorkflowsJobs', parameterDiff);
     return parameterDiff;
   };
 

@@ -4,11 +4,14 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 
 import Row from './Row/Row';
-import { NoData } from '../../../../components';
+import { Card, NoData } from '../../../../components';
 const TableParamDiffInStage = ({ stage }) => {
   return (
-    <>
-      <div className={style.title}>Stage : {stage.name}</div>
+    <Card
+      title={`Parameter change in Stage : ${stage.name}`}
+      classTitle="title-yellow"
+      // className="mb-5"
+    >
       <div style={{ height: '650px' }} className={'tableOuter'}>
         <div className="tableContainer">
           <div className="tableHead">
@@ -22,7 +25,7 @@ const TableParamDiffInStage = ({ stage }) => {
         </div>
         {stage?.parameters?.length === 0 && <NoData />}
       </div>
-    </>
+    </Card>
   );
 };
 

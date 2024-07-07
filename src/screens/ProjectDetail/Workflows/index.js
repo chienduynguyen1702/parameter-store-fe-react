@@ -1,4 +1,4 @@
-import { Card, InputSelect } from '../../../components';
+import { Card, InputSelect, NoData } from '../../../components';
 import 'reactflow/dist/style.css';
 import {
   useListWorkflowRunJobs,
@@ -32,7 +32,7 @@ export default function Workflows() {
     !selectWorkflowLogID &&
     listWorkflowsLogs.length > 0
   ) {
-    setSelectWorkflowLogID(listWorkflowsLogs[0]?.id);
+    setSelectWorkflowLogID(listWorkflowsLogs[0].id);
   }
   const {
     listWorkflowsJobs,
@@ -42,6 +42,7 @@ export default function Workflows() {
   if (isWorkflowRunSuccess && !selectWorkflowID && listWorkflows.length > 0) {
     setSelectWorkflowID(listWorkflows[0]?.id);
   }
+
   const {
     isSuccess: isParamDiffSuccess,
     parameterDiffInWorkflowLog,
@@ -65,11 +66,14 @@ export default function Workflows() {
   };
 
   const setWorkflowLogs = (data) => {
-    console.log('workflow Log id', data);
-
+    // console.log('workflow Log id', data);
+    const selectedWorkflowLog = listWorkflowsLogs.find(
+      (log) => log.displayString === data || log.id === data,
+    );
     if (data) {
-      setSelectWorkflowLogID(data);
-      refetch();
+      setSelectWorkflowLogID(selectedWorkflowLog.id);
+      // console.log('selectWorkflowLogID', selectWorkflowLogID);
+      refetchParamDiff();
     }
   };
 
@@ -92,14 +96,18 @@ export default function Workflows() {
     window.addEventListener('error', errorHandler);
 
     const interval = setInterval(() => {
-      if (listWorkflowsJobs?.conclusion === 'in_progress') refetch(); // Use refetch here
+      // console.log('listWorkflowsJobs', listWorkflowsJobs);
+      if (listWorkflowsJobs.conclusion === 'in_progress') {
+        refetch(); // Use refetch workflow jobs in workflow progress
+        refetchParamDiff(); // Use refetch parameter diff in workflow log
+      }
     }, 1000);
 
     return () => {
       window.removeEventListener('error', errorHandler);
       clearInterval(interval);
     };
-  }, [projectId, refetch]);
+  }, [projectId, refetch, refetchParamDiff, listWorkflowsJobs]);
 
   return (
     <Card
@@ -111,8 +119,8 @@ export default function Workflows() {
           {isSuccess && (
             <div className="">
               <InputSelect
-                tooltip="Filter by workflow"
-                name="workflow"
+                tooltip="Filter by workflow name"
+                label={'Name'}
                 value={listWorkflows[0]?.workflow_name}
                 suggestions={listWorkflows?.map((workflow) => ({
                   label: workflow.workflow_name,
@@ -126,8 +134,8 @@ export default function Workflows() {
             <div className="">
               <InputSelect
                 className={'ml-3'}
-                tooltip="Filter by workflow"
-                name="workflow"
+                tooltip="Filter by workflow history"
+                label={'History'}
                 value={listWorkflowsLogs[0]?.displayString}
                 suggestions={listWorkflowsLogs?.map((workflowLog) => ({
                   label: workflowLog.displayString,
@@ -141,8 +149,12 @@ export default function Workflows() {
       }
     >
       <Row>
-        <Col>
-          <div style={{ width: '60vw', height: '60vh', marginTop: '10px' }}>
+        <Card
+          title={`Workflow Progress`}
+          classTitle="title-green"
+          // className="mb-5"
+        >
+          <div style={{ width: '75vw', height: '50vh', marginTop: '10px' }}>
             {isWorkflowRunSuccess ? (
               <JobNode job={listWorkflowsJobs} />
             ) : (
@@ -156,14 +168,23 @@ export default function Workflows() {
               </ReactFlow>
             )}
           </div>
-        </Col>
-        <Col>
-          {/* Param diff table |name| previous| current | */}
-          {isParamDiffSuccess &&
-            parameterDiffInWorkflowLog?.stages.map((stage) => (
-              <TableParamDiffInStage stage={stage} />
-            ))}
-        </Col>
+        </Card>
+      </Row>
+      <Row>
+        {isParamDiffSuccess &&
+          parameterDiffInWorkflowLog?.stages &&
+          parameterDiffInWorkflowLog?.stages?.map((stage) => (
+            <TableParamDiffInStage stage={stage} />
+          ))}
+        {!isParamDiffSuccess && (
+          <Card
+            title={`Parameter change in workflow`}
+            classTitle="title-yellow"
+            // className="mb-5"
+          >
+            <NoData />
+          </Card>
+        )}
       </Row>
     </Card>
   );

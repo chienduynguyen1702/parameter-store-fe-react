@@ -10,7 +10,7 @@ const useListWorkflowRunJobs = (project_id, workflow_id) => {
     // console.log('listWorkflowsJobs', listWorkflowsJobs);
     let overallConclusion = 'success';
     for (const job of listWorkflowsJobs.jobs) {
-      if (job.conclusion === 'in_progress') {
+      if (job.conclusion == '') {
         overallConclusion = 'in_progress';
         break;
       }
