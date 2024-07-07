@@ -53,7 +53,7 @@ jobs:
         run: |
           export PARAMETER_STORE_TOKEN=${{ secrets.AGENT_DEV_BUILD }}
           ./scripts/get-parameters.sh -o .env
-          # cat .env | grep TEST
+          cat .env 
 
       - name: Install dependencies
         #if cache is true then skip npm i, else run npm i
@@ -92,8 +92,8 @@ jobs:
           file: ./docker/Dockerfile 
           push: true
           tags: |
-            ghcr.io/chienduynguyen1702/parameter-store-fe:${{ env.SHORT_SHA }}
-            ghcr.io/chienduynguyen1702/parameter-store-fe:latest
+            ghcr.io/chienduynguyen1702/parameter-store-dev-fe:${{ env.SHORT_SHA }}
+            ghcr.io/chienduynguyen1702/parameter-store-dev-fe:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 #
@@ -123,6 +123,6 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
         port: ${{ secrets.SERVER_PORT }}
         script: |
-          cd /home/${{ secrets.SERVER_USERNAME }}/${{ secrets.SERVER_FOLDER }}
+          cd /home/${{ secrets.SERVER_USERNAME }}/${{ secrets.SERVER_DEV_FOLDER }}
           ./docker-compose-restart-fe.sh
           # . ./export-token.sh  && ./get-parameters.sh  -o .env  
