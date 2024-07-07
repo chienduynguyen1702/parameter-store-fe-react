@@ -105,6 +105,7 @@ const JobNode = ({ job }) => {
       //   onEdgesChange={onEdgesChange}
       attributionPosition="top-right"
       nodeTypes={nodeTypes}
+      fitView="true"
     >
       <Controls />
       <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
