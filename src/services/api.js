@@ -314,6 +314,20 @@ export const getWorkflowsRunID = (project_id, workflow_id) =>
     method: 'GET',
     url: `/projects/${project_id}/workflows/${workflow_id}/run`,
   });
+export const getWorkflowLogs = (project_id, workflow_id) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/workflows/${workflow_id}/logs`,
+  });
+export const getParamDiffInWorkflowLog = (
+  project_id,
+  workflow_id,
+  workflow_log_id,
+) =>
+  authApi({
+    method: 'GET',
+    url: `/projects/${project_id}/workflows/${workflow_id}/logs/${workflow_log_id}/diff-parameter`,
+  });
 export const deleteProject = (project_id) =>
   authApi({
     method: 'DELETE',
